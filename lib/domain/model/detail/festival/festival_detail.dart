@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kovel_app/domain/model/detail/festival/festival_detail_info.dart';
-import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 
 part 'festival_detail.freezed.dart';
 part 'festival_detail.g.dart';

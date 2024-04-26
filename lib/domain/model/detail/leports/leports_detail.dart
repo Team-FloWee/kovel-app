@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kovel_app/domain/model/detail/leports/leports_detail_info.dart';
 
 part 'leports_detail.freezed.dart';
 part 'leports_detail.g.dart';

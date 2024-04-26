@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kovel_app/domain/model/detail/course/course_detail_info.dart';
 
 part 'course_detail.freezed.dart';
 part 'course_detail.g.dart';
