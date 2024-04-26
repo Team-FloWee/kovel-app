@@ -8,7 +8,6 @@ part 'festival_detail.g.dart';
 @freezed
 class FestivalDetail with _$FestivalDetail {
   const factory FestivalDetail({
-    required TourDetail tourDetail,
     required String startDate,
     required String endDate,
     required String playTime,
@@ -18,7 +17,6 @@ class FestivalDetail with _$FestivalDetail {
     required String ageLimit,
     required String placeInfo,
     required String useFee,
-    required List<FestivalDetailInfo> festivalDetailInfoList,
   }) = _FestivalDetail;
 
   factory FestivalDetail.fromJson(Map<String, Object?> json) =>
