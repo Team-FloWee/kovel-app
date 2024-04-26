@@ -8,8 +8,6 @@ part of 'shopping_detail.dart';
 
 _$ShoppingDetailImpl _$$ShoppingDetailImplFromJson(Map<String, dynamic> json) =>
     _$ShoppingDetailImpl(
-      tourDetail:
-          TourDetail.fromJson(json['tourDetail'] as Map<String, dynamic>),
       saleItem: json['saleItem'] as String,
       saleItemCost: json['saleItemCost'] as String,
       restDay: json['restDay'] as String,
@@ -21,7 +19,6 @@ _$ShoppingDetailImpl _$$ShoppingDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ShoppingDetailImplToJson(
         _$ShoppingDetailImpl instance) =>
     <String, dynamic>{
-      'tourDetail': instance.tourDetail,
       'saleItem': instance.saleItem,
       'saleItemCost': instance.saleItemCost,
       'restDay': instance.restDay,
