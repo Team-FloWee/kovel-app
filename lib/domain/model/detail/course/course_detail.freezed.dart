@@ -22,8 +22,6 @@ CourseDetail _$CourseDetailFromJson(Map<String, dynamic> json) {
 mixin _$CourseDetail {
   String get takeTime => throw _privateConstructorUsedError;
   String get distance => throw _privateConstructorUsedError;
-  List<CourseDetailInfo> get courseDetailInfoList =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,10 +35,7 @@ abstract class $CourseDetailCopyWith<$Res> {
           CourseDetail value, $Res Function(CourseDetail) then) =
       _$CourseDetailCopyWithImpl<$Res, CourseDetail>;
   @useResult
-  $Res call(
-      {String takeTime,
-      String distance,
-      List<CourseDetailInfo> courseDetailInfoList});
+  $Res call({String takeTime, String distance});
 }
 
 /// @nodoc
@@ -58,7 +53,6 @@ class _$CourseDetailCopyWithImpl<$Res, $Val extends CourseDetail>
   $Res call({
     Object? takeTime = null,
     Object? distance = null,
-    Object? courseDetailInfoList = null,
   }) {
     return _then(_value.copyWith(
       takeTime: null == takeTime
@@ -69,10 +63,6 @@ class _$CourseDetailCopyWithImpl<$Res, $Val extends CourseDetail>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as String,
-      courseDetailInfoList: null == courseDetailInfoList
-          ? _value.courseDetailInfoList
-          : courseDetailInfoList // ignore: cast_nullable_to_non_nullable
-              as List<CourseDetailInfo>,
     ) as $Val);
   }
 }
@@ -85,10 +75,7 @@ abstract class _$$CourseDetailImplCopyWith<$Res>
       __$$CourseDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String takeTime,
-      String distance,
-      List<CourseDetailInfo> courseDetailInfoList});
+  $Res call({String takeTime, String distance});
 }
 
 /// @nodoc
@@ -104,7 +91,6 @@ class __$$CourseDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? takeTime = null,
     Object? distance = null,
-    Object? courseDetailInfoList = null,
   }) {
     return _then(_$CourseDetailImpl(
       takeTime: null == takeTime
@@ -115,10 +101,6 @@ class __$$CourseDetailImplCopyWithImpl<$Res>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as String,
-      courseDetailInfoList: null == courseDetailInfoList
-          ? _value._courseDetailInfoList
-          : courseDetailInfoList // ignore: cast_nullable_to_non_nullable
-              as List<CourseDetailInfo>,
     ));
   }
 }
@@ -126,11 +108,7 @@ class __$$CourseDetailImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CourseDetailImpl implements _CourseDetail {
-  const _$CourseDetailImpl(
-      {required this.takeTime,
-      required this.distance,
-      required final List<CourseDetailInfo> courseDetailInfoList})
-      : _courseDetailInfoList = courseDetailInfoList;
+  const _$CourseDetailImpl({required this.takeTime, required this.distance});
 
   factory _$CourseDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$CourseDetailImplFromJson(json);
@@ -139,18 +117,10 @@ class _$CourseDetailImpl implements _CourseDetail {
   final String takeTime;
   @override
   final String distance;
-  final List<CourseDetailInfo> _courseDetailInfoList;
-  @override
-  List<CourseDetailInfo> get courseDetailInfoList {
-    if (_courseDetailInfoList is EqualUnmodifiableListView)
-      return _courseDetailInfoList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_courseDetailInfoList);
-  }
 
   @override
   String toString() {
-    return 'CourseDetail(takeTime: $takeTime, distance: $distance, courseDetailInfoList: $courseDetailInfoList)';
+    return 'CourseDetail(takeTime: $takeTime, distance: $distance)';
   }
 
   @override
@@ -161,15 +131,12 @@ class _$CourseDetailImpl implements _CourseDetail {
             (identical(other.takeTime, takeTime) ||
                 other.takeTime == takeTime) &&
             (identical(other.distance, distance) ||
-                other.distance == distance) &&
-            const DeepCollectionEquality()
-                .equals(other._courseDetailInfoList, _courseDetailInfoList));
+                other.distance == distance));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, takeTime, distance,
-      const DeepCollectionEquality().hash(_courseDetailInfoList));
+  int get hashCode => Object.hash(runtimeType, takeTime, distance);
 
   @JsonKey(ignore: true)
   @override
@@ -187,10 +154,8 @@ class _$CourseDetailImpl implements _CourseDetail {
 
 abstract class _CourseDetail implements CourseDetail {
   const factory _CourseDetail(
-          {required final String takeTime,
-          required final String distance,
-          required final List<CourseDetailInfo> courseDetailInfoList}) =
-      _$CourseDetailImpl;
+      {required final String takeTime,
+      required final String distance}) = _$CourseDetailImpl;
 
   factory _CourseDetail.fromJson(Map<String, dynamic> json) =
       _$CourseDetailImpl.fromJson;
@@ -199,8 +164,6 @@ abstract class _CourseDetail implements CourseDetail {
   String get takeTime;
   @override
   String get distance;
-  @override
-  List<CourseDetailInfo> get courseDetailInfoList;
   @override
   @JsonKey(ignore: true)
   _$$CourseDetailImplCopyWith<_$CourseDetailImpl> get copyWith =>

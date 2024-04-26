@@ -9,7 +9,6 @@ class CourseDetail with _$CourseDetail {
   const factory CourseDetail({
     required String takeTime,
     required String distance,
-    required List<CourseDetailInfo> courseDetailInfoList,
   }) = _CourseDetail;
 
   factory CourseDetail.fromJson(Map<String, Object?> json) =>
