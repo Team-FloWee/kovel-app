@@ -1,5 +1,5 @@
 import 'package:kovel_app/data/dto/tour_detail_dto.dart';
-import 'package:kovel_app/domain/model/tour_detail.dart';
+import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 
 extension ToTourDetail on TourDetailDto {
   TourDetail toTourDetail() {
