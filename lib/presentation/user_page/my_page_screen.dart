@@ -18,12 +18,14 @@ class MyPageScreen extends StatelessWidget {
               )),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MyPageYourProfile(),
-          MyPageMenuList(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MyPageYourProfile(),
+            MyPageMenuList(),
+          ],
+        ),
       ),
     );
   }
