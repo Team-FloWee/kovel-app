@@ -1,5 +1,5 @@
-class TourLocationDto {
-  TourLocationDto({
+class TourDto {
+  TourDto({
       this.addr1, 
       this.addr2, 
       this.areacode, 
@@ -22,7 +22,7 @@ class TourLocationDto {
       this.title, 
       this.zipcode,});
 
-  TourLocationDto.fromJson(dynamic json) {
+  TourDto.fromJson(dynamic json) {
     addr1 = json['addr1'];
     addr2 = json['addr2'];
     areacode = json['areacode'];

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'tour_location.dart';
+part of 'tour.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,14 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-TourLocation _$TourLocationFromJson(Map<String, dynamic> json) {
-  return _TourLocation.fromJson(json);
+Tour _$TourFromJson(Map<String, dynamic> json) {
+  return _Tour.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TourLocation {
+mixin _$Tour {
   int get id => throw _privateConstructorUsedError;
+  String get contentTypeId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get address1 => throw _privateConstructorUsedError;
   String get address2 => throw _privateConstructorUsedError;
@@ -29,26 +30,25 @@ mixin _$TourLocation {
   String get category1 => throw _privateConstructorUsedError;
   String get category2 => throw _privateConstructorUsedError;
   String get category3 => throw _privateConstructorUsedError;
-  String get contentTypeId => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get mapx => throw _privateConstructorUsedError;
   String get mapy => throw _privateConstructorUsedError;
   String get imagePath => throw _privateConstructorUsedError;
+  String get tel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TourLocationCopyWith<TourLocation> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TourCopyWith<Tour> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TourLocationCopyWith<$Res> {
-  factory $TourLocationCopyWith(
-          TourLocation value, $Res Function(TourLocation) then) =
-      _$TourLocationCopyWithImpl<$Res, TourLocation>;
+abstract class $TourCopyWith<$Res> {
+  factory $TourCopyWith(Tour value, $Res Function(Tour) then) =
+      _$TourCopyWithImpl<$Res, Tour>;
   @useResult
   $Res call(
       {int id,
+      String contentTypeId,
       String title,
       String address1,
       String address2,
@@ -57,17 +57,17 @@ abstract class $TourLocationCopyWith<$Res> {
       String category1,
       String category2,
       String category3,
-      String contentTypeId,
       String createdTime,
       String mapx,
       String mapy,
-      String imagePath});
+      String imagePath,
+      String tel});
 }
 
 /// @nodoc
-class _$TourLocationCopyWithImpl<$Res, $Val extends TourLocation>
-    implements $TourLocationCopyWith<$Res> {
-  _$TourLocationCopyWithImpl(this._value, this._then);
+class _$TourCopyWithImpl<$Res, $Val extends Tour>
+    implements $TourCopyWith<$Res> {
+  _$TourCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -78,6 +78,7 @@ class _$TourLocationCopyWithImpl<$Res, $Val extends TourLocation>
   @override
   $Res call({
     Object? id = null,
+    Object? contentTypeId = null,
     Object? title = null,
     Object? address1 = null,
     Object? address2 = null,
@@ -86,17 +87,21 @@ class _$TourLocationCopyWithImpl<$Res, $Val extends TourLocation>
     Object? category1 = null,
     Object? category2 = null,
     Object? category3 = null,
-    Object? contentTypeId = null,
     Object? createdTime = null,
     Object? mapx = null,
     Object? mapy = null,
     Object? imagePath = null,
+    Object? tel = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -129,10 +134,6 @@ class _$TourLocationCopyWithImpl<$Res, $Val extends TourLocation>
           ? _value.category3
           : category3 // ignore: cast_nullable_to_non_nullable
               as String,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -149,20 +150,24 @@ class _$TourLocationCopyWithImpl<$Res, $Val extends TourLocation>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
+      tel: null == tel
+          ? _value.tel
+          : tel // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$TourLocationImplCopyWith<$Res>
-    implements $TourLocationCopyWith<$Res> {
-  factory _$$TourLocationImplCopyWith(
-          _$TourLocationImpl value, $Res Function(_$TourLocationImpl) then) =
-      __$$TourLocationImplCopyWithImpl<$Res>;
+abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
+  factory _$$TourImplCopyWith(
+          _$TourImpl value, $Res Function(_$TourImpl) then) =
+      __$$TourImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int id,
+      String contentTypeId,
       String title,
       String address1,
       String address2,
@@ -171,25 +176,25 @@ abstract class _$$TourLocationImplCopyWith<$Res>
       String category1,
       String category2,
       String category3,
-      String contentTypeId,
       String createdTime,
       String mapx,
       String mapy,
-      String imagePath});
+      String imagePath,
+      String tel});
 }
 
 /// @nodoc
-class __$$TourLocationImplCopyWithImpl<$Res>
-    extends _$TourLocationCopyWithImpl<$Res, _$TourLocationImpl>
-    implements _$$TourLocationImplCopyWith<$Res> {
-  __$$TourLocationImplCopyWithImpl(
-      _$TourLocationImpl _value, $Res Function(_$TourLocationImpl) _then)
+class __$$TourImplCopyWithImpl<$Res>
+    extends _$TourCopyWithImpl<$Res, _$TourImpl>
+    implements _$$TourImplCopyWith<$Res> {
+  __$$TourImplCopyWithImpl(_$TourImpl _value, $Res Function(_$TourImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
+    Object? contentTypeId = null,
     Object? title = null,
     Object? address1 = null,
     Object? address2 = null,
@@ -198,17 +203,21 @@ class __$$TourLocationImplCopyWithImpl<$Res>
     Object? category1 = null,
     Object? category2 = null,
     Object? category3 = null,
-    Object? contentTypeId = null,
     Object? createdTime = null,
     Object? mapx = null,
     Object? mapy = null,
     Object? imagePath = null,
+    Object? tel = null,
   }) {
-    return _then(_$TourLocationImpl(
+    return _then(_$TourImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -241,10 +250,6 @@ class __$$TourLocationImplCopyWithImpl<$Res>
           ? _value.category3
           : category3 // ignore: cast_nullable_to_non_nullable
               as String,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -261,15 +266,20 @@ class __$$TourLocationImplCopyWithImpl<$Res>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
+      tel: null == tel
+          ? _value.tel
+          : tel // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$TourLocationImpl implements _TourLocation {
-  const _$TourLocationImpl(
+class _$TourImpl implements _Tour {
+  const _$TourImpl(
       {required this.id,
+      required this.contentTypeId,
       required this.title,
       required this.address1,
       required this.address2,
@@ -278,17 +288,19 @@ class _$TourLocationImpl implements _TourLocation {
       required this.category1,
       required this.category2,
       required this.category3,
-      required this.contentTypeId,
       required this.createdTime,
       required this.mapx,
       required this.mapy,
-      required this.imagePath});
+      required this.imagePath,
+      required this.tel});
 
-  factory _$TourLocationImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TourLocationImplFromJson(json);
+  factory _$TourImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TourImplFromJson(json);
 
   @override
   final int id;
+  @override
+  final String contentTypeId;
   @override
   final String title;
   @override
@@ -306,8 +318,6 @@ class _$TourLocationImpl implements _TourLocation {
   @override
   final String category3;
   @override
-  final String contentTypeId;
-  @override
   final String createdTime;
   @override
   final String mapx;
@@ -315,18 +325,22 @@ class _$TourLocationImpl implements _TourLocation {
   final String mapy;
   @override
   final String imagePath;
+  @override
+  final String tel;
 
   @override
   String toString() {
-    return 'TourLocation(id: $id, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, contentTypeId: $contentTypeId, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath)';
+    return 'Tour(id: $id, contentTypeId: $contentTypeId, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TourLocationImpl &&
+            other is _$TourImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.address1, address1) ||
                 other.address1 == address1) &&
@@ -341,14 +355,13 @@ class _$TourLocationImpl implements _TourLocation {
                 other.category2 == category2) &&
             (identical(other.category3, category3) ||
                 other.category3 == category3) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
             (identical(other.createdTime, createdTime) ||
                 other.createdTime == createdTime) &&
             (identical(other.mapx, mapx) || other.mapx == mapx) &&
             (identical(other.mapy, mapy) || other.mapy == mapy) &&
             (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath));
+                other.imagePath == imagePath) &&
+            (identical(other.tel, tel) || other.tel == tel));
   }
 
   @JsonKey(ignore: true)
@@ -356,6 +369,7 @@ class _$TourLocationImpl implements _TourLocation {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      contentTypeId,
       title,
       address1,
       address2,
@@ -364,29 +378,30 @@ class _$TourLocationImpl implements _TourLocation {
       category1,
       category2,
       category3,
-      contentTypeId,
       createdTime,
       mapx,
       mapy,
-      imagePath);
+      imagePath,
+      tel);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TourLocationImplCopyWith<_$TourLocationImpl> get copyWith =>
-      __$$TourLocationImplCopyWithImpl<_$TourLocationImpl>(this, _$identity);
+  _$$TourImplCopyWith<_$TourImpl> get copyWith =>
+      __$$TourImplCopyWithImpl<_$TourImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TourLocationImplToJson(
+    return _$$TourImplToJson(
       this,
     );
   }
 }
 
-abstract class _TourLocation implements TourLocation {
-  const factory _TourLocation(
+abstract class _Tour implements Tour {
+  const factory _Tour(
       {required final int id,
+      required final String contentTypeId,
       required final String title,
       required final String address1,
       required final String address2,
@@ -395,17 +410,18 @@ abstract class _TourLocation implements TourLocation {
       required final String category1,
       required final String category2,
       required final String category3,
-      required final String contentTypeId,
       required final String createdTime,
       required final String mapx,
       required final String mapy,
-      required final String imagePath}) = _$TourLocationImpl;
+      required final String imagePath,
+      required final String tel}) = _$TourImpl;
 
-  factory _TourLocation.fromJson(Map<String, dynamic> json) =
-      _$TourLocationImpl.fromJson;
+  factory _Tour.fromJson(Map<String, dynamic> json) = _$TourImpl.fromJson;
 
   @override
   int get id;
+  @override
+  String get contentTypeId;
   @override
   String get title;
   @override
@@ -423,8 +439,6 @@ abstract class _TourLocation implements TourLocation {
   @override
   String get category3;
   @override
-  String get contentTypeId;
-  @override
   String get createdTime;
   @override
   String get mapx;
@@ -433,7 +447,9 @@ abstract class _TourLocation implements TourLocation {
   @override
   String get imagePath;
   @override
+  String get tel;
+  @override
   @JsonKey(ignore: true)
-  _$$TourLocationImplCopyWith<_$TourLocationImpl> get copyWith =>
+  _$$TourImplCopyWith<_$TourImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
