@@ -47,3 +47,4 @@ app.*.map.json
 firebase_options.dart
 debug.keystore
 google-services.json
+.env
