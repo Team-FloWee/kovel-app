@@ -1,13 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'tour_location.freezed.dart';
+part 'tour.freezed.dart';
 
-part 'tour_location.g.dart';
+part 'tour.g.dart';
 
 @freezed
-class TourLocation with _$TourLocation {
-  const factory TourLocation({
+class Tour with _$Tour {
+  const factory Tour({
     required int id,
+    required String contentTypeId,
     required String title,
     required String address1,
     required String address2,
@@ -16,13 +17,12 @@ class TourLocation with _$TourLocation {
     required String category1,
     required String category2,
     required String category3,
-    required String contentTypeId,
     required String createdTime,
     required String mapx,
     required String mapy,
     required String imagePath,
+    required String tel,
+  }) = _Tour;
 
-  }) = _TourLocation;
-
-  factory TourLocation.fromJson(Map<String, Object?> json) => _$TourLocationFromJson(json);
+  factory Tour.fromJson(Map<String, Object?> json) => _$TourFromJson(json);
 }

@@ -1,9 +1,9 @@
-import 'package:kovel_app/data/dto/tour_location_dto.dart';
-import 'package:kovel_app/domain/model/tour_location.dart';
+import 'package:kovel_app/data/dto/tour_dto.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 
-extension ToTourLocation on TourLocationDto {
-  TourLocation toTourLocation() {
-    return TourLocation(
+extension ToTour on TourDto {
+  Tour toTour() {
+    return Tour(
         id: int.tryParse(contentid!) ?? 0,
         title: title ?? '',
         address1: addr1 ?? '',
@@ -17,7 +17,8 @@ extension ToTourLocation on TourLocationDto {
         createdTime: createdtime ?? '',
         mapx: mapx ?? '',
         mapy: mapy ?? '',
-        imagePath: firstimage ?? ''
+        imagePath: firstimage ?? '',
+        tel: tel ?? '',
     );
   }
 }
