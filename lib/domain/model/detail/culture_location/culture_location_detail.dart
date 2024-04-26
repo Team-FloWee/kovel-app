@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 
 part 'culture_location_detail.freezed.dart';
 
