@@ -12,9 +12,6 @@ _$LeportsDetailImpl _$$LeportsDetailImplFromJson(Map<String, dynamic> json) =>
       useTime: json['useTime'] as String,
       ageLimit: json['ageLimit'] as String,
       parking: json['parking'] as String,
-      leportsDetailInfoList: (json['leportsDetailInfoList'] as List<dynamic>)
-          .map((e) => LeportsDetailInfo.fromJson(e as Map<String, dynamic>))
-          .toList(),
     );
 
 Map<String, dynamic> _$$LeportsDetailImplToJson(_$LeportsDetailImpl instance) =>
@@ -23,5 +20,4 @@ Map<String, dynamic> _$$LeportsDetailImplToJson(_$LeportsDetailImpl instance) =>
       'useTime': instance.useTime,
       'ageLimit': instance.ageLimit,
       'parking': instance.parking,
-      'leportsDetailInfoList': instance.leportsDetailInfoList,
     };

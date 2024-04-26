@@ -24,8 +24,6 @@ mixin _$LeportsDetail {
   String get useTime => throw _privateConstructorUsedError;
   String get ageLimit => throw _privateConstructorUsedError;
   String get parking => throw _privateConstructorUsedError;
-  List<LeportsDetailInfo> get leportsDetailInfoList =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,12 +37,7 @@ abstract class $LeportsDetailCopyWith<$Res> {
           LeportsDetail value, $Res Function(LeportsDetail) then) =
       _$LeportsDetailCopyWithImpl<$Res, LeportsDetail>;
   @useResult
-  $Res call(
-      {String restDay,
-      String useTime,
-      String ageLimit,
-      String parking,
-      List<LeportsDetailInfo> leportsDetailInfoList});
+  $Res call({String restDay, String useTime, String ageLimit, String parking});
 }
 
 /// @nodoc
@@ -64,7 +57,6 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
     Object? useTime = null,
     Object? ageLimit = null,
     Object? parking = null,
-    Object? leportsDetailInfoList = null,
   }) {
     return _then(_value.copyWith(
       restDay: null == restDay
@@ -83,10 +75,6 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
           ? _value.parking
           : parking // ignore: cast_nullable_to_non_nullable
               as String,
-      leportsDetailInfoList: null == leportsDetailInfoList
-          ? _value.leportsDetailInfoList
-          : leportsDetailInfoList // ignore: cast_nullable_to_non_nullable
-              as List<LeportsDetailInfo>,
     ) as $Val);
   }
 }
@@ -99,12 +87,7 @@ abstract class _$$LeportsDetailImplCopyWith<$Res>
       __$$LeportsDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String restDay,
-      String useTime,
-      String ageLimit,
-      String parking,
-      List<LeportsDetailInfo> leportsDetailInfoList});
+  $Res call({String restDay, String useTime, String ageLimit, String parking});
 }
 
 /// @nodoc
@@ -122,7 +105,6 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
     Object? useTime = null,
     Object? ageLimit = null,
     Object? parking = null,
-    Object? leportsDetailInfoList = null,
   }) {
     return _then(_$LeportsDetailImpl(
       restDay: null == restDay
@@ -141,10 +123,6 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
           ? _value.parking
           : parking // ignore: cast_nullable_to_non_nullable
               as String,
-      leportsDetailInfoList: null == leportsDetailInfoList
-          ? _value._leportsDetailInfoList
-          : leportsDetailInfoList // ignore: cast_nullable_to_non_nullable
-              as List<LeportsDetailInfo>,
     ));
   }
 }
@@ -156,9 +134,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
       {required this.restDay,
       required this.useTime,
       required this.ageLimit,
-      required this.parking,
-      required final List<LeportsDetailInfo> leportsDetailInfoList})
-      : _leportsDetailInfoList = leportsDetailInfoList;
+      required this.parking});
 
   factory _$LeportsDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$LeportsDetailImplFromJson(json);
@@ -171,18 +147,10 @@ class _$LeportsDetailImpl implements _LeportsDetail {
   final String ageLimit;
   @override
   final String parking;
-  final List<LeportsDetailInfo> _leportsDetailInfoList;
-  @override
-  List<LeportsDetailInfo> get leportsDetailInfoList {
-    if (_leportsDetailInfoList is EqualUnmodifiableListView)
-      return _leportsDetailInfoList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_leportsDetailInfoList);
-  }
 
   @override
   String toString() {
-    return 'LeportsDetail(restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking, leportsDetailInfoList: $leportsDetailInfoList)';
+    return 'LeportsDetail(restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
   }
 
   @override
@@ -194,15 +162,13 @@ class _$LeportsDetailImpl implements _LeportsDetail {
             (identical(other.useTime, useTime) || other.useTime == useTime) &&
             (identical(other.ageLimit, ageLimit) ||
                 other.ageLimit == ageLimit) &&
-            (identical(other.parking, parking) || other.parking == parking) &&
-            const DeepCollectionEquality()
-                .equals(other._leportsDetailInfoList, _leportsDetailInfoList));
+            (identical(other.parking, parking) || other.parking == parking));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, restDay, useTime, ageLimit,
-      parking, const DeepCollectionEquality().hash(_leportsDetailInfoList));
+  int get hashCode =>
+      Object.hash(runtimeType, restDay, useTime, ageLimit, parking);
 
   @JsonKey(ignore: true)
   @override
@@ -220,12 +186,10 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
 abstract class _LeportsDetail implements LeportsDetail {
   const factory _LeportsDetail(
-          {required final String restDay,
-          required final String useTime,
-          required final String ageLimit,
-          required final String parking,
-          required final List<LeportsDetailInfo> leportsDetailInfoList}) =
-      _$LeportsDetailImpl;
+      {required final String restDay,
+      required final String useTime,
+      required final String ageLimit,
+      required final String parking}) = _$LeportsDetailImpl;
 
   factory _LeportsDetail.fromJson(Map<String, dynamic> json) =
       _$LeportsDetailImpl.fromJson;
@@ -238,8 +202,6 @@ abstract class _LeportsDetail implements LeportsDetail {
   String get ageLimit;
   @override
   String get parking;
-  @override
-  List<LeportsDetailInfo> get leportsDetailInfoList;
   @override
   @JsonKey(ignore: true)
   _$$LeportsDetailImplCopyWith<_$LeportsDetailImpl> get copyWith =>
