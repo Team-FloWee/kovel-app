@@ -20,7 +20,6 @@ ShoppingDetail _$ShoppingDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShoppingDetail {
-  TourDetail get tourDetail => throw _privateConstructorUsedError;
   String get saleItem => throw _privateConstructorUsedError;
   String get saleItemCost => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
@@ -41,15 +40,12 @@ abstract class $ShoppingDetailCopyWith<$Res> {
       _$ShoppingDetailCopyWithImpl<$Res, ShoppingDetail>;
   @useResult
   $Res call(
-      {TourDetail tourDetail,
-      String saleItem,
+      {String saleItem,
       String saleItemCost,
       String restDay,
       String scale,
       String creditCard,
       String openTime});
-
-  $TourDetailCopyWith<$Res> get tourDetail;
 }
 
 /// @nodoc
@@ -65,7 +61,6 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourDetail = null,
     Object? saleItem = null,
     Object? saleItemCost = null,
     Object? restDay = null,
@@ -74,10 +69,6 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
     Object? openTime = null,
   }) {
     return _then(_value.copyWith(
-      tourDetail: null == tourDetail
-          ? _value.tourDetail
-          : tourDetail // ignore: cast_nullable_to_non_nullable
-              as TourDetail,
       saleItem: null == saleItem
           ? _value.saleItem
           : saleItem // ignore: cast_nullable_to_non_nullable
@@ -104,14 +95,6 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
               as String,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TourDetailCopyWith<$Res> get tourDetail {
-    return $TourDetailCopyWith<$Res>(_value.tourDetail, (value) {
-      return _then(_value.copyWith(tourDetail: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -123,16 +106,12 @@ abstract class _$$ShoppingDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TourDetail tourDetail,
-      String saleItem,
+      {String saleItem,
       String saleItemCost,
       String restDay,
       String scale,
       String creditCard,
       String openTime});
-
-  @override
-  $TourDetailCopyWith<$Res> get tourDetail;
 }
 
 /// @nodoc
@@ -146,7 +125,6 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourDetail = null,
     Object? saleItem = null,
     Object? saleItemCost = null,
     Object? restDay = null,
@@ -155,10 +133,6 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
     Object? openTime = null,
   }) {
     return _then(_$ShoppingDetailImpl(
-      tourDetail: null == tourDetail
-          ? _value.tourDetail
-          : tourDetail // ignore: cast_nullable_to_non_nullable
-              as TourDetail,
       saleItem: null == saleItem
           ? _value.saleItem
           : saleItem // ignore: cast_nullable_to_non_nullable
@@ -191,8 +165,7 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ShoppingDetailImpl implements _ShoppingDetail {
   const _$ShoppingDetailImpl(
-      {required this.tourDetail,
-      required this.saleItem,
+      {required this.saleItem,
       required this.saleItemCost,
       required this.restDay,
       required this.scale,
@@ -202,8 +175,6 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
   factory _$ShoppingDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$ShoppingDetailImplFromJson(json);
 
-  @override
-  final TourDetail tourDetail;
   @override
   final String saleItem;
   @override
@@ -219,7 +190,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
   @override
   String toString() {
-    return 'ShoppingDetail(tourDetail: $tourDetail, saleItem: $saleItem, saleItemCost: $saleItemCost, restDay: $restDay, scale: $scale, creditCard: $creditCard, openTime: $openTime)';
+    return 'ShoppingDetail(saleItem: $saleItem, saleItemCost: $saleItemCost, restDay: $restDay, scale: $scale, creditCard: $creditCard, openTime: $openTime)';
   }
 
   @override
@@ -227,8 +198,6 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ShoppingDetailImpl &&
-            (identical(other.tourDetail, tourDetail) ||
-                other.tourDetail == tourDetail) &&
             (identical(other.saleItem, saleItem) ||
                 other.saleItem == saleItem) &&
             (identical(other.saleItemCost, saleItemCost) ||
@@ -243,8 +212,8 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, tourDetail, saleItem,
-      saleItemCost, restDay, scale, creditCard, openTime);
+  int get hashCode => Object.hash(runtimeType, saleItem, saleItemCost, restDay,
+      scale, creditCard, openTime);
 
   @JsonKey(ignore: true)
   @override
@@ -263,8 +232,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
 abstract class _ShoppingDetail implements ShoppingDetail {
   const factory _ShoppingDetail(
-      {required final TourDetail tourDetail,
-      required final String saleItem,
+      {required final String saleItem,
       required final String saleItemCost,
       required final String restDay,
       required final String scale,
@@ -274,8 +242,6 @@ abstract class _ShoppingDetail implements ShoppingDetail {
   factory _ShoppingDetail.fromJson(Map<String, dynamic> json) =
       _$ShoppingDetailImpl.fromJson;
 
-  @override
-  TourDetail get tourDetail;
   @override
   String get saleItem;
   @override
