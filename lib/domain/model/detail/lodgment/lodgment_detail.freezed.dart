@@ -20,7 +20,6 @@ LodgmentDetail _$LodgmentDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LodgmentDetail {
-  TourDetail get tourDetail => throw _privateConstructorUsedError;
   String get reservationUrl => throw _privateConstructorUsedError;
   String get roomCount => throw _privateConstructorUsedError;
   bool get isGoodStay => throw _privateConstructorUsedError;
@@ -56,8 +55,7 @@ abstract class $LodgmentDetailCopyWith<$Res> {
       _$LodgmentDetailCopyWithImpl<$Res, LodgmentDetail>;
   @useResult
   $Res call(
-      {TourDetail tourDetail,
-      String reservationUrl,
+      {String reservationUrl,
       String roomCount,
       bool isGoodStay,
       bool isBenikia,
@@ -78,8 +76,6 @@ abstract class $LodgmentDetailCopyWith<$Res> {
       String park,
       String subFacility,
       String foodPlace});
-
-  $TourDetailCopyWith<$Res> get tourDetail;
 }
 
 /// @nodoc
@@ -95,7 +91,6 @@ class _$LodgmentDetailCopyWithImpl<$Res, $Val extends LodgmentDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourDetail = null,
     Object? reservationUrl = null,
     Object? roomCount = null,
     Object? isGoodStay = null,
@@ -119,10 +114,6 @@ class _$LodgmentDetailCopyWithImpl<$Res, $Val extends LodgmentDetail>
     Object? foodPlace = null,
   }) {
     return _then(_value.copyWith(
-      tourDetail: null == tourDetail
-          ? _value.tourDetail
-          : tourDetail // ignore: cast_nullable_to_non_nullable
-              as TourDetail,
       reservationUrl: null == reservationUrl
           ? _value.reservationUrl
           : reservationUrl // ignore: cast_nullable_to_non_nullable
@@ -209,14 +200,6 @@ class _$LodgmentDetailCopyWithImpl<$Res, $Val extends LodgmentDetail>
               as String,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TourDetailCopyWith<$Res> get tourDetail {
-    return $TourDetailCopyWith<$Res>(_value.tourDetail, (value) {
-      return _then(_value.copyWith(tourDetail: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -228,8 +211,7 @@ abstract class _$$LodgmentDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TourDetail tourDetail,
-      String reservationUrl,
+      {String reservationUrl,
       String roomCount,
       bool isGoodStay,
       bool isBenikia,
@@ -250,9 +232,6 @@ abstract class _$$LodgmentDetailImplCopyWith<$Res>
       String park,
       String subFacility,
       String foodPlace});
-
-  @override
-  $TourDetailCopyWith<$Res> get tourDetail;
 }
 
 /// @nodoc
@@ -266,7 +245,6 @@ class __$$LodgmentDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourDetail = null,
     Object? reservationUrl = null,
     Object? roomCount = null,
     Object? isGoodStay = null,
@@ -290,10 +268,6 @@ class __$$LodgmentDetailImplCopyWithImpl<$Res>
     Object? foodPlace = null,
   }) {
     return _then(_$LodgmentDetailImpl(
-      tourDetail: null == tourDetail
-          ? _value.tourDetail
-          : tourDetail // ignore: cast_nullable_to_non_nullable
-              as TourDetail,
       reservationUrl: null == reservationUrl
           ? _value.reservationUrl
           : reservationUrl // ignore: cast_nullable_to_non_nullable
@@ -386,8 +360,7 @@ class __$$LodgmentDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LodgmentDetailImpl implements _LodgmentDetail {
   const _$LodgmentDetailImpl(
-      {required this.tourDetail,
-      required this.reservationUrl,
+      {required this.reservationUrl,
       required this.roomCount,
       required this.isGoodStay,
       required this.isBenikia,
@@ -412,8 +385,6 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
   factory _$LodgmentDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$LodgmentDetailImplFromJson(json);
 
-  @override
-  final TourDetail tourDetail;
   @override
   final String reservationUrl;
   @override
@@ -459,7 +430,7 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
 
   @override
   String toString() {
-    return 'LodgmentDetail(tourDetail: $tourDetail, reservationUrl: $reservationUrl, roomCount: $roomCount, isGoodStay: $isGoodStay, isBenikia: $isBenikia, isHanok: $isHanok, hasSeminar: $hasSeminar, hasSports: $hasSports, hasSauna: $hasSauna, hasBeauty: $hasBeauty, hasBeverage: $hasBeverage, hasKaraoke: $hasKaraoke, hasBarbecue: $hasBarbecue, hasCampfire: $hasCampfire, hasBicycle: $hasBicycle, hasFitness: $hasFitness, hasPublicPc: $hasPublicPc, hasPublicBath: $hasPublicBath, pickup: $pickup, park: $park, subFacility: $subFacility, foodPlace: $foodPlace)';
+    return 'LodgmentDetail(reservationUrl: $reservationUrl, roomCount: $roomCount, isGoodStay: $isGoodStay, isBenikia: $isBenikia, isHanok: $isHanok, hasSeminar: $hasSeminar, hasSports: $hasSports, hasSauna: $hasSauna, hasBeauty: $hasBeauty, hasBeverage: $hasBeverage, hasKaraoke: $hasKaraoke, hasBarbecue: $hasBarbecue, hasCampfire: $hasCampfire, hasBicycle: $hasBicycle, hasFitness: $hasFitness, hasPublicPc: $hasPublicPc, hasPublicBath: $hasPublicBath, pickup: $pickup, park: $park, subFacility: $subFacility, foodPlace: $foodPlace)';
   }
 
   @override
@@ -467,8 +438,6 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LodgmentDetailImpl &&
-            (identical(other.tourDetail, tourDetail) ||
-                other.tourDetail == tourDetail) &&
             (identical(other.reservationUrl, reservationUrl) ||
                 other.reservationUrl == reservationUrl) &&
             (identical(other.roomCount, roomCount) ||
@@ -514,7 +483,6 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        tourDetail,
         reservationUrl,
         roomCount,
         isGoodStay,
@@ -555,8 +523,7 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
 
 abstract class _LodgmentDetail implements LodgmentDetail {
   const factory _LodgmentDetail(
-      {required final TourDetail tourDetail,
-      required final String reservationUrl,
+      {required final String reservationUrl,
       required final String roomCount,
       required final bool isGoodStay,
       required final bool isBenikia,
@@ -581,8 +548,6 @@ abstract class _LodgmentDetail implements LodgmentDetail {
   factory _LodgmentDetail.fromJson(Map<String, dynamic> json) =
       _$LodgmentDetailImpl.fromJson;
 
-  @override
-  TourDetail get tourDetail;
   @override
   String get reservationUrl;
   @override
