@@ -20,13 +20,10 @@ TouristSpotDetail _$TouristSpotDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TouristSpotDetail {
-  TourDetail get tourDetail => throw _privateConstructorUsedError;
   String get expGuide => throw _privateConstructorUsedError;
   String get parking => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
   String get useTime => throw _privateConstructorUsedError;
-  List<TouristSpotDetailInfo> get touristSpotDetailInfoList =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,15 +37,7 @@ abstract class $TouristSpotDetailCopyWith<$Res> {
           TouristSpotDetail value, $Res Function(TouristSpotDetail) then) =
       _$TouristSpotDetailCopyWithImpl<$Res, TouristSpotDetail>;
   @useResult
-  $Res call(
-      {TourDetail tourDetail,
-      String expGuide,
-      String parking,
-      String restDay,
-      String useTime,
-      List<TouristSpotDetailInfo> touristSpotDetailInfoList});
-
-  $TourDetailCopyWith<$Res> get tourDetail;
+  $Res call({String expGuide, String parking, String restDay, String useTime});
 }
 
 /// @nodoc
@@ -64,18 +53,12 @@ class _$TouristSpotDetailCopyWithImpl<$Res, $Val extends TouristSpotDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourDetail = null,
     Object? expGuide = null,
     Object? parking = null,
     Object? restDay = null,
     Object? useTime = null,
-    Object? touristSpotDetailInfoList = null,
   }) {
     return _then(_value.copyWith(
-      tourDetail: null == tourDetail
-          ? _value.tourDetail
-          : tourDetail // ignore: cast_nullable_to_non_nullable
-              as TourDetail,
       expGuide: null == expGuide
           ? _value.expGuide
           : expGuide // ignore: cast_nullable_to_non_nullable
@@ -92,19 +75,7 @@ class _$TouristSpotDetailCopyWithImpl<$Res, $Val extends TouristSpotDetail>
           ? _value.useTime
           : useTime // ignore: cast_nullable_to_non_nullable
               as String,
-      touristSpotDetailInfoList: null == touristSpotDetailInfoList
-          ? _value.touristSpotDetailInfoList
-          : touristSpotDetailInfoList // ignore: cast_nullable_to_non_nullable
-              as List<TouristSpotDetailInfo>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TourDetailCopyWith<$Res> get tourDetail {
-    return $TourDetailCopyWith<$Res>(_value.tourDetail, (value) {
-      return _then(_value.copyWith(tourDetail: value) as $Val);
-    });
   }
 }
 
@@ -116,16 +87,7 @@ abstract class _$$TouristSpotDetailImplCopyWith<$Res>
       __$$TouristSpotDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {TourDetail tourDetail,
-      String expGuide,
-      String parking,
-      String restDay,
-      String useTime,
-      List<TouristSpotDetailInfo> touristSpotDetailInfoList});
-
-  @override
-  $TourDetailCopyWith<$Res> get tourDetail;
+  $Res call({String expGuide, String parking, String restDay, String useTime});
 }
 
 /// @nodoc
@@ -139,18 +101,12 @@ class __$$TouristSpotDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tourDetail = null,
     Object? expGuide = null,
     Object? parking = null,
     Object? restDay = null,
     Object? useTime = null,
-    Object? touristSpotDetailInfoList = null,
   }) {
     return _then(_$TouristSpotDetailImpl(
-      tourDetail: null == tourDetail
-          ? _value.tourDetail
-          : tourDetail // ignore: cast_nullable_to_non_nullable
-              as TourDetail,
       expGuide: null == expGuide
           ? _value.expGuide
           : expGuide // ignore: cast_nullable_to_non_nullable
@@ -167,10 +123,6 @@ class __$$TouristSpotDetailImplCopyWithImpl<$Res>
           ? _value.useTime
           : useTime // ignore: cast_nullable_to_non_nullable
               as String,
-      touristSpotDetailInfoList: null == touristSpotDetailInfoList
-          ? _value._touristSpotDetailInfoList
-          : touristSpotDetailInfoList // ignore: cast_nullable_to_non_nullable
-              as List<TouristSpotDetailInfo>,
     ));
   }
 }
@@ -179,19 +131,14 @@ class __$$TouristSpotDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TouristSpotDetailImpl implements _TouristSpotDetail {
   const _$TouristSpotDetailImpl(
-      {required this.tourDetail,
-      required this.expGuide,
+      {required this.expGuide,
       required this.parking,
       required this.restDay,
-      required this.useTime,
-      required final List<TouristSpotDetailInfo> touristSpotDetailInfoList})
-      : _touristSpotDetailInfoList = touristSpotDetailInfoList;
+      required this.useTime});
 
   factory _$TouristSpotDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$TouristSpotDetailImplFromJson(json);
 
-  @override
-  final TourDetail tourDetail;
   @override
   final String expGuide;
   @override
@@ -200,18 +147,10 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
   final String restDay;
   @override
   final String useTime;
-  final List<TouristSpotDetailInfo> _touristSpotDetailInfoList;
-  @override
-  List<TouristSpotDetailInfo> get touristSpotDetailInfoList {
-    if (_touristSpotDetailInfoList is EqualUnmodifiableListView)
-      return _touristSpotDetailInfoList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_touristSpotDetailInfoList);
-  }
 
   @override
   String toString() {
-    return 'TouristSpotDetail(tourDetail: $tourDetail, expGuide: $expGuide, parking: $parking, restDay: $restDay, useTime: $useTime, touristSpotDetailInfoList: $touristSpotDetailInfoList)';
+    return 'TouristSpotDetail(expGuide: $expGuide, parking: $parking, restDay: $restDay, useTime: $useTime)';
   }
 
   @override
@@ -219,27 +158,17 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TouristSpotDetailImpl &&
-            (identical(other.tourDetail, tourDetail) ||
-                other.tourDetail == tourDetail) &&
             (identical(other.expGuide, expGuide) ||
                 other.expGuide == expGuide) &&
             (identical(other.parking, parking) || other.parking == parking) &&
             (identical(other.restDay, restDay) || other.restDay == restDay) &&
-            (identical(other.useTime, useTime) || other.useTime == useTime) &&
-            const DeepCollectionEquality().equals(
-                other._touristSpotDetailInfoList, _touristSpotDetailInfoList));
+            (identical(other.useTime, useTime) || other.useTime == useTime));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      tourDetail,
-      expGuide,
-      parking,
-      restDay,
-      useTime,
-      const DeepCollectionEquality().hash(_touristSpotDetailInfoList));
+  int get hashCode =>
+      Object.hash(runtimeType, expGuide, parking, restDay, useTime);
 
   @JsonKey(ignore: true)
   @override
@@ -258,19 +187,14 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
 
 abstract class _TouristSpotDetail implements TouristSpotDetail {
   const factory _TouristSpotDetail(
-      {required final TourDetail tourDetail,
-      required final String expGuide,
+      {required final String expGuide,
       required final String parking,
       required final String restDay,
-      required final String useTime,
-      required final List<TouristSpotDetailInfo>
-          touristSpotDetailInfoList}) = _$TouristSpotDetailImpl;
+      required final String useTime}) = _$TouristSpotDetailImpl;
 
   factory _TouristSpotDetail.fromJson(Map<String, dynamic> json) =
       _$TouristSpotDetailImpl.fromJson;
 
-  @override
-  TourDetail get tourDetail;
   @override
   String get expGuide;
   @override
@@ -279,8 +203,6 @@ abstract class _TouristSpotDetail implements TouristSpotDetail {
   String get restDay;
   @override
   String get useTime;
-  @override
-  List<TouristSpotDetailInfo> get touristSpotDetailInfoList;
   @override
   @JsonKey(ignore: true)
   _$$TouristSpotDetailImplCopyWith<_$TouristSpotDetailImpl> get copyWith =>
