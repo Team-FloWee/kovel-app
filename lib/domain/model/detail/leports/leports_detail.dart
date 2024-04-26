@@ -11,7 +11,6 @@ class LeportsDetail with _$LeportsDetail {
     required String useTime,
     required String ageLimit,
     required String parking,
-    required List<LeportsDetailInfo> leportsDetailInfoList,
   }) = _LeportsDetail;
 
   factory LeportsDetail.fromJson(Map<String, Object?> json) =>
