@@ -29,7 +29,7 @@ abstract interface class TourInfoRepository {
   // 축제 공연 행사 검색 조회 (search Festival)
   Future<List<Tour>> getSearchFestival(String eventStartDate);
 
-  // 숙박 검색 조회 (search stay)
+  // 숙박 정보 조회 (search stay)
   Future<List<Tour>> getSearchStay();
 
   // 공통 정보 조회 (tour detail)
@@ -37,44 +37,59 @@ abstract interface class TourInfoRepository {
 
   // 소개 정보 조회 - 컨텐츠 별 (content detail)
   // (12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
+
   // 25: 여행 코스
-  Future<List<CourseDetail>> getCourseDetail(String contentId, String contentTypeId);
+  Future<List<CourseDetail>> getCourseDetail(
+      String contentId, String contentTypeId);
 
   // 14: 문화 시설
-  Future<List<CultureLocationDetail>> getCultureLocationDetail(String contentId, String contentTypeId);
+  Future<List<CultureLocationDetail>> getCultureLocationDetail(
+      String contentId, String contentTypeId);
 
   // 15: 축제 공연 행사
-  Future<List<FestivalDetail>> getFestivalDetail(String contentId, String contentTypeId);
+  Future<List<FestivalDetail>> getFestivalDetail(
+      String contentId, String contentTypeId);
 
   // 28: 레포츠
-  Future<List<LeportsDetail>> getLeportsDetail(String contentId, String contentTypeId);
+  Future<List<LeportsDetail>> getLeportsDetail(
+      String contentId, String contentTypeId);
 
   // 32: 숙박
-  Future<List<LodgmentDetail>> getLodgmentDetail(String contentId, String contentTypeId);
+  Future<List<LodgmentDetail>> getLodgmentDetail(
+      String contentId, String contentTypeId);
 
   // 39: 음식점
-  Future<List<RestaurantDetail>> getRestaurantDetail(String contentId, String contentTypeId);
+  Future<List<RestaurantDetail>> getRestaurantDetail(
+      String contentId, String contentTypeId);
 
   // 38: 쇼핑
-  Future<List<ShoppingDetail>> getShoppingDetail(String contentId, String contentTypeId);
+  Future<List<ShoppingDetail>> getShoppingDetail(
+      String contentId, String contentTypeId);
 
   // 12: 관광지
-  Future<List<TouristSpotDetail>> getTouristSpotDetail(String contentId, String contentTypeId);
+  Future<List<TouristSpotDetail>> getTouristSpotDetail(
+      String contentId, String contentTypeId);
 
   // 반복 정보 조회 - 컨텐츠 별 (content detail info)
   // (12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠)
+
   // 25: 여행 코스
-  Future<List<CourseDetailInfo>> getCourseDetailInfo(String contentId, String contentTypeId);
+  Future<List<CourseDetailInfo>> getCourseDetailInfo(
+      String contentId, String contentTypeId);
 
   // 14: 문화 시설
-  Future<List<CultureLocationDetailInfo>> getCultureLocationDetailInfo(String contentId, String contentTypeId);
+  Future<List<CultureLocationDetailInfo>> getCultureLocationDetailInfo(
+      String contentId, String contentTypeId);
 
   // 15: 축제 공연 행사
-  Future<List<FestivalDetailInfo>> getFestivalDetailInfo(String contentId, String contentTypeId);
+  Future<List<FestivalDetailInfo>> getFestivalDetailInfo(
+      String contentId, String contentTypeId);
 
   // 28: 레포츠
-  Future<List<LeportsDetailInfo>> getLeportsDetailInfo(String contentId, String contentTypeId);
+  Future<List<LeportsDetailInfo>> getLeportsDetailInfo(
+      String contentId, String contentTypeId);
 
   // 12: 관광지
-  Future<List<TouristSpotDetailInfo>> getTouristSpotDetailInfo(String contentId, String contentTypeId);
+  Future<List<TouristSpotDetailInfo>> getTouristSpotDetailInfo(
+      String contentId, String contentTypeId);
 }
