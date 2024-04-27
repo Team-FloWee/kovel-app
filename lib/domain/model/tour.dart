@@ -8,7 +8,7 @@ part 'tour.g.dart';
 class Tour with _$Tour {
   const factory Tour({
     required int id,
-    required String contentTypeId,
+    required int contentTypeId,
     required String title,
     required String address1,
     required String address2,

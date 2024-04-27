@@ -20,6 +20,8 @@ FestivalDetailInfo _$FestivalDetailInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FestivalDetailInfo {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get infoName => throw _privateConstructorUsedError;
   String get infoText => throw _privateConstructorUsedError;
 
@@ -35,7 +37,8 @@ abstract class $FestivalDetailInfoCopyWith<$Res> {
           FestivalDetailInfo value, $Res Function(FestivalDetailInfo) then) =
       _$FestivalDetailInfoCopyWithImpl<$Res, FestivalDetailInfo>;
   @useResult
-  $Res call({String infoName, String infoText});
+  $Res call(
+      {int contentId, int contentTypeId, String infoName, String infoText});
 }
 
 /// @nodoc
@@ -51,10 +54,20 @@ class _$FestivalDetailInfoCopyWithImpl<$Res, $Val extends FestivalDetailInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -75,7 +88,8 @@ abstract class _$$FestivalDetailInfoImplCopyWith<$Res>
       __$$FestivalDetailInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String infoName, String infoText});
+  $Res call(
+      {int contentId, int contentTypeId, String infoName, String infoText});
 }
 
 /// @nodoc
@@ -89,10 +103,20 @@ class __$$FestivalDetailInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
     return _then(_$FestivalDetailInfoImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -109,11 +133,18 @@ class __$$FestivalDetailInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FestivalDetailInfoImpl implements _FestivalDetailInfo {
   const _$FestivalDetailInfoImpl(
-      {required this.infoName, required this.infoText});
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.infoName,
+      required this.infoText});
 
   factory _$FestivalDetailInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$FestivalDetailInfoImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String infoName;
   @override
@@ -121,7 +152,7 @@ class _$FestivalDetailInfoImpl implements _FestivalDetailInfo {
 
   @override
   String toString() {
-    return 'FestivalDetailInfo(infoName: $infoName, infoText: $infoText)';
+    return 'FestivalDetailInfo(contentId: $contentId, contentTypeId: $contentTypeId, infoName: $infoName, infoText: $infoText)';
   }
 
   @override
@@ -129,6 +160,10 @@ class _$FestivalDetailInfoImpl implements _FestivalDetailInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FestivalDetailInfoImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.infoName, infoName) ||
                 other.infoName == infoName) &&
             (identical(other.infoText, infoText) ||
@@ -137,7 +172,8 @@ class _$FestivalDetailInfoImpl implements _FestivalDetailInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, infoName, infoText);
+  int get hashCode =>
+      Object.hash(runtimeType, contentId, contentTypeId, infoName, infoText);
 
   @JsonKey(ignore: true)
   @override
@@ -156,12 +192,18 @@ class _$FestivalDetailInfoImpl implements _FestivalDetailInfo {
 
 abstract class _FestivalDetailInfo implements FestivalDetailInfo {
   const factory _FestivalDetailInfo(
-      {required final String infoName,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String infoName,
       required final String infoText}) = _$FestivalDetailInfoImpl;
 
   factory _FestivalDetailInfo.fromJson(Map<String, dynamic> json) =
       _$FestivalDetailInfoImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get infoName;
   @override

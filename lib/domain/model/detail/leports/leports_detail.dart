@@ -6,6 +6,8 @@ part 'leports_detail.g.dart';
 @freezed
 class LeportsDetail with _$LeportsDetail {
   const factory LeportsDetail({
+    required int contentId,
+    required int contentTypeId,
     required String restDay,
     required String useTime,
     required String ageLimit,

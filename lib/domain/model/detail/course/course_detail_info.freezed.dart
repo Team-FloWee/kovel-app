@@ -20,6 +20,8 @@ CourseDetailInfo _$CourseDetailInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CourseDetailInfo {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
 
@@ -35,7 +37,7 @@ abstract class $CourseDetailInfoCopyWith<$Res> {
           CourseDetailInfo value, $Res Function(CourseDetailInfo) then) =
       _$CourseDetailInfoCopyWithImpl<$Res, CourseDetailInfo>;
   @useResult
-  $Res call({String name, String overview});
+  $Res call({int contentId, int contentTypeId, String name, String overview});
 }
 
 /// @nodoc
@@ -51,10 +53,20 @@ class _$CourseDetailInfoCopyWithImpl<$Res, $Val extends CourseDetailInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? name = null,
     Object? overview = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -75,7 +87,7 @@ abstract class _$$CourseDetailInfoImplCopyWith<$Res>
       __$$CourseDetailInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String overview});
+  $Res call({int contentId, int contentTypeId, String name, String overview});
 }
 
 /// @nodoc
@@ -89,10 +101,20 @@ class __$$CourseDetailInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? name = null,
     Object? overview = null,
   }) {
     return _then(_$CourseDetailInfoImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -108,11 +130,19 @@ class __$$CourseDetailInfoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CourseDetailInfoImpl implements _CourseDetailInfo {
-  const _$CourseDetailInfoImpl({required this.name, required this.overview});
+  const _$CourseDetailInfoImpl(
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.name,
+      required this.overview});
 
   factory _$CourseDetailInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CourseDetailInfoImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String name;
   @override
@@ -120,7 +150,7 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
 
   @override
   String toString() {
-    return 'CourseDetailInfo(name: $name, overview: $overview)';
+    return 'CourseDetailInfo(contentId: $contentId, contentTypeId: $contentTypeId, name: $name, overview: $overview)';
   }
 
   @override
@@ -128,6 +158,10 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CourseDetailInfoImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.overview, overview) ||
                 other.overview == overview));
@@ -135,7 +169,8 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, overview);
+  int get hashCode =>
+      Object.hash(runtimeType, contentId, contentTypeId, name, overview);
 
   @JsonKey(ignore: true)
   @override
@@ -154,12 +189,18 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
 
 abstract class _CourseDetailInfo implements CourseDetailInfo {
   const factory _CourseDetailInfo(
-      {required final String name,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String name,
       required final String overview}) = _$CourseDetailInfoImpl;
 
   factory _CourseDetailInfo.fromJson(Map<String, dynamic> json) =
       _$CourseDetailInfoImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get name;
   @override

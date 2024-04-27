@@ -9,6 +9,8 @@ part of 'restaurant_detail.dart';
 _$RestaurantDetailImpl _$$RestaurantDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$RestaurantDetailImpl(
+      contentId: (json['contentId'] as num).toInt(),
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
       firstMenu: json['firstMenu'] as String,
       treatMenu: json['treatMenu'] as String,
       parking: json['parking'] as String,
@@ -19,6 +21,8 @@ _$RestaurantDetailImpl _$$RestaurantDetailImplFromJson(
 Map<String, dynamic> _$$RestaurantDetailImplToJson(
         _$RestaurantDetailImpl instance) =>
     <String, dynamic>{
+      'contentId': instance.contentId,
+      'contentTypeId': instance.contentTypeId,
       'firstMenu': instance.firstMenu,
       'treatMenu': instance.treatMenu,
       'parking': instance.parking,

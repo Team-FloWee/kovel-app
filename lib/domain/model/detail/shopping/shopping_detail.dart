@@ -6,6 +6,8 @@ part 'shopping_detail.g.dart';
 @freezed
 class ShoppingDetail with _$ShoppingDetail {
   const factory ShoppingDetail({
+    required int contentId,
+    required int contentTypeId,
     required String saleItem,
     required String saleItemCost,
     required String restDay,

@@ -21,6 +21,8 @@ CultureLocationDetail _$CultureLocationDetailFromJson(
 
 /// @nodoc
 mixin _$CultureLocationDetail {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get useFee => throw _privateConstructorUsedError;
   String get useTime => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
@@ -41,7 +43,9 @@ abstract class $CultureLocationDetailCopyWith<$Res> {
       _$CultureLocationDetailCopyWithImpl<$Res, CultureLocationDetail>;
   @useResult
   $Res call(
-      {String useFee,
+      {int contentId,
+      int contentTypeId,
+      String useFee,
       String useTime,
       String restDay,
       String parking,
@@ -63,6 +67,8 @@ class _$CultureLocationDetailCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? useFee = null,
     Object? useTime = null,
     Object? restDay = null,
@@ -71,6 +77,14 @@ class _$CultureLocationDetailCopyWithImpl<$Res,
     Object? petAllowed = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       useFee: null == useFee
           ? _value.useFee
           : useFee // ignore: cast_nullable_to_non_nullable
@@ -109,7 +123,9 @@ abstract class _$$CultureLocationDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String useFee,
+      {int contentId,
+      int contentTypeId,
+      String useFee,
       String useTime,
       String restDay,
       String parking,
@@ -129,6 +145,8 @@ class __$$CultureLocationDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? useFee = null,
     Object? useTime = null,
     Object? restDay = null,
@@ -137,6 +155,14 @@ class __$$CultureLocationDetailImplCopyWithImpl<$Res>
     Object? petAllowed = null,
   }) {
     return _then(_$CultureLocationDetailImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       useFee: null == useFee
           ? _value.useFee
           : useFee // ignore: cast_nullable_to_non_nullable
@@ -169,7 +195,9 @@ class __$$CultureLocationDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CultureLocationDetailImpl implements _CultureLocationDetail {
   const _$CultureLocationDetailImpl(
-      {required this.useFee,
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.useFee,
       required this.useTime,
       required this.restDay,
       required this.parking,
@@ -179,6 +207,10 @@ class _$CultureLocationDetailImpl implements _CultureLocationDetail {
   factory _$CultureLocationDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$CultureLocationDetailImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String useFee;
   @override
@@ -194,7 +226,7 @@ class _$CultureLocationDetailImpl implements _CultureLocationDetail {
 
   @override
   String toString() {
-    return 'CultureLocationDetail(useFee: $useFee, useTime: $useTime, restDay: $restDay, parking: $parking, spendTime: $spendTime, petAllowed: $petAllowed)';
+    return 'CultureLocationDetail(contentId: $contentId, contentTypeId: $contentTypeId, useFee: $useFee, useTime: $useTime, restDay: $restDay, parking: $parking, spendTime: $spendTime, petAllowed: $petAllowed)';
   }
 
   @override
@@ -202,6 +234,10 @@ class _$CultureLocationDetailImpl implements _CultureLocationDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CultureLocationDetailImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.useFee, useFee) || other.useFee == useFee) &&
             (identical(other.useTime, useTime) || other.useTime == useTime) &&
             (identical(other.restDay, restDay) || other.restDay == restDay) &&
@@ -214,8 +250,8 @@ class _$CultureLocationDetailImpl implements _CultureLocationDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, useFee, useTime, restDay, parking, spendTime, petAllowed);
+  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId, useFee,
+      useTime, restDay, parking, spendTime, petAllowed);
 
   @JsonKey(ignore: true)
   @override
@@ -234,7 +270,9 @@ class _$CultureLocationDetailImpl implements _CultureLocationDetail {
 
 abstract class _CultureLocationDetail implements CultureLocationDetail {
   const factory _CultureLocationDetail(
-      {required final String useFee,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String useFee,
       required final String useTime,
       required final String restDay,
       required final String parking,
@@ -244,6 +282,10 @@ abstract class _CultureLocationDetail implements CultureLocationDetail {
   factory _CultureLocationDetail.fromJson(Map<String, dynamic> json) =
       _$CultureLocationDetailImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get useFee;
   @override

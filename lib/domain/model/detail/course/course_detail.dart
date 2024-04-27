@@ -6,6 +6,8 @@ part 'course_detail.g.dart';
 @freezed
 class CourseDetail with _$CourseDetail {
   const factory CourseDetail({
+    required int contentId,
+    required int contentTypeId,
     required String takeTime,
     required String distance,
   }) = _CourseDetail;

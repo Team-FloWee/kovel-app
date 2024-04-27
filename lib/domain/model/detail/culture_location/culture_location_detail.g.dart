@@ -9,6 +9,8 @@ part of 'culture_location_detail.dart';
 _$CultureLocationDetailImpl _$$CultureLocationDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$CultureLocationDetailImpl(
+      contentId: (json['contentId'] as num).toInt(),
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
       useFee: json['useFee'] as String,
       useTime: json['useTime'] as String,
       restDay: json['restDay'] as String,
@@ -20,6 +22,8 @@ _$CultureLocationDetailImpl _$$CultureLocationDetailImplFromJson(
 Map<String, dynamic> _$$CultureLocationDetailImplToJson(
         _$CultureLocationDetailImpl instance) =>
     <String, dynamic>{
+      'contentId': instance.contentId,
+      'contentTypeId': instance.contentTypeId,
       'useFee': instance.useFee,
       'useTime': instance.useTime,
       'restDay': instance.restDay,

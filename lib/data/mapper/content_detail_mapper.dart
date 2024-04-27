@@ -11,6 +11,8 @@ import 'package:kovel_app/domain/model/detail/tourist_spot/tourist_spot_detail.d
 extension ToContentDetail on ContentDetailDto {
   CourseDetail toCourseDetail() {
     return CourseDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       takeTime: taketime ?? '',
       distance: distance ?? '',
     );
@@ -18,6 +20,8 @@ extension ToContentDetail on ContentDetailDto {
 
   CultureLocationDetail toCultureLocationDetail() {
     return CultureLocationDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       useFee: usefee ?? '',
       useTime: usetime ?? '',
       restDay: restdateculture ?? '',
@@ -29,6 +33,8 @@ extension ToContentDetail on ContentDetailDto {
 
   FestivalDetail toFestivalDetail() {
     return FestivalDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       startDate: eventstartdate ?? '',
       endDate: eventenddate ?? '',
       playTime: playtime ?? '',
@@ -43,6 +49,8 @@ extension ToContentDetail on ContentDetailDto {
 
   LeportsDetail toLeportsDetail() {
     return LeportsDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       restDay: restdateleports ?? '',
       useTime: usetimeleports ?? '',
       ageLimit: expagerangeleports ?? '',
@@ -52,6 +60,8 @@ extension ToContentDetail on ContentDetailDto {
 
   LodgmentDetail toLodgmentDetail() {
     return LodgmentDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       reservationUrl: reservationurl ?? '',
       roomCount: roomcount ?? '',
       isGoodStay: goodstay == "1" ? true : false,
@@ -78,6 +88,8 @@ extension ToContentDetail on ContentDetailDto {
 
   RestaurantDetail toRestaurantDetail() {
     return RestaurantDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       firstMenu: firstmenu ?? '',
       treatMenu: treatmenu ?? '',
       parking: parkingfood ?? '',
@@ -88,6 +100,8 @@ extension ToContentDetail on ContentDetailDto {
 
   ShoppingDetail toShoppingDetail() {
     return ShoppingDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       saleItem: saleitem ?? '',
       saleItemCost: saleitemcost ?? '',
       restDay: restdateshopping ?? '',
@@ -99,6 +113,8 @@ extension ToContentDetail on ContentDetailDto {
 
   TouristSpotDetail toTouristSpotDetail() {
     return TouristSpotDetail(
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       expGuide: expguide ?? '',
       parking: parking ?? '',
       restDay: restdate ?? '',

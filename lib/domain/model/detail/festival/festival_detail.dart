@@ -6,6 +6,8 @@ part 'festival_detail.g.dart';
 @freezed
 class FestivalDetail with _$FestivalDetail {
   const factory FestivalDetail({
+    required int contentId,
+    required int contentTypeId,
     required String startDate,
     required String endDate,
     required String playTime,

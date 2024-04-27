@@ -8,7 +8,7 @@ part of 'tour.dart';
 
 _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       id: (json['id'] as num).toInt(),
-      contentTypeId: json['contentTypeId'] as String,
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
       title: json['title'] as String,
       address1: json['address1'] as String,
       address2: json['address2'] as String,
