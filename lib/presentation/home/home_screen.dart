@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kovel_app/presentation/components/location_selector.dart';
+import 'package:kovel_app/presentation/components/nearby_tourist_information_recommendations.dart';
+import 'package:kovel_app/presentation/components/ongoing_festivals.dart';
+import 'package:kovel_app/presentation/components/top_10_popular_landmarks.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,41 +42,29 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 children: [
-                  Container(
-                    child: Image.network(
-                      'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  NearbyTouristInformation(
+                    url:
+                        'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
                   ),
-                  Container(
-                    child: Image.network(
-                      'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  NearbyTouristInformation(
+                    url:
+                        'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
                   ),
-                  Container(
-                    child: Image.network(
-                      'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  NearbyTouristInformation(
+                    url:
+                        'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
                   ),
-                  Container(
-                    child: Image.network(
-                      'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  NearbyTouristInformation(
+                    url:
+                        'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
                   ),
-                  Container(
-                    child: Image.network(
-                      'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  NearbyTouristInformation(
+                    url:
+                        'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
                   ),
-                  Container(
-                    child: Image.network(
-                      'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                  NearbyTouristInformation(
+                    url:
+                        'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
                   ),
                 ],
               ),
@@ -94,102 +86,22 @@ class HomeScreen extends StatelessWidget {
               crossAxisSpacing: 15,
               mainAxisSpacing: 10,
               children: [
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  height: 20,
-                  width: 30,
-                  color: Colors.blue,
-                ),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
+                LocationSelector(),
               ],
             )),
             Row(children: [
@@ -210,66 +122,16 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 10,
                 children: [
-                  Container(
-                    color: Colors.blue,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 1')), // 데이터 1
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 2')), // 데이터 1
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 3')), // 데이터 1
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 4')), // 데이터 1
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 5')), // 데이터 2
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 6')), // 데이터 2
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 7')), // 데이터 2
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 8')), // 데이터 2
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 9')), // 데이터 2
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 200, // 내용의 높이
-                    width: 200,
-                    child: Center(child: Text('Data 10')), // 데이터 2
-                  ),
+                  Top10PopularLandmarks(text: 'data1'),
+                  Top10PopularLandmarks(text: 'data2'),
+                  Top10PopularLandmarks(text: 'data3'),
+                  Top10PopularLandmarks(text: 'data4'),
+                  Top10PopularLandmarks(text: 'data5'),
+                  Top10PopularLandmarks(text: 'data6'),
+                  Top10PopularLandmarks(text: 'data7'),
+                  Top10PopularLandmarks(text: 'data8'),
+                  Top10PopularLandmarks(text: 'data9'),
+                  Top10PopularLandmarks(text: 'data10'),
                 ],
               ),
             ),
@@ -282,58 +144,22 @@ class HomeScreen extends StatelessWidget {
               ),
             ]),
             Container(
-              height: 300,
-              child: SingleChildScrollView(
+              height: 150,
+              child: GridView.count(
+                padding: EdgeInsets.all(8.0),
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                        height: 200, // 내용의 높이
-                        width: 200,
-                        child: Center(child: Text('Data 1')), // 데이터 1
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                        height: 200, // 내용의 높이
-                        width: 200,
-                        child: Center(child: Text('Data 2')), // 데이터 1
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                        height: 200, // 내용의 높이
-                        width: 200,
-                        child: Center(child: Text('Data 3')), // 데이터 1
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                        height: 200, // 내용의 높이
-                        width: 200,
-                        child: Center(child: Text('Data 4')), // 데이터 1
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                        height: 200, // 내용의 높이
-                        width: 200,
-                        child: Center(child: Text('Data 5')), // 데이터 1
-                      ),
-                    ),
-                  ],
-                ),
+                shrinkWrap: true,
+                crossAxisCount: 1,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 10,
+                children: [
+                  OngoingFestivals(text: 'data1'),
+                  OngoingFestivals(text: 'data2'),
+                  OngoingFestivals(text: 'data3'),
+                  OngoingFestivals(text: 'data4'),
+                  OngoingFestivals(text: 'data5'),
+                  OngoingFestivals(text: 'data6'),
+                ],
               ),
             ),
           ],
