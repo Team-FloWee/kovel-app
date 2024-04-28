@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kovel_app/config/firebase_options.dart';
+import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/login_page.dart';
 
 void main() async {
@@ -10,6 +11,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await dotenv.load(fileName: '.env');
+  diSetup();
   runApp(const MyApp());
 }
 
