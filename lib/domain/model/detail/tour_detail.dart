@@ -7,8 +7,8 @@ part 'tour_detail.g.dart';
 @freezed
 class TourDetail with _$TourDetail {
   const factory TourDetail({
-    required int id,
-    required String contentTypeId,
+    required int contentId,
+    required int contentTypeId,
     required String title,
     required String address1,
     required String address2,

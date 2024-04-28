@@ -4,7 +4,8 @@ import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 extension ToTourDetail on TourDetailDto {
   TourDetail toTourDetail() {
     return TourDetail(
-      id: int.tryParse(contentid!) ?? 0,
+      contentId: int.tryParse(contentid!) ?? 0,
+      contentTypeId: int.tryParse(contenttypeid!) ?? 0,
       title: title ?? '',
       address1: addr1 ?? '',
       address2: addr2 ?? '',
@@ -13,7 +14,6 @@ extension ToTourDetail on TourDetailDto {
       category1: cat1 ?? '',
       category2: cat2 ?? '',
       category3: cat3 ?? '',
-      contentTypeId: contenttypeid ?? '',
       createdTime: createdtime ?? '',
       mapx: mapx ?? '',
       mapy: mapy ?? '',

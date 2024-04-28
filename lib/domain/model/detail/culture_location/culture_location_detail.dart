@@ -7,6 +7,8 @@ part 'culture_location_detail.g.dart';
 @freezed
 class CultureLocationDetail with _$CultureLocationDetail {
   const factory CultureLocationDetail({
+    required int contentId,
+    required int contentTypeId,
     required String useFee,
     required String useTime,
     required String restDay,

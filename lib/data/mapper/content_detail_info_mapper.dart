@@ -8,34 +8,44 @@ import 'package:kovel_app/domain/model/detail/tourist_spot/tourist_spot_detail_i
 extension ToContentDetailInfo on ContentDetailInfoDto {
   CourseDetailInfo toCourseDetailInfo() {
     return CourseDetailInfo(
+        contentId: int.tryParse(contentid!) ?? 0,
+        contentTypeId: int.tryParse(contenttypeid!) ?? 0,
         name: subname ?? '',
-        overview: subdetailoverview ?? ''
+        overview: subdetailoverview ?? '',
     );
   }
 
   CultureLocationDetailInfo toCultureLocationDeteailInfo() {
     return CultureLocationDetailInfo(
+        contentId: int.tryParse(contentid!) ?? 0,
+        contentTypeId: int.tryParse(contenttypeid!) ?? 0,
         infoName: infoname ?? '',
         infoText: infotext ?? ''
     );
   }
 
-  FestivalDetailInfo toFestivalDeteailInfo() {
+  FestivalDetailInfo toFestivalDetailInfo() {
     return FestivalDetailInfo(
+        contentId: int.tryParse(contentid!) ?? 0,
+        contentTypeId: int.tryParse(contenttypeid!) ?? 0,
         infoName: infoname ?? '',
         infoText: infotext ?? ''
     );
   }
 
-  LeportsDetailInfo toLeportsDeteailInfo() {
+  LeportsDetailInfo toLeportsDetailInfo() {
     return LeportsDetailInfo(
+        contentId: int.tryParse(contentid!) ?? 0,
+        contentTypeId: int.tryParse(contenttypeid!) ?? 0,
         infoName: infoname ?? '',
         infoText: infotext ?? ''
     );
   }
 
-  TouristSpotDetailInfo toTouristSpotDeteailInfo() {
+  TouristSpotDetailInfo toTouristSpotDetailInfo() {
     return TouristSpotDetailInfo(
+        contentId: int.tryParse(contentid!) ?? 0,
+        contentTypeId: int.tryParse(contenttypeid!) ?? 0,
         infoName: infoname ?? '',
         infoText: infotext ?? ''
     );

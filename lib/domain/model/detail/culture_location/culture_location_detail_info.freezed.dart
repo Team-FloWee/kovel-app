@@ -21,6 +21,8 @@ CultureLocationDetailInfo _$CultureLocationDetailInfoFromJson(
 
 /// @nodoc
 mixin _$CultureLocationDetailInfo {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get infoName => throw _privateConstructorUsedError;
   String get infoText => throw _privateConstructorUsedError;
 
@@ -36,7 +38,8 @@ abstract class $CultureLocationDetailInfoCopyWith<$Res> {
           $Res Function(CultureLocationDetailInfo) then) =
       _$CultureLocationDetailInfoCopyWithImpl<$Res, CultureLocationDetailInfo>;
   @useResult
-  $Res call({String infoName, String infoText});
+  $Res call(
+      {int contentId, int contentTypeId, String infoName, String infoText});
 }
 
 /// @nodoc
@@ -53,10 +56,20 @@ class _$CultureLocationDetailInfoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -78,7 +91,8 @@ abstract class _$$CultureLocationDetailInfoImplCopyWith<$Res>
       __$$CultureLocationDetailInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String infoName, String infoText});
+  $Res call(
+      {int contentId, int contentTypeId, String infoName, String infoText});
 }
 
 /// @nodoc
@@ -94,10 +108,20 @@ class __$$CultureLocationDetailInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
     return _then(_$CultureLocationDetailInfoImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -114,11 +138,18 @@ class __$$CultureLocationDetailInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CultureLocationDetailInfoImpl implements _CultureLocationDetailInfo {
   const _$CultureLocationDetailInfoImpl(
-      {required this.infoName, required this.infoText});
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.infoName,
+      required this.infoText});
 
   factory _$CultureLocationDetailInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CultureLocationDetailInfoImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String infoName;
   @override
@@ -126,7 +157,7 @@ class _$CultureLocationDetailInfoImpl implements _CultureLocationDetailInfo {
 
   @override
   String toString() {
-    return 'CultureLocationDetailInfo(infoName: $infoName, infoText: $infoText)';
+    return 'CultureLocationDetailInfo(contentId: $contentId, contentTypeId: $contentTypeId, infoName: $infoName, infoText: $infoText)';
   }
 
   @override
@@ -134,6 +165,10 @@ class _$CultureLocationDetailInfoImpl implements _CultureLocationDetailInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CultureLocationDetailInfoImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.infoName, infoName) ||
                 other.infoName == infoName) &&
             (identical(other.infoText, infoText) ||
@@ -142,7 +177,8 @@ class _$CultureLocationDetailInfoImpl implements _CultureLocationDetailInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, infoName, infoText);
+  int get hashCode =>
+      Object.hash(runtimeType, contentId, contentTypeId, infoName, infoText);
 
   @JsonKey(ignore: true)
   @override
@@ -161,12 +197,18 @@ class _$CultureLocationDetailInfoImpl implements _CultureLocationDetailInfo {
 
 abstract class _CultureLocationDetailInfo implements CultureLocationDetailInfo {
   const factory _CultureLocationDetailInfo(
-      {required final String infoName,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String infoName,
       required final String infoText}) = _$CultureLocationDetailInfoImpl;
 
   factory _CultureLocationDetailInfo.fromJson(Map<String, dynamic> json) =
       _$CultureLocationDetailInfoImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get infoName;
   @override

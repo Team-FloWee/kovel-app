@@ -20,6 +20,8 @@ LeportsDetail _$LeportsDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LeportsDetail {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
   String get useTime => throw _privateConstructorUsedError;
   String get ageLimit => throw _privateConstructorUsedError;
@@ -37,7 +39,13 @@ abstract class $LeportsDetailCopyWith<$Res> {
           LeportsDetail value, $Res Function(LeportsDetail) then) =
       _$LeportsDetailCopyWithImpl<$Res, LeportsDetail>;
   @useResult
-  $Res call({String restDay, String useTime, String ageLimit, String parking});
+  $Res call(
+      {int contentId,
+      int contentTypeId,
+      String restDay,
+      String useTime,
+      String ageLimit,
+      String parking});
 }
 
 /// @nodoc
@@ -53,12 +61,22 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? restDay = null,
     Object? useTime = null,
     Object? ageLimit = null,
     Object? parking = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       restDay: null == restDay
           ? _value.restDay
           : restDay // ignore: cast_nullable_to_non_nullable
@@ -87,7 +105,13 @@ abstract class _$$LeportsDetailImplCopyWith<$Res>
       __$$LeportsDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String restDay, String useTime, String ageLimit, String parking});
+  $Res call(
+      {int contentId,
+      int contentTypeId,
+      String restDay,
+      String useTime,
+      String ageLimit,
+      String parking});
 }
 
 /// @nodoc
@@ -101,12 +125,22 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? restDay = null,
     Object? useTime = null,
     Object? ageLimit = null,
     Object? parking = null,
   }) {
     return _then(_$LeportsDetailImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       restDay: null == restDay
           ? _value.restDay
           : restDay // ignore: cast_nullable_to_non_nullable
@@ -131,7 +165,9 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LeportsDetailImpl implements _LeportsDetail {
   const _$LeportsDetailImpl(
-      {required this.restDay,
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.restDay,
       required this.useTime,
       required this.ageLimit,
       required this.parking});
@@ -139,6 +175,10 @@ class _$LeportsDetailImpl implements _LeportsDetail {
   factory _$LeportsDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$LeportsDetailImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String restDay;
   @override
@@ -150,7 +190,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
   @override
   String toString() {
-    return 'LeportsDetail(restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
+    return 'LeportsDetail(contentId: $contentId, contentTypeId: $contentTypeId, restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
   }
 
   @override
@@ -158,6 +198,10 @@ class _$LeportsDetailImpl implements _LeportsDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LeportsDetailImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.restDay, restDay) || other.restDay == restDay) &&
             (identical(other.useTime, useTime) || other.useTime == useTime) &&
             (identical(other.ageLimit, ageLimit) ||
@@ -167,8 +211,8 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, restDay, useTime, ageLimit, parking);
+  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
+      restDay, useTime, ageLimit, parking);
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +230,9 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
 abstract class _LeportsDetail implements LeportsDetail {
   const factory _LeportsDetail(
-      {required final String restDay,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String restDay,
       required final String useTime,
       required final String ageLimit,
       required final String parking}) = _$LeportsDetailImpl;
@@ -194,6 +240,10 @@ abstract class _LeportsDetail implements LeportsDetail {
   factory _LeportsDetail.fromJson(Map<String, dynamic> json) =
       _$LeportsDetailImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get restDay;
   @override

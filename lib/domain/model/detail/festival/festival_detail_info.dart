@@ -6,6 +6,8 @@ part 'festival_detail_info.g.dart';
 @freezed
 class FestivalDetailInfo with _$FestivalDetailInfo {
   const factory FestivalDetailInfo({
+    required int contentId,
+    required int contentTypeId,
     required String infoName,
     required String infoText,
   }) = _FestivalDetailInfo;

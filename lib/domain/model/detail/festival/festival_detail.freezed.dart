@@ -20,6 +20,8 @@ FestivalDetail _$FestivalDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FestivalDetail {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
   String get playTime => throw _privateConstructorUsedError;
@@ -43,7 +45,9 @@ abstract class $FestivalDetailCopyWith<$Res> {
       _$FestivalDetailCopyWithImpl<$Res, FestivalDetail>;
   @useResult
   $Res call(
-      {String startDate,
+      {int contentId,
+      int contentTypeId,
+      String startDate,
       String endDate,
       String playTime,
       String sponsor,
@@ -67,6 +71,8 @@ class _$FestivalDetailCopyWithImpl<$Res, $Val extends FestivalDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? startDate = null,
     Object? endDate = null,
     Object? playTime = null,
@@ -78,6 +84,14 @@ class _$FestivalDetailCopyWithImpl<$Res, $Val extends FestivalDetail>
     Object? useFee = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -127,7 +141,9 @@ abstract class _$$FestivalDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String startDate,
+      {int contentId,
+      int contentTypeId,
+      String startDate,
       String endDate,
       String playTime,
       String sponsor,
@@ -149,6 +165,8 @@ class __$$FestivalDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? startDate = null,
     Object? endDate = null,
     Object? playTime = null,
@@ -160,6 +178,14 @@ class __$$FestivalDetailImplCopyWithImpl<$Res>
     Object? useFee = null,
   }) {
     return _then(_$FestivalDetailImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -204,7 +230,9 @@ class __$$FestivalDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FestivalDetailImpl implements _FestivalDetail {
   const _$FestivalDetailImpl(
-      {required this.startDate,
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.startDate,
       required this.endDate,
       required this.playTime,
       required this.sponsor,
@@ -217,6 +245,10 @@ class _$FestivalDetailImpl implements _FestivalDetail {
   factory _$FestivalDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$FestivalDetailImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String startDate;
   @override
@@ -238,7 +270,7 @@ class _$FestivalDetailImpl implements _FestivalDetail {
 
   @override
   String toString() {
-    return 'FestivalDetail(startDate: $startDate, endDate: $endDate, playTime: $playTime, sponsor: $sponsor, sponsorTel: $sponsorTel, homePage: $homePage, ageLimit: $ageLimit, placeInfo: $placeInfo, useFee: $useFee)';
+    return 'FestivalDetail(contentId: $contentId, contentTypeId: $contentTypeId, startDate: $startDate, endDate: $endDate, playTime: $playTime, sponsor: $sponsor, sponsorTel: $sponsorTel, homePage: $homePage, ageLimit: $ageLimit, placeInfo: $placeInfo, useFee: $useFee)';
   }
 
   @override
@@ -246,6 +278,10 @@ class _$FestivalDetailImpl implements _FestivalDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FestivalDetailImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -265,8 +301,19 @@ class _$FestivalDetailImpl implements _FestivalDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, startDate, endDate, playTime,
-      sponsor, sponsorTel, homePage, ageLimit, placeInfo, useFee);
+  int get hashCode => Object.hash(
+      runtimeType,
+      contentId,
+      contentTypeId,
+      startDate,
+      endDate,
+      playTime,
+      sponsor,
+      sponsorTel,
+      homePage,
+      ageLimit,
+      placeInfo,
+      useFee);
 
   @JsonKey(ignore: true)
   @override
@@ -285,7 +332,9 @@ class _$FestivalDetailImpl implements _FestivalDetail {
 
 abstract class _FestivalDetail implements FestivalDetail {
   const factory _FestivalDetail(
-      {required final String startDate,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String startDate,
       required final String endDate,
       required final String playTime,
       required final String sponsor,
@@ -298,6 +347,10 @@ abstract class _FestivalDetail implements FestivalDetail {
   factory _FestivalDetail.fromJson(Map<String, dynamic> json) =
       _$FestivalDetailImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get startDate;
   @override

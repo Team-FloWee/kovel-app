@@ -20,6 +20,8 @@ ShoppingDetail _$ShoppingDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShoppingDetail {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get saleItem => throw _privateConstructorUsedError;
   String get saleItemCost => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
@@ -40,7 +42,9 @@ abstract class $ShoppingDetailCopyWith<$Res> {
       _$ShoppingDetailCopyWithImpl<$Res, ShoppingDetail>;
   @useResult
   $Res call(
-      {String saleItem,
+      {int contentId,
+      int contentTypeId,
+      String saleItem,
       String saleItemCost,
       String restDay,
       String scale,
@@ -61,6 +65,8 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? saleItem = null,
     Object? saleItemCost = null,
     Object? restDay = null,
@@ -69,6 +75,14 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
     Object? openTime = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       saleItem: null == saleItem
           ? _value.saleItem
           : saleItem // ignore: cast_nullable_to_non_nullable
@@ -106,7 +120,9 @@ abstract class _$$ShoppingDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String saleItem,
+      {int contentId,
+      int contentTypeId,
+      String saleItem,
       String saleItemCost,
       String restDay,
       String scale,
@@ -125,6 +141,8 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? saleItem = null,
     Object? saleItemCost = null,
     Object? restDay = null,
@@ -133,6 +151,14 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
     Object? openTime = null,
   }) {
     return _then(_$ShoppingDetailImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       saleItem: null == saleItem
           ? _value.saleItem
           : saleItem // ignore: cast_nullable_to_non_nullable
@@ -165,7 +191,9 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ShoppingDetailImpl implements _ShoppingDetail {
   const _$ShoppingDetailImpl(
-      {required this.saleItem,
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.saleItem,
       required this.saleItemCost,
       required this.restDay,
       required this.scale,
@@ -175,6 +203,10 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
   factory _$ShoppingDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$ShoppingDetailImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String saleItem;
   @override
@@ -190,7 +222,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
   @override
   String toString() {
-    return 'ShoppingDetail(saleItem: $saleItem, saleItemCost: $saleItemCost, restDay: $restDay, scale: $scale, creditCard: $creditCard, openTime: $openTime)';
+    return 'ShoppingDetail(contentId: $contentId, contentTypeId: $contentTypeId, saleItem: $saleItem, saleItemCost: $saleItemCost, restDay: $restDay, scale: $scale, creditCard: $creditCard, openTime: $openTime)';
   }
 
   @override
@@ -198,6 +230,10 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ShoppingDetailImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.saleItem, saleItem) ||
                 other.saleItem == saleItem) &&
             (identical(other.saleItemCost, saleItemCost) ||
@@ -212,8 +248,8 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, saleItem, saleItemCost, restDay,
-      scale, creditCard, openTime);
+  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
+      saleItem, saleItemCost, restDay, scale, creditCard, openTime);
 
   @JsonKey(ignore: true)
   @override
@@ -232,7 +268,9 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
 abstract class _ShoppingDetail implements ShoppingDetail {
   const factory _ShoppingDetail(
-      {required final String saleItem,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String saleItem,
       required final String saleItemCost,
       required final String restDay,
       required final String scale,
@@ -242,6 +280,10 @@ abstract class _ShoppingDetail implements ShoppingDetail {
   factory _ShoppingDetail.fromJson(Map<String, dynamic> json) =
       _$ShoppingDetailImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get saleItem;
   @override

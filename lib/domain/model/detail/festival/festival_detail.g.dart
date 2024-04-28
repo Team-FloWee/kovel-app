@@ -8,6 +8,8 @@ part of 'festival_detail.dart';
 
 _$FestivalDetailImpl _$$FestivalDetailImplFromJson(Map<String, dynamic> json) =>
     _$FestivalDetailImpl(
+      contentId: (json['contentId'] as num).toInt(),
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
       playTime: json['playTime'] as String,
@@ -22,6 +24,8 @@ _$FestivalDetailImpl _$$FestivalDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$FestivalDetailImplToJson(
         _$FestivalDetailImpl instance) =>
     <String, dynamic>{
+      'contentId': instance.contentId,
+      'contentTypeId': instance.contentTypeId,
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'playTime': instance.playTime,
