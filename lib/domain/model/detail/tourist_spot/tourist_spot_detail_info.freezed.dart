@@ -21,6 +21,8 @@ TouristSpotDetailInfo _$TouristSpotDetailInfoFromJson(
 
 /// @nodoc
 mixin _$TouristSpotDetailInfo {
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get infoName => throw _privateConstructorUsedError;
   String get infoText => throw _privateConstructorUsedError;
 
@@ -36,7 +38,8 @@ abstract class $TouristSpotDetailInfoCopyWith<$Res> {
           $Res Function(TouristSpotDetailInfo) then) =
       _$TouristSpotDetailInfoCopyWithImpl<$Res, TouristSpotDetailInfo>;
   @useResult
-  $Res call({String infoName, String infoText});
+  $Res call(
+      {int contentId, int contentTypeId, String infoName, String infoText});
 }
 
 /// @nodoc
@@ -53,10 +56,20 @@ class _$TouristSpotDetailInfoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -78,7 +91,8 @@ abstract class _$$TouristSpotDetailInfoImplCopyWith<$Res>
       __$$TouristSpotDetailInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String infoName, String infoText});
+  $Res call(
+      {int contentId, int contentTypeId, String infoName, String infoText});
 }
 
 /// @nodoc
@@ -93,10 +107,20 @@ class __$$TouristSpotDetailInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
+    Object? contentTypeId = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
     return _then(_$TouristSpotDetailInfoImpl(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentTypeId: null == contentTypeId
+          ? _value.contentTypeId
+          : contentTypeId // ignore: cast_nullable_to_non_nullable
+              as int,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -113,11 +137,18 @@ class __$$TouristSpotDetailInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
   const _$TouristSpotDetailInfoImpl(
-      {required this.infoName, required this.infoText});
+      {required this.contentId,
+      required this.contentTypeId,
+      required this.infoName,
+      required this.infoText});
 
   factory _$TouristSpotDetailInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$TouristSpotDetailInfoImplFromJson(json);
 
+  @override
+  final int contentId;
+  @override
+  final int contentTypeId;
   @override
   final String infoName;
   @override
@@ -125,7 +156,7 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
 
   @override
   String toString() {
-    return 'TouristSpotDetailInfo(infoName: $infoName, infoText: $infoText)';
+    return 'TouristSpotDetailInfo(contentId: $contentId, contentTypeId: $contentTypeId, infoName: $infoName, infoText: $infoText)';
   }
 
   @override
@@ -133,6 +164,10 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TouristSpotDetailInfoImpl &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.contentTypeId, contentTypeId) ||
+                other.contentTypeId == contentTypeId) &&
             (identical(other.infoName, infoName) ||
                 other.infoName == infoName) &&
             (identical(other.infoText, infoText) ||
@@ -141,7 +176,8 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, infoName, infoText);
+  int get hashCode =>
+      Object.hash(runtimeType, contentId, contentTypeId, infoName, infoText);
 
   @JsonKey(ignore: true)
   @override
@@ -160,12 +196,18 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
 
 abstract class _TouristSpotDetailInfo implements TouristSpotDetailInfo {
   const factory _TouristSpotDetailInfo(
-      {required final String infoName,
+      {required final int contentId,
+      required final int contentTypeId,
+      required final String infoName,
       required final String infoText}) = _$TouristSpotDetailInfoImpl;
 
   factory _TouristSpotDetailInfo.fromJson(Map<String, dynamic> json) =
       _$TouristSpotDetailInfoImpl.fromJson;
 
+  @override
+  int get contentId;
+  @override
+  int get contentTypeId;
   @override
   String get infoName;
   @override

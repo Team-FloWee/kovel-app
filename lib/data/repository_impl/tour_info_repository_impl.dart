@@ -34,14 +34,17 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 지역 기반 관광 정보 조회 (area based list)
   @override
-  Future<List<Tour>> getAreaBasedList() async {
+  Future<List<Tour>> getAreaBasedList({int pageNo = 1}) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList();
     return tourDto.map((e) => e.toTour()).toList();
   }
 
   // 키워드 검색 조회 (search keyword)
   @override
-  Future<List<Tour>> getSearchKeyword(String keyword) async {
+  Future<List<Tour>> getSearchKeyword({
+    int pageNo = 1,
+    required String keyword,
+  }) async {
     final List<TourDto> tourDto =
         await _tourInfoDataSource.getSearchKeyword(keyword);
     return tourDto.map((e) => e.toTour()).toList();
@@ -49,7 +52,10 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 축제 공연 행사 검색 조회 (search Festival)
   @override
-  Future<List<Tour>> getSearchFestival(String eventStartDate) async {
+  Future<List<Tour>> getSearchFestival({
+    int pageNo = 1,
+    required String eventStartDate,
+  }) async {
     final List<TourDto> tourDto =
         await _tourInfoDataSource.getSearchFestival(eventStartDate);
     return tourDto.map((e) => e.toTour()).toList();
@@ -57,11 +63,12 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 위치 기반 관광 정보 조회 (location based list)
   @override
-  Future<List<Tour>> getLocationBasedList(
-    String mapX,
-    String mapY,
-    String radius,
-  ) async {
+  Future<List<Tour>> getLocationBasedList({
+    int pageNo = 1,
+    required String mapX,
+    required String mapY,
+    required String radius,
+  }) async {
     final List<TourDto> tourDto =
         await _tourInfoDataSource.getLocationBasedList(mapX, mapY, radius);
     return tourDto.map((e) => e.toTour()).toList();
@@ -69,14 +76,17 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 숙박 정보 조회 (search stay)
   @override
-  Future<List<Tour>> getSearchStay() async {
+  Future<List<Tour>> getSearchStay({int pageNo = 1}) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getSearchStay();
     return tourDto.map((e) => e.toTour()).toList();
   }
 
   // 공통 정보 조회 (detail info)
   @override
-  Future<List<TourDetail>> getDetailCommon(String contentId) async {
+  Future<List<TourDetail>> getDetailCommon({
+    int pageNo = 1,
+    required String contentId,
+  }) async {
     final List<TourDetailDto> tourDetailDto =
         await _tourInfoDataSource.getDetailCommon(contentId);
     return tourDetailDto.map((e) => e.toTourDetail()).toList();
@@ -87,8 +97,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 25: 여행 코스
   @override
-  Future<List<CourseDetail>> getCourseDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<CourseDetail>> getCourseDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> courseDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return courseDetailDto.map((e) => e.toCourseDetail()).toList();
@@ -96,8 +109,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 14: 문화 시설
   @override
-  Future<List<CultureLocationDetail>> getCultureLocationDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<CultureLocationDetail>> getCultureLocationDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> cultureLocationDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return cultureLocationDetailDto
@@ -107,8 +123,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 15: 축제 공연 행사
   @override
-  Future<List<FestivalDetail>> getFestivalDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<FestivalDetail>> getFestivalDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> festivalDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return festivalDetailDto.map((e) => e.toFestivalDetail()).toList();
@@ -116,8 +135,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 28: 레포츠
   @override
-  Future<List<LeportsDetail>> getLeportsDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<LeportsDetail>> getLeportsDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> leportsDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return leportsDetailDto.map((e) => e.toLeportsDetail()).toList();
@@ -125,8 +147,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 32: 숙박
   @override
-  Future<List<LodgmentDetail>> getLodgmentDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<LodgmentDetail>> getLodgmentDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> lodgmentDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return lodgmentDetailDto.map((e) => e.toLodgmentDetail()).toList();
@@ -134,8 +159,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 39: 음식점
   @override
-  Future<List<RestaurantDetail>> getRestaurantDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<RestaurantDetail>> getRestaurantDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> restaurantDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return restaurantDetailDto.map((e) => e.toRestaurantDetail()).toList();
@@ -143,8 +171,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 38: 쇼핑
   @override
-  Future<List<ShoppingDetail>> getShoppingDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<ShoppingDetail>> getShoppingDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> shoppingDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return shoppingDetailDto.map((e) => e.toShoppingDetail()).toList();
@@ -152,8 +183,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 12: 관광지
   @override
-  Future<List<TouristSpotDetail>> getTouristSpotDetail(
-      String contentId, String contentTypeId) async {
+  Future<List<TouristSpotDetail>> getTouristSpotDetail({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailDto> touristSpotDetailDto =
         await _tourInfoDataSource.getDetailIntro(contentId, contentTypeId);
     return touristSpotDetailDto.map((e) => e.toTouristSpotDetail()).toList();
@@ -164,8 +198,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 25: 여행 코스
   @override
-  Future<List<CourseDetailInfo>> getCourseDetailInfo(
-      String contentId, String contentTypeId) async {
+  Future<List<CourseDetailInfo>> getCourseDetailInfo({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailInfoDto> courseDetailInfoDto =
         await _tourInfoDataSource.getDetailInfo(contentId, contentTypeId);
     return courseDetailInfoDto.map((e) => e.toCourseDetailInfo()).toList();
@@ -173,8 +210,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 14: 문화 시설
   @override
-  Future<List<CultureLocationDetailInfo>> getCultureLocationDetailInfo(
-      String contentId, String contentTypeId) async {
+  Future<List<CultureLocationDetailInfo>> getCultureLocationDetailInfo({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailInfoDto> cultureLocationDetailInfo =
         await _tourInfoDataSource.getDetailInfo(contentId, contentTypeId);
     return cultureLocationDetailInfo
@@ -184,8 +224,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 15: 축제 공연 행사
   @override
-  Future<List<FestivalDetailInfo>> getFestivalDetailInfo(
-      String contentId, String contentTypeId) async {
+  Future<List<FestivalDetailInfo>> getFestivalDetailInfo({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailInfoDto> festivalDetailInfo =
         await _tourInfoDataSource.getDetailInfo(contentId, contentTypeId);
     return festivalDetailInfo.map((e) => e.toFestivalDeteailInfo()).toList();
@@ -193,8 +236,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 28: 레포츠
   @override
-  Future<List<LeportsDetailInfo>> getLeportsDetailInfo(
-      String contentId, String contentTypeId) async {
+  Future<List<LeportsDetailInfo>> getLeportsDetailInfo({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailInfoDto> leportsDetailInfo =
         await _tourInfoDataSource.getDetailInfo(contentId, contentTypeId);
     return leportsDetailInfo.map((e) => e.toLeportsDeteailInfo()).toList();
@@ -202,8 +248,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 12: 관광지
   @override
-  Future<List<TouristSpotDetailInfo>> getTouristSpotDetailInfo(
-      String contentId, String contentTypeId) async {
+  Future<List<TouristSpotDetailInfo>> getTouristSpotDetailInfo({
+    int pageNo = 1,
+    required String contentId,
+    required String contentTypeId,
+  }) async {
     final List<ContentDetailInfoDto> touristSpotDetailInfo =
         await _tourInfoDataSource.getDetailInfo(contentId, contentTypeId);
     return touristSpotDetailInfo

@@ -8,8 +8,8 @@ part of 'tour_detail.dart';
 
 _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
     _$TourDetailImpl(
-      id: (json['id'] as num).toInt(),
-      contentTypeId: json['contentTypeId'] as String,
+      contentId: (json['contentId'] as num).toInt(),
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
       title: json['title'] as String,
       address1: json['address1'] as String,
       address2: json['address2'] as String,
@@ -29,7 +29,7 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,
       'title': instance.title,
       'address1': instance.address1,

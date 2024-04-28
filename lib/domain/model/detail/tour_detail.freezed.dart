@@ -20,8 +20,8 @@ TourDetail _$TourDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TourDetail {
-  int get id => throw _privateConstructorUsedError;
-  String get contentTypeId => throw _privateConstructorUsedError;
+  int get contentId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get address1 => throw _privateConstructorUsedError;
   String get address2 => throw _privateConstructorUsedError;
@@ -51,8 +51,8 @@ abstract class $TourDetailCopyWith<$Res> {
       _$TourDetailCopyWithImpl<$Res, TourDetail>;
   @useResult
   $Res call(
-      {int id,
-      String contentTypeId,
+      {int contentId,
+      int contentTypeId,
       String title,
       String address1,
       String address2,
@@ -83,7 +83,7 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? contentId = null,
     Object? contentTypeId = null,
     Object? title = null,
     Object? address1 = null,
@@ -102,14 +102,14 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
     Object? overview = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
               as int,
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -183,8 +183,8 @@ abstract class _$$TourDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String contentTypeId,
+      {int contentId,
+      int contentTypeId,
       String title,
       String address1,
       String address2,
@@ -213,7 +213,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? contentId = null,
     Object? contentTypeId = null,
     Object? title = null,
     Object? address1 = null,
@@ -232,14 +232,14 @@ class __$$TourDetailImplCopyWithImpl<$Res>
     Object? overview = null,
   }) {
     return _then(_$TourDetailImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
               as int,
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -308,7 +308,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TourDetailImpl implements _TourDetail {
   const _$TourDetailImpl(
-      {required this.id,
+      {required this.contentId,
       required this.contentTypeId,
       required this.title,
       required this.address1,
@@ -330,9 +330,9 @@ class _$TourDetailImpl implements _TourDetail {
       _$$TourDetailImplFromJson(json);
 
   @override
-  final int id;
+  final int contentId;
   @override
-  final String contentTypeId;
+  final int contentTypeId;
   @override
   final String title;
   @override
@@ -366,7 +366,7 @@ class _$TourDetailImpl implements _TourDetail {
 
   @override
   String toString() {
-    return 'TourDetail(id: $id, contentTypeId: $contentTypeId, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel, telName: $telName, overview: $overview)';
+    return 'TourDetail(contentId: $contentId, contentTypeId: $contentTypeId, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel, telName: $telName, overview: $overview)';
   }
 
   @override
@@ -374,7 +374,8 @@ class _$TourDetailImpl implements _TourDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TourDetailImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
                 other.contentTypeId == contentTypeId) &&
             (identical(other.title, title) || other.title == title) &&
@@ -407,7 +408,7 @@ class _$TourDetailImpl implements _TourDetail {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
+      contentId,
       contentTypeId,
       title,
       address1,
@@ -441,8 +442,8 @@ class _$TourDetailImpl implements _TourDetail {
 
 abstract class _TourDetail implements TourDetail {
   const factory _TourDetail(
-      {required final int id,
-      required final String contentTypeId,
+      {required final int contentId,
+      required final int contentTypeId,
       required final String title,
       required final String address1,
       required final String address2,
@@ -463,9 +464,9 @@ abstract class _TourDetail implements TourDetail {
       _$TourDetailImpl.fromJson;
 
   @override
-  int get id;
+  int get contentId;
   @override
-  String get contentTypeId;
+  int get contentTypeId;
   @override
   String get title;
   @override

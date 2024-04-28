@@ -7,6 +7,8 @@ part 'restaurant_detail.g.dart';
 @freezed
 class RestaurantDetail with _$RestaurantDetail {
   const factory RestaurantDetail({
+    required int contentId,
+    required int contentTypeId,
     required String firstMenu,
     required String treatMenu,
     required String parking,

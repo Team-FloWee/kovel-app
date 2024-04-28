@@ -7,6 +7,8 @@ part 'tourist_spot_detail.g.dart';
 @freezed
 class TouristSpotDetail with _$TouristSpotDetail {
   const factory TouristSpotDetail({
+    required int contentId,
+    required int contentTypeId,
     required String expGuide,
     required String parking,
     required String restDay,

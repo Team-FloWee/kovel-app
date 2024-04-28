@@ -7,6 +7,8 @@ part 'lodgment_detail.g.dart';
 @freezed
 class LodgmentDetail with _$LodgmentDetail {
   const factory LodgmentDetail({
+    required int contentId,
+    required int contentTypeId,
     required String reservationUrl,
     required String roomCount,
     required bool isGoodStay,

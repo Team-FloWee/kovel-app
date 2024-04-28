@@ -21,7 +21,7 @@ Tour _$TourFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Tour {
   int get id => throw _privateConstructorUsedError;
-  String get contentTypeId => throw _privateConstructorUsedError;
+  int get contentTypeId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get address1 => throw _privateConstructorUsedError;
   String get address2 => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $TourCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String contentTypeId,
+      int contentTypeId,
       String title,
       String address1,
       String address2,
@@ -101,7 +101,7 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String contentTypeId,
+      int contentTypeId,
       String title,
       String address1,
       String address2,
@@ -217,7 +217,7 @@ class __$$TourImplCopyWithImpl<$Res>
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -300,7 +300,7 @@ class _$TourImpl implements _Tour {
   @override
   final int id;
   @override
-  final String contentTypeId;
+  final int contentTypeId;
   @override
   final String title;
   @override
@@ -401,7 +401,7 @@ class _$TourImpl implements _Tour {
 abstract class _Tour implements Tour {
   const factory _Tour(
       {required final int id,
-      required final String contentTypeId,
+      required final int contentTypeId,
       required final String title,
       required final String address1,
       required final String address2,
@@ -421,7 +421,7 @@ abstract class _Tour implements Tour {
   @override
   int get id;
   @override
-  String get contentTypeId;
+  int get contentTypeId;
   @override
   String get title;
   @override
