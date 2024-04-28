@@ -20,7 +20,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDto.fromJson(e)).toList();
   }
 
@@ -32,7 +32,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&mapX=$mapX&mapY=$mapY&radius=$radius&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDto.fromJson(e)).toList();
   }
 
@@ -43,7 +43,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&keyword=$keyword&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDto.fromJson(e)).toList();
   }
 
@@ -54,7 +54,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&eventStartDate=$eventStartDate&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDto.fromJson(e)).toList();
   }
 
@@ -77,7 +77,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     response = await _dio.get(
         '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$contentId&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&pageNo=$pageNo&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDetailDto.fromJson(e)).toList();
   }
 
@@ -89,7 +89,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$contentId&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => ContentDetailDto.fromJson(e)).toList();
   }
 
@@ -101,21 +101,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$contentId&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
 
-    final List tourInfoList = response.data['response']['body']['items']['item'];
+    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => ContentDetailInfoDto.fromJson(e)).toList();
   }
 }
-
-main() async {
-  await dotenv.load(fileName: '.env');
-  //final tourList = await TourInfoDataSourceImpl().getAreaBasedList(3);
-  // final tourList = await TourInfoDataSourceImpl().getLocationBasedList('127.7130161606', '37.9167408445', '500', 2);
-
-  // final tourList = await TourInfoDataSourceImpl().getSearchFestival('20240401', 5);
-  final tourList = await TourInfoDataSourceImpl().getSearchStay(100);
-  tourList.map((e) => e.addr1).toList().forEach(print);
-  //final tourList = await TourInfoDataSourceImpl().getDetailCommon('132248', 2);
-  //final tourList = await TourInfoDataSourceImpl().getDetailIntro('3111770', '15');
-  //final tourList = await TourInfoDataSourceImpl().getDetailInfo('2384832', '25');
-}
-///    final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
