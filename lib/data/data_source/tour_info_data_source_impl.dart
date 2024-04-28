@@ -14,7 +14,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 지역기반 관광정보조회(areaBasedList1)
   @override
-  Future<List<TourDto>> getAreaBasedList([int? pageNo = 1]) async {
+  Future<List<TourDto>> getAreaBasedList({int pageNo = 1}) async {
     // TODO: parameter는 unnamed or named?
     const String apiName = 'areaBasedList1';
     final Response response;
@@ -26,7 +26,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 위치기반 관광정보조회
   @override
-  Future<List<TourDto>> getLocationBasedList(String mapX, String mapY, String radius, [int? pageNo = 1]) async {
+  Future<List<TourDto>> getLocationBasedList({required String mapX, required String mapY, required String radius, int pageNo = 1}) async {
     await dotenv.load();
     const String apiName = 'locationBasedList1';
     final Response response;
@@ -38,7 +38,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 키워드 검색 조회
   @override
-  Future<List<TourDto>> getSearchKeyword(String keyword, [int? pageNo = 1]) async {
+  Future<List<TourDto>> getSearchKeyword({required String keyword, int pageNo = 1}) async {
     const String apiName = 'searchKeyword1';
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&keyword=$keyword&serviceKey=$key');
@@ -49,7 +49,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 행사정보조회
   @override
-  Future<List<TourDto>> getSearchFestival(String eventStartDate, [int? pageNo = 1]) async {
+  Future<List<TourDto>> getSearchFestival({required String eventStartDate, int pageNo = 1}) async {
     const String apiName = 'searchFestival1';
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&eventStartDate=$eventStartDate&serviceKey=$key');
@@ -60,7 +60,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 숙박정보조회
   @override
-  Future<List<TourDto>> getSearchStay([int? pageNo = 1]) async {
+  Future<List<TourDto>> getSearchStay({int? pageNo = 1}) async {
     const String apiName = 'searchStay1';
     final Response response;
     response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&serviceKey=$key');
@@ -71,7 +71,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 공통정보조회
   @override
-  Future<List<TourDetailDto>> getDetailCommon(String contentId, [int? pageNo = 1]) async {
+  Future<List<TourDetailDto>> getDetailCommon({required String contentId, int pageNo = 1}) async {
     const String apiName = 'detailCommon1';
     Response response;
     response = await _dio.get(
@@ -83,7 +83,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 소개정보조회
   @override
-  Future<List<ContentDetailDto>> getDetailIntro(String contentId, String contentTypeId, [int? pageNo = 1]) async {
+  Future<List<ContentDetailDto>> getDetailIntro({required String contentId, required String contentTypeId, int pageNo = 1}) async {
     const String apiName = 'detailIntro1';
 
     final Response response;
@@ -95,7 +95,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 반복정보조회
   @override
-  Future<List<ContentDetailInfoDto>> getDetailInfo(String contentId, String contentTypeId, [int? pageNo]) async {
+  Future<List<ContentDetailInfoDto>> getDetailInfo({required String contentId, required String contentTypeId, int pageNo = 1}) async {
     const String apiName = 'detailInfo1';
 
     final Response response;
