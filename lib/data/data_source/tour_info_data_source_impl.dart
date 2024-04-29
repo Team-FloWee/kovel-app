@@ -7,12 +7,12 @@ import 'package:kovel_app/data/dto/tour_detail_dto.dart';
 import 'package:kovel_app/data/dto/tour_dto.dart';
 
 class TourInfoDataSourceImpl implements TourInfoDataSource {
-  final _dio = Dio();
+  final Dio _dio;
   final _mobileOs = 'AND'; // TODO: Core에 Enum으로 만들 예정
   final String baseUrl = dotenv.get('Base_URL');
   final String key = dotenv.get('TOUR_API_KEY');
 
-  // 지역기반 관광정보조회(areaBasedList1)
+  TourInfoDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio(); // 지역기반 관광정보조회(areaBasedList1)
   @override
   Future<List<TourDto>> getAreaBasedList({int pageNo = 1}) async {
     // TODO: parameter는 unnamed or named?
