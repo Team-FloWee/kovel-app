@@ -10,7 +10,7 @@ abstract interface class TourInfoDataSource {
   Future<List<TourDto>> getSearchFestival({required String eventStartDate, int pageNo = 1});
   Future<List<TourDto>> getSearchStay({int? pageNo = 1});
 
-  Future<List<TourDetailDto>> getDetailCommon({required String contentId, int pageNo = 1});
-  Future<List<ContentDetailDto>> getDetailIntro({required String contentId, required String contentTypeId, int pageNo = 1});
-  Future<List<ContentDetailInfoDto>> getDetailInfo({required String contentId, required String contentTypeId, int pageNo = 1});
+  Future<List<TourDetailDto>> getDetailCommon({required int id, int pageNo = 1});
+  Future<List<ContentDetailDto>> getDetailIntro({required int id, required int contentTypeId, int pageNo = 1});
+  Future<List<ContentDetailInfoDto>> getDetailInfo({required int id, required int contentTypeId, int pageNo = 1});
 }

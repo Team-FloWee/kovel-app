@@ -71,11 +71,11 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 공통정보조회
   @override
-  Future<List<TourDetailDto>> getDetailCommon({required String contentId, int pageNo = 1}) async {
+  Future<List<TourDetailDto>> getDetailCommon({required int id, int pageNo = 1}) async {
     const String apiName = 'detailCommon1';
     Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$contentId&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&pageNo=$pageNo&serviceKey=$key');
+        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&pageNo=$pageNo&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDetailDto.fromJson(e)).toList();
@@ -83,11 +83,11 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 소개정보조회
   @override
-  Future<List<ContentDetailDto>> getDetailIntro({required String contentId, required String contentTypeId, int pageNo = 1}) async {
+  Future<List<ContentDetailDto>> getDetailIntro({required int id, required int contentTypeId, int pageNo = 1}) async {
     const String apiName = 'detailIntro1';
 
     final Response response;
-    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$contentId&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
+    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => ContentDetailDto.fromJson(e)).toList();
@@ -95,11 +95,11 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 반복정보조회
   @override
-  Future<List<ContentDetailInfoDto>> getDetailInfo({required String contentId, required String contentTypeId, int pageNo = 1}) async {
+  Future<List<ContentDetailInfoDto>> getDetailInfo({required int id, required int contentTypeId, int pageNo = 1}) async {
     const String apiName = 'detailInfo1';
 
     final Response response;
-    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$contentId&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
+    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => ContentDetailInfoDto.fromJson(e)).toList();
