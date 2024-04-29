@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UiConfig {
   static const Color primaryColor = Color(0xFF00D1FF);
@@ -16,38 +17,38 @@ class UiConfig {
     900: Color(0xff282828),
   };
 
-  static const TextStyle h1Style = TextStyle(
-      fontSize: 20,
+  static TextStyle h1Style = TextStyle(
+      fontSize: 20.sp,
       letterSpacing: -0.3,
       fontWeight: FontWeight.w400,
       color: Color(0xFF282828),
       fontFamily: 'Inter');
-  static const TextStyle h2Style = TextStyle(
-      fontSize: 18,
+  static TextStyle h2Style = TextStyle(
+      fontSize: 18.sp,
       letterSpacing: -0.3,
       fontWeight: FontWeight.w400,
       color: Color(0xFF282828),
       fontFamily: 'Inter');
-  static const TextStyle h3Style = TextStyle(
-      fontSize: 16,
+  static TextStyle h3Style = TextStyle(
+      fontSize: 16.sp,
       letterSpacing: -0.3,
       fontWeight: FontWeight.w400,
       color: Color(0xFF282828),
       fontFamily: 'Inter');
-  static const TextStyle h4Style = TextStyle(
-      fontSize: 14,
+  static TextStyle h4Style = TextStyle(
+      fontSize: 14.sp,
       letterSpacing: -0.3,
       fontWeight: FontWeight.w400,
       color: Color(0xFF282828),
       fontFamily: 'Inter');
-  static const TextStyle bodyStyle = TextStyle(
-      fontSize: 12,
+  static TextStyle bodyStyle = TextStyle(
+      fontSize: 12.sp,
       letterSpacing: -0.3,
       fontWeight: FontWeight.w400,
       color: Color(0xFF282828),
       fontFamily: 'Inter');
-  static const TextStyle smallStyle = TextStyle(
-      fontSize: 10,
+  static TextStyle smallStyle = TextStyle(
+      fontSize: 10.sp,
       letterSpacing: -0.3,
       fontWeight: FontWeight.w400,
       color: Color(0xFF282828),
