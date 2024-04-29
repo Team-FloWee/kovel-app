@@ -45,7 +45,7 @@ abstract interface class TourInfoRepository {
   // 공통 정보 조회 (tour detail)
   Future<List<TourDetail>> getDetailCommon({
     int pageNo = 1,
-    required String contentId,
+    required int id,
   });
 
   // 소개 정보 조회 - 컨텐츠 별 (content detail)
@@ -54,57 +54,57 @@ abstract interface class TourInfoRepository {
   // 25: 여행 코스
   Future<List<CourseDetail>> getCourseDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 14: 문화 시설
   Future<List<CultureLocationDetail>> getCultureLocationDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 15: 축제 공연 행사
   Future<List<FestivalDetail>> getFestivalDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 28: 레포츠
   Future<List<LeportsDetail>> getLeportsDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 32: 숙박
   Future<List<LodgmentDetail>> getLodgmentDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 39: 음식점
   Future<List<RestaurantDetail>> getRestaurantDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 38: 쇼핑
   Future<List<ShoppingDetail>> getShoppingDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 12: 관광지
   Future<List<TouristSpotDetail>> getTouristSpotDetail({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 반복 정보 조회 - 컨텐츠 별 (content detail info)
@@ -113,35 +113,35 @@ abstract interface class TourInfoRepository {
   // 25: 여행 코스
   Future<List<CourseDetailInfo>> getCourseDetailInfo({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 14: 문화 시설
   Future<List<CultureLocationDetailInfo>> getCultureLocationDetailInfo({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 15: 축제 공연 행사
   Future<List<FestivalDetailInfo>> getFestivalDetailInfo({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 28: 레포츠
   Future<List<LeportsDetailInfo>> getLeportsDetailInfo({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 
   // 12: 관광지
   Future<List<TouristSpotDetailInfo>> getTouristSpotDetailInfo({
     int pageNo = 1,
-    required String contentId,
-    required String contentTypeId,
+    required int id,
+    required int contentTypeId,
   });
 }
