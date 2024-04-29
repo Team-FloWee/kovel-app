@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:kovel_app/config/firebase_options.dart';
 import 'package:kovel_app/di/di_setup.dart';
-import 'package:kovel_app/login_page.dart';
+import 'package:kovel_app/presentation/location_detail/location_detail_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const LocationDetailScreen(),
     );
   }
 }
