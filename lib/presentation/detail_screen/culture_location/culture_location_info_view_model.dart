@@ -23,17 +23,16 @@ class CultureLocationInfoViewModel with ChangeNotifier {
       _CultureLocationInfoData;
 
   Future<void> getCultureLocationData(Tour tour) async {
-    _tourDetailData = await _tourInfoRepository.getDetailCommon(
-        contentId: tour.id.toString());
+    _tourDetailData = await _tourInfoRepository.getDetailCommon(id: tour.id);
 
     _CultureLocationDetailData =
         await _tourInfoRepository.getCultureLocationDetail(
-            contentId: tour.id.toString(),
-            contentTypeId: tour.contentTypeId.toString());
+            id: tour.id, contentTypeId: tour.contentTypeId);
 
     _CultureLocationInfoData =
         await _tourInfoRepository.getCultureLocationDetailInfo(
-            contentId: tour.id.toString(),
-            contentTypeId: tour.contentTypeId.toString());
+            id: tour.id, contentTypeId: tour.contentTypeId);
+
+    notifyListeners();
   }
 }

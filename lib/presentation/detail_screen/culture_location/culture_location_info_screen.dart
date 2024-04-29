@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/presentation/detail_screen/culture_location/culture_location_info_view_model.dart';
+import 'package:provider/provider.dart';
 
 class CultureLocationInfoScreen extends StatelessWidget {
   const CultureLocationInfoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<CultureLocationInfoViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: Text('아직안댐'),
