@@ -1,16 +1,26 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:kovel_app/config/firebase_options.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/login_page.dart';
 
 void main() async {
+  await dotenv.load(fileName: '.env');
+  // kakao 초기화
+  WidgetsFlutterBinding.ensureInitialized();
+  KakaoSdk.init(
+    nativeAppKey: dotenv.get('KAKAO_NATIVE_APP_KEY'),
+    javaScriptAppKey: dotenv.get('KAKAO_JAVASCRIPT_APP_KEY'),
+  );
+
+  // firebase 초기화
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await dotenv.load(fileName: '.env');
+
   diSetup();
   runApp(const MyApp());
 }
@@ -43,7 +53,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const LoginScreen(),
     );
   }
 }

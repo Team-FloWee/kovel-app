@@ -65,3 +65,5 @@ flutter {
 }
 
 dependencies {}
+
+apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"
