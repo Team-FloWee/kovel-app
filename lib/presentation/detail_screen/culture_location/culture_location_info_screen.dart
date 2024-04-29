@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/presentation/components/common_app_bar.dart';
+import 'package:kovel_app/presentation/components/common_text.dart';
+import 'package:kovel_app/presentation/components/icon_text_row.dart';
+import 'package:kovel_app/presentation/components/info_text.dart';
 import 'package:kovel_app/presentation/detail_screen/culture_location/culture_location_info_view_model.dart';
 import 'package:provider/provider.dart';
 
-class CultureLocationInfoScreen extends StatelessWidget {
-  const CultureLocationInfoScreen({super.key});
+class CultureLocationInfoScreen extends StatefulWidget {
+  final int id;
+  const CultureLocationInfoScreen({super.key, required this.id});
 
+  @override
+  State<CultureLocationInfoScreen> createState() =>
+      _CultureLocationInfoScreenState();
+}
+
+class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<CultureLocationInfoViewModel>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('아직안댐'),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-      ),
+      appBar: CommonAppBar(title: "viewModel.tourDetailData.first.title"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -30,81 +35,11 @@ class CultureLocationInfoScreen extends StatelessWidget {
                 padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    //이후 컴포넌트로 교체
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Container(
-                                color: Color(0xFF00D1FF),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4, horizontal: 10),
-                                  child: Text('음식점', style: UiConfig.h4Style),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              '오리 주물럭 집',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: -0.3),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.phone,
-                                  size: 16,
-                                ),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  '010-1234-5678',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: -0.3),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on_rounded,
-                                  size: 16,
-                                ),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  '서울 관악구 관악시 11로 12길',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: -0.3),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    //컴포넌트로 교체 끝
+                    CommonText(
+                        badgeTitle: '음식점',
+                        title: '오리 주물럭 집',
+                        tel: '010-1234-5678',
+                        address: '서울 관악구 관악시 11로 12길'),
                     Padding(
                       padding: const EdgeInsets.only(top: 18, bottom: 16),
                       child: Divider(
@@ -112,24 +47,12 @@ class CultureLocationInfoScreen extends StatelessWidget {
                           height: 1,
                           color: UiConfig.black.shade500),
                     ),
-                    Row(
-                      children: [
-                        Icon(Icons.monetization_on),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          '무료',
-                          style: UiConfig.bodyStyle
-                              .copyWith(fontWeight: UiConfig.semiBoldFont),
-                        ),
-                        //Icon(Icons.access_time_filled),
-                        //Icon(Icons.door_front_door),
-                        //Icon(Icons.local_parking),
-                        //Icon(Icons.timelapse),
-                        //Icon(Icons.pets),
-                      ],
-                    ),
+                    IconTextRow(icon: Icons.monetization_on, text: "무료"),
+                    IconTextRow(icon: Icons.access_time_filled, text: "무료"),
+                    IconTextRow(icon: Icons.door_front_door, text: "무료"),
+                    IconTextRow(icon: Icons.local_parking, text: "무료"),
+                    IconTextRow(icon: Icons.timelapse, text: "무료"),
+                    IconTextRow(icon: Icons.pets, text: "무료"),
                     Padding(
                       padding: const EdgeInsets.only(top: 18, bottom: 16),
                       child: Divider(
@@ -144,14 +67,13 @@ class CultureLocationInfoScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         color: UiConfig.black.shade500,
                       ),
-                      child: Row(
+                      child: Column(
                         children: [
-                          Row(
-                            children: [
-                              Text('인포텍스트입니다'),
-                              Text('216Km'),
-                            ],
-                          )
+                          InfoText(title: '인포텍스트입니다', contents: '214km'),
+                          InfoText(title: '인포텍스트입니다', contents: '214km'),
+                          InfoText(title: '인포텍스트입니다', contents: '214km'),
+                          InfoText(title: '인포텍스트입니다', contents: '214km'),
+                          InfoText(title: '인포텍스트입니다', contents: '214km'),
                         ],
                       ),
                     ),
