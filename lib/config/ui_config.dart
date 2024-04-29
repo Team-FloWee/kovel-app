@@ -1,25 +1,58 @@
 import 'package:flutter/material.dart';
 
 class UiConfig {
-  Color primaryColor = const Color(0xFF00D1FF);
-  Color primaryColorSurface = const Color(0xFFEAFBFF);
-  Color secondaryColor = const Color(0xFFFFE76B);
-  Color secondaryColorSurface = const Color(0xFFFFFBE7);
+  static const Color primaryColor = Color(0xFF00D1FF);
+  static const Color primaryColorSurface = Color(0xFFEAFBFF);
+  static const Color secondaryColor = Color(0xFFFFE76B);
+  static const Color secondaryColorSurface = Color(0xFFFFFBE7);
 
-  Color textColorWhite = const Color(0xFFFFFFFF);
-  Color textColorGrey = const Color(0xFFF5F5F5);
-  Color textColorGrey2 = const Color(0xFFE9E9E9);
-  Color textColorGrey3 = const Color(0xFF828282);
-  Color textColorGrey4 = const Color(0xFF424242);
-  Color textColorBlack = const Color(0xFF282828);
+  static const MaterialColor black = MaterialColor(0xff282828, color);
+  static const Map<int, Color> color = {
+    100: Color(0xffFFFFFF),
+    500: Color(0xffF5F5F5),
+    600: Color(0xffE9E9E9),
+    700: Color(0xff828282),
+    800: Color(0xff424242),
+    900: Color(0xff282828),
+  };
 
-  TextStyle h1Style = const TextStyle(fontSize: 20, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: Color(0xFF282828), fontFamily: 'Inter');
-  TextStyle h2Style = const TextStyle(fontSize: 18, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: Color(0xFF282828), fontFamily: 'Inter');
-  TextStyle h3Style = const TextStyle(fontSize: 16, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: Color(0xFF282828), fontFamily: 'Inter');
-  TextStyle h4Style = const TextStyle(fontSize: 14, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: Color(0xFF282828), fontFamily: 'Inter');
-  TextStyle bodyStyle = const TextStyle(fontSize: 12, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: Color(0xFF282828), fontFamily: 'Inter');
-  TextStyle smallStyle = const TextStyle(fontSize: 10, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: Color(0xFF282828), fontFamily: 'Inter');
+  static const TextStyle h1Style = TextStyle(
+      fontSize: 20,
+      letterSpacing: -0.3,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF282828),
+      fontFamily: 'Inter');
+  static const TextStyle h2Style = TextStyle(
+      fontSize: 18,
+      letterSpacing: -0.3,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF282828),
+      fontFamily: 'Inter');
+  static const TextStyle h3Style = TextStyle(
+      fontSize: 16,
+      letterSpacing: -0.3,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF282828),
+      fontFamily: 'Inter');
+  static const TextStyle h4Style = TextStyle(
+      fontSize: 14,
+      letterSpacing: -0.3,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF282828),
+      fontFamily: 'Inter');
+  static const TextStyle bodyStyle = TextStyle(
+      fontSize: 12,
+      letterSpacing: -0.3,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF282828),
+      fontFamily: 'Inter');
+  static const TextStyle smallStyle = TextStyle(
+      fontSize: 10,
+      letterSpacing: -0.3,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF282828),
+      fontFamily: 'Inter');
 
-  FontWeight regularFont = FontWeight.w400;
-  FontWeight semiBoldFont = FontWeight.w600;
+  static const FontWeight regularFont = FontWeight.w400;
+  static const FontWeight semiBoldFont = FontWeight.w600;
 }
