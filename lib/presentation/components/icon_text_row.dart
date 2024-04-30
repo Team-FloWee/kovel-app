@@ -1,21 +1,46 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
 class IconTextRow extends StatelessWidget {
   final IconData icon;
   final String text;
+  final int maxline;
 
-
-  const IconTextRow({super.key, required this.icon, required this.text});
+  const IconTextRow(
+      {super.key,
+      required this.icon,
+      required this.text,
+      this.maxline = 0});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 18, color: UiConfig.black.shade800),
-        SizedBox(width: 8,),
-        Text( text ,style: UiConfig.bodyStyle .copyWith(fontWeight: UiConfig.semiBoldFont)),
+        Padding(
+          padding: const EdgeInsets.only(top: 1.5),
+          child: Icon(icon, size: 18, color: UiConfig.black.shade800),
+        ),
+        SizedBox(
+          width: 8,
+        ),
+        Expanded(
+          child: maxline == 0 ? Text(
+            text,
+            style: UiConfig.bodyStyle.copyWith(
+              fontWeight: UiConfig.semiBoldFont,
+            ),
+          ) : Text(
+            text,
+            style: UiConfig.bodyStyle.copyWith(
+              fontWeight: UiConfig.semiBoldFont,
+              overflow: TextOverflow.ellipsis,
+            ),
+            maxLines: maxline,
+          ),
+        ),
       ],
     );
   }
