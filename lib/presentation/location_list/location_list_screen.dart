@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class LocationDetailScreen extends StatelessWidget {
-  const LocationDetailScreen({super.key});
+class LocationListScreen extends StatelessWidget {
+  const LocationListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
