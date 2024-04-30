@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:kovel_app/domain/model/detail/culture_location/culture_location_detail.dart';
 import 'package:kovel_app/domain/model/detail/culture_location/culture_location_detail_info.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
-import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
 class CultureLocationInfoViewModel with ChangeNotifier {
@@ -12,28 +11,28 @@ class CultureLocationInfoViewModel with ChangeNotifier {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
+  bool _isLoading = true;
   List<TourDetail> _tourDetailData = [];
-  List<CultureLocationDetail> _CultureLocationDetailData = [];
-  List<CultureLocationDetailInfo> _CultureLocationInfoData = [];
+  List<CultureLocationDetail> _cultureLocationDetailData = [];
+  List<CultureLocationDetailInfo> _cultureLocationInfoData = [];
 
+  bool get isLoading => _isLoading;
   List<TourDetail> get tourDetailData => _tourDetailData;
-  List<CultureLocationDetail> get CultureLocationDetailData =>
-      _CultureLocationDetailData;
-  List<CultureLocationDetailInfo> get CultureLocationInfoData =>
-      _CultureLocationInfoData;
+  List<CultureLocationDetail> get cultureLocationDetailData =>
+      _cultureLocationDetailData;
+  List<CultureLocationDetailInfo> get cultureLocationInfoData =>
+      _cultureLocationInfoData;
 
-  Future<void> getCultureLocationData(Tour tour) async {
-    _tourDetailData = await _tourInfoRepository.getDetailCommon(
-        contentId: tour.id.toString());
+  Future<void> getCultureLocationData(int id, int contentTypeId) async {
+    _isLoading = true;
+    notifyListeners();
+    _tourDetailData = await _tourInfoRepository.getDetailCommon(id: id);
+    _cultureLocationDetailData = await _tourInfoRepository
+        .getCultureLocationDetail(id: id, contentTypeId: contentTypeId);
+    _cultureLocationInfoData = await _tourInfoRepository
+        .getCultureLocationDetailInfo(id: id, contentTypeId: contentTypeId);
 
-    _CultureLocationDetailData =
-        await _tourInfoRepository.getCultureLocationDetail(
-            contentId: tour.id.toString(),
-            contentTypeId: tour.contentTypeId.toString());
-
-    _CultureLocationInfoData =
-        await _tourInfoRepository.getCultureLocationDetailInfo(
-            contentId: tour.id.toString(),
-            contentTypeId: tour.contentTypeId.toString());
+    _isLoading = false;
+    notifyListeners();
   }
 }
