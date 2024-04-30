@@ -8,17 +8,20 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        color: UiConfig.black.shade500,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Text(
-            text,
-            style: UiConfig.smallStyle.copyWith(
-              fontWeight: UiConfig.semiBoldFont,
-              color: UiConfig.black.shade900,
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          color: UiConfig.black.shade500,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            child: Text(
+              text,
+              style: UiConfig.smallStyle.copyWith(
+                fontWeight: UiConfig.semiBoldFont,
+                color: UiConfig.black.shade900,
+              ),
             ),
           ),
         ),
