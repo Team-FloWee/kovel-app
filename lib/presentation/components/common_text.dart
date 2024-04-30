@@ -54,7 +54,7 @@ class CommonText extends StatelessWidget {
             SizedBox(
               height: 4,
             ),
-            IconTextRow(icon: Icons.location_on_rounded, text: tel),
+            IconTextRow(icon: Icons.location_on_rounded, text: address),
               ],
             ),
           ],
