@@ -22,6 +22,7 @@ LeportsDetail _$LeportsDetailFromJson(Map<String, dynamic> json) {
 mixin _$LeportsDetail {
   int get contentId => throw _privateConstructorUsedError;
   int get contentTypeId => throw _privateConstructorUsedError;
+  String get infoCenter => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
   String get useTime => throw _privateConstructorUsedError;
   String get ageLimit => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $LeportsDetailCopyWith<$Res> {
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String restDay,
       String useTime,
       String ageLimit,
@@ -63,6 +65,7 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? restDay = null,
     Object? useTime = null,
     Object? ageLimit = null,
@@ -77,6 +80,10 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       restDay: null == restDay
           ? _value.restDay
           : restDay // ignore: cast_nullable_to_non_nullable
@@ -108,6 +115,7 @@ abstract class _$$LeportsDetailImplCopyWith<$Res>
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String restDay,
       String useTime,
       String ageLimit,
@@ -127,6 +135,7 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? restDay = null,
     Object? useTime = null,
     Object? ageLimit = null,
@@ -141,6 +150,10 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       restDay: null == restDay
           ? _value.restDay
           : restDay // ignore: cast_nullable_to_non_nullable
@@ -167,6 +180,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
   const _$LeportsDetailImpl(
       {required this.contentId,
       required this.contentTypeId,
+      required this.infoCenter,
       required this.restDay,
       required this.useTime,
       required this.ageLimit,
@@ -180,6 +194,8 @@ class _$LeportsDetailImpl implements _LeportsDetail {
   @override
   final int contentTypeId;
   @override
+  final String infoCenter;
+  @override
   final String restDay;
   @override
   final String useTime;
@@ -190,7 +206,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
   @override
   String toString() {
-    return 'LeportsDetail(contentId: $contentId, contentTypeId: $contentTypeId, restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
+    return 'LeportsDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
   }
 
   @override
@@ -202,6 +218,8 @@ class _$LeportsDetailImpl implements _LeportsDetail {
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
                 other.contentTypeId == contentTypeId) &&
+            (identical(other.infoCenter, infoCenter) ||
+                other.infoCenter == infoCenter) &&
             (identical(other.restDay, restDay) || other.restDay == restDay) &&
             (identical(other.useTime, useTime) || other.useTime == useTime) &&
             (identical(other.ageLimit, ageLimit) ||
@@ -212,7 +230,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
-      restDay, useTime, ageLimit, parking);
+      infoCenter, restDay, useTime, ageLimit, parking);
 
   @JsonKey(ignore: true)
   @override
@@ -232,6 +250,7 @@ abstract class _LeportsDetail implements LeportsDetail {
   const factory _LeportsDetail(
       {required final int contentId,
       required final int contentTypeId,
+      required final String infoCenter,
       required final String restDay,
       required final String useTime,
       required final String ageLimit,
@@ -244,6 +263,8 @@ abstract class _LeportsDetail implements LeportsDetail {
   int get contentId;
   @override
   int get contentTypeId;
+  @override
+  String get infoCenter;
   @override
   String get restDay;
   @override
