@@ -34,9 +34,4 @@ class CourseInfoViewModel with ChangeNotifier {
     }
     notifyListeners();
   }
-
-  Future<String> getRelatedCourseImage(int id) async {
-    final data = await _tourInfoRepository.getDetailCommon(id: id);
-    return data.first.imagePath;
-  }
 }
