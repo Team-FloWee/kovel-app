@@ -10,17 +10,7 @@ class CultureLocationInfoScreen extends StatefulWidget {
   final int id;
   final int contentTypeId;
   final String title;
-  final Map<String, dynamic> mockdata = {
-    "contentId": 129854,
-    "contentTypeId": 14,
-    "infoCenter": "02-720-1020",
-    "useFee": " 전시마다 상이",
-    "useTime": "",
-    "restDay": "월요일",
-    "parking": "",
-    "spendTime": "",
-    "petAllowed": "불가"
-  };
+
   CultureLocationInfoScreen(
       {super.key,
       required this.id,
