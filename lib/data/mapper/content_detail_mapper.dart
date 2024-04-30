@@ -22,6 +22,7 @@ extension ToContentDetail on ContentDetailDto {
     return CultureLocationDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: infocenterculture ?? '',
       useFee: usefee ?? '',
       useTime: usetime ?? '',
       restDay: restdateculture ?? '',
@@ -35,6 +36,7 @@ extension ToContentDetail on ContentDetailDto {
     return FestivalDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: placeinfo ?? '',
       startDate: eventstartdate ?? '',
       endDate: eventenddate ?? '',
       playTime: playtime ?? '',
@@ -51,6 +53,7 @@ extension ToContentDetail on ContentDetailDto {
     return LeportsDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: infocenterleports ?? '',
       restDay: restdateleports ?? '',
       useTime: usetimeleports ?? '',
       ageLimit: expagerangeleports ?? '',
@@ -62,6 +65,7 @@ extension ToContentDetail on ContentDetailDto {
     return LodgmentDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: infocenterlodging ?? '',
       reservationUrl: reservationurl ?? '',
       roomCount: roomcount ?? '',
       isGoodStay: goodstay == "1" ? true : false,
@@ -90,6 +94,7 @@ extension ToContentDetail on ContentDetailDto {
     return RestaurantDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: infocentershopping ?? '',
       firstMenu: firstmenu ?? '',
       treatMenu: treatmenu ?? '',
       parking: parkingfood ?? '',
@@ -102,6 +107,7 @@ extension ToContentDetail on ContentDetailDto {
     return ShoppingDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: infocentershopping ?? '',
       saleItem: saleitem ?? '',
       saleItemCost: saleitemcost ?? '',
       restDay: restdateshopping ?? '',
@@ -115,6 +121,7 @@ extension ToContentDetail on ContentDetailDto {
     return TouristSpotDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+      infoCenter: infocenter ?? '',
       expGuide: expguide ?? '',
       parking: parking ?? '',
       restDay: restdate ?? '',
