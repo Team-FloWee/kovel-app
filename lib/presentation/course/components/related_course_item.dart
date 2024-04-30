@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/detail/course/course_detail_info.dart';
 
 class RelatedCourseItem extends StatelessWidget {
-  final String imagePath;
-  final String title;
-  final String overview;
-  const RelatedCourseItem({super.key, required this.imagePath, required this.title, required this.overview});
+  final CourseDetailInfo info;
+  const RelatedCourseItem({super.key, required this.info});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,29 @@ class RelatedCourseItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(imagePath, width: 100, height: 100, fit: BoxFit.fill,),
+              child: info.imagePath == ''? Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: UiConfig.black.shade500,
+                ),
+              ) : Image.network(
+                info.imagePath, width: 100, height: 100, fit: BoxFit.fill,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) {
+                    return child;
+                  }
+                  return Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: UiConfig.black.shade500,
+                    ),
+                  );
+                },
+              ),
             ),
             SizedBox(width: 8),
             Expanded(
@@ -24,9 +44,9 @@ class RelatedCourseItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(title, style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont)),
+                  Text(info.name, style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont)),
                   SizedBox(height: 8),
-                  Text(overview, style: UiConfig.smallStyle, maxLines: 4, overflow: TextOverflow.ellipsis)
+                  Text(info.overview, style: UiConfig.smallStyle, maxLines: 4, overflow: TextOverflow.ellipsis)
                 ],
               ),
             )
