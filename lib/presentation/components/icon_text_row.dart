@@ -8,10 +8,7 @@ class IconTextRow extends StatelessWidget {
   final int maxline;
 
   const IconTextRow(
-      {super.key,
-      required this.icon,
-      required this.text,
-      this.maxline = 0});
+      {super.key, required this.icon, required this.text, this.maxline = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +24,21 @@ class IconTextRow extends StatelessWidget {
           width: 8,
         ),
         Expanded(
-          child: maxline == 0 ? Text(
-            text,
-            style: UiConfig.bodyStyle.copyWith(
-              fontWeight: UiConfig.semiBoldFont,
-            ),
-          ) : Text(
-            text,
-            style: UiConfig.bodyStyle.copyWith(
-              fontWeight: UiConfig.semiBoldFont,
-              overflow: TextOverflow.ellipsis,
-            ),
-            maxLines: maxline,
-          ),
+          child: maxline == 0
+              ? Text(
+                  text,
+                  style: UiConfig.bodyStyle.copyWith(
+                    fontWeight: UiConfig.semiBoldFont,
+                  ),
+                )
+              : Text(
+                  text,
+                  style: UiConfig.bodyStyle.copyWith(
+                    fontWeight: UiConfig.semiBoldFont,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  maxLines: maxline,
+                ),
         ),
       ],
     );

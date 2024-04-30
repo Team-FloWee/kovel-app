@@ -28,8 +28,8 @@ class CommonText extends StatelessWidget {
             child: Container(
               color: UiConfig.primaryColor,
               child: Padding(
-                padding:
-                    const EdgeInsets.only(bottom: 5, top: 3, left: 10, right: 10),
+                padding: const EdgeInsets.only(
+                    bottom: 5, top: 3, left: 10, right: 10),
                 child: Text(
                   badgeTitle,
                   style: UiConfig.smallStyle.copyWith(
@@ -42,9 +42,12 @@ class CommonText extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          Text(title,
-              style: UiConfig.h4Style
-                  .copyWith(fontWeight: UiConfig.semiBoldFont),maxLines: 2, overflow: TextOverflow.ellipsis,),
+          Text(
+            title,
+            style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           SizedBox(
             height: 8,
           ),
@@ -52,9 +55,13 @@ class CommonText extends StatelessWidget {
           SizedBox(
             height: 4,
           ),
-          IconTextRow(icon: Icons.location_on_rounded, text: address, maxline: 1,),
-            ],
+          IconTextRow(
+            icon: Icons.location_on_rounded,
+            text: address,
+            maxline: 1,
           ),
+        ],
+      ),
     );
   }
 }
