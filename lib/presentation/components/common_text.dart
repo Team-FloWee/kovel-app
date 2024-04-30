@@ -45,7 +45,7 @@ class CommonText extends StatelessWidget {
               height: 8,
             ),
             Text(title,
-                style: UiConfig.h3Style
+                style: UiConfig.h4Style
                     .copyWith(fontWeight: UiConfig.semiBoldFont)),
             SizedBox(
               height: 8,
@@ -54,7 +54,7 @@ class CommonText extends StatelessWidget {
             SizedBox(
               height: 4,
             ),
-            IconTextRow(icon: Icons.location_on_rounded, text: tel),
+            IconTextRow(icon: Icons.location_on_rounded, text: address),
               ],
             ),
           ],

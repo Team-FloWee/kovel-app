@@ -15,14 +15,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: UiConfig.black.shade100,
       leading: Icon(Icons.arrow_back_ios),
       centerTitle: true,
-      title: Padding(
-        padding: const EdgeInsets.only(right: 33.4),
-        child: Text(
-          title,
-          style: UiConfig.h3Style.copyWith(
-            fontWeight: UiConfig.semiBoldFont,
-            overflow: TextOverflow.ellipsis,
-          ),
+      title: Text(
+        title,
+        style: UiConfig.h3Style.copyWith(
+          fontWeight: UiConfig.semiBoldFont,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );
