@@ -20,17 +20,6 @@ class CultureLocationInfoViewModel with ChangeNotifier {
   List<CultureLocationDetail> _cultureLocationDetailData = [];
   List<CultureLocationDetailInfo> _cultureLocationInfoData = [];
 
-  // Map<String, dynamic> mockdata = CultureLocationDetail(
-  //     contentId: 129854,
-  //     contentTypeId: 14,
-  //     infoCenter: "02-720-1020",
-  //     useFee: " 전시마다 상이",
-  //     useTime: "",
-  //     restDay: "월요일",
-  //     parking: "",
-  //     spendTime: "",
-  //     petAllowed: "불가") as Map<String, dynamic>;
-
   bool get isLoading => _isLoading;
   List<TourDetail> get tourDetailData => _tourDetailData;
   List<CultureLocationDetail> get cultureLocationDetailData =>
