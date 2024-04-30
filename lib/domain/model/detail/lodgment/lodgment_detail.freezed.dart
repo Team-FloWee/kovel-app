@@ -22,6 +22,7 @@ LodgmentDetail _$LodgmentDetailFromJson(Map<String, dynamic> json) {
 mixin _$LodgmentDetail {
   int get contentId => throw _privateConstructorUsedError;
   int get contentTypeId => throw _privateConstructorUsedError;
+  String get infoCenter => throw _privateConstructorUsedError;
   String get reservationUrl => throw _privateConstructorUsedError;
   String get roomCount => throw _privateConstructorUsedError;
   bool get isGoodStay => throw _privateConstructorUsedError;
@@ -59,6 +60,7 @@ abstract class $LodgmentDetailCopyWith<$Res> {
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String reservationUrl,
       String roomCount,
       bool isGoodStay,
@@ -97,6 +99,7 @@ class _$LodgmentDetailCopyWithImpl<$Res, $Val extends LodgmentDetail>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? reservationUrl = null,
     Object? roomCount = null,
     Object? isGoodStay = null,
@@ -128,6 +131,10 @@ class _$LodgmentDetailCopyWithImpl<$Res, $Val extends LodgmentDetail>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       reservationUrl: null == reservationUrl
           ? _value.reservationUrl
           : reservationUrl // ignore: cast_nullable_to_non_nullable
@@ -227,6 +234,7 @@ abstract class _$$LodgmentDetailImplCopyWith<$Res>
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String reservationUrl,
       String roomCount,
       bool isGoodStay,
@@ -263,6 +271,7 @@ class __$$LodgmentDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? reservationUrl = null,
     Object? roomCount = null,
     Object? isGoodStay = null,
@@ -294,6 +303,10 @@ class __$$LodgmentDetailImplCopyWithImpl<$Res>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       reservationUrl: null == reservationUrl
           ? _value.reservationUrl
           : reservationUrl // ignore: cast_nullable_to_non_nullable
@@ -388,6 +401,7 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
   const _$LodgmentDetailImpl(
       {required this.contentId,
       required this.contentTypeId,
+      required this.infoCenter,
       required this.reservationUrl,
       required this.roomCount,
       required this.isGoodStay,
@@ -417,6 +431,8 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
   final int contentId;
   @override
   final int contentTypeId;
+  @override
+  final String infoCenter;
   @override
   final String reservationUrl;
   @override
@@ -462,7 +478,7 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
 
   @override
   String toString() {
-    return 'LodgmentDetail(contentId: $contentId, contentTypeId: $contentTypeId, reservationUrl: $reservationUrl, roomCount: $roomCount, isGoodStay: $isGoodStay, isBenikia: $isBenikia, isHanok: $isHanok, hasSeminar: $hasSeminar, hasSports: $hasSports, hasSauna: $hasSauna, hasBeauty: $hasBeauty, hasBeverage: $hasBeverage, hasKaraoke: $hasKaraoke, hasBarbecue: $hasBarbecue, hasCampfire: $hasCampfire, hasBicycle: $hasBicycle, hasFitness: $hasFitness, hasPublicPc: $hasPublicPc, hasPublicBath: $hasPublicBath, pickup: $pickup, park: $park, subFacility: $subFacility, foodPlace: $foodPlace)';
+    return 'LodgmentDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, reservationUrl: $reservationUrl, roomCount: $roomCount, isGoodStay: $isGoodStay, isBenikia: $isBenikia, isHanok: $isHanok, hasSeminar: $hasSeminar, hasSports: $hasSports, hasSauna: $hasSauna, hasBeauty: $hasBeauty, hasBeverage: $hasBeverage, hasKaraoke: $hasKaraoke, hasBarbecue: $hasBarbecue, hasCampfire: $hasCampfire, hasBicycle: $hasBicycle, hasFitness: $hasFitness, hasPublicPc: $hasPublicPc, hasPublicBath: $hasPublicBath, pickup: $pickup, park: $park, subFacility: $subFacility, foodPlace: $foodPlace)';
   }
 
   @override
@@ -474,6 +490,8 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
                 other.contentTypeId == contentTypeId) &&
+            (identical(other.infoCenter, infoCenter) ||
+                other.infoCenter == infoCenter) &&
             (identical(other.reservationUrl, reservationUrl) ||
                 other.reservationUrl == reservationUrl) &&
             (identical(other.roomCount, roomCount) ||
@@ -521,6 +539,7 @@ class _$LodgmentDetailImpl implements _LodgmentDetail {
         runtimeType,
         contentId,
         contentTypeId,
+        infoCenter,
         reservationUrl,
         roomCount,
         isGoodStay,
@@ -563,6 +582,7 @@ abstract class _LodgmentDetail implements LodgmentDetail {
   const factory _LodgmentDetail(
       {required final int contentId,
       required final int contentTypeId,
+      required final String infoCenter,
       required final String reservationUrl,
       required final String roomCount,
       required final bool isGoodStay,
@@ -592,6 +612,8 @@ abstract class _LodgmentDetail implements LodgmentDetail {
   int get contentId;
   @override
   int get contentTypeId;
+  @override
+  String get infoCenter;
   @override
   String get reservationUrl;
   @override

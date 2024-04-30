@@ -22,6 +22,7 @@ FestivalDetail _$FestivalDetailFromJson(Map<String, dynamic> json) {
 mixin _$FestivalDetail {
   int get contentId => throw _privateConstructorUsedError;
   int get contentTypeId => throw _privateConstructorUsedError;
+  String get infoCenter => throw _privateConstructorUsedError;
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
   String get playTime => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $FestivalDetailCopyWith<$Res> {
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String startDate,
       String endDate,
       String playTime,
@@ -73,6 +75,7 @@ class _$FestivalDetailCopyWithImpl<$Res, $Val extends FestivalDetail>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? startDate = null,
     Object? endDate = null,
     Object? playTime = null,
@@ -92,6 +95,10 @@ class _$FestivalDetailCopyWithImpl<$Res, $Val extends FestivalDetail>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -143,6 +150,7 @@ abstract class _$$FestivalDetailImplCopyWith<$Res>
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String startDate,
       String endDate,
       String playTime,
@@ -167,6 +175,7 @@ class __$$FestivalDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? startDate = null,
     Object? endDate = null,
     Object? playTime = null,
@@ -186,6 +195,10 @@ class __$$FestivalDetailImplCopyWithImpl<$Res>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -232,6 +245,7 @@ class _$FestivalDetailImpl implements _FestivalDetail {
   const _$FestivalDetailImpl(
       {required this.contentId,
       required this.contentTypeId,
+      required this.infoCenter,
       required this.startDate,
       required this.endDate,
       required this.playTime,
@@ -249,6 +263,8 @@ class _$FestivalDetailImpl implements _FestivalDetail {
   final int contentId;
   @override
   final int contentTypeId;
+  @override
+  final String infoCenter;
   @override
   final String startDate;
   @override
@@ -270,7 +286,7 @@ class _$FestivalDetailImpl implements _FestivalDetail {
 
   @override
   String toString() {
-    return 'FestivalDetail(contentId: $contentId, contentTypeId: $contentTypeId, startDate: $startDate, endDate: $endDate, playTime: $playTime, sponsor: $sponsor, sponsorTel: $sponsorTel, homePage: $homePage, ageLimit: $ageLimit, placeInfo: $placeInfo, useFee: $useFee)';
+    return 'FestivalDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, startDate: $startDate, endDate: $endDate, playTime: $playTime, sponsor: $sponsor, sponsorTel: $sponsorTel, homePage: $homePage, ageLimit: $ageLimit, placeInfo: $placeInfo, useFee: $useFee)';
   }
 
   @override
@@ -282,6 +298,8 @@ class _$FestivalDetailImpl implements _FestivalDetail {
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
                 other.contentTypeId == contentTypeId) &&
+            (identical(other.infoCenter, infoCenter) ||
+                other.infoCenter == infoCenter) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -305,6 +323,7 @@ class _$FestivalDetailImpl implements _FestivalDetail {
       runtimeType,
       contentId,
       contentTypeId,
+      infoCenter,
       startDate,
       endDate,
       playTime,
@@ -334,6 +353,7 @@ abstract class _FestivalDetail implements FestivalDetail {
   const factory _FestivalDetail(
       {required final int contentId,
       required final int contentTypeId,
+      required final String infoCenter,
       required final String startDate,
       required final String endDate,
       required final String playTime,
@@ -351,6 +371,8 @@ abstract class _FestivalDetail implements FestivalDetail {
   int get contentId;
   @override
   int get contentTypeId;
+  @override
+  String get infoCenter;
   @override
   String get startDate;
   @override

@@ -11,6 +11,7 @@ _$CultureLocationDetailImpl _$$CultureLocationDetailImplFromJson(
     _$CultureLocationDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
       contentTypeId: (json['contentTypeId'] as num).toInt(),
+      infoCenter: json['infoCenter'] as String,
       useFee: json['useFee'] as String,
       useTime: json['useTime'] as String,
       restDay: json['restDay'] as String,
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$CultureLocationDetailImplToJson(
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,
+      'infoCenter': instance.infoCenter,
       'useFee': instance.useFee,
       'useTime': instance.useTime,
       'restDay': instance.restDay,

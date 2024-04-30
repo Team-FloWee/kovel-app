@@ -4,10 +4,11 @@ import 'package:kovel_app/config/ui_config.dart';
 
 class FavoriteImage extends StatefulWidget {
   final String imagePath;
+  final double imageSize;
   final String area;
   final String title;
 
-  const FavoriteImage({super.key, required this.imagePath, this.area = '', this.title = ''});
+  const FavoriteImage({super.key, required this.imagePath, required this.imageSize, this.area = '', this.title = ''});
 
   @override
   State<FavoriteImage> createState() => _FavoriteImageState();
@@ -32,7 +33,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(widget.imagePath, width: 160.w, height: 160.w, fit: BoxFit.fill,),
+          child: Image.network(widget.imagePath, width: widget.imageSize, height: widget.imageSize, fit: BoxFit.fill,),
         ),
         Positioned(
             top: 8,

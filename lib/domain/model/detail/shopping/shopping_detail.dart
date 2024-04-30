@@ -8,6 +8,7 @@ class ShoppingDetail with _$ShoppingDetail {
   const factory ShoppingDetail({
     required int contentId,
     required int contentTypeId,
+    required String infoCenter,
     required String saleItem,
     required String saleItemCost,
     required String restDay,

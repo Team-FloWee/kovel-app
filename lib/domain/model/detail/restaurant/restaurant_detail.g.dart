@@ -11,6 +11,7 @@ _$RestaurantDetailImpl _$$RestaurantDetailImplFromJson(
     _$RestaurantDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
       contentTypeId: (json['contentTypeId'] as num).toInt(),
+      infoCenter: json['infoCenter'] as String,
       firstMenu: json['firstMenu'] as String,
       treatMenu: json['treatMenu'] as String,
       parking: json['parking'] as String,
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$RestaurantDetailImplToJson(
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,
+      'infoCenter': instance.infoCenter,
       'firstMenu': instance.firstMenu,
       'treatMenu': instance.treatMenu,
       'parking': instance.parking,

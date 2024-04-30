@@ -10,6 +10,7 @@ _$FestivalDetailImpl _$$FestivalDetailImplFromJson(Map<String, dynamic> json) =>
     _$FestivalDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
       contentTypeId: (json['contentTypeId'] as num).toInt(),
+      infoCenter: json['infoCenter'] as String,
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
       playTime: json['playTime'] as String,
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$FestivalDetailImplToJson(
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,
+      'infoCenter': instance.infoCenter,
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'playTime': instance.playTime,
