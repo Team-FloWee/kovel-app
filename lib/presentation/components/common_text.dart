@@ -19,45 +19,49 @@ class CommonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Container(
-                color: UiConfig.primaryColor,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-                  child: Text(
-                    badgeTitle,
-                    style: UiConfig.smallStyle.copyWith(
-                        fontWeight: UiConfig.semiBoldFont,
-                        color: UiConfig.black.shade100),
-                  ),
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              color: UiConfig.primaryColor,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 5, top: 3, left: 10, right: 10),
+                child: Text(
+                  badgeTitle,
+                  style: UiConfig.smallStyle.copyWith(
+                      fontWeight: UiConfig.semiBoldFont,
+                      color: UiConfig.black.shade100),
                 ),
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(title,
-                style: UiConfig.h4Style
-                    .copyWith(fontWeight: UiConfig.semiBoldFont)),
-            SizedBox(
-              height: 8,
-            ),
-            IconTextRow(icon: Icons.phone, text: tel),
-            SizedBox(
-              height: 4,
-            ),
-            IconTextRow(icon: Icons.location_on_rounded, text: address),
-              ],
-            ),
-          ],
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            title,
+            style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          IconTextRow(icon: Icons.phone, text: tel, maxline: 1),
+          SizedBox(
+            height: 4,
+          ),
+          IconTextRow(
+            icon: Icons.location_on_rounded,
+            text: address,
+            maxline: 1,
+          ),
+        ],
+      ),
     );
   }
 }
