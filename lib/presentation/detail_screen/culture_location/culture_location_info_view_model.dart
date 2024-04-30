@@ -15,12 +15,13 @@ class CultureLocationInfoViewModel with ChangeNotifier {
   }) : _tourInfoRepository = tourInfoRepository;
 
   bool _isLoading = true;
-  List<Widget> widgets = [];
+  List<Widget> _widgets = [];
   List<TourDetail> _tourDetailData = [];
   List<CultureLocationDetail> _cultureLocationDetailData = [];
   List<CultureLocationDetailInfo> _cultureLocationInfoData = [];
 
   bool get isLoading => _isLoading;
+  List<Widget> get widgets => _widgets;
   List<TourDetail> get tourDetailData => _tourDetailData;
   List<CultureLocationDetail> get cultureLocationDetailData =>
       _cultureLocationDetailData;
@@ -51,7 +52,7 @@ class CultureLocationInfoViewModel with ChangeNotifier {
           value != '' &&
           key != 'contentId' &&
           key != 'contentTypeId') {
-        widgets.add(
+        _widgets.add(
           IconTextRow(
             icon: Icons.phone,
             text: value.toString(),
