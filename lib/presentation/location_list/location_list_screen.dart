@@ -134,7 +134,7 @@ class LocationListScreen extends StatelessWidget {
                     CommonText(
                         badgeTitle: '음식점',
                         title:
-                            '오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집',
+                            '오리 주물럭 집',
                         tel: '010-1234-5678',
                         address: '서울 관악구 관악시 11로 12길'),
                   ],
@@ -155,7 +155,7 @@ class LocationListScreen extends StatelessWidget {
                     CommonText(
                         badgeTitle: '음식점',
                         title:
-                            '오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집',
+                            '오리 주물럭 집',
                         tel: '010-1234-5678',
                         address: '서울 관악구 관악시 11로 12길'),
                   ],
@@ -176,7 +176,7 @@ class LocationListScreen extends StatelessWidget {
                     CommonText(
                         badgeTitle: '음식점',
                         title:
-                            '오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집',
+                            '오리 주물럭 집',
                         tel: '010-1234-5678',
                         address: '서울 관악구 관악시 11로 12길'),
                   ],
@@ -197,7 +197,7 @@ class LocationListScreen extends StatelessWidget {
                     CommonText(
                         badgeTitle: '음식점',
                         title:
-                            '오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집',
+                            '오리 주물럭 집',
                         tel: '010-1234-5678',
                         address: '서울 관악구 관악시 11로 12길'),
                   ],
@@ -218,7 +218,7 @@ class LocationListScreen extends StatelessWidget {
                     CommonText(
                         badgeTitle: '음식점',
                         title:
-                            '오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집오리 주물럭 집',
+                            '오리 주물럭 집',
                         tel: '010-1234-5678',
                         address: '서울 관악구 관악시 11로 12길'),
                   ],
