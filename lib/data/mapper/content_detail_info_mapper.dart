@@ -10,8 +10,10 @@ extension ToContentDetailInfo on ContentDetailInfoDto {
     return CourseDetailInfo(
         contentId: int.tryParse(contentid!) ?? 0,
         contentTypeId: int.tryParse(contenttypeid!) ?? 0,
+        subContentId: int.tryParse(subcontentid!) ?? 0,
         name: subname ?? '',
         overview: subdetailoverview ?? '',
+        imagePath: subdetailimg ?? '',
     );
   }
 
