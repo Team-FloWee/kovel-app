@@ -8,6 +8,7 @@ class FestivalDetail with _$FestivalDetail {
   const factory FestivalDetail({
     required int contentId,
     required int contentTypeId,
+    required String infoCenter,
     required String startDate,
     required String endDate,
     required String playTime,

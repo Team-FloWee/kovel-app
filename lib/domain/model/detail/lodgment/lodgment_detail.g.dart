@@ -10,6 +10,7 @@ _$LodgmentDetailImpl _$$LodgmentDetailImplFromJson(Map<String, dynamic> json) =>
     _$LodgmentDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
       contentTypeId: (json['contentTypeId'] as num).toInt(),
+      infoCenter: json['infoCenter'] as String,
       reservationUrl: json['reservationUrl'] as String,
       roomCount: json['roomCount'] as String,
       isGoodStay: json['isGoodStay'] as bool,
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$LodgmentDetailImplToJson(
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,
+      'infoCenter': instance.infoCenter,
       'reservationUrl': instance.reservationUrl,
       'roomCount': instance.roomCount,
       'isGoodStay': instance.isGoodStay,

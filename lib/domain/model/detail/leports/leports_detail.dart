@@ -8,6 +8,7 @@ class LeportsDetail with _$LeportsDetail {
   const factory LeportsDetail({
     required int contentId,
     required int contentTypeId,
+    required String infoCenter,
     required String restDay,
     required String useTime,
     required String ageLimit,

@@ -22,6 +22,7 @@ TouristSpotDetail _$TouristSpotDetailFromJson(Map<String, dynamic> json) {
 mixin _$TouristSpotDetail {
   int get contentId => throw _privateConstructorUsedError;
   int get contentTypeId => throw _privateConstructorUsedError;
+  String get infoCenter => throw _privateConstructorUsedError;
   String get expGuide => throw _privateConstructorUsedError;
   String get parking => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $TouristSpotDetailCopyWith<$Res> {
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String expGuide,
       String parking,
       String restDay,
@@ -63,6 +65,7 @@ class _$TouristSpotDetailCopyWithImpl<$Res, $Val extends TouristSpotDetail>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? expGuide = null,
     Object? parking = null,
     Object? restDay = null,
@@ -77,6 +80,10 @@ class _$TouristSpotDetailCopyWithImpl<$Res, $Val extends TouristSpotDetail>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       expGuide: null == expGuide
           ? _value.expGuide
           : expGuide // ignore: cast_nullable_to_non_nullable
@@ -108,6 +115,7 @@ abstract class _$$TouristSpotDetailImplCopyWith<$Res>
   $Res call(
       {int contentId,
       int contentTypeId,
+      String infoCenter,
       String expGuide,
       String parking,
       String restDay,
@@ -127,6 +135,7 @@ class __$$TouristSpotDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? contentTypeId = null,
+    Object? infoCenter = null,
     Object? expGuide = null,
     Object? parking = null,
     Object? restDay = null,
@@ -141,6 +150,10 @@ class __$$TouristSpotDetailImplCopyWithImpl<$Res>
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
+      infoCenter: null == infoCenter
+          ? _value.infoCenter
+          : infoCenter // ignore: cast_nullable_to_non_nullable
+              as String,
       expGuide: null == expGuide
           ? _value.expGuide
           : expGuide // ignore: cast_nullable_to_non_nullable
@@ -167,6 +180,7 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
   const _$TouristSpotDetailImpl(
       {required this.contentId,
       required this.contentTypeId,
+      required this.infoCenter,
       required this.expGuide,
       required this.parking,
       required this.restDay,
@@ -180,6 +194,8 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
   @override
   final int contentTypeId;
   @override
+  final String infoCenter;
+  @override
   final String expGuide;
   @override
   final String parking;
@@ -190,7 +206,7 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
 
   @override
   String toString() {
-    return 'TouristSpotDetail(contentId: $contentId, contentTypeId: $contentTypeId, expGuide: $expGuide, parking: $parking, restDay: $restDay, useTime: $useTime)';
+    return 'TouristSpotDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, expGuide: $expGuide, parking: $parking, restDay: $restDay, useTime: $useTime)';
   }
 
   @override
@@ -202,6 +218,8 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
                 other.contentTypeId == contentTypeId) &&
+            (identical(other.infoCenter, infoCenter) ||
+                other.infoCenter == infoCenter) &&
             (identical(other.expGuide, expGuide) ||
                 other.expGuide == expGuide) &&
             (identical(other.parking, parking) || other.parking == parking) &&
@@ -212,7 +230,7 @@ class _$TouristSpotDetailImpl implements _TouristSpotDetail {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
-      expGuide, parking, restDay, useTime);
+      infoCenter, expGuide, parking, restDay, useTime);
 
   @JsonKey(ignore: true)
   @override
@@ -233,6 +251,7 @@ abstract class _TouristSpotDetail implements TouristSpotDetail {
   const factory _TouristSpotDetail(
       {required final int contentId,
       required final int contentTypeId,
+      required final String infoCenter,
       required final String expGuide,
       required final String parking,
       required final String restDay,
@@ -245,6 +264,8 @@ abstract class _TouristSpotDetail implements TouristSpotDetail {
   int get contentId;
   @override
   int get contentTypeId;
+  @override
+  String get infoCenter;
   @override
   String get expGuide;
   @override
