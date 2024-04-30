@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final viewModel = context.watch<HomeViewModel>();
     // 드롭다운 리스트
     List<String> locationList = ['경기도 고양시 일산동구', '2', '3'];
-    List<String> radiusList = ['1km', '3km', '5km'];
+    List<String> radiusList = ['1km', '3km', '5km', '10km']; // TODO: 따로 모아야할까요
 
     // 위치 초기값 설정
     if (_selectedRadius == "") {
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           CustomIconButton(
                             icon: Icons.refresh,
                             onPressed: () {
-                              viewModel.determinePosition();
+                              viewModel.determinePosition(_selectedRadius);
                             },
                           ),
                         ],
