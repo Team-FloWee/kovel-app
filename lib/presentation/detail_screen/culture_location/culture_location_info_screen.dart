@@ -9,7 +9,9 @@ import 'package:provider/provider.dart';
 
 class CultureLocationInfoScreen extends StatefulWidget {
   final int id;
-  const CultureLocationInfoScreen({super.key, required this.id});
+  final int contentTypeId;
+  const CultureLocationInfoScreen(
+      {super.key, required this.id, required this.contentTypeId});
 
   @override
   State<CultureLocationInfoScreen> createState() =>
@@ -18,10 +20,19 @@ class CultureLocationInfoScreen extends StatefulWidget {
 
 class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
   @override
+  void initState() {
+    super.initState();
+    final viewModel = context.read<CultureLocationInfoViewModel>();
+    viewModel.getCultureLocationData(widget.id, widget.contentTypeId);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<CultureLocationInfoViewModel>();
     return Scaffold(
-      appBar: CommonAppBar(title: "viewModel.tourDetailData.first.title"),
+      appBar: viewModel.isLoading == true
+          ? CommonAppBar(title: '관광지')
+          : CommonAppBar(title: viewModel.tourDetailData.first.title),
       body: SingleChildScrollView(
         child: Column(
           children: [
