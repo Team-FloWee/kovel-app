@@ -28,7 +28,7 @@ class CultureLocationInfoViewModel with ChangeNotifier {
   List<CultureLocationDetailInfo> get cultureLocationInfoData =>
       _cultureLocationInfoData;
 
-  Future<void> getCultureLocationData(int id, int contentTypeId) async {
+  void getCultureLocationData(int id, int contentTypeId) async {
     _isLoading = true;
     notifyListeners();
 
