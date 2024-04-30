@@ -59,7 +59,7 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
                     aspectRatio: 1 / 1,
                     child: Image.network(
                         fit: BoxFit.cover,
-                        "https://images.unsplash.com/photo-1472791108553-c9405341e398?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
+                        viewModel.tourDetailData.first.imagePath),
                   ),
                   Padding(
                     padding: EdgeInsets.all(16),
@@ -70,7 +70,10 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
                             CommonText(
                               badgeTitle: 'badgeTitle',
                               title: viewModel.tourDetailData.first.title,
-                              tel: viewModel.tourDetailData.first.tel,
+                              tel: (viewModel.tourDetailData.first.tel == '')
+                                  ? viewModel.cultureLocationDetailData.first
+                                      .infoCenter
+                                  : '',
                               address: viewModel.tourDetailData.first.address1,
                             ),
                           ],
