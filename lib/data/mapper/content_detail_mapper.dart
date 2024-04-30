@@ -94,7 +94,7 @@ extension ToContentDetail on ContentDetailDto {
     return RestaurantDetail(
       contentId: int.tryParse(contentid!) ?? 0,
       contentTypeId: int.tryParse(contenttypeid!) ?? 0,
-      infoCenter: infocentershopping ?? '',
+      infoCenter: infocenterfood ?? '',
       firstMenu: firstmenu ?? '',
       treatMenu: treatmenu ?? '',
       parking: parkingfood ?? '',
