@@ -11,28 +11,25 @@ class CultureLocationInfoViewModel with ChangeNotifier {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  bool _isLoading = false;
+  bool _isLoading = true;
   List<TourDetail> _tourDetailData = [];
-  List<CultureLocationDetail> _CultureLocationDetailData = [];
-  List<CultureLocationDetailInfo> _CultureLocationInfoData = [];
+  List<CultureLocationDetail> _cultureLocationDetailData = [];
+  List<CultureLocationDetailInfo> _cultureLocationInfoData = [];
 
   bool get isLoading => _isLoading;
   List<TourDetail> get tourDetailData => _tourDetailData;
-  List<CultureLocationDetail> get CultureLocationDetailData =>
-      _CultureLocationDetailData;
-  List<CultureLocationDetailInfo> get CultureLocationInfoData =>
-      _CultureLocationInfoData;
+  List<CultureLocationDetail> get cultureLocationDetailData =>
+      _cultureLocationDetailData;
+  List<CultureLocationDetailInfo> get cultureLocationInfoData =>
+      _cultureLocationInfoData;
 
   Future<void> getCultureLocationData(int id, int contentTypeId) async {
     _isLoading = true;
     notifyListeners();
-
     _tourDetailData = await _tourInfoRepository.getDetailCommon(id: id);
-    print(_tourDetailData);
-    _CultureLocationDetailData = await _tourInfoRepository
+    _cultureLocationDetailData = await _tourInfoRepository
         .getCultureLocationDetail(id: id, contentTypeId: contentTypeId);
-
-    _CultureLocationInfoData = await _tourInfoRepository
+    _cultureLocationInfoData = await _tourInfoRepository
         .getCultureLocationDetailInfo(id: id, contentTypeId: contentTypeId);
 
     _isLoading = false;

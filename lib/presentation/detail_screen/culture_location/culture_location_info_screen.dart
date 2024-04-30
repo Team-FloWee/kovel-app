@@ -22,77 +22,98 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
   @override
   void initState() {
     super.initState();
-    final viewModel = context.read<CultureLocationInfoViewModel>();
-    viewModel.getCultureLocationData(widget.id, widget.contentTypeId);
+    Future.microtask(
+      () => context
+          .read<CultureLocationInfoViewModel>()
+          .getCultureLocationData(widget.id, widget.contentTypeId),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<CultureLocationInfoViewModel>();
     return Scaffold(
-      appBar: viewModel.isLoading == true
-          ? CommonAppBar(title: '관광지')
-          : CommonAppBar(title: viewModel.tourDetailData.first.title),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 1 / 1,
-              child: Image.network(
-                  fit: BoxFit.cover,
-                  "https://images.unsplash.com/photo-1472791108553-c9405341e398?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
+      appBar: CommonAppBar(title: "viewModel.tourDetailData.first.title"),
+      body: viewModel.isLoading == true
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1 / 1,
+                    child: Image.network(
+                        fit: BoxFit.cover,
+                        "https://images.unsplash.com/photo-1472791108553-c9405341e398?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        CommonText(
+                            badgeTitle: '문화시설',
+                            title: viewModel.tourDetailData.first.title,
+                            tel: viewModel.tourDetailData.first.tel,
+                            address: viewModel.tourDetailData.first.address1),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18, bottom: 16),
+                          child: Divider(
+                              thickness: 1,
+                              height: 1,
+                              color: UiConfig.black.shade500),
+                        ),
+                        IconTextRow(
+                            icon: Icons.monetization_on,
+                            text: viewModel
+                                .cultureLocationDetailData.first.useFee),
+                        IconTextRow(
+                            icon: Icons.access_time_filled,
+                            text: viewModel
+                                .cultureLocationDetailData.first.useTime),
+                        IconTextRow(
+                            icon: Icons.door_front_door,
+                            text: viewModel
+                                .cultureLocationDetailData.first.restDay),
+                        IconTextRow(
+                            icon: Icons.local_parking,
+                            text: viewModel
+                                .cultureLocationDetailData.first.parking),
+                        IconTextRow(
+                            icon: Icons.timelapse,
+                            text: viewModel
+                                .cultureLocationDetailData.first.spendTime),
+                        IconTextRow(
+                            icon: Icons.pets,
+                            text: viewModel
+                                .cultureLocationDetailData.first.petAllowed),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18, bottom: 16),
+                          child: Divider(
+                              thickness: 1,
+                              height: 1,
+                              color: UiConfig.black.shade500),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: 16, top: 16, right: 16, bottom: 8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: UiConfig.black.shade500,
+                          ),
+                          child: Column(
+                            children: viewModel.cultureLocationInfoData
+                                .map((e) => InfoText(
+                                    title: e.infoName, contents: e.infoText))
+                                .toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    CommonText(
-                        badgeTitle: '음식점',
-                        title: '오리 주물럭 집',
-                        tel: '010-1234-5678',
-                        address: '서울 관악구 관악시 11로 12길'),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 18, bottom: 16),
-                      child: Divider(
-                          thickness: 1,
-                          height: 1,
-                          color: UiConfig.black.shade500),
-                    ),
-                    IconTextRow(icon: Icons.monetization_on, text: "무료"),
-                    IconTextRow(icon: Icons.access_time_filled, text: "무료"),
-                    IconTextRow(icon: Icons.door_front_door, text: "무료"),
-                    IconTextRow(icon: Icons.local_parking, text: "무료"),
-                    IconTextRow(icon: Icons.timelapse, text: "무료"),
-                    IconTextRow(icon: Icons.pets, text: "무료"),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 18, bottom: 16),
-                      child: Divider(
-                          thickness: 1,
-                          height: 1,
-                          color: UiConfig.black.shade500),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: 16, top: 16, right: 16, bottom: 8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: UiConfig.black.shade500,
-                      ),
-                      child: Column(
-                        children: [
-                          InfoText(title: '인포텍스트입니다', contents: '214km'),
-                          InfoText(title: '인포텍스트입니다', contents: '214km'),
-                          InfoText(title: '인포텍스트입니다', contents: '214km'),
-                          InfoText(title: '인포텍스트입니다', contents: '214km'),
-                          InfoText(title: '인포텍스트입니다', contents: '214km'),
-                        ],
-                      ),
-                    ),
-                  ],
-                )),
-          ],
-        ),
-      ),
     );
   }
 }
