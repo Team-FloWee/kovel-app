@@ -18,7 +18,7 @@ class InfoText extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               title,
               style:
-                  UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                  UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
             ),
           ),
           SizedBox(
@@ -26,7 +26,7 @@ class InfoText extends StatelessWidget {
           ),
           Text(
             contents,
-            style: UiConfig.h4Style,
+            style: UiConfig.smallStyle,
           ),
         ],
       ),
