@@ -75,7 +75,7 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
                               height: 1,
                               color: UiConfig.black.shade500),
                         ),
-                        ...viewModel.widgets.map((e) => e),
+                        ...viewModel.widgets,
                         Padding(
                           padding: const EdgeInsets.only(top: 18, bottom: 16),
                           child: Divider(
