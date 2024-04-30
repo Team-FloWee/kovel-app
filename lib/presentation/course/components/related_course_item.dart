@@ -32,7 +32,7 @@ class RelatedCourseItem extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 16),
       ],
     );
   }
