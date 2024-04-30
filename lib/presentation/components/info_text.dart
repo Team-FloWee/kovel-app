@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
@@ -17,16 +18,18 @@ class InfoText extends StatelessWidget {
             child: Text(
               overflow: TextOverflow.ellipsis,
               title,
-              style:
-                  UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+              style: UiConfig.bodyStyle
+                  .copyWith(fontWeight: UiConfig.semiBoldFont),
             ),
           ),
           SizedBox(
             width: 8,
           ),
-          Text(
-            contents,
-            style: UiConfig.bodyStyle,
+          Expanded(
+            child: Text(
+              contents,
+              style: UiConfig.bodyStyle,
+            ),
           ),
         ],
       ),
