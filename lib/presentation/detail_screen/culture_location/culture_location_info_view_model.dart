@@ -44,10 +44,7 @@ class CultureLocationInfoViewModel with ChangeNotifier {
   }
 
   void showDetailData() async {
-    Map<String, dynamic> detailData =
-        jsonDecode(jsonEncode(_cultureLocationDetailData.first));
-
-    detailData.forEach((key, value) {
+    _cultureLocationDetailData.first.toJson().forEach((key, value) {
       if (value != null &&
           value != '' &&
           key != 'contentId' &&
