@@ -15,7 +15,6 @@ class AddressInfoDataSourceImpl implements AddressInfoDataSource {
     String url = '$baseUrl?x=$longitude&y=$latitude&input_coord=WGS84';
 
     response = await _dio.get(url, options: Options(headers: {'Authorization': key}));
-    print('response: $response');
     final List jsonList = response.data['documents'] != '' ? response.data['documents'] : throw Exception('주소 데이터가 없습니다.');
 
     return jsonList.map((e) => AddressDto.fromJson(e)).toList();
