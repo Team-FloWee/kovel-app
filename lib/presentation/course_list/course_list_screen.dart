@@ -27,7 +27,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     final viewModel = context.watch<CourseListViewModel>();
     return Scaffold(
       appBar: CommonAppBar(
-        title: '여행코스',
+        title: '전체 여행코스',
       ),
       body: SingleChildScrollView(
         child: Padding(
