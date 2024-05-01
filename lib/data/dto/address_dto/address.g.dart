@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'old_address_dto.dart';
+part of 'address.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-OldAddressDto _$OldAddressDtoFromJson(Map<String, dynamic> json) =>
-    OldAddressDto(
+Address _$AddressFromJson(Map<String, dynamic> json) => Address(
       addressName: json['address_name'] as String?,
       region1depthName: json['region_1depth_name'] as String?,
       region2depthName: json['region_2depth_name'] as String?,
@@ -18,8 +17,7 @@ OldAddressDto _$OldAddressDtoFromJson(Map<String, dynamic> json) =>
       zipCode: json['zip_code'] as String?,
     );
 
-Map<String, dynamic> _$OldAddressDtoToJson(OldAddressDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
       'address_name': instance.addressName,
       'region_1depth_name': instance.region1depthName,
       'region_2depth_name': instance.region2depthName,

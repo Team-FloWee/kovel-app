@@ -9,7 +9,7 @@ part of 'address.dart';
 _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
     _$AddressImpl(
       roadAddress:
-          RoadAddress.fromJson(json['roadAddress'] as Map<String, dynamic>),
+          NewAddress.fromJson(json['roadAddress'] as Map<String, dynamic>),
       oldAddress:
           OldAddress.fromJson(json['oldAddress'] as Map<String, dynamic>),
     );
