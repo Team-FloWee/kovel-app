@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 import '../../../config/ui_config.dart';
