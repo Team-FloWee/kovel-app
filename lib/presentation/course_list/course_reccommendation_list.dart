@@ -42,8 +42,8 @@ class CourseRecommendation extends StatelessWidget {
                   child: Container(
                     color: Color(0xFF00D1FF),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 5,top: 3,left: 10,right: 10),
                       child: Text(
                         course,
 
