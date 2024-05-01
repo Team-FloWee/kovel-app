@@ -1,7 +1,7 @@
-import 'package:kovel_app/data/dto/address_dto/old_address_dto.dart';
+import 'package:kovel_app/data/dto/address_dto/address.dart';
 import 'package:kovel_app/domain/model/old_address.dart';
 
-extension ToOldAddress on OldAddressDto {
+extension ToOldAddress on Address {
   OldAddress toOldAddress() {
     return OldAddress(
       addressName: addressName ?? '', // TODO: null 처리 필요한지 확인

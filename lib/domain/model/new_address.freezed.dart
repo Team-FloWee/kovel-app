@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'road_address.dart';
+part of 'new_address.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-RoadAddress _$RoadAddressFromJson(Map<String, dynamic> json) {
-  return _RoadAddress.fromJson(json);
+NewAddress _$NewAddressFromJson(Map<String, dynamic> json) {
+  return _NewAddress.fromJson(json);
 }
 
 /// @nodoc
-mixin _$RoadAddress {
+mixin _$NewAddress {
   String get addressName => throw _privateConstructorUsedError;
   String get region1depthName => throw _privateConstructorUsedError;
   String get region2depthName => throw _privateConstructorUsedError;
@@ -28,15 +28,15 @@ mixin _$RoadAddress {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RoadAddressCopyWith<RoadAddress> get copyWith =>
+  $NewAddressCopyWith<NewAddress> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RoadAddressCopyWith<$Res> {
-  factory $RoadAddressCopyWith(
-          RoadAddress value, $Res Function(RoadAddress) then) =
-      _$RoadAddressCopyWithImpl<$Res, RoadAddress>;
+abstract class $NewAddressCopyWith<$Res> {
+  factory $NewAddressCopyWith(
+          NewAddress value, $Res Function(NewAddress) then) =
+      _$NewAddressCopyWithImpl<$Res, NewAddress>;
   @useResult
   $Res call(
       {String addressName,
@@ -47,9 +47,9 @@ abstract class $RoadAddressCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RoadAddressCopyWithImpl<$Res, $Val extends RoadAddress>
-    implements $RoadAddressCopyWith<$Res> {
-  _$RoadAddressCopyWithImpl(this._value, this._then);
+class _$NewAddressCopyWithImpl<$Res, $Val extends NewAddress>
+    implements $NewAddressCopyWith<$Res> {
+  _$NewAddressCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,11 +91,11 @@ class _$RoadAddressCopyWithImpl<$Res, $Val extends RoadAddress>
 }
 
 /// @nodoc
-abstract class _$$RoadAddressImplCopyWith<$Res>
-    implements $RoadAddressCopyWith<$Res> {
-  factory _$$RoadAddressImplCopyWith(
-          _$RoadAddressImpl value, $Res Function(_$RoadAddressImpl) then) =
-      __$$RoadAddressImplCopyWithImpl<$Res>;
+abstract class _$$NewAddressImplCopyWith<$Res>
+    implements $NewAddressCopyWith<$Res> {
+  factory _$$NewAddressImplCopyWith(
+          _$NewAddressImpl value, $Res Function(_$NewAddressImpl) then) =
+      __$$NewAddressImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$RoadAddressImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$RoadAddressImplCopyWithImpl<$Res>
-    extends _$RoadAddressCopyWithImpl<$Res, _$RoadAddressImpl>
-    implements _$$RoadAddressImplCopyWith<$Res> {
-  __$$RoadAddressImplCopyWithImpl(
-      _$RoadAddressImpl _value, $Res Function(_$RoadAddressImpl) _then)
+class __$$NewAddressImplCopyWithImpl<$Res>
+    extends _$NewAddressCopyWithImpl<$Res, _$NewAddressImpl>
+    implements _$$NewAddressImplCopyWith<$Res> {
+  __$$NewAddressImplCopyWithImpl(
+      _$NewAddressImpl _value, $Res Function(_$NewAddressImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$RoadAddressImplCopyWithImpl<$Res>
     Object? region3depthName = null,
     Object? roadName = null,
   }) {
-    return _then(_$RoadAddressImpl(
+    return _then(_$NewAddressImpl(
       addressName: null == addressName
           ? _value.addressName
           : addressName // ignore: cast_nullable_to_non_nullable
@@ -150,16 +150,16 @@ class __$$RoadAddressImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RoadAddressImpl implements _RoadAddress {
-  const _$RoadAddressImpl(
+class _$NewAddressImpl implements _NewAddress {
+  const _$NewAddressImpl(
       {required this.addressName,
       required this.region1depthName,
       required this.region2depthName,
       required this.region3depthName,
       required this.roadName});
 
-  factory _$RoadAddressImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RoadAddressImplFromJson(json);
+  factory _$NewAddressImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewAddressImplFromJson(json);
 
   @override
   final String addressName;
@@ -174,14 +174,14 @@ class _$RoadAddressImpl implements _RoadAddress {
 
   @override
   String toString() {
-    return 'RoadAddress(addressName: $addressName, region1depthName: $region1depthName, region2depthName: $region2depthName, region3depthName: $region3depthName, roadName: $roadName)';
+    return 'NewAddress(addressName: $addressName, region1depthName: $region1depthName, region2depthName: $region2depthName, region3depthName: $region3depthName, roadName: $roadName)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RoadAddressImpl &&
+            other is _$NewAddressImpl &&
             (identical(other.addressName, addressName) ||
                 other.addressName == addressName) &&
             (identical(other.region1depthName, region1depthName) ||
@@ -202,27 +202,27 @@ class _$RoadAddressImpl implements _RoadAddress {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RoadAddressImplCopyWith<_$RoadAddressImpl> get copyWith =>
-      __$$RoadAddressImplCopyWithImpl<_$RoadAddressImpl>(this, _$identity);
+  _$$NewAddressImplCopyWith<_$NewAddressImpl> get copyWith =>
+      __$$NewAddressImplCopyWithImpl<_$NewAddressImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RoadAddressImplToJson(
+    return _$$NewAddressImplToJson(
       this,
     );
   }
 }
 
-abstract class _RoadAddress implements RoadAddress {
-  const factory _RoadAddress(
+abstract class _NewAddress implements NewAddress {
+  const factory _NewAddress(
       {required final String addressName,
       required final String region1depthName,
       required final String region2depthName,
       required final String region3depthName,
-      required final String roadName}) = _$RoadAddressImpl;
+      required final String roadName}) = _$NewAddressImpl;
 
-  factory _RoadAddress.fromJson(Map<String, dynamic> json) =
-      _$RoadAddressImpl.fromJson;
+  factory _NewAddress.fromJson(Map<String, dynamic> json) =
+      _$NewAddressImpl.fromJson;
 
   @override
   String get addressName;
@@ -236,6 +236,6 @@ abstract class _RoadAddress implements RoadAddress {
   String get roadName;
   @override
   @JsonKey(ignore: true)
-  _$$RoadAddressImplCopyWith<_$RoadAddressImpl> get copyWith =>
+  _$$NewAddressImplCopyWith<_$NewAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
