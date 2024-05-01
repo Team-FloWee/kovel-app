@@ -21,26 +21,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    Future.microtask(() {
+      final viewModel = context.read<HomeViewModel>();
+      viewModel.onFetch();
+    });
     super.initState();
   }
 
-  String _selectedLocation = '';
   String _selectedRadius = '';
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
     // 드롭다운 리스트
-    List<String> locationList = ['경기도 고양시 일산동구', '2', '3'];
+
     List<String> radiusList = ['1km', '3km', '5km', '10km']; // TODO: 따로 모아야할까요
 
-    // 위치 초기값 설정
-    if (_selectedRadius == "") {
+    // radius 초기값 설정
+    if (_selectedRadius == '') {
       _selectedRadius = radiusList.first;
     }
-    // radius 초기값 설정
-    if (_selectedLocation == "") {
-      _selectedLocation = locationList.first;
-    }
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: MediaQuery.of(context).size.width * 0.02,
                             ),
                             DropdownButton(
-                                items: locationList.map((e) {
+                                items: viewModel.locationList.map((e) {
                                   return DropdownMenuItem<String>(
                                     value: e,
                                     child: Text(
@@ -71,11 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   );
                                 }).toList(),
-                                value: _selectedLocation,
+                                value: viewModel.selectedLocation,
                                 onChanged: (value) {
-                                  print(value);
                                   setState(() {
-                                    _selectedLocation = value!;
+                                    viewModel.selectedLocation = value!;
                                   });
                                 }),
                           ],
@@ -91,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           CustomIconButton(
                             icon: Icons.refresh,
                             onPressed: () {
-                              viewModel.determinePosition(_selectedRadius);
+                              viewModel.refreshPosition(_selectedRadius);
                             },
                           ),
                         ],
