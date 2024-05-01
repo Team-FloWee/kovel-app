@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
+import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
+import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 
 class HomeViewModel with ChangeNotifier {
   final TourInfoRepositoryImpl _tourInfoRepository;
@@ -70,5 +74,9 @@ class HomeViewModel with ChangeNotifier {
     // 잘 나오는지 확인!
     final dataList = await AddressInfoRepositoryImpl(addressInfoDataSource: AddressInfoDataSourceImpl()).getAddress(lon, lat);
     print('addressName : ${dataList.first.roadAddress.addressName}${dataList.first.oldAddress.addressName}');
+  }
+
+  void fetchOnGoingFestival() async {
+    final List<Tour> tourList = await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getSearchFestival(eventStartDate: '20240101', eventEndDate: '20240502');
   }
 }

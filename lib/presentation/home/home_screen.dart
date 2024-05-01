@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/location_selector.dart';
@@ -119,25 +122,37 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text('내주변 관광정보 추천', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
                       const Spacer(),
-                      DropdownButton(
-                          items: radiusList.map((e) {
-                            return DropdownMenuItem<String>(
-                              value: e,
-                              child: Text(
-                                e,
-                                style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
-                              ),
-                            );
-                          }).toList(),
-                          value: _selectedRadius,
-                          onChanged: (value) {
-                            print(value);
-                            setState(() {
-                              _selectedRadius = value!;
-                            });
-                          }),
+                      DecoratedBox(
+                        decoration: const BoxDecoration(color: UiConfig.primaryColor, borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          child: Center(
+                            child: DropdownButton(
+                                dropdownColor: UiConfig.primaryColor, //TODO: dropdown 밖의 색과 선택했을 때의 배경색이 같이 감. border radius 주는 방법?
+                                iconEnabledColor: UiConfig.black.shade100,
+                                items: radiusList.map((e) {
+                                  return DropdownMenuItem<String>(
+                                    value: e,
+                                    child: Text(
+                                      e,
+                                      style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, fontSize: 15.sp, color: UiConfig.black.shade100),
+                                    ),
+                                  );
+                                }).toList(),
+                                value: _selectedRadius,
+                                onChanged: (value) {
+                                  print(value);
+                                  setState(() {
+                                    _selectedRadius = value!;
+                                  });
+                                }),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
+                  const SizedBox(height: 8),
                   Container(
                     child: GridView.count(
                       physics: const NeverScrollableScrollPhysics(),
