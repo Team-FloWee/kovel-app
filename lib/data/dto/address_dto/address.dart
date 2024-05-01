@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'old_address_dto.g.dart';
+part 'address.g.dart';
 
 @JsonSerializable()
-class OldAddressDto {
+class Address {
   @JsonKey(name: 'address_name')
   String? addressName;
   @JsonKey(name: 'region_1depth_name')
@@ -21,7 +21,7 @@ class OldAddressDto {
   @JsonKey(name: 'zip_code')
   String? zipCode;
 
-  OldAddressDto({
+  Address({
     this.addressName,
     this.region1depthName,
     this.region2depthName,
@@ -32,9 +32,9 @@ class OldAddressDto {
     this.zipCode,
   });
 
-  factory OldAddressDto.fromJson(Map<String, dynamic> json) {
-    return _$OldAddressDtoFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return _$AddressFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$OldAddressDtoToJson(this);
+  Map<String, dynamic> toJson() => _$AddressToJson(this);
 }

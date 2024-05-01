@@ -1,17 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'old_address_dto.dart';
-import 'road_address_dto.dart';
+import 'address.dart';
+import 'road_address.dart';
 
 part 'address_dto.g.dart';
 
 @JsonSerializable()
 class AddressDto {
   @JsonKey(name: 'road_address')
-  RoadAddressDto? roadAddress;
-  OldAddressDto? oldAddress;
+  RoadAddress? roadAddress;
+  Address? address;
 
-  AddressDto({this.roadAddress, this.oldAddress});
+  AddressDto({this.roadAddress, this.address});
 
   factory AddressDto.fromJson(Map<String, dynamic> json) {
     return _$AddressDtoFromJson(json);

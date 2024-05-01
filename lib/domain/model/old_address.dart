@@ -12,5 +12,6 @@ class OldAddress with _$OldAddress {
     required String region3depthName,
   }) = _OldAddress;
 
-  factory OldAddress.fromJson(Map<String, dynamic> json) => _$OldAddressFromJson(json);
+  factory OldAddress.fromJson(Map<String, dynamic> json) =>
+      _$OldAddressFromJson(json);
 }

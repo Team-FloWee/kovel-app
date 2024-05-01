@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'road_address.dart';
+part of 'new_address.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RoadAddressImpl _$$RoadAddressImplFromJson(Map<String, dynamic> json) =>
-    _$RoadAddressImpl(
+_$NewAddressImpl _$$NewAddressImplFromJson(Map<String, dynamic> json) =>
+    _$NewAddressImpl(
       addressName: json['addressName'] as String,
       region1depthName: json['region1depthName'] as String,
       region2depthName: json['region2depthName'] as String,
@@ -15,7 +15,7 @@ _$RoadAddressImpl _$$RoadAddressImplFromJson(Map<String, dynamic> json) =>
       roadName: json['roadName'] as String,
     );
 
-Map<String, dynamic> _$$RoadAddressImplToJson(_$RoadAddressImpl instance) =>
+Map<String, dynamic> _$$NewAddressImplToJson(_$NewAddressImpl instance) =>
     <String, dynamic>{
       'addressName': instance.addressName,
       'region1depthName': instance.region1depthName,
