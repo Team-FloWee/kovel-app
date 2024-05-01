@@ -20,7 +20,7 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Address {
-  RoadAddress get roadAddress => throw _privateConstructorUsedError;
+  NewAddress get roadAddress => throw _privateConstructorUsedError;
   OldAddress get oldAddress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,9 +33,9 @@ abstract class $AddressCopyWith<$Res> {
   factory $AddressCopyWith(Address value, $Res Function(Address) then) =
       _$AddressCopyWithImpl<$Res, Address>;
   @useResult
-  $Res call({RoadAddress roadAddress, OldAddress oldAddress});
+  $Res call({NewAddress roadAddress, OldAddress oldAddress});
 
-  $RoadAddressCopyWith<$Res> get roadAddress;
+  $NewAddressCopyWith<$Res> get roadAddress;
   $OldAddressCopyWith<$Res> get oldAddress;
 }
 
@@ -59,7 +59,7 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
       roadAddress: null == roadAddress
           ? _value.roadAddress
           : roadAddress // ignore: cast_nullable_to_non_nullable
-              as RoadAddress,
+              as NewAddress,
       oldAddress: null == oldAddress
           ? _value.oldAddress
           : oldAddress // ignore: cast_nullable_to_non_nullable
@@ -69,8 +69,8 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
 
   @override
   @pragma('vm:prefer-inline')
-  $RoadAddressCopyWith<$Res> get roadAddress {
-    return $RoadAddressCopyWith<$Res>(_value.roadAddress, (value) {
+  $NewAddressCopyWith<$Res> get roadAddress {
+    return $NewAddressCopyWith<$Res>(_value.roadAddress, (value) {
       return _then(_value.copyWith(roadAddress: value) as $Val);
     });
   }
@@ -91,10 +91,10 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
       __$$AddressImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RoadAddress roadAddress, OldAddress oldAddress});
+  $Res call({NewAddress roadAddress, OldAddress oldAddress});
 
   @override
-  $RoadAddressCopyWith<$Res> get roadAddress;
+  $NewAddressCopyWith<$Res> get roadAddress;
   @override
   $OldAddressCopyWith<$Res> get oldAddress;
 }
@@ -117,7 +117,7 @@ class __$$AddressImplCopyWithImpl<$Res>
       roadAddress: null == roadAddress
           ? _value.roadAddress
           : roadAddress // ignore: cast_nullable_to_non_nullable
-              as RoadAddress,
+              as NewAddress,
       oldAddress: null == oldAddress
           ? _value.oldAddress
           : oldAddress // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ class _$AddressImpl implements _Address {
       _$$AddressImplFromJson(json);
 
   @override
-  final RoadAddress roadAddress;
+  final NewAddress roadAddress;
   @override
   final OldAddress oldAddress;
 
@@ -175,13 +175,13 @@ class _$AddressImpl implements _Address {
 
 abstract class _Address implements Address {
   const factory _Address(
-      {required final RoadAddress roadAddress,
+      {required final NewAddress roadAddress,
       required final OldAddress oldAddress}) = _$AddressImpl;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$AddressImpl.fromJson;
 
   @override
-  RoadAddress get roadAddress;
+  NewAddress get roadAddress;
   @override
   OldAddress get oldAddress;
   @override

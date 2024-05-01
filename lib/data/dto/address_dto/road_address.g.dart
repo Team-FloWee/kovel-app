@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'road_address_dto.dart';
+part of 'road_address.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-RoadAddressDto _$RoadAddressDtoFromJson(Map<String, dynamic> json) =>
-    RoadAddressDto(
+RoadAddress _$RoadAddressFromJson(Map<String, dynamic> json) => RoadAddress(
       addressName: json['address_name'] as String?,
       region1depthName: json['region_1depth_name'] as String?,
       region2depthName: json['region_2depth_name'] as String?,
@@ -20,7 +19,7 @@ RoadAddressDto _$RoadAddressDtoFromJson(Map<String, dynamic> json) =>
       zoneNo: json['zone_no'] as String?,
     );
 
-Map<String, dynamic> _$RoadAddressDtoToJson(RoadAddressDto instance) =>
+Map<String, dynamic> _$RoadAddressToJson(RoadAddress instance) =>
     <String, dynamic>{
       'address_name': instance.addressName,
       'region_1depth_name': instance.region1depthName,
