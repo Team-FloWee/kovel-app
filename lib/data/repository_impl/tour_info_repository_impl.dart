@@ -58,7 +58,7 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required String eventEndDate,
   }) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getSearchFestival(
-        eventStartDate: eventStartDate);
+        eventStartDate: eventStartDate, eventEndDate: eventEndDate);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
