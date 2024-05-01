@@ -10,9 +10,9 @@ class AddressInfoDataSourceImpl implements AddressInfoDataSource {
   AddressInfoDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio();
 
   @override
-  Future<List<AddressDto>> getAddress(String long, String lat) async {
+  Future<List<AddressDto>> getAddress({required String longitude, required String latitude}) async {
     final Response response;
-    String url = '$baseUrl?x=$long&y=$lat&input_coord=WGS84';
+    String url = '$baseUrl?x=$longitude&y=$latitude&input_coord=WGS84';
 
     response = await _dio.get(url, options: Options(headers: {'Authorization': key}));
     print('response: $response');
