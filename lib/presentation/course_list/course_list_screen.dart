@@ -56,9 +56,9 @@ class _CourseListScreenState extends State<CourseListScreen> {
                 '가족코스',
                 '나홀로코스',
                 '힐링코스',
-                '전체',
-                '가족코스',
-                '나홀로코스',
+                '도보코스',
+                '캠핑코스',
+                '맛코스',
               ]),
               SizedBox(
                 height: 16,
