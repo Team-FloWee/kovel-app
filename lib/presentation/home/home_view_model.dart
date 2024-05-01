@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
+import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 
 class HomeViewModel with ChangeNotifier {
@@ -42,13 +44,31 @@ class HomeViewModel with ChangeNotifier {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     final Position currentPosition = await Geolocator.getCurrentPosition();
-    _longitude = currentPosition.longitude * -1;
+    _longitude = currentPosition.longitude;
     _latitude = currentPosition.latitude;
-    print('_longitude: $_longitude');
-    print('_latitude: $_latitude');
-    // List tourData = await _tourInfoRepository.getLocationBasedList(mapX: _longitude.toString(), mapY: _latitude.toString(), radius: radius);
-    List tourData = await _tourInfoRepository.getLocationBasedList(mapX: '127.1216721795'.toString(), mapY: '36.4529297875'.toString(), radius: radius);
-    print(tourData[0]);
-    tourData.map((e) => e.address1).toList().forEach(print);
+    if (_longitude != null && _longitude! < 0) {
+      _longitude = currentPosition.longitude * -1;
+    }
+    // print('_longitude: $_longitude');
+    // print('_latitude: $_latitude');
+    //List tourData = await _tourInfoRepository.getLocationBasedList(mapX: _longitude.toString(), mapY: _latitude.toString(), radius: radius);
+    // List tourData = await _tourInfoRepository.getLocationBasedList(mapX: '127.1216721795'.toString(), mapY: '36.4529297875'.toString(), radius: radius);
+    //print(tourData[0]);
+    //tourData.map((e) => e.address1).toList().forEach(print);
+
+    //fetchAddressData('127.1216721795'.toString(), '36.4529297875'.toString()); // 안나옴
+    fetchAddressData(lon: '127.423084873712'.toString(), lat: '37.0789561558879'.toString()); // 나옴
+    // if (_longitude != null && _latitude != null) {
+    //   // fetchAddressData(_longitude!.toStringAsFixed(12), _latitude!.toStringAsFixed(12));
+    //   fetchAddressData(lon: _longitude!.toString(), lat: _latitude!.toString());
+    // }
+  }
+
+  void fetchAddressData({required String lon, required String lat}) async {
+    print('lat: $lat');
+    print('lon: $lon');
+    // 잘 나오는지 확인!
+    final dataList = await AddressInfoRepositoryImpl(addressInfoDataSource: AddressInfoDataSourceImpl()).getAddress(lon, lat);
+    print('addressName : ${dataList.first.roadAddress.addressName}${dataList.first.oldAddress.addressName}');
   }
 }
