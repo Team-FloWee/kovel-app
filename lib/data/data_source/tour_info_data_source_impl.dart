@@ -52,7 +52,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
   Future<List<TourDto>> getSearchFestival({required String eventStartDate, required String eventEndDate, int pageNo = 1}) async {
     const String apiName = 'searchFestival1';
     final Response response;
-    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&eventStartDate=$eventStartDate&serviceKey=$key');
+    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&eventStartDate=$eventStartDate&eventEndDate=$eventEndDate&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != '' ? response.data['response']['body']['items']['item'] : (throw Exception('데이터가 없습니다'));
     return tourInfoList.map((e) => TourDto.fromJson(e)).toList();
