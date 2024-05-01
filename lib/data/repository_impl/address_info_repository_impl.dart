@@ -11,8 +11,8 @@ class AddressInfoRepositoryImpl implements AddressInfoRepository {
   }) : _addressInfoDataSource = addressInfoDataSource;
 
   @override
-  Future<List<Address>> getAddress(String long, String lat) async {
-    final List<AddressDto> addressDto = await _addressInfoDataSource.getAddress(long, lat);
+  Future<List<Address>> getAddress({required String longitude, required String latitude}) async {
+    final List<AddressDto> addressDto = await _addressInfoDataSource.getAddress(longitude: longitude, latitude: latitude);
 
     return addressDto.map((e) => e.toAddress()).toList();
   }
