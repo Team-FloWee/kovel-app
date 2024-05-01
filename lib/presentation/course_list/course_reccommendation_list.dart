@@ -27,7 +27,8 @@ class CourseRecommendation extends StatelessWidget {
           FavoriteImage(
             imagePath: url,
             title: 'data',
-            area: '145',
+            area: '145', imageSize: 145,
+            
           ),
           SizedBox(
             width: 8,
