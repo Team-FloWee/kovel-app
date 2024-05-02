@@ -9,6 +9,8 @@ import 'package:kovel_app/domain/model/detail/restaurant/restaurant_detail.dart'
 import 'package:kovel_app/domain/model/detail/shopping/shopping_detail.dart';
 import 'package:kovel_app/domain/model/detail/tourist_spot/tourist_spot_detail.dart';
 
+import '../../core/utils/html_util.dart';
+
 extension ToContentDetail on ContentDetailDto {
   CourseDetail toCourseDetail() {
     return CourseDetail(
@@ -25,7 +27,7 @@ extension ToContentDetail on ContentDetailDto {
       contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterculture ?? '',
       useFee: usefee ?? '',
-      useTime: usetime ?? '',
+      useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
       restDay: restdateculture ?? '',
       parking: parking ?? '',
       spendTime: spendtime ?? '',
@@ -56,7 +58,7 @@ extension ToContentDetail on ContentDetailDto {
       contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterleports ?? '',
       restDay: restdateleports ?? '',
-      useTime: usetimeleports ?? '',
+      useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
       ageLimit: expagerangeleports ?? '',
       parking: parkingleports ?? '',
     );
@@ -67,7 +69,7 @@ extension ToContentDetail on ContentDetailDto {
       contentId: int.tryParse(contentid!) ?? 0,
       contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterlodging ?? '',
-      reservationUrl: reservationurl ?? '',
+      reservationUrl: HtmlUtil().removeHtmlTags(reservationurl ?? ''),
       roomCount: roomcount ?? '',
       isGoodStay: goodstay == "1" ? true : false,
       isBenikia: benikia == "1" ? true : false,
@@ -126,7 +128,7 @@ extension ToContentDetail on ContentDetailDto {
       expGuide: expguide ?? '',
       parking: parking ?? '',
       restDay: restdate ?? '',
-      useTime: usetime ?? '',
+      useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
     );
   }
 }
