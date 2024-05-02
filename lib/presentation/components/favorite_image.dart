@@ -33,7 +33,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(widget.imagePath, width: widget.imageSize, height: widget.imageSize, fit: BoxFit.fill,),
+          child: Image.network(widget.imagePath, width: widget.imageSize, height: widget.imageSize, fit: BoxFit.cover,),
         ),
         Positioned(
             top: 8,
