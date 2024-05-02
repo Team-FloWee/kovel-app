@@ -17,6 +17,7 @@ _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       category1: json['category1'] as String,
       category2: json['category2'] as String,
       category3: json['category3'] as String,
+      categoryType: $enumDecode(_$CategoryTypeEnumMap, json['categoryType']),
       createdTime: json['createdTime'] as String,
       mapx: json['mapx'] as String,
       mapy: json['mapy'] as String,
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
       'category1': instance.category1,
       'category2': instance.category2,
       'category3': instance.category3,
+      'categoryType': _$CategoryTypeEnumMap[instance.categoryType]!,
       'createdTime': instance.createdTime,
       'mapx': instance.mapx,
       'mapy': instance.mapy,
@@ -53,4 +55,14 @@ const _$ContentTypeEnumMap = {
   ContentType.lodgment: 'lodgment',
   ContentType.shopping: 'shopping',
   ContentType.restaurant: 'restaurant',
+};
+
+const _$CategoryTypeEnumMap = {
+  CategoryType.allCourse: 'allCourse',
+  CategoryType.famCourse: 'famCourse',
+  CategoryType.aloneCourse: 'aloneCourse',
+  CategoryType.healCourse: 'healCourse',
+  CategoryType.walkCourse: 'walkCourse',
+  CategoryType.campCourse: 'campCourse',
+  CategoryType.tasteCourse: 'tasteCourse',
 };
