@@ -1,5 +1,5 @@
 enum ContentType {
-  error(id: 0, text: '에러'),
+  all(id: 0, text: '전체'),
   touristSpot(id: 12, text: '관광지'),
   cultureLocation(id: 14, text: '문화시설'),
   festival(id: 15, text: '축제공연행사'),
