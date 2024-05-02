@@ -24,7 +24,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     const String apiName = 'areaBasedList1';
     final Response response;
 
-    if (contentTypeId == null) {
+    if (contentTypeId == null || contentTypeId == 0) {
       response = await _dio.get(
           '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
     } else {
