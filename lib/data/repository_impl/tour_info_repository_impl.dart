@@ -34,8 +34,13 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 지역 기반 관광 정보 조회 (area based list)
   @override
-  Future<List<Tour>> getAreaBasedList({int pageNo = 1}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList();
+  Future<List<Tour>> getAreaBasedList(
+      {int pageNo = 1,
+      int? contentTypeId,
+      String? areaCode,
+      String? cat2}) async {
+    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
+        contentTypeId: contentTypeId, areaCode: areaCode, cat2: cat2);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -45,7 +50,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     int pageNo = 1,
     required String keyword,
   }) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchKeyword(keyword: keyword);
+    final List<TourDto> tourDto =
+        await _tourInfoDataSource.getSearchKeyword(keyword: keyword);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -55,7 +61,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     int pageNo = 1,
     required String eventStartDate,
   }) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchFestival(eventStartDate: eventStartDate);
+    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchFestival(
+        eventStartDate: eventStartDate);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -67,7 +74,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required String mapY,
     required String radius,
   }) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getLocationBasedList(mapX: mapX, mapY: mapY, radius: radius);
+    final List<TourDto> tourDto = await _tourInfoDataSource
+        .getLocationBasedList(mapX: mapX, mapY: mapY, radius: radius);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -84,7 +92,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     int pageNo = 1,
     required int id,
   }) async {
-    final List<TourDetailDto> tourDetailDto = await _tourInfoDataSource.getDetailCommon(id: id);
+    final List<TourDetailDto> tourDetailDto =
+        await _tourInfoDataSource.getDetailCommon(id: id);
     return tourDetailDto.map((e) => e.toTourDetail()).toList();
   }
 
@@ -98,7 +107,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> courseDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> courseDetailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
     return courseDetailDto.map((e) => e.toCourseDetail()).toList();
   }
 
@@ -109,8 +119,12 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> cultureLocationDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
-    return cultureLocationDetailDto.map((e) => e.toCultureLocationDetail()).toList();
+    final List<ContentDetailDto> cultureLocationDetailDto =
+        await _tourInfoDataSource.getDetailIntro(
+            id: id, contentTypeId: contentTypeId);
+    return cultureLocationDetailDto
+        .map((e) => e.toCultureLocationDetail())
+        .toList();
   }
 
   // 15: 축제 공연 행사
@@ -120,7 +134,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> festivalDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> festivalDetailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
     return festivalDetailDto.map((e) => e.toFestivalDetail()).toList();
   }
 
@@ -131,7 +146,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> leportsDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> leportsDetailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
     return leportsDetailDto.map((e) => e.toLeportsDetail()).toList();
   }
 
@@ -142,7 +158,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> lodgmentDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> lodgmentDetailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
     return lodgmentDetailDto.map((e) => e.toLodgmentDetail()).toList();
   }
 
@@ -153,7 +170,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> restaurantDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> restaurantDetailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
     return restaurantDetailDto.map((e) => e.toRestaurantDetail()).toList();
   }
 
@@ -164,7 +182,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> shoppingDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> shoppingDetailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
     return shoppingDetailDto.map((e) => e.toShoppingDetail()).toList();
   }
 
@@ -175,7 +194,9 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailDto> touristSpotDetailDto = await _tourInfoDataSource.getDetailIntro(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailDto> touristSpotDetailDto =
+        await _tourInfoDataSource.getDetailIntro(
+            id: id, contentTypeId: contentTypeId);
     return touristSpotDetailDto.map((e) => e.toTouristSpotDetail()).toList();
   }
 
@@ -189,7 +210,9 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailInfoDto> courseDetailInfoDto = await _tourInfoDataSource.getDetailInfo(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailInfoDto> courseDetailInfoDto =
+        await _tourInfoDataSource.getDetailInfo(
+            id: id, contentTypeId: contentTypeId);
     return courseDetailInfoDto.map((e) => e.toCourseDetailInfo()).toList();
   }
 
@@ -200,8 +223,12 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailInfoDto> cultureLocationDetailInfo = await _tourInfoDataSource.getDetailInfo(id: id, contentTypeId: contentTypeId);
-    return cultureLocationDetailInfo.map((e) => e.toCultureLocationDeteailInfo()).toList();
+    final List<ContentDetailInfoDto> cultureLocationDetailInfo =
+        await _tourInfoDataSource.getDetailInfo(
+            id: id, contentTypeId: contentTypeId);
+    return cultureLocationDetailInfo
+        .map((e) => e.toCultureLocationDeteailInfo())
+        .toList();
   }
 
   // 15: 축제 공연 행사
@@ -211,7 +238,9 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailInfoDto> festivalDetailInfo = await _tourInfoDataSource.getDetailInfo(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailInfoDto> festivalDetailInfo =
+        await _tourInfoDataSource.getDetailInfo(
+            id: id, contentTypeId: contentTypeId);
     return festivalDetailInfo.map((e) => e.toFestivalDetailInfo()).toList();
   }
 
@@ -222,7 +251,9 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailInfoDto> leportsDetailInfo = await _tourInfoDataSource.getDetailInfo(id: id, contentTypeId: contentTypeId);
+    final List<ContentDetailInfoDto> leportsDetailInfo =
+        await _tourInfoDataSource.getDetailInfo(
+            id: id, contentTypeId: contentTypeId);
     return leportsDetailInfo.map((e) => e.toLeportsDetailInfo()).toList();
   }
 
@@ -233,7 +264,11 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
     required int contentTypeId,
   }) async {
-    final List<ContentDetailInfoDto> touristSpotDetailInfo = await _tourInfoDataSource.getDetailInfo(id: id, contentTypeId: contentTypeId);
-    return touristSpotDetailInfo.map((e) => e.toTouristSpotDetailInfo()).toList();
+    final List<ContentDetailInfoDto> touristSpotDetailInfo =
+        await _tourInfoDataSource.getDetailInfo(
+            id: id, contentTypeId: contentTypeId);
+    return touristSpotDetailInfo
+        .map((e) => e.toTouristSpotDetailInfo())
+        .toList();
   }
 }
