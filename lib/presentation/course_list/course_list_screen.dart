@@ -5,6 +5,8 @@ import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/course_list/course_reccommendation_list.dart';
 
+import '../../core/enums/content_type.dart';
+
 class CourseListScreen extends StatelessWidget {
   const CourseListScreen({super.key});
 
@@ -36,15 +38,7 @@ class CourseListScreen extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              CategoryList(textdata: [
-                '전체',
-                '가족코스',
-                '나홀로코스',
-                '힐링코스',
-                '전체',
-                '가족코스',
-                '나홀로코스',
-              ]),
+              CategoryList(textdata: ContentType.values),
               SizedBox(
                 height: 16,
               ),

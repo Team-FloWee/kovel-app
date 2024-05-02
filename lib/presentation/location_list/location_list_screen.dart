@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +10,8 @@ import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/enums/content_type.dart';
 
 class LocationListScreen extends StatefulWidget {
   const LocationListScreen({super.key});
@@ -47,15 +51,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: CategoryList(textdata: [
-                      '전체',
-                      '가족코스',
-                      '나홀로코스',
-                      '힐링코스',
-                      '도보코스',
-                      '캠핑코스',
-                      '맛코스',
-                    ]),
+                    child: CategoryList(textdata: ContentType.values),
                   ),
                   SizedBox(
                     height: 16,
@@ -72,7 +68,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                       imagePath: e.imagePath, imageSize: 100),
                                 ))
                             .toList(),
-                      ), //TODO 이미지가 null값일 때 디폴트 이미지 삽입
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -89,15 +85,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: CategoryList(textdata: [
-                      '전체',
-                      '관광지',
-                      '문화시설',
-                      '축제공연행사',
-                      '숙박',
-                      '캠핑',
-                      '맛'
-                    ]),
+                    child: CategoryList(textdata:
+                      ContentType.values
+                    ),
                   ),
                   SizedBox(
                     height: 16,
@@ -124,7 +114,6 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                     badgeTitle: '음식점',
                                     title: e.title,
                                     tel: e.tel,
-                                    //TODO 공통정보에 전화번호가 없는 경우, 소개정보에 있는 전화번호 데이터 바인딩 필요함
                                     address: e.address1,
                                   ),
                                 ],
