@@ -9,7 +9,7 @@ part of 'festival_detail.dart';
 _$FestivalDetailImpl _$$FestivalDetailImplFromJson(Map<String, dynamic> json) =>
     _$FestivalDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       infoCenter: json['infoCenter'] as String,
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$FestivalDetailImplToJson(
         _$FestivalDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'infoCenter': instance.infoCenter,
       'startDate': instance.startDate,
       'endDate': instance.endDate,
@@ -38,3 +38,15 @@ Map<String, dynamic> _$$FestivalDetailImplToJson(
       'placeInfo': instance.placeInfo,
       'useFee': instance.useFee,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.error: 'error',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};

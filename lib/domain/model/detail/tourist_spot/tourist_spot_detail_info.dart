@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 
 part 'tourist_spot_detail_info.freezed.dart';
 
@@ -8,7 +9,7 @@ part 'tourist_spot_detail_info.g.dart';
 class TouristSpotDetailInfo with _$TouristSpotDetailInfo {
   const factory TouristSpotDetailInfo({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String infoName,
     required String infoText,
   }) = _TouristSpotDetailInfo;
