@@ -34,13 +34,6 @@ class LocationListViewModel with ChangeNotifier {
   List<TourDetail> get tourDetail => _tourDetail;
 
   //지역 기반으로 해서 가지고 온 contentId
-  List<int> mockData = [
-    2361026,
-    1885246,
-    2680214,
-    1968165,
-    1949308,
-  ];
 
   //서울 areacode에 있는 contentTypeId :25(여행정보)의 contentId를 받아와야 함
   //contentTypeId도 필요합니다.(관광지/ 음식점...등등)
