@@ -37,8 +37,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
   Future<List<Tour>> getAreaBasedList(
       {int pageNo = 1,
       int? contentTypeId,
-      String? areaCode,
-      String? cat2}) async {
+      String areaCode = '',
+      String cat2 = ''}) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
         contentTypeId: contentTypeId, areaCode: areaCode, cat2: cat2);
     return tourDto.map((e) => e.toTour()).toList();

@@ -5,7 +5,7 @@ import 'package:kovel_app/data/dto/tour_dto.dart';
 
 abstract interface class TourInfoDataSource {
   Future<List<TourDto>> getAreaBasedList(
-      {int pageNo = 1, int? contentTypeId, String? areaCode, String? cat2});
+      {int pageNo = 1, int? contentTypeId, String areaCode = '', String cat2 = ''});
   Future<List<TourDto>> getLocationBasedList(
       {required String mapX,
       required String mapY,

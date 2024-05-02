@@ -17,14 +17,20 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
   @override
   Future<List<TourDto>> getAreaBasedList(
       {int pageNo = 1,
-      int? contentTypeId,
-      String? areaCode,
-      String? cat2}) async {
+        int? contentTypeId,
+        String areaCode = '',
+        String cat2 = ''}) async {
     // TODO: parameter는 unnamed or named?
     const String apiName = 'areaBasedList1';
     final Response response;
-    response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&contentTypeId=${contentTypeId}&areaCode=${areaCode}&cat2=${cat2}&serviceKey=$key');
+
+    if (contentTypeId == null) {
+      response = await _dio.get(
+          '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+    } else {
+      response = await _dio.get(
+          '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&contentTypeId=$contentTypeId&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+    }
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
