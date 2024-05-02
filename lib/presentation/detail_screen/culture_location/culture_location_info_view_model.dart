@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/method/get_detail_icon.dart';
 import 'package:kovel_app/domain/model/detail/culture_location/culture_location_detail.dart';
 import 'package:kovel_app/domain/model/detail/culture_location/culture_location_detail_info.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
@@ -51,7 +50,7 @@ class CultureLocationInfoViewModel with ChangeNotifier {
           key != 'contentTypeId') {
         _widgets.add(
           IconTextRow(
-            icon: Icons.phone,
+            icon: getDetailIcon(key),
             text: value.toString(),
           ),
         );
