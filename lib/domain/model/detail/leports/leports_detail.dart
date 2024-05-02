@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 
 part 'leports_detail.freezed.dart';
 part 'leports_detail.g.dart';
@@ -7,7 +8,7 @@ part 'leports_detail.g.dart';
 class LeportsDetail with _$LeportsDetail {
   const factory LeportsDetail({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String infoCenter,
     required String restDay,
     required String useTime,

@@ -21,7 +21,7 @@ CourseDetailInfo _$CourseDetailInfoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CourseDetailInfo {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   int get subContentId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $CourseDetailInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       int subContentId,
       String name,
       String overview,
@@ -62,7 +62,7 @@ class _$CourseDetailInfoCopyWithImpl<$Res, $Val extends CourseDetailInfo>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? subContentId = null,
     Object? name = null,
     Object? overview = null,
@@ -73,10 +73,10 @@ class _$CourseDetailInfoCopyWithImpl<$Res, $Val extends CourseDetailInfo>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       subContentId: null == subContentId
           ? _value.subContentId
           : subContentId // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$CourseDetailInfoImplCopyWith<$Res>
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       int subContentId,
       String name,
       String overview,
@@ -126,7 +126,7 @@ class __$$CourseDetailInfoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? subContentId = null,
     Object? name = null,
     Object? overview = null,
@@ -137,10 +137,10 @@ class __$$CourseDetailInfoImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       subContentId: null == subContentId
           ? _value.subContentId
           : subContentId // ignore: cast_nullable_to_non_nullable
@@ -166,7 +166,7 @@ class __$$CourseDetailInfoImplCopyWithImpl<$Res>
 class _$CourseDetailInfoImpl implements _CourseDetailInfo {
   const _$CourseDetailInfoImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.subContentId,
       required this.name,
       required this.overview,
@@ -178,7 +178,7 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final int subContentId;
   @override
@@ -190,7 +190,7 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
 
   @override
   String toString() {
-    return 'CourseDetailInfo(contentId: $contentId, contentTypeId: $contentTypeId, subContentId: $subContentId, name: $name, overview: $overview, imagePath: $imagePath)';
+    return 'CourseDetailInfo(contentId: $contentId, contentType: $contentType, subContentId: $subContentId, name: $name, overview: $overview, imagePath: $imagePath)';
   }
 
   @override
@@ -200,8 +200,8 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
             other is _$CourseDetailInfoImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.subContentId, subContentId) ||
                 other.subContentId == subContentId) &&
             (identical(other.name, name) || other.name == name) &&
@@ -213,7 +213,7 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
+  int get hashCode => Object.hash(runtimeType, contentId, contentType,
       subContentId, name, overview, imagePath);
 
   @JsonKey(ignore: true)
@@ -234,7 +234,7 @@ class _$CourseDetailInfoImpl implements _CourseDetailInfo {
 abstract class _CourseDetailInfo implements CourseDetailInfo {
   const factory _CourseDetailInfo(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final int subContentId,
       required final String name,
       required final String overview,
@@ -246,7 +246,7 @@ abstract class _CourseDetailInfo implements CourseDetailInfo {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   int get subContentId;
   @override

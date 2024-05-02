@@ -8,7 +8,7 @@ part of 'tour.dart';
 
 _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       id: (json['id'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       title: json['title'] as String,
       address1: json['address1'] as String,
       address2: json['address2'] as String,
@@ -27,7 +27,7 @@ _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
 Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'title': instance.title,
       'address1': instance.address1,
       'address2': instance.address2,
@@ -42,3 +42,15 @@ Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
       'imagePath': instance.imagePath,
       'tel': instance.tel,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.all: 'all',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};
