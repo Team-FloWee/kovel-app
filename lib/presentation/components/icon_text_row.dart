@@ -12,7 +12,7 @@ class IconTextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return text != '' ? Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,6 +41,6 @@ class IconTextRow extends StatelessWidget {
                 ),
         ),
       ],
-    );
+    ) : SizedBox();
   }
 }
