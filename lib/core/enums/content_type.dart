@@ -1,4 +1,5 @@
 enum ContentType {
+  error(id: 0, text: '에러'),
   touristSpot(id: 12, text: '관광지'),
   cultureLocation(id: 14, text: '문화시설'),
   festival(id: 15, text: '축제공연행사'),
@@ -16,7 +17,7 @@ enum ContentType {
     required this.text
   });
 
-  factory ContentType.getByCode(int id) {
+  factory ContentType.getById({required int id}) {
     return ContentType.values.firstWhere((element) => element.id == id);
   }
 }

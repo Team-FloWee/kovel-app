@@ -10,7 +10,7 @@ _$TouristSpotDetailImpl _$$TouristSpotDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$TouristSpotDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       infoCenter: json['infoCenter'] as String,
       expGuide: json['expGuide'] as String,
       parking: json['parking'] as String,
@@ -22,10 +22,22 @@ Map<String, dynamic> _$$TouristSpotDetailImplToJson(
         _$TouristSpotDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'infoCenter': instance.infoCenter,
       'expGuide': instance.expGuide,
       'parking': instance.parking,
       'restDay': instance.restDay,
       'useTime': instance.useTime,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.error: 'error',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};

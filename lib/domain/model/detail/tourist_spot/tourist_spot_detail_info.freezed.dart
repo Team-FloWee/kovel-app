@@ -22,7 +22,7 @@ TouristSpotDetailInfo _$TouristSpotDetailInfoFromJson(
 /// @nodoc
 mixin _$TouristSpotDetailInfo {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get infoName => throw _privateConstructorUsedError;
   String get infoText => throw _privateConstructorUsedError;
 
@@ -39,7 +39,10 @@ abstract class $TouristSpotDetailInfoCopyWith<$Res> {
       _$TouristSpotDetailInfoCopyWithImpl<$Res, TouristSpotDetailInfo>;
   @useResult
   $Res call(
-      {int contentId, int contentTypeId, String infoName, String infoText});
+      {int contentId,
+      ContentType contentType,
+      String infoName,
+      String infoText});
 }
 
 /// @nodoc
@@ -57,7 +60,7 @@ class _$TouristSpotDetailInfoCopyWithImpl<$Res,
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
@@ -66,10 +69,10 @@ class _$TouristSpotDetailInfoCopyWithImpl<$Res,
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -92,7 +95,10 @@ abstract class _$$TouristSpotDetailInfoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int contentId, int contentTypeId, String infoName, String infoText});
+      {int contentId,
+      ContentType contentType,
+      String infoName,
+      String infoText});
 }
 
 /// @nodoc
@@ -108,7 +114,7 @@ class __$$TouristSpotDetailInfoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoName = null,
     Object? infoText = null,
   }) {
@@ -117,10 +123,10 @@ class __$$TouristSpotDetailInfoImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoName: null == infoName
           ? _value.infoName
           : infoName // ignore: cast_nullable_to_non_nullable
@@ -138,7 +144,7 @@ class __$$TouristSpotDetailInfoImplCopyWithImpl<$Res>
 class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
   const _$TouristSpotDetailInfoImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.infoName,
       required this.infoText});
 
@@ -148,7 +154,7 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final String infoName;
   @override
@@ -156,7 +162,7 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
 
   @override
   String toString() {
-    return 'TouristSpotDetailInfo(contentId: $contentId, contentTypeId: $contentTypeId, infoName: $infoName, infoText: $infoText)';
+    return 'TouristSpotDetailInfo(contentId: $contentId, contentType: $contentType, infoName: $infoName, infoText: $infoText)';
   }
 
   @override
@@ -166,8 +172,8 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
             other is _$TouristSpotDetailInfoImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.infoName, infoName) ||
                 other.infoName == infoName) &&
             (identical(other.infoText, infoText) ||
@@ -177,7 +183,7 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, contentId, contentTypeId, infoName, infoText);
+      Object.hash(runtimeType, contentId, contentType, infoName, infoText);
 
   @JsonKey(ignore: true)
   @override
@@ -197,7 +203,7 @@ class _$TouristSpotDetailInfoImpl implements _TouristSpotDetailInfo {
 abstract class _TouristSpotDetailInfo implements TouristSpotDetailInfo {
   const factory _TouristSpotDetailInfo(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final String infoName,
       required final String infoText}) = _$TouristSpotDetailInfoImpl;
 
@@ -207,7 +213,7 @@ abstract class _TouristSpotDetailInfo implements TouristSpotDetailInfo {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   String get infoName;
   @override

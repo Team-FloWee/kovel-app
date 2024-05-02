@@ -21,7 +21,7 @@ RestaurantDetail _$RestaurantDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RestaurantDetail {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get infoCenter => throw _privateConstructorUsedError;
   String get firstMenu => throw _privateConstructorUsedError;
   String get treatMenu => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $RestaurantDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String infoCenter,
       String firstMenu,
       String treatMenu,
@@ -66,7 +66,7 @@ class _$RestaurantDetailCopyWithImpl<$Res, $Val extends RestaurantDetail>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoCenter = null,
     Object? firstMenu = null,
     Object? treatMenu = null,
@@ -79,10 +79,10 @@ class _$RestaurantDetailCopyWithImpl<$Res, $Val extends RestaurantDetail>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoCenter: null == infoCenter
           ? _value.infoCenter
           : infoCenter // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ abstract class _$$RestaurantDetailImplCopyWith<$Res>
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String infoCenter,
       String firstMenu,
       String treatMenu,
@@ -142,7 +142,7 @@ class __$$RestaurantDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoCenter = null,
     Object? firstMenu = null,
     Object? treatMenu = null,
@@ -155,10 +155,10 @@ class __$$RestaurantDetailImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoCenter: null == infoCenter
           ? _value.infoCenter
           : infoCenter // ignore: cast_nullable_to_non_nullable
@@ -192,7 +192,7 @@ class __$$RestaurantDetailImplCopyWithImpl<$Res>
 class _$RestaurantDetailImpl implements _RestaurantDetail {
   const _$RestaurantDetailImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.infoCenter,
       required this.firstMenu,
       required this.treatMenu,
@@ -206,7 +206,7 @@ class _$RestaurantDetailImpl implements _RestaurantDetail {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final String infoCenter;
   @override
@@ -222,7 +222,7 @@ class _$RestaurantDetailImpl implements _RestaurantDetail {
 
   @override
   String toString() {
-    return 'RestaurantDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, firstMenu: $firstMenu, treatMenu: $treatMenu, parking: $parking, openTime: $openTime, restDay: $restDay)';
+    return 'RestaurantDetail(contentId: $contentId, contentType: $contentType, infoCenter: $infoCenter, firstMenu: $firstMenu, treatMenu: $treatMenu, parking: $parking, openTime: $openTime, restDay: $restDay)';
   }
 
   @override
@@ -232,8 +232,8 @@ class _$RestaurantDetailImpl implements _RestaurantDetail {
             other is _$RestaurantDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.infoCenter, infoCenter) ||
                 other.infoCenter == infoCenter) &&
             (identical(other.firstMenu, firstMenu) ||
@@ -248,7 +248,7 @@ class _$RestaurantDetailImpl implements _RestaurantDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
+  int get hashCode => Object.hash(runtimeType, contentId, contentType,
       infoCenter, firstMenu, treatMenu, parking, openTime, restDay);
 
   @JsonKey(ignore: true)
@@ -269,7 +269,7 @@ class _$RestaurantDetailImpl implements _RestaurantDetail {
 abstract class _RestaurantDetail implements RestaurantDetail {
   const factory _RestaurantDetail(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final String infoCenter,
       required final String firstMenu,
       required final String treatMenu,
@@ -283,7 +283,7 @@ abstract class _RestaurantDetail implements RestaurantDetail {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   String get infoCenter;
   @override
