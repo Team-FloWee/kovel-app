@@ -154,33 +154,42 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 8),
                   Container(
                     child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      childAspectRatio: 3 / 1,
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      children: const [
-                        NearbyTouristInformation(
-                          url: 'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                        ),
-                        NearbyTouristInformation(
-                          url: 'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                        ),
-                        NearbyTouristInformation(
-                          url: 'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                        ),
-                        NearbyTouristInformation(
-                          url: 'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                        ),
-                        NearbyTouristInformation(
-                          url: 'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                        ),
-                        NearbyTouristInformation(
-                          url: 'https://news.kbs.co.kr/data/fckeditor/new/image/2021/05/07/314691620354493423.jpg',
-                        ),
-                      ],
-                    ),
+                        physics: const NeverScrollableScrollPhysics(),
+                        childAspectRatio: 3 / 1,
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        children: viewModel.locationBasedList
+                            .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
+                            .map(
+                              (index, e) => MapEntry(
+                                index,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    e.title.length > 10
+                                        ? Expanded(
+                                            child: Text(
+                                            '${e.title.substring(0, 10)}...',
+                                            style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                          ))
+                                        : Expanded(
+                                            child: Text(
+                                              e.title,
+                                              style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                            ),
+                                          ),
+                                    Text(
+                                      '${viewModel.distanceList[index][e.id] ?? '가까이 있음'}',
+                                      style: UiConfig.smallStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            .values // MapEntry의 값들만 추출
+                            .toList()),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Row(children: [
@@ -189,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont),
                     ),
                   ]),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                   Container(
                       child: GridView.count(
                     physics: const NeverScrollableScrollPhysics(),
@@ -221,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(children: [
                     Text('🔥 가장 인기 있는 명소 Top 10', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
                   ]),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                 ],
               ),
             ),
@@ -258,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text('🎉 진행중인 축제 모음', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
               ]),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.015),
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: SizedBox(
@@ -269,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: 1,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 0,
-                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: '서울', title: '명소이름', url: e.imagePath)).toList()),
+                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: e.areaCode, title: e.title, url: e.imagePath)).toList()),
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),

@@ -1,21 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:kovel_app/config/ui_config.dart';
 
 class OngoingFestivals extends StatelessWidget {
-  final String text;
-  const OngoingFestivals({super.key, required this.text});
+  final String area;
+  final String title;
+  final String url;
+  const OngoingFestivals({super.key, required this.url, required this.area, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 8.0, bottom: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.blue,
-        ),
-        height: 200, // 내용의 높이
-        width: 200,
-        child: Center(child: Text(text)), // 데이터 1
+      child: Stack(
+        children: [
+          Positioned(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(url),
+                ),
+              ),
+
+              height: 200, // 내용의 높이
+              width: 200,
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.007,
+            right: MediaQuery.of(context).size.width * 0.02,
+            child: Icon(
+              Icons.favorite_outline,
+              color: UiConfig.black.shade100,
+            ),
+          ),
+          Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.033,
+              left: MediaQuery.of(context).size.width * 0.04,
+              child: Text(
+                area,
+                style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade100),
+              )),
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.01,
+            left: MediaQuery.of(context).size.width * 0.04,
+            child: Text(
+              title,
+              style: UiConfig.bodyStyle.copyWith(color: UiConfig.black.shade100, fontWeight: UiConfig.semiBoldFont),
+            ),
+          ),
+        ],
       ),
     );
   }
