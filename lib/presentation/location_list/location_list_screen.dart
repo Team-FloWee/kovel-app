@@ -72,7 +72,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                       imagePath: e.imagePath, imageSize: 100),
                                 ))
                             .toList(),
-                      ),
+                      ), //TODO 이미지가 null값일 때 디폴트 이미지 삽입
                     ),
                   ),
                   SizedBox(
@@ -124,6 +124,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                     badgeTitle: '음식점',
                                     title: e.title,
                                     tel: e.tel,
+                                    //TODO 공통정보에 전화번호가 없는 경우, 소개정보에 있는 전화번호 데이터 바인딩 필요함
                                     address: e.address1,
                                   ),
                                 ],

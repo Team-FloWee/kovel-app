@@ -33,17 +33,16 @@ class LocationListViewModel with ChangeNotifier {
 
   List<TourDetail> get tourDetail => _tourDetail;
 
-  //지역 기반으로 해서 가지고 온 contentId
-
   //서울 areacode에 있는 contentTypeId :25(여행정보)의 contentId를 받아와야 함
   //contentTypeId도 필요합니다.(관광지/ 음식점...등등)
+
+  //추천코스 [전체]
   Future<void> getCourseData() async {
     _isLoading = true;
     notifyListeners();
     _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
     List<int> idList = _areaBasedDataList.map((e) => e.id).toList();
     idList.forEach((e) async {
-      //지역 기반으로 서울/ 경기/ 등등 값을 넣는게 필요합니다.
       (_courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: e)));
       notifyListeners();
     });
@@ -53,13 +52,13 @@ class LocationListViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  //테마별 여행 [전체]
   Future<void> getDetailCommon() async {
     _isLoading = true;
     notifyListeners();
     _areaBasedDataList = await _tourInfoRepository.getAreaBasedList();
     List<int> idList = _areaBasedDataList.map((e) => e.id).toList();
     idList.forEach((e) async {
-      //지역 기반으로 서울/ 경기/ 등등 값을 넣는게 필요합니다.
       (_tourDetail.addAll(await _tourInfoRepository.getDetailCommon(id: e)));
       notifyListeners();
     });
