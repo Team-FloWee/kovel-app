@@ -34,7 +34,7 @@ Map<String, dynamic> _$$ShoppingDetailImplToJson(
     };
 
 const _$ContentTypeEnumMap = {
-  ContentType.error: 'error',
+  ContentType.all: 'all',
   ContentType.touristSpot: 'touristSpot',
   ContentType.cultureLocation: 'cultureLocation',
   ContentType.festival: 'festival',
