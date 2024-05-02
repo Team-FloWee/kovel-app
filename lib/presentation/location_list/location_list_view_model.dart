@@ -47,16 +47,13 @@ class LocationListViewModel with ChangeNotifier {
   Future<void> getCourseData() async {
     _isLoading = true;
     notifyListeners();
-    _courseDetail
-        .addAll(await _tourInfoRepository.getDetailCommon(id: 2361026));
-    _courseDetail
-        .addAll(await _tourInfoRepository.getDetailCommon(id: 1885246));
-    _courseDetail
-        .addAll(await _tourInfoRepository.getDetailCommon(id: 2680214));
-    _courseDetail
-        .addAll(await _tourInfoRepository.getDetailCommon(id: 1968165));
-    _courseDetail
-        .addAll(await _tourInfoRepository.getDetailCommon(id: 1949308)); //addAll 이 뭘까?
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
+    List<int> idList = _areaBasedDataList.map((e) => e.id).toList();
+    idList.forEach((e) async {
+      //지역 기반으로 서울/ 경기/ 등등 값을 넣는게 필요합니다.
+      (_courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: e)));
+      notifyListeners();
+    });
     await getDetailCommon();
     notifyListeners();
     _isLoading = false;
