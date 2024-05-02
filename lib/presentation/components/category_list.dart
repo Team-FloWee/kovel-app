@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 import 'package:kovel_app/presentation/components/category_item.dart';
 
 class CategoryList extends StatelessWidget {
-  final List<String> textdata;
+  final List<ContentType> textdata;
   const CategoryList({super.key, required this.textdata});
 
   @override
@@ -12,7 +13,7 @@ class CategoryList extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: Row(
-          children: textdata.map((e) => CategoryItem(e)).toList(),
+          children: textdata.map((e) => CategoryItem(e.text)).toList(),
         ),
       ),
     );
