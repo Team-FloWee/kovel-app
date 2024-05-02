@@ -27,7 +27,7 @@ class _ContentsDetailScreenState extends State<ContentsDetailScreen> {
   @override
   Widget build(BuildContext context) {
     // viewModel 상태 관찰
-    ContentsDetailViewModel viewModel = context.watch();
+    final viewModel = context.watch<ContentsDetailViewModel>();
 
     // contentId 값에 따라 꽂힐 위젯을 저장할 변수
     Widget detailView;
