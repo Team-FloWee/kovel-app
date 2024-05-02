@@ -29,10 +29,6 @@ Widget lodgmentDetailView(
                 fontWeight: UiConfig.semiBoldFont,
               ),
             ),
-            // IconTextRow(
-            //   icon: Icons.info,
-            //   text: tourDetailData.overview,
-            // ),
             const SizedBox(height: 8),
             IconTextRow(
               icon: Icons.link,

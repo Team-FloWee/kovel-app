@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
-import 'package:logger/logger.dart';
 
 import '../../../domain/model/detail/lodgment/lodgment_detail.dart';
 import '../../../domain/model/detail/restaurant/restaurant_detail.dart';
@@ -49,19 +48,6 @@ class ContentsDetailViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  // html tag 제거
-  String? _htmlUrlString;
-  String? _htmlOverviewString;
-
-  String? get htmlString => _htmlUrlString;
-
-  String? get htmlOverviewString => _htmlOverviewString;
-
-  String _removeHtmlTags(String? htmlText) {
-    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: false);
-    return htmlText?.replaceAll(exp, '') ?? '';
-  }
-
   // 공통 정보 목록을 가져 오는 메서드
   void getTourDetailData() async {
     _isLoading = true;
@@ -85,7 +71,8 @@ class ContentsDetailViewModel with ChangeNotifier {
     int contentId = _id;
 
     if (_tourDetailData != null) {
-      int contentTypeId = _tourDetailData!.contentTypeId;
+      int contentTypeId = _tourDetailData!.contentType.id;
+
 
       switch (contentTypeId) {
         case 39:
@@ -102,15 +89,6 @@ class ContentsDetailViewModel with ChangeNotifier {
               .getLodgmentDetail(id: contentId, contentTypeId: contentTypeId);
 
           _lodgmentDetailData = lodgmentDetailResult.first;
-
-          // url html 제거
-          _lodgmentDetailData = _lodgmentDetailData?.copyWith(
-              reservationUrl:
-                  _removeHtmlTags(_lodgmentDetailData?.reservationUrl));
-
-          // overview html 제거
-          _tourDetailData = _tourDetailData?.copyWith(
-              overview: _removeHtmlTags(_tourDetailData?.overview));
 
           break;
         case 38:

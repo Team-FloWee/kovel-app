@@ -34,7 +34,6 @@ class _ContentsDetailScreenState extends State<ContentsDetailScreen> {
 
     // 공통 정보에 번호 정보가 빈값일 때, 소개 정보의 번호를 담기 위한 변수
     String detailTel = viewModel.tourDetailData?.tel ?? '';
-    String detailTitle = '정보 없음';
     ImageProvider imageProvider;
 
     // imagePath가 null일 때 보여줄 기본 이미지(임시) 설정
@@ -43,7 +42,7 @@ class _ContentsDetailScreenState extends State<ContentsDetailScreen> {
       imageProvider = NetworkImage(viewModel.tourDetailData!.imagePath);
     } else {
       imageProvider =
-          const AssetImage('assets/images/default_image_temporary.png');
+          const AssetImage('assets/images/blank_image.png');
     }
 
     // detailView에 contentId에 따라 꽂힐 위젯 저장
@@ -51,19 +50,16 @@ class _ContentsDetailScreenState extends State<ContentsDetailScreen> {
       detailView = restaurantDetailView(
           context, viewModel.tourDetailData!, viewModel.restaurantDetailData!);
 
-      detailTitle = '음식점';
       detailTel = viewModel.restaurantDetailData?.infoCenter ?? '정보 없음';
     } else if (viewModel.lodgmentDetailData != null) {
       detailView = lodgmentDetailView(
           context, viewModel.tourDetailData!, viewModel.lodgmentDetailData!);
 
-      detailTitle = '숙박';
       detailTel = viewModel.lodgmentDetailData?.infoCenter ?? '정보 없음';
     } else if (viewModel.shoppingDetailData != null) {
       detailView = shoppingDetailView(
           context, viewModel.tourDetailData!, viewModel.shoppingDetailData!);
 
-      detailTitle = '쇼핑';
       detailTel = viewModel.shoppingDetailData?.infoCenter ?? '정보 없음';
     } else {
       detailView = const Text('빈 페이지');
@@ -96,7 +92,7 @@ class _ContentsDetailScreenState extends State<ContentsDetailScreen> {
                       children: [
                         // 공통 정보 리스트
                         CommonText(
-                          badgeTitle: detailTitle,
+                          badgeTitle: viewModel.tourDetailData?.contentType.text ?? '',
                           title: viewModel.tourDetailData?.title ?? '',
                           tel: detailTel,
                           address: viewModel.tourDetailData?.address1 ?? '',

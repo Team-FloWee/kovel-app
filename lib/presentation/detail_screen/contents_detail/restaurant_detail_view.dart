@@ -28,23 +28,11 @@ Widget restaurantDetailView(
               text: restaurantDetailData.treatMenu,
             ),
             const SizedBox(height: 8),
-            // 빈 값일 경우 데이터 안보이게 처리 case test -> 의논 필요
-            restaurantDetailData.parking != ''
-                ? Column(
-                    children: [
-                      IconTextRow(
-                        icon: Icons.local_parking,
-                        text: restaurantDetailData.parking,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                    ],
-                  )
-                : const SizedBox(
-                    height: 0,
-                  ),
-            // SizedBox(height: 8),
+            IconTextRow(
+              icon: Icons.local_parking,
+              text: restaurantDetailData.parking,
+            ),
+            const SizedBox(height: 8),
             IconTextRow(
               icon: Icons.access_time_filled,
               text: restaurantDetailData.openTime,
