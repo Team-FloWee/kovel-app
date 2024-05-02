@@ -2,6 +2,8 @@ import 'package:kovel_app/core/enums/content_type.dart';
 import 'package:kovel_app/data/dto/tour_detail_dto.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 
+import '../../core/utils/html_util.dart';
+
 extension ToTourDetail on TourDetailDto {
   TourDetail toTourDetail() {
     return TourDetail(
@@ -21,7 +23,7 @@ extension ToTourDetail on TourDetailDto {
       imagePath: firstimage ?? '',
       tel: tel ?? '',
       telName: telname ?? '',
-      overview: overview ?? '',
+      overview: HtmlUtil().removeHtmlTags(overview ?? ''),
     );
   }
 }
