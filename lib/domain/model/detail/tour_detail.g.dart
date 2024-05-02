@@ -9,7 +9,7 @@ part of 'tour_detail.dart';
 _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
     _$TourDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       title: json['title'] as String,
       address1: json['address1'] as String,
       address2: json['address2'] as String,
@@ -30,7 +30,7 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'title': instance.title,
       'address1': instance.address1,
       'address2': instance.address2,
@@ -47,3 +47,15 @@ Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
       'telName': instance.telName,
       'overview': instance.overview,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.error: 'error',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};

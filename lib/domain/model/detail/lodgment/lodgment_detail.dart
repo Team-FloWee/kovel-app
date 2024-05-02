@@ -1,13 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 
 part 'lodgment_detail.freezed.dart';
 part 'lodgment_detail.g.dart';
 
 @freezed
 class LodgmentDetail with _$LodgmentDetail {
-  const factory LodgmentDetail(
-      {required int contentId,
-      required int contentTypeId,
+  const factory LodgmentDetail({
+      required int contentId,
+      required ContentType contentType,
       required String infoCenter,
       required String reservationUrl,
       required String roomCount,

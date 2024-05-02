@@ -9,7 +9,7 @@ part of 'shopping_detail.dart';
 _$ShoppingDetailImpl _$$ShoppingDetailImplFromJson(Map<String, dynamic> json) =>
     _$ShoppingDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       infoCenter: json['infoCenter'] as String,
       saleItem: json['saleItem'] as String,
       saleItemCost: json['saleItemCost'] as String,
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$ShoppingDetailImplToJson(
         _$ShoppingDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'infoCenter': instance.infoCenter,
       'saleItem': instance.saleItem,
       'saleItemCost': instance.saleItemCost,
@@ -32,3 +32,15 @@ Map<String, dynamic> _$$ShoppingDetailImplToJson(
       'creditCard': instance.creditCard,
       'openTime': instance.openTime,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.error: 'error',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 
 part 'shopping_detail.freezed.dart';
 part 'shopping_detail.g.dart';
@@ -7,7 +8,7 @@ part 'shopping_detail.g.dart';
 class ShoppingDetail with _$ShoppingDetail {
   const factory ShoppingDetail({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String infoCenter,
     required String saleItem,
     required String saleItemCost,
