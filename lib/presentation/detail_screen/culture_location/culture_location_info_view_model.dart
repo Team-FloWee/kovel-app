@@ -27,18 +27,22 @@ class CultureLocationInfoViewModel with ChangeNotifier {
   List<CultureLocationDetailInfo> get cultureLocationInfoData =>
       _cultureLocationInfoData;
 
-  void getCultureLocationData(int id, int contentTypeId) async {
+  void getDetailData(int id, int contentTypeId) async {
     _isLoading = true;
     notifyListeners();
 
     _tourDetailData = await _tourInfoRepository.getDetailCommon(id: id);
     _cultureLocationDetailData = await _tourInfoRepository
         .getCultureLocationDetail(id: id, contentTypeId: contentTypeId);
-    _cultureLocationInfoData = await _tourInfoRepository
-        .getCultureLocationDetailInfo(id: id, contentTypeId: contentTypeId);
 
     _isLoading = false;
     showDetailData();
+    notifyListeners();
+  }
+
+  void getInfoData(int id, int contentTypeId) async {
+    _cultureLocationInfoData = await _tourInfoRepository
+        .getCultureLocationDetailInfo(id: id, contentTypeId: contentTypeId);
     notifyListeners();
   }
 
@@ -47,7 +51,7 @@ class CultureLocationInfoViewModel with ChangeNotifier {
       if (value != null &&
           value != '' &&
           key != 'contentId' &&
-          key != 'contentTypeId') {
+          key != 'contentType') {
         _widgets.add(
           IconTextRow(
             icon: getDetailIcon(key),

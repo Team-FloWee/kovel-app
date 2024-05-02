@@ -29,7 +29,7 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
     Future.microtask(() => {
           context
               .read<CultureLocationInfoViewModel>()
-              .getCultureLocationData(widget.id, widget.contentTypeId),
+              .getDetailData(widget.id, widget.contentTypeId),
         });
   }
 
@@ -58,7 +58,8 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
                         Row(
                           children: [
                             CommonText(
-                              badgeTitle: 'badgeTitle',
+                              badgeTitle: viewModel
+                                  .tourDetailData.first.contentType.text,
                               title: viewModel.tourDetailData.first.title,
                               tel: (viewModel.tourDetailData.first.tel == '')
                                   ? viewModel.cultureLocationDetailData.first
@@ -76,48 +77,87 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
                               color: UiConfig.black.shade500),
                         ),
                         ...viewModel.widgets,
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18, bottom: 16),
-                          child: Divider(
-                              thickness: 1,
-                              height: 1,
-                              color: UiConfig.black.shade500),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 16, top: 16, right: 16, bottom: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: UiConfig.black.shade500,
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 16, top: 16, right: 16, bottom: 8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: UiConfig.black.shade500,
-                                ),
-                                child: Column(
-                                  children: viewModel.cultureLocationInfoData
-                                      .map(
-                                        (e) => InfoText(
-                                            title: e.infoName,
-                                            contents: e.infoText),
-                                      )
-                                      .toList(),
-                                ),
+                        widget.contentTypeId == 12
+                            ? SizedBox()
+                            : InfoSection(
+                                id: widget.id,
+                                contentTypeId: widget.contentTypeId,
+                                title: widget.title,
                               ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
+    );
+  }
+}
+
+class InfoSection extends StatefulWidget {
+  final int id;
+  final int contentTypeId;
+  final String title;
+
+  const InfoSection(
+      {super.key,
+      required this.id,
+      required this.contentTypeId,
+      required this.title});
+
+  @override
+  State<InfoSection> createState() => _InfoSectionState();
+}
+
+class _InfoSectionState extends State<InfoSection> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => {
+          context
+              .read<CultureLocationInfoViewModel>()
+              .getInfoData(widget.id, widget.contentTypeId),
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = context.watch<CultureLocationInfoViewModel>();
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 18, bottom: 16),
+          child:
+              Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: UiConfig.black.shade500,
+          ),
+          child: Column(
+            children: [
+              Container(
+                padding:
+                    EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: UiConfig.black.shade500,
+                ),
+                child: Column(
+                  children: viewModel.cultureLocationInfoData
+                      .map(
+                        (e) =>
+                            InfoText(title: e.infoName, contents: e.infoText),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
