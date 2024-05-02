@@ -35,7 +35,7 @@ Map<String, dynamic> _$$CultureLocationDetailImplToJson(
     };
 
 const _$ContentTypeEnumMap = {
-  ContentType.error: 'error',
+  ContentType.all: 'all',
   ContentType.touristSpot: 'touristSpot',
   ContentType.cultureLocation: 'cultureLocation',
   ContentType.festival: 'festival',
