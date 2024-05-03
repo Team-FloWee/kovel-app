@@ -13,87 +13,67 @@ import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
 class CourseListViewModel with ChangeNotifier {
   final TourInfoRepository _tourInfoRepository;
+  final String areaCode;
 
-  String code = '';
+  List<String> textdata = [
+    '전체',
+    'C0112',
+    'C0113',
+    'C0114',
+    'C0115',
+    'C0116',
+    'C0117',
+  ];
 
-  bool _isLoading = false;
+  bool _isLoading = true;
 
   bool get isLoading => _isLoading;
 
-  bool _isFavorite = false;
+  List<Tour> _tourList = [];
 
-  int _areaCode = 1; //서울, 경기...
+  List<Tour> get tourList => _tourList;
 
   CourseListViewModel({
     required TourInfoRepository tourInfoRepository,
+    required this.areaCode,
   }) : _tourInfoRepository = tourInfoRepository;
-
-  List<Tour> _areaBasedDataList = [];
-
-  List<Tour> get areaBasedDataList => _areaBasedDataList;
-
-  List<TourDetail> _courseDetail = [];
 
   List<TourDetail> get courseDetail => _courseDetail;
 
-  List<TourDetail> _tourDetail = [];
+  List<TourDetail> get TourDetailData => _TourDetailData;
 
-  List<TourDetail> get tourDetail => _tourDetail;
-
-  int get contentTypeId => 0;
-
-  Future<void> getData(String areaCode) async {
-    // 지역기반조회 컨텐트 아이디 25 넣고 -> 공통정보조회에 아이디 넣고 -> getCommonData
+  Future<void> getCourseData() async {
     _isLoading = true;
     notifyListeners();
-    _areaBasedDataList =
-        await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
 
-    _areaBasedDataList.forEach((element) async {
-      _courseDetail
-          .addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+    _tourList = await _tourInfoRepository.getAreaBasedList(areaCode: '1', contentTypeId: 25);
+
+    List<int> tourIdList = _tourList.map((e) => e.id).toList();
+
+    tourIdList.forEach((e) async {
+      _TourDetailData.addAll(await _tourInfoRepository.getDetailCommon(id: e));
+      notifyListeners();
     });
 
-    notifyListeners();
-    await getCommonData(areaCode, contentTypeId);
-
-    notifyListeners();
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> getCourseData(String areaCode, String cat2) async {
-    // 지역기반조회 지역, 카테고리 받고 -> 공통정보조회 아이디 받음.
-    // _isLoading = true;
+  dynamic onTapCourseData(String text) async {
+    _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(
-        contentTypeId: 25, areaCode: areaCode, cat2: cat2);
-    _courseDetail = [];
-    _areaBasedDataList.forEach((element) async {
-      _courseDetail
-          .addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
-      notifyListeners();
 
-    });
-    // _isLoading = false;
-    notifyListeners();
-  }
+    _TourDetailData = [];
 
-  Future<void> getCommonData(String areaCode, int contentTypeId) async {
-    // 지역코드, 컨텐트타입아이디 받고 지역기반조회에 넣고 아이디를 받아 공통정보조회에 넣음 .
+    _tourList = await _tourInfoRepository.getAreaBasedList(areaCode: '1', contentTypeId: 25, cat2: text);
 
-    // _isLoading = true;
-    notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(
-        areaCode: areaCode, contentTypeId: contentTypeId);
-
-    _areaBasedDataList.forEach((element) async {
-      _tourDetail
-          .addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+    List<int> tourIdList = _tourList.map((e) => e.id).toList();
+    tourIdList.forEach((e) async {
+      _TourDetailData.addAll(await _tourInfoRepository.getDetailCommon(id: e));
       notifyListeners();
     });
-    print(_tourDetail);
-    // _isLoading = false;
+
+    _isLoading = false;
     notifyListeners();
   }
 }
