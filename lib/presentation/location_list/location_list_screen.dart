@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
@@ -8,14 +10,34 @@ import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
+import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
+import 'package:provider/provider.dart';
 
-class LocationListScreen extends StatelessWidget {
-  const LocationListScreen({super.key});
+
+class LocationListScreen extends StatefulWidget {
+  final String areaCode;
+
+  const LocationListScreen({super.key, required this.areaCode});
+
+  @override
+  State<LocationListScreen> createState() => _LocationListScreenState();
+}
+
+class _LocationListScreenState extends State<LocationListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() =>
+        context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonAppBar(title: '강남'),
+    final viewModel = context.watch<LocationListViewModel>(); //세트
+    return viewModel.isLoading == true
+        ? Center(child: CircularProgressIndicator())
+        : Scaffold(
+      appBar: CommonAppBar(title: '뷰모델 전체'),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,7 +45,7 @@ class LocationListScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               child: ContentTitle(
-                title: '추천코스',
+                title: '추천 코스',
                 withMore: true,
               ),
             ),
@@ -32,7 +54,11 @@ class LocationListScreen extends StatelessWidget {
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: CategoryList(categoryData: CourseCategoryTypeList.typeList),
+              child: CategoryList(
+                  categoryData: CourseCategoryTypeList.typeList,
+                  onSelect: (Category category) {
+                    context.read<LocationListViewModel>().getCourseData(widget.areaCode, category.id);
+                  }),
             ),
             SizedBox(
               height: 16,
@@ -42,191 +68,102 @@ class LocationListScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fill,
-                        )),
-                    SizedBox(width: 8),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fill,
-                        )),
-                    SizedBox(width: 8),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fill,
-                        )),
-                    SizedBox(width: 8),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fill,
-                        )),
-                    SizedBox(width: 8),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fill,
-                        )),
-                    SizedBox(width: 8),
-                  ],
+                  children: viewModel.courseDetail
+                      .map((e) => Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: FavoriteImage(
+                        imagePath: e.imagePath, imageSize: 100),
+                  ))
+                      .toList(),
                 ),
               ),
             ),
             SizedBox(
               height: 24,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: ContentTitle(
-                title: '테마별 장소',
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: CategoryList(categoryData: ContentTypeList.typeList,),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: Column(children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FavoriteImage(
-                        imagePath:
-                            'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                        imageSize: 145),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    CommonText(
-                        badgeTitle: '음식점',
-                        title:
-                            '오리 주물럭 집',
-                        tel: '010-1234-5678',
-                        address: '서울 관악구 관악시 11로 12길'),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FavoriteImage(
-                        imagePath:
-                            'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                        imageSize: 145),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    CommonText(
-                        badgeTitle: '음식점',
-                        title:
-                            '오리 주물럭 집',
-                        tel: '010-1234-5678',
-                        address: '서울 관악구 관악시 11로 12길'),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FavoriteImage(
-                        imagePath:
-                            'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                        imageSize: 145),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    CommonText(
-                        badgeTitle: '음식점',
-                        title:
-                            '오리 주물럭 집',
-                        tel: '010-1234-5678',
-                        address: '서울 관악구 관악시 11로 12길'),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FavoriteImage(
-                        imagePath:
-                            'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                        imageSize: 145),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    CommonText(
-                        badgeTitle: '음식점',
-                        title:
-                            '오리 주물럭 집',
-                        tel: '010-1234-5678',
-                        address: '서울 관악구 관악시 11로 12길'),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FavoriteImage(
-                        imagePath:
-                            'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                        imageSize: 145),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    CommonText(
-                        badgeTitle: '음식점',
-                        title:
-                            '오리 주물럭 집',
-                        tel: '010-1234-5678',
-                        address: '서울 관악구 관악시 11로 12길'),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-              ]),
-            ),
-            SizedBox(
-              height: 40,
-            ),
+            LocationCommonData(areaCode: widget.areaCode)
           ],
         ),
       ),
     );
+  }
+}
+
+class LocationCommonData extends StatefulWidget {
+  final String areaCode;
+
+  const LocationCommonData(
+      {super.key, required this.areaCode,});
+
+  @override
+  State<LocationCommonData> createState() => _LocationCommonDataState();
+}
+
+class _LocationCommonDataState extends State<LocationCommonData> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = context.watch<LocationListViewModel>();
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: ContentTitle(
+              title: '테마별 장소',
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 16),
+              CategoryList(
+                categoryData: ContentTypeList.typeList,
+                onSelect: (Category category) {
+                  context.read<LocationListViewModel>().getCommonData(widget.areaCode, int.parse(category.id ?? '0'));
+                },
+              ),
+              SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: viewModel.tourDetail
+                      .map((e) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        viewModel.isLoading
+                            ? Center(
+                            child: CircularProgressIndicator())
+                            : FavoriteImage(
+                          imagePath: e.imagePath,
+                          imageSize: 145,
+                        ),
+                        SizedBox(width: 8),
+                        CommonText(
+                          badgeTitle: '음식점',
+                          title: e.title,
+                          tel: e.tel,
+                          address: e.address1,
+                        ),
+                      ],
+                    ),
+                  ))
+                      .toList(),
+                ),
+              ),
+              SizedBox(height: 40),
+            ],
+          ),
+        ],
+      ),
+    );
+
   }
 }
