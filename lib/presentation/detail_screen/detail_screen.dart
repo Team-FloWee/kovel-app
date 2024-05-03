@@ -47,6 +47,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   AspectRatio(
                     aspectRatio: 1 / 1,
                     child: Image.network(
+                        errorBuilder: (context, error, stackTrace) {
+                      return Image.asset('assets/images/blank_image.png');
+                    },
                         fit: BoxFit.cover,
                         viewModel.tourDetailData.first.imagePath),
                   ),
@@ -55,6 +58,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     child: Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CommonText(
                               badgeTitle:
@@ -65,6 +70,26 @@ class _DetailScreenState extends State<DetailScreen> {
                                   : '',
                               address: viewModel.tourDetailData.first.address1,
                             ),
+                            Transform.translate(
+                              offset: Offset(16, -16),
+                              child: InkWell(
+                                onTap: () {
+                                  viewModel.toggleFavorite();
+                                },
+                                borderRadius: BorderRadius.circular(888.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      16.0, 16.0, 16.0, 16.0),
+                                  child: Icon(
+                                    Icons.favorite,
+                                    size: 24.0,
+                                    color: viewModel.isFavorite
+                                        ? UiConfig.primaryColor
+                                        : UiConfig.black.shade600,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         Padding(
@@ -74,6 +99,20 @@ class _DetailScreenState extends State<DetailScreen> {
                               height: 1,
                               color: UiConfig.black.shade500),
                         ),
+                        // ContentType.lodgment.id != 32
+                        viewModel.tourDetailData.first.contentType.id != 32
+                            ? SizedBox()
+                            : Column(
+                                children: [
+                                  Text(
+                                    viewModel.tourDetailData.first.overview,
+                                    style: UiConfig.bodyStyle.copyWith(
+                                      fontWeight: UiConfig.regularFont,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                ],
+                              ),
                         ...viewModel.widgets,
                         widget.contentTypeId == 12 ||
                                 widget.contentTypeId == 14 ||
@@ -83,7 +122,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 id: widget.id,
                                 contentTypeId: widget.contentTypeId,
                               )
-                            : SizedBox()
+                            : SizedBox(),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/method/get_detail_icon.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
@@ -13,16 +14,28 @@ class DetailScreenViewModel with ChangeNotifier {
   }) : _unifiedDetailRepository = unifiedDetailRepository;
 
   bool _isLoading = true;
+  bool _isFavorite = false;
   List<Widget> _widgets = [];
   List<TourDetail> _tourDetailData = [];
   List<UnifiedDetail> _detailData = [];
   List<UnifiedInfo> _infoData = [];
 
   bool get isLoading => _isLoading;
+
+  bool get isFavorite => _isFavorite;
+
   List<Widget> get widgets => _widgets;
+
   List<TourDetail> get tourDetailData => _tourDetailData;
+
   List<UnifiedDetail> get detailData => _detailData;
+
   List<UnifiedInfo> get infoData => _infoData;
+
+  void toggleFavorite() {
+    _isFavorite = !_isFavorite;
+    notifyListeners();
+  }
 
   void getDetailData(int id, int contentTypeId) async {
     _isLoading = true;
@@ -54,10 +67,11 @@ class DetailScreenViewModel with ChangeNotifier {
           value != true &&
           value != false &&
           key != 'contentId' &&
-          key != 'contentType') {
+          key != 'contentType' &&
+          key != 'firstMenu') {
         _widgets.add(
           IconTextRow(
-            icon: Icons.phone,
+            icon: getDetailIcon(key.toString()),
             text: value.toString(),
           ),
         );
