@@ -5,6 +5,7 @@ import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
 import 'package:kovel_app/domain/repository/unified_detail_repository.dart';
 import 'package:kovel_app/presentation/components/icon_text_row.dart';
+import 'package:logger/logger.dart';
 
 class DetailScreenViewModel with ChangeNotifier {
   final UnifiedDetailRepository _unifiedDetailRepository;
@@ -13,6 +14,7 @@ class DetailScreenViewModel with ChangeNotifier {
     required UnifiedDetailRepository unifiedDetailRepository,
   }) : _unifiedDetailRepository = unifiedDetailRepository;
 
+  Exception? error;
   bool _isLoading = true;
   bool _isFavorite = false;
   List<Widget> _widgets = [];
@@ -32,6 +34,17 @@ class DetailScreenViewModel with ChangeNotifier {
 
   List<UnifiedInfo> get infoData => _infoData;
 
+  void onRefresh() {
+    _isLoading = false;
+    _widgets = [];
+    _tourDetailData = [];
+    _detailData = [];
+    _infoData = [];
+    error = null;
+
+    notifyListeners();
+  }
+
   void toggleFavorite() {
     _isFavorite = !_isFavorite;
     notifyListeners();
@@ -41,21 +54,33 @@ class DetailScreenViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _tourDetailData = await _unifiedDetailRepository.getDetailCommon(id: id);
-    print(_tourDetailData);
-    _detailData = await _unifiedDetailRepository.getUnifiedDetail(
-        id: id, contentTypeId: contentTypeId);
-    print(_detailData);
+    try {
+      _tourDetailData = await _unifiedDetailRepository.getDetailCommon(id: id);
 
-    _isLoading = false;
-    showDetailData();
+      Logger().i('_tourDetailData >> $_tourDetailData');
+
+      _detailData = await _unifiedDetailRepository.getUnifiedDetail(
+          id: id, contentTypeId: contentTypeId);
+
+      Logger().i('_detailData >> $_detailData');
+
+      showDetailData();
+
+      _isLoading = false;
+    } on Exception catch (e) {
+      _isLoading = false;
+
+      error = e;
+    }
+
     notifyListeners();
   }
 
   void getInfoData(int id, int contentTypeId) async {
     _infoData = await _unifiedDetailRepository.getUnifiedInfo(
         id: id, contentTypeId: contentTypeId);
-    print(_infoData);
+
+    Logger().i('_infoData >> $_infoData');
 
     notifyListeners();
   }
