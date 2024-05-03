@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
@@ -79,15 +80,23 @@ class _DetailScreenState extends State<DetailScreen> {
             children: [
               AspectRatio(
                 aspectRatio: 1 / 1,
-                child:
-                    Image.network(errorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/images/blank_image.png');
-                }, loadingBuilder: (context, child, progress) {
-                  if (progress == null) {
-                    return child;
-                  }
-                  return Center(child: CircularProgressIndicator());
-                }, fit: BoxFit.cover, viewModel.tourDetailData.first.imagePath),
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: viewModel.tourDetailData.first.imagePath,
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      Image.asset('assets/images/blank_image.png'),
+                ),
+                // child:
+                //     Image.network(errorBuilder: (context, error, stackTrace) {
+                //   return Image.asset('assets/images/blank_image.png');
+                // }, loadingBuilder: (context, child, progress) {
+                //   if (progress == null) {
+                //     return child;
+                //   }
+                //   return Center(child: CircularProgressIndicator());
+                // }, fit: BoxFit.cover, viewModel.tourDetailData.first.imagePath),
               ),
               Padding(
                 padding: EdgeInsets.all(16),
