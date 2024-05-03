@@ -33,36 +33,51 @@ class LocationListViewModel with ChangeNotifier {
 
   List<TourDetail> get tourDetail => _tourDetail;
 
+  int get contentTypeId => 0;
+
   //서울 areacode에 있는 contentTypeId :25(여행정보)의 contentId를 받아와야 함
   //contentTypeId도 필요합니다.(관광지/ 음식점...등등)
 
   //추천코스 [전체]
-  Future<void> getCourseData() async {
+  Future<void> getData(String areaCode) async {
     _isLoading = true;
     notifyListeners();
     _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
-    List<int> idList = _areaBasedDataList.map((e) => e.id).toList();
-    idList.forEach((e) async {
-      (_courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: e)));
+
+    _areaBasedDataList.forEach((element) async {
+      _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+    }); //이렇게 쓰면 ID 리스트 필요없을 거 같음
+
       notifyListeners();
+    await getCommonData(areaCode, contentTypeId);
+    notifyListeners();
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> getCourseData(String areaCode, String cat2) async {
+    _isLoading = true;
+    notifyListeners();
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25, areaCode: areaCode, cat2: cat2);
+    _areaBasedDataList.forEach((element) async {
+      _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
     });
-    await getDetailCommon();
     notifyListeners();
     _isLoading = false;
     notifyListeners();
   }
 
   //테마별 여행 [전체]
-  Future<void> getDetailCommon() async {
-    _isLoading = true;
+  Future<void> getCommonData(String areaCode, int contentTypeId) async {
+    // _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(areaCode: '1');
-    List<int> idList = _areaBasedDataList.map((e) => e.id).toList();
-    idList.forEach((e) async {
-      (_tourDetail.addAll(await _tourInfoRepository.getDetailCommon(id: e)));
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(areaCode: areaCode, contentTypeId: contentTypeId);
+    _areaBasedDataList.forEach((element) async {
+      _tourDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
       notifyListeners();
     });
-    _isLoading = false;
+    print(_tourDetail);
+    // _isLoading = false;
     notifyListeners();
   }
 }
