@@ -9,7 +9,8 @@ part of 'unified_detail.dart';
 _$UnifiedDetailImpl _$$UnifiedDetailImplFromJson(Map<String, dynamic> json) =>
     _$UnifiedDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoCenter: json['infoCenter'] as String,
       openTime: json['openTime'] as String,
       useFee: json['useFee'] as String,
@@ -61,7 +62,7 @@ _$UnifiedDetailImpl _$$UnifiedDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$UnifiedDetailImplToJson(_$UnifiedDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
+      'contentType': instance.contentType,
       'infoCenter': instance.infoCenter,
       'openTime': instance.openTime,
       'useFee': instance.useFee,
@@ -109,15 +110,3 @@ Map<String, dynamic> _$$UnifiedDetailImplToJson(_$UnifiedDetailImpl instance) =>
       'hasPublicPc': instance.hasPublicPc,
       'hasPublicBath': instance.hasPublicBath,
     };
-
-const _$ContentTypeEnumMap = {
-  ContentType.all: 'all',
-  ContentType.touristSpot: 'touristSpot',
-  ContentType.cultureLocation: 'cultureLocation',
-  ContentType.festival: 'festival',
-  ContentType.course: 'course',
-  ContentType.leports: 'leports',
-  ContentType.lodgment: 'lodgment',
-  ContentType.shopping: 'shopping',
-  ContentType.restaurant: 'restaurant',
-};

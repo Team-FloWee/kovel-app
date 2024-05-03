@@ -58,7 +58,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           children: [
                             CommonText(
                               badgeTitle:
-                                  viewModel.detailData.first.contentType.text,
+                                  viewModel.detailData.first.contentType.name,
                               title: viewModel.tourDetailData.first.title,
                               tel: (viewModel.tourDetailData.first.tel == '')
                                   ? viewModel.detailData.first.infoCenter
