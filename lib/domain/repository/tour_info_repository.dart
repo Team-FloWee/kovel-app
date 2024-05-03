@@ -38,6 +38,7 @@ abstract interface class TourInfoRepository {
   Future<List<Tour>> getSearchFestival({
     int pageNo = 1,
     required String eventStartDate,
+    required String eventEndDate,
   });
 
   // 숙박 정보 조회 (search stay)

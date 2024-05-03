@@ -8,7 +8,12 @@ class FavoriteImage extends StatefulWidget {
   final String area;
   final String title;
 
-  const FavoriteImage({super.key, required this.imagePath, required this.imageSize, this.area = '', this.title = ''});
+  const FavoriteImage(
+      {super.key,
+      required this.imagePath,
+      required this.imageSize,
+      this.area = '',
+      this.title = ''});
 
   @override
   State<FavoriteImage> createState() => _FavoriteImageState();
@@ -33,7 +38,23 @@ class _FavoriteImageState extends State<FavoriteImage> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(widget.imagePath, width: widget.imageSize, height: widget.imageSize, fit: BoxFit.fill,),
+          child: Image.network(
+            widget.imagePath,
+            width: widget.imageSize,
+            height: widget.imageSize,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  'assets/images/blank_image.png',
+                  width: widget.imageSize,
+                  height: widget.imageSize,
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
+          ),
         ),
         Positioned(
             top: 8,
@@ -49,18 +70,21 @@ class _FavoriteImageState extends State<FavoriteImage> {
                   height: 24.w,
                   child: isLiked
                       ? Icon(Icons.favorite, color: UiConfig.primaryColor)
-                      : Icon(Icons.favorite_border, color: Colors.white)
-              ),
-            )
-        ),
+                      : Icon(Icons.favorite_border, color: Colors.white)),
+            )),
         Positioned(
           left: 16.w,
           bottom: 16.w,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.area, style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade100)),
-              Text(widget.title, style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade100))
+              Text(widget.area,
+                  style: UiConfig.smallStyle
+                      .copyWith(color: UiConfig.black.shade100)),
+              Text(widget.title,
+                  style: UiConfig.h4Style.copyWith(
+                      fontWeight: UiConfig.semiBoldFont,
+                      color: UiConfig.black.shade100))
             ],
           ),
         )
@@ -68,4 +92,3 @@ class _FavoriteImageState extends State<FavoriteImage> {
     );
   }
 }
-

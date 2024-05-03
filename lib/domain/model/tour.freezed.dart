@@ -30,6 +30,8 @@ mixin _$Tour {
   String get category1 => throw _privateConstructorUsedError;
   String get category2 => throw _privateConstructorUsedError;
   String get category3 => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+  CategoryType get categoryType => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get mapx => throw _privateConstructorUsedError;
   String get mapy => throw _privateConstructorUsedError;
@@ -57,6 +59,8 @@ abstract class $TourCopyWith<$Res> {
       String category1,
       String category2,
       String category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      CategoryType categoryType,
       String createdTime,
       String mapx,
       String mapy,
@@ -87,6 +91,7 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     Object? category1 = null,
     Object? category2 = null,
     Object? category3 = null,
+    Object? categoryType = null,
     Object? createdTime = null,
     Object? mapx = null,
     Object? mapy = null,
@@ -134,6 +139,10 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
           ? _value.category3
           : category3 // ignore: cast_nullable_to_non_nullable
               as String,
+      categoryType: null == categoryType
+          ? _value.categoryType
+          : categoryType // ignore: cast_nullable_to_non_nullable
+              as CategoryType,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -176,6 +185,8 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
       String category1,
       String category2,
       String category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      CategoryType categoryType,
       String createdTime,
       String mapx,
       String mapy,
@@ -203,6 +214,7 @@ class __$$TourImplCopyWithImpl<$Res>
     Object? category1 = null,
     Object? category2 = null,
     Object? category3 = null,
+    Object? categoryType = null,
     Object? createdTime = null,
     Object? mapx = null,
     Object? mapy = null,
@@ -250,6 +262,10 @@ class __$$TourImplCopyWithImpl<$Res>
           ? _value.category3
           : category3 // ignore: cast_nullable_to_non_nullable
               as String,
+      categoryType: null == categoryType
+          ? _value.categoryType
+          : categoryType // ignore: cast_nullable_to_non_nullable
+              as CategoryType,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -288,6 +304,8 @@ class _$TourImpl implements _Tour {
       required this.category1,
       required this.category2,
       required this.category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      required this.categoryType,
       required this.createdTime,
       required this.mapx,
       required this.mapy,
@@ -318,6 +336,9 @@ class _$TourImpl implements _Tour {
   @override
   final String category3;
   @override
+  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+  final CategoryType categoryType;
+  @override
   final String createdTime;
   @override
   final String mapx;
@@ -330,7 +351,7 @@ class _$TourImpl implements _Tour {
 
   @override
   String toString() {
-    return 'Tour(id: $id, contentType: $contentType, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel)';
+    return 'Tour(id: $id, contentType: $contentType, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, categoryType: $categoryType, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel)';
   }
 
   @override
@@ -355,6 +376,8 @@ class _$TourImpl implements _Tour {
                 other.category2 == category2) &&
             (identical(other.category3, category3) ||
                 other.category3 == category3) &&
+            (identical(other.categoryType, categoryType) ||
+                other.categoryType == categoryType) &&
             (identical(other.createdTime, createdTime) ||
                 other.createdTime == createdTime) &&
             (identical(other.mapx, mapx) || other.mapx == mapx) &&
@@ -378,6 +401,7 @@ class _$TourImpl implements _Tour {
       category1,
       category2,
       category3,
+      categoryType,
       createdTime,
       mapx,
       mapy,
@@ -410,6 +434,8 @@ abstract class _Tour implements Tour {
       required final String category1,
       required final String category2,
       required final String category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      required final CategoryType categoryType,
       required final String createdTime,
       required final String mapx,
       required final String mapy,
@@ -438,6 +464,9 @@ abstract class _Tour implements Tour {
   String get category2;
   @override
   String get category3;
+  @override
+  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+  CategoryType get categoryType;
   @override
   String get createdTime;
   @override
