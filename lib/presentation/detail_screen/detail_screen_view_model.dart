@@ -5,7 +5,6 @@ import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
 import 'package:kovel_app/domain/repository/unified_detail_repository.dart';
 import 'package:kovel_app/presentation/components/icon_text_row.dart';
-import 'package:logger/logger.dart';
 
 class DetailScreenViewModel with ChangeNotifier {
   final UnifiedDetailRepository _unifiedDetailRepository;
@@ -57,12 +56,8 @@ class DetailScreenViewModel with ChangeNotifier {
     try {
       _tourDetailData = await _unifiedDetailRepository.getDetailCommon(id: id);
 
-      Logger().i('_tourDetailData >> $_tourDetailData');
-
       _detailData = await _unifiedDetailRepository.getUnifiedDetail(
           id: id, contentTypeId: contentTypeId);
-
-      Logger().i('_detailData >> $_detailData');
 
       showDetailData();
 
@@ -79,8 +74,6 @@ class DetailScreenViewModel with ChangeNotifier {
   void getInfoData(int id, int contentTypeId) async {
     _infoData = await _unifiedDetailRepository.getUnifiedInfo(
         id: id, contentTypeId: contentTypeId);
-
-    Logger().i('_infoData >> $_infoData');
 
     notifyListeners();
   }
