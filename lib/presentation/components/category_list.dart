@@ -35,6 +35,10 @@ class _CategoryListState extends State<CategoryList> {
               isSelected: isSelectedList[index],
               onSelect: (bool isSelected) {
                 setState(() {
+                  if (!isSelected && isSelectedList[index]) {
+                    // 이미 선택된 아이템을 다시 선택하려고 할 때는 아무 작업도 하지 않음
+                    return;
+                  }
                   isSelectedList = List.filled(widget.textdata.length, false);
                   isSelectedList[index] = isSelected;
                 });
