@@ -15,60 +15,47 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  signInWithGoogle();
-                },
-                child: Card(
-                  margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  elevation: 2,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Sign IN with Google',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ],
-                  ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            InkWell(
+              onTap: () {
+                signInWithKakao();
+              },
+              child: Card(
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                elevation: 2,
+                child: Image.asset(
+                  'assets/images/kakao_login_medium_wide.png',
+                  fit: BoxFit.cover,
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  signInWithKakao();
-                },
-                child: Card(
-                  margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  elevation: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset('assets/images/kakao_login_medium_narrow.png'),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  ),
+            ),
+            InkWell(
+              onTap: () {
+                signInWithGoogle();
+              },
+              child: Card(
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7),
                 ),
-              )
-            ],
-          ))
-        ],
+                elevation: 2,
+                child: Image.asset(
+                  'assets/images/Google Login.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            )
+          ],
+        ),
       ),
     );
   }
