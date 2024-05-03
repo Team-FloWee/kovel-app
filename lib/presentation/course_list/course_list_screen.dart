@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/category_item.dart';
+import 'package:kovel_app/presentation/components/category_item.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
