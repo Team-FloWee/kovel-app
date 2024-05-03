@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/domain/model/category/course_category_type.dart';
+import 'package:kovel_app/presentation/components/category_item.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
@@ -28,89 +28,83 @@ class _CourseListScreenState extends State<CourseListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CommonAppBar(
-        title: '여행코스',
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 24,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Text(
-                  '추천코스',
-                  style: UiConfig.h3Style.copyWith(
-                    fontWeight: UiConfig.semiBoldFont,
-                    color: UiConfig.black.shade900,
-                  ),
+    final viewModel = context.watch<CourseListViewModel>();
+    return viewModel.isLoading == true
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : Scaffold(
+            appBar: const CommonAppBar(
+              title: '전체 여행코스',
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Text(
+                        '추천코스',
+                        style: UiConfig.h3Style.copyWith(
+                          fontWeight: UiConfig.semiBoldFont,
+                          color: UiConfig.black.shade900,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    // CategoryList(textdata: [
+                    //   '전체',
+                    //   'C0112',
+                    //   'C0113',
+                    //   'C0114',
+                    //   'C0115',
+                    //   'C0116',
+                    //   'C0117',
+                    // ]),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Row(
+                          // children: widget.textdata
+                          //     .map((e) => GestureDetector(onTap: onTapCourseData(e) ,child: CategoryItem(e,)))
+                          //     .toList(),
+                          children: viewModel.textdata
+                              .map((e) => GestureDetector(
+                                  onTap: () {
+                                    viewModel.onTapCourseData(e);
+                                  },
+                                  child: CategoryItem(e)))
+                              .toList(),
+                        ), //This expression has a type of
+                        // 'void' so its value can't be used. (Documentation)
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Column(
+                      children: viewModel.TourDetailData.map((e) => Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: CourseRecommendation(
+                              url: e.imagePath,
+                              course: '음식점',
+                              title: e.title,
+                              content: e.overview,
+                            ),
+                          )).toList(),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              CategoryList(categoryData: CourseCategoryTypeList.typeList),
-              const SizedBox(
-                height: 16,
-              ),
-              const Column(
-                children: [
-                  CourseRecommendation(
-                    url: 'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                    course: '음식점',
-                    title: '서울 용산을 중심으로 알차게 하루 즐기기',
-                    content: '국립중앙박물관은 서울의 가장 볼거리가 많은 박물관 중의 하나이며 용산공원은 가족 나들이하기 좋은 공원이다. 주변에 전쟁기념관을 함께 둘러보고 저녁에는 남산서울타워에 올라 서울야경을 감상한다면 아주 즐거운 서울나들이가 될 것이다',
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  CourseRecommendation(
-                    url: 'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                    course: '음식점',
-                    title: '서울 용산을 중심으로 알차게 하루 즐기기',
-                    content: '국립중앙박물관은 서울의 가장 볼거리가 많은 박물관 중의 하나이며 용산공원은 가족 나들이하기 좋은 공원이다. 주변에 전쟁기념관을 함께 둘러보고 저녁에는 남산서울타워에 올라 서울야경을 감상한다면 아주 즐거운 서울나들이가 될 것이다',
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  CourseRecommendation(
-                    url: 'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                    course: '음식점',
-                    title: '서울 용산을 중심으로 알차게 하루 즐기기',
-                    content: '국립중앙박물관은 서울의 가장 볼거리가 많은 박물관 중의 하나이며 용산공원은 가족 나들이하기 좋은 공원이다. 주변에 전쟁기념관을 함께 둘러보고 저녁에는 남산서울타워에 올라 서울야경을 감상한다면 아주 즐거운 서울나들이가 될 것이다',
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  CourseRecommendation(
-                    url: 'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                    course: '음식점',
-                    title: '서울 용산을 중심으로 알차게 하루 즐기기',
-                    content: '국립중앙박물관은 서울의 가장 볼거리가 많은 박물관 중의 하나이며 용산공원은 가족 나들이하기 좋은 공원이다. 주변에 전쟁기념관을 함께 둘러보고 저녁에는 남산서울타워에 올라 서울야경을 감상한다면 아주 즐거운 서울나들이가 될 것이다',
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  CourseRecommendation(
-                    url: 'https://food.sarangbang.com/upload/board/image/20200925144925528104.jpg',
-                    course: '음식점',
-                    title: '서울 용산을 중심으로 알차게 하루 즐기기',
-                    content: '국립중앙박물관은 서울의 가장 볼거리가 많은 박물관 중의 하나이며 용산공원은 가족 나들이하기 좋은 공원이다. 주변에 전쟁기념관을 함께 둘러보고 저녁에는 남산서울타워에 올라 서울야경을 감상한다면 아주 즐거운 서울나들이가 될 것이다',
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
