@@ -1,5 +1,5 @@
 abstract class Category {
-  final String id;
+  final dynamic id;
   String get name;
 
   Category({required this.id});
