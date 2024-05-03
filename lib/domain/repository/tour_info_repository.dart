@@ -17,7 +17,8 @@ import '../model/tour.dart';
 
 abstract interface class TourInfoRepository {
   // 지역 기반 관광 정보 조회 (area based list)
-  Future<List<Tour>> getAreaBasedList({int pageNo = 1});
+  Future<List<Tour>> getAreaBasedList(
+      {int pageNo = 1, int? contentTypeId, String areaCode = '', String cat2 = ''});
 
   // 키워드 검색 조회 (search keyword)
   Future<List<Tour>> getSearchKeyword({

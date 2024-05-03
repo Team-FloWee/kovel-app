@@ -21,7 +21,7 @@ ShoppingDetail _$ShoppingDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ShoppingDetail {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get infoCenter => throw _privateConstructorUsedError;
   String get saleItem => throw _privateConstructorUsedError;
   String get saleItemCost => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $ShoppingDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String infoCenter,
       String saleItem,
       String saleItemCost,
@@ -68,7 +68,7 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoCenter = null,
     Object? saleItem = null,
     Object? saleItemCost = null,
@@ -82,10 +82,10 @@ class _$ShoppingDetailCopyWithImpl<$Res, $Val extends ShoppingDetail>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoCenter: null == infoCenter
           ? _value.infoCenter
           : infoCenter // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ abstract class _$$ShoppingDetailImplCopyWith<$Res>
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String infoCenter,
       String saleItem,
       String saleItemCost,
@@ -150,7 +150,7 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoCenter = null,
     Object? saleItem = null,
     Object? saleItemCost = null,
@@ -164,10 +164,10 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoCenter: null == infoCenter
           ? _value.infoCenter
           : infoCenter // ignore: cast_nullable_to_non_nullable
@@ -205,7 +205,7 @@ class __$$ShoppingDetailImplCopyWithImpl<$Res>
 class _$ShoppingDetailImpl implements _ShoppingDetail {
   const _$ShoppingDetailImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.infoCenter,
       required this.saleItem,
       required this.saleItemCost,
@@ -220,7 +220,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final String infoCenter;
   @override
@@ -238,7 +238,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
   @override
   String toString() {
-    return 'ShoppingDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, saleItem: $saleItem, saleItemCost: $saleItemCost, restDay: $restDay, scale: $scale, creditCard: $creditCard, openTime: $openTime)';
+    return 'ShoppingDetail(contentId: $contentId, contentType: $contentType, infoCenter: $infoCenter, saleItem: $saleItem, saleItemCost: $saleItemCost, restDay: $restDay, scale: $scale, creditCard: $creditCard, openTime: $openTime)';
   }
 
   @override
@@ -248,8 +248,8 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
             other is _$ShoppingDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.infoCenter, infoCenter) ||
                 other.infoCenter == infoCenter) &&
             (identical(other.saleItem, saleItem) ||
@@ -266,7 +266,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
+  int get hashCode => Object.hash(runtimeType, contentId, contentType,
       infoCenter, saleItem, saleItemCost, restDay, scale, creditCard, openTime);
 
   @JsonKey(ignore: true)
@@ -287,7 +287,7 @@ class _$ShoppingDetailImpl implements _ShoppingDetail {
 abstract class _ShoppingDetail implements ShoppingDetail {
   const factory _ShoppingDetail(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final String infoCenter,
       required final String saleItem,
       required final String saleItemCost,
@@ -302,7 +302,7 @@ abstract class _ShoppingDetail implements ShoppingDetail {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   String get infoCenter;
   @override

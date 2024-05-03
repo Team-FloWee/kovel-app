@@ -21,7 +21,7 @@ LeportsDetail _$LeportsDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LeportsDetail {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get infoCenter => throw _privateConstructorUsedError;
   String get restDay => throw _privateConstructorUsedError;
   String get useTime => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $LeportsDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String infoCenter,
       String restDay,
       String useTime,
@@ -64,7 +64,7 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoCenter = null,
     Object? restDay = null,
     Object? useTime = null,
@@ -76,10 +76,10 @@ class _$LeportsDetailCopyWithImpl<$Res, $Val extends LeportsDetail>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoCenter: null == infoCenter
           ? _value.infoCenter
           : infoCenter // ignore: cast_nullable_to_non_nullable
@@ -114,7 +114,7 @@ abstract class _$$LeportsDetailImplCopyWith<$Res>
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String infoCenter,
       String restDay,
       String useTime,
@@ -134,7 +134,7 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? infoCenter = null,
     Object? restDay = null,
     Object? useTime = null,
@@ -146,10 +146,10 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       infoCenter: null == infoCenter
           ? _value.infoCenter
           : infoCenter // ignore: cast_nullable_to_non_nullable
@@ -179,7 +179,7 @@ class __$$LeportsDetailImplCopyWithImpl<$Res>
 class _$LeportsDetailImpl implements _LeportsDetail {
   const _$LeportsDetailImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.infoCenter,
       required this.restDay,
       required this.useTime,
@@ -192,7 +192,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final String infoCenter;
   @override
@@ -206,7 +206,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
   @override
   String toString() {
-    return 'LeportsDetail(contentId: $contentId, contentTypeId: $contentTypeId, infoCenter: $infoCenter, restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
+    return 'LeportsDetail(contentId: $contentId, contentType: $contentType, infoCenter: $infoCenter, restDay: $restDay, useTime: $useTime, ageLimit: $ageLimit, parking: $parking)';
   }
 
   @override
@@ -216,8 +216,8 @@ class _$LeportsDetailImpl implements _LeportsDetail {
             other is _$LeportsDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.infoCenter, infoCenter) ||
                 other.infoCenter == infoCenter) &&
             (identical(other.restDay, restDay) || other.restDay == restDay) &&
@@ -229,7 +229,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, contentTypeId,
+  int get hashCode => Object.hash(runtimeType, contentId, contentType,
       infoCenter, restDay, useTime, ageLimit, parking);
 
   @JsonKey(ignore: true)
@@ -249,7 +249,7 @@ class _$LeportsDetailImpl implements _LeportsDetail {
 abstract class _LeportsDetail implements LeportsDetail {
   const factory _LeportsDetail(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final String infoCenter,
       required final String restDay,
       required final String useTime,
@@ -262,7 +262,7 @@ abstract class _LeportsDetail implements LeportsDetail {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   String get infoCenter;
   @override

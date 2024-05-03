@@ -21,7 +21,7 @@ CourseDetail _$CourseDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CourseDetail {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get takeTime => throw _privateConstructorUsedError;
   String get distance => throw _privateConstructorUsedError;
 
@@ -38,7 +38,10 @@ abstract class $CourseDetailCopyWith<$Res> {
       _$CourseDetailCopyWithImpl<$Res, CourseDetail>;
   @useResult
   $Res call(
-      {int contentId, int contentTypeId, String takeTime, String distance});
+      {int contentId,
+      ContentType contentType,
+      String takeTime,
+      String distance});
 }
 
 /// @nodoc
@@ -55,7 +58,7 @@ class _$CourseDetailCopyWithImpl<$Res, $Val extends CourseDetail>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? takeTime = null,
     Object? distance = null,
   }) {
@@ -64,10 +67,10 @@ class _$CourseDetailCopyWithImpl<$Res, $Val extends CourseDetail>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       takeTime: null == takeTime
           ? _value.takeTime
           : takeTime // ignore: cast_nullable_to_non_nullable
@@ -89,7 +92,10 @@ abstract class _$$CourseDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int contentId, int contentTypeId, String takeTime, String distance});
+      {int contentId,
+      ContentType contentType,
+      String takeTime,
+      String distance});
 }
 
 /// @nodoc
@@ -104,7 +110,7 @@ class __$$CourseDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? takeTime = null,
     Object? distance = null,
   }) {
@@ -113,10 +119,10 @@ class __$$CourseDetailImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       takeTime: null == takeTime
           ? _value.takeTime
           : takeTime // ignore: cast_nullable_to_non_nullable
@@ -134,7 +140,7 @@ class __$$CourseDetailImplCopyWithImpl<$Res>
 class _$CourseDetailImpl implements _CourseDetail {
   const _$CourseDetailImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.takeTime,
       required this.distance});
 
@@ -144,7 +150,7 @@ class _$CourseDetailImpl implements _CourseDetail {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final String takeTime;
   @override
@@ -152,7 +158,7 @@ class _$CourseDetailImpl implements _CourseDetail {
 
   @override
   String toString() {
-    return 'CourseDetail(contentId: $contentId, contentTypeId: $contentTypeId, takeTime: $takeTime, distance: $distance)';
+    return 'CourseDetail(contentId: $contentId, contentType: $contentType, takeTime: $takeTime, distance: $distance)';
   }
 
   @override
@@ -162,8 +168,8 @@ class _$CourseDetailImpl implements _CourseDetail {
             other is _$CourseDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.takeTime, takeTime) ||
                 other.takeTime == takeTime) &&
             (identical(other.distance, distance) ||
@@ -173,7 +179,7 @@ class _$CourseDetailImpl implements _CourseDetail {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, contentId, contentTypeId, takeTime, distance);
+      Object.hash(runtimeType, contentId, contentType, takeTime, distance);
 
   @JsonKey(ignore: true)
   @override
@@ -192,7 +198,7 @@ class _$CourseDetailImpl implements _CourseDetail {
 abstract class _CourseDetail implements CourseDetail {
   const factory _CourseDetail(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final String takeTime,
       required final String distance}) = _$CourseDetailImpl;
 
@@ -202,7 +208,7 @@ abstract class _CourseDetail implements CourseDetail {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   String get takeTime;
   @override

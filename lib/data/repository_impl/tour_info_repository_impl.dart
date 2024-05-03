@@ -34,8 +34,13 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 지역 기반 관광 정보 조회 (area based list)
   @override
-  Future<List<Tour>> getAreaBasedList({int pageNo = 1}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList();
+  Future<List<Tour>> getAreaBasedList(
+      {int pageNo = 1,
+      int? contentTypeId,
+      String areaCode = '',
+      String cat2 = ''}) async {
+    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
+        contentTypeId: contentTypeId, areaCode: areaCode, cat2: cat2);
     return tourDto.map((e) => e.toTour()).toList();
   }
 

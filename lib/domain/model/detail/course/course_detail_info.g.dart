@@ -10,16 +10,32 @@ _$CourseDetailInfoImpl _$$CourseDetailInfoImplFromJson(
         Map<String, dynamic> json) =>
     _$CourseDetailInfoImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
+      subContentId: (json['subContentId'] as num).toInt(),
       name: json['name'] as String,
       overview: json['overview'] as String,
+      imagePath: json['imagePath'] as String,
     );
 
 Map<String, dynamic> _$$CourseDetailInfoImplToJson(
         _$CourseDetailInfoImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
+      'subContentId': instance.subContentId,
       'name': instance.name,
       'overview': instance.overview,
+      'imagePath': instance.imagePath,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.all: 'all',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};

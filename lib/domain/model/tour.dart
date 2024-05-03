@@ -1,14 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/core/enums/category_type.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 
 part 'tour.freezed.dart';
-
 part 'tour.g.dart';
 
 @freezed
 class Tour with _$Tour {
   const factory Tour({
     required int id,
-    required int contentTypeId,
+    required ContentType contentType,
     required String title,
     required String address1,
     required String address2,
@@ -17,6 +18,7 @@ class Tour with _$Tour {
     required String category1,
     required String category2,
     required String category3,
+    required CategoryType categoryType,
     required String createdTime,
     required String mapx,
     required String mapy,
