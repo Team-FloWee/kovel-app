@@ -60,9 +60,10 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
   Future<List<Tour>> getSearchFestival({
     int pageNo = 1,
     required String eventStartDate,
+    required String eventEndDate,
   }) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getSearchFestival(
-        eventStartDate: eventStartDate);
+        eventStartDate: eventStartDate, eventEndDate: eventEndDate);
     return tourDto.map((e) => e.toTour()).toList();
   }
 

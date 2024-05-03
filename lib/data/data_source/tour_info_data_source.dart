@@ -14,7 +14,7 @@ abstract interface class TourInfoDataSource {
   Future<List<TourDto>> getSearchKeyword(
       {required String keyword, int pageNo = 1});
   Future<List<TourDto>> getSearchFestival(
-      {required String eventStartDate, int pageNo = 1});
+      {required String eventStartDate, required String eventEndDate, int pageNo = 1});
   Future<List<TourDto>> getSearchStay({int? pageNo = 1});
 
   Future<List<TourDetailDto>> getDetailCommon(
