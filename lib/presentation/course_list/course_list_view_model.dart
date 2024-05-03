@@ -6,62 +6,76 @@ import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
 class CourseListViewModel with ChangeNotifier {
   final TourInfoRepository _tourInfoRepository;
-  bool _isloading = true;
+  final String areaCode;
 
-  bool get isloading => _isloading;
-
-  final List<int> mockData = [
-    2361026,
-    1885246,
-    2680214,
-    1968165,
-    1949308,
-    1908287,
-    2514870,
-    2916281,
-    2677792,
-    2619120,
+  List<String> textdata = [
+    '전체',
+    'C0112',
+    'C0113',
+    'C0114',
+    'C0115',
+    'C0116',
+    'C0117',
   ];
+
+  bool _isLoading = true;
+
+  bool get isLoading => _isLoading;
+
+  List<Tour> _tourList = [];
+
+  List<Tour> get tourList => _tourList;
 
   CourseListViewModel({
     required TourInfoRepository tourInfoRepository,
+    required this.areaCode,
   }) : _tourInfoRepository = tourInfoRepository;
-
-  //소개정보
-  List<CourseDetail> _CourseDetailData = [];
-
-  List<CourseDetail> get CourseDetailData => _CourseDetailData;
 
   //공통정보
   List<TourDetail> _TourDetailData = [];
 
   List<TourDetail> get TourDetailData => _TourDetailData;
 
-  List<CourseDetailInfo> _CourseDetailInfoData = [];
-
-  List<CourseDetailInfo> get CourseDetailInfoData => _CourseDetailInfoData;
-
   Future<void> getCourseData() async {
-    _isloading = true;
+    _isLoading = true;
     notifyListeners();
-    _TourDetailData.addAll(
-        await _tourInfoRepository.getDetailCommon(id: 2361026));
-    _TourDetailData.addAll(
-        await _tourInfoRepository.getDetailCommon(id: 1885246));
-    _TourDetailData.addAll(
-        await _tourInfoRepository.getDetailCommon(id: 2680214));
-    _TourDetailData.addAll(
-        await _tourInfoRepository.getDetailCommon(id: 1968165));
-    _TourDetailData.addAll(
-        await _tourInfoRepository.getDetailCommon(id: 1949308));
 
-    _isloading = false;
+    _tourList = await _tourInfoRepository.getAreaBasedList(
+        areaCode: '1', contentTypeId: 25);
 
+    List<int> tourIdList = _tourList.map((e) => e.id).toList();
+
+    tourIdList.forEach((e) async {
+      _TourDetailData.addAll(await _tourInfoRepository.getDetailCommon(id: e));
+      notifyListeners();
+    });
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  dynamic onTapCourseData(String text) async {
+    _isLoading = true;
+    notifyListeners();
+
+    _TourDetailData = [];
+
+    _tourList = await _tourInfoRepository.getAreaBasedList(
+        areaCode: '1', contentTypeId: 25, cat2: text);
+
+    List<int> tourIdList = _tourList.map((e) => e.id).toList();
+    tourIdList.forEach((e) async {
+      _TourDetailData.addAll(await _tourInfoRepository.getDetailCommon(id: e));
+      notifyListeners();
+    });
+
+    _isLoading = false;
     notifyListeners();
   }
 }
