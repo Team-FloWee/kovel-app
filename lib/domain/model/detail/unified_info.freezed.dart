@@ -22,9 +22,9 @@ UnifiedInfo _$UnifiedInfoFromJson(Map<String, dynamic> json) {
 mixin _$UnifiedInfo {
   int get contentId => throw _privateConstructorUsedError;
   ContentType get contentType => throw _privateConstructorUsedError;
+  int get subContentId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
-  int get subContentId => throw _privateConstructorUsedError;
   String get imagePath => throw _privateConstructorUsedError;
   String get infoName => throw _privateConstructorUsedError;
   String get infoText => throw _privateConstructorUsedError;
@@ -44,9 +44,9 @@ abstract class $UnifiedInfoCopyWith<$Res> {
   $Res call(
       {int contentId,
       ContentType contentType,
+      int subContentId,
       String name,
       String overview,
-      int subContentId,
       String imagePath,
       String infoName,
       String infoText});
@@ -67,9 +67,9 @@ class _$UnifiedInfoCopyWithImpl<$Res, $Val extends UnifiedInfo>
   $Res call({
     Object? contentId = null,
     Object? contentType = null,
+    Object? subContentId = null,
     Object? name = null,
     Object? overview = null,
-    Object? subContentId = null,
     Object? imagePath = null,
     Object? infoName = null,
     Object? infoText = null,
@@ -83,6 +83,10 @@ class _$UnifiedInfoCopyWithImpl<$Res, $Val extends UnifiedInfo>
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
               as ContentType,
+      subContentId: null == subContentId
+          ? _value.subContentId
+          : subContentId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -91,10 +95,6 @@ class _$UnifiedInfoCopyWithImpl<$Res, $Val extends UnifiedInfo>
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String,
-      subContentId: null == subContentId
-          ? _value.subContentId
-          : subContentId // ignore: cast_nullable_to_non_nullable
-              as int,
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -122,9 +122,9 @@ abstract class _$$UnifiedInfoImplCopyWith<$Res>
   $Res call(
       {int contentId,
       ContentType contentType,
+      int subContentId,
       String name,
       String overview,
-      int subContentId,
       String imagePath,
       String infoName,
       String infoText});
@@ -143,9 +143,9 @@ class __$$UnifiedInfoImplCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? contentType = null,
+    Object? subContentId = null,
     Object? name = null,
     Object? overview = null,
-    Object? subContentId = null,
     Object? imagePath = null,
     Object? infoName = null,
     Object? infoText = null,
@@ -159,6 +159,10 @@ class __$$UnifiedInfoImplCopyWithImpl<$Res>
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
               as ContentType,
+      subContentId: null == subContentId
+          ? _value.subContentId
+          : subContentId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -167,10 +171,6 @@ class __$$UnifiedInfoImplCopyWithImpl<$Res>
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String,
-      subContentId: null == subContentId
-          ? _value.subContentId
-          : subContentId // ignore: cast_nullable_to_non_nullable
-              as int,
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -193,9 +193,9 @@ class _$UnifiedInfoImpl implements _UnifiedInfo {
   const _$UnifiedInfoImpl(
       {required this.contentId,
       required this.contentType,
+      required this.subContentId,
       required this.name,
       required this.overview,
-      required this.subContentId,
       required this.imagePath,
       required this.infoName,
       required this.infoText});
@@ -208,11 +208,11 @@ class _$UnifiedInfoImpl implements _UnifiedInfo {
   @override
   final ContentType contentType;
   @override
+  final int subContentId;
+  @override
   final String name;
   @override
   final String overview;
-  @override
-  final int subContentId;
   @override
   final String imagePath;
   @override
@@ -222,7 +222,7 @@ class _$UnifiedInfoImpl implements _UnifiedInfo {
 
   @override
   String toString() {
-    return 'UnifiedInfo(contentId: $contentId, contentType: $contentType, name: $name, overview: $overview, subContentId: $subContentId, imagePath: $imagePath, infoName: $infoName, infoText: $infoText)';
+    return 'UnifiedInfo(contentId: $contentId, contentType: $contentType, subContentId: $subContentId, name: $name, overview: $overview, imagePath: $imagePath, infoName: $infoName, infoText: $infoText)';
   }
 
   @override
@@ -234,11 +234,11 @@ class _$UnifiedInfoImpl implements _UnifiedInfo {
                 other.contentId == contentId) &&
             (identical(other.contentType, contentType) ||
                 other.contentType == contentType) &&
+            (identical(other.subContentId, subContentId) ||
+                other.subContentId == subContentId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.overview, overview) ||
                 other.overview == overview) &&
-            (identical(other.subContentId, subContentId) ||
-                other.subContentId == subContentId) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             (identical(other.infoName, infoName) ||
@@ -249,8 +249,8 @@ class _$UnifiedInfoImpl implements _UnifiedInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, contentType, name,
-      overview, subContentId, imagePath, infoName, infoText);
+  int get hashCode => Object.hash(runtimeType, contentId, contentType,
+      subContentId, name, overview, imagePath, infoName, infoText);
 
   @JsonKey(ignore: true)
   @override
@@ -270,9 +270,9 @@ abstract class _UnifiedInfo implements UnifiedInfo {
   const factory _UnifiedInfo(
       {required final int contentId,
       required final ContentType contentType,
+      required final int subContentId,
       required final String name,
       required final String overview,
-      required final int subContentId,
       required final String imagePath,
       required final String infoName,
       required final String infoText}) = _$UnifiedInfoImpl;
@@ -285,11 +285,11 @@ abstract class _UnifiedInfo implements UnifiedInfo {
   @override
   ContentType get contentType;
   @override
+  int get subContentId;
+  @override
   String get name;
   @override
   String get overview;
-  @override
-  int get subContentId;
   @override
   String get imagePath;
   @override

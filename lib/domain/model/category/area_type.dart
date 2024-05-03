@@ -1,8 +1,16 @@
 import 'package:kovel_app/domain/model/category/category.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'area_type.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class AreaType extends Category {
   final String areaCode;
   AreaType({required this.areaCode}) : super(id: areaCode);
+
+  factory AreaType.fromJson(Map<String, dynamic> json) => _$AreaTypeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AreaTypeToJson(this);
 
   @override
   String get name => switch (areaCode)  {

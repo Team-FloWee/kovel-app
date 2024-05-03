@@ -1,8 +1,17 @@
-import 'package:kovel_app/domain/model/category/category.dart';
+import 'package:kovel_app/domain/model/category/category_type.dart';
 
-class CourseCategoryType extends Category {
+import 'package:json_annotation/json_annotation.dart';
+
+part 'course_category_type.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class CourseCategoryType extends CategoryType{
   final String courseCategoryId;
   CourseCategoryType({required this.courseCategoryId}) : super(id: courseCategoryId);
+
+  factory CourseCategoryType.fromJson(Map<String, dynamic> json) => _$CourseCategoryTypeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CourseCategoryTypeToJson(this);
 
   @override
   String get name => switch (courseCategoryId)  {

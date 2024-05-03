@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kovel_app/core/enums/category_type.dart';
-import 'package:kovel_app/core/enums/content_type.dart';
+import 'package:kovel_app/domain/model/category/category_type.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'tour.freezed.dart';
 part 'tour.g.dart';
