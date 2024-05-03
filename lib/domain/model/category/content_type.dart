@@ -1,8 +1,16 @@
 import 'package:kovel_app/domain/model/category/category.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'content_type.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class ContentType extends Category {
   final int contentTypeId;
   ContentType({required this.contentTypeId}) : super(id: contentTypeId.toString());
+
+  factory ContentType.fromJson(Map<String, dynamic> json) => _$ContentTypeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ContentTypeToJson(this);
 
   @override
   String get name => switch (contentTypeId)  {

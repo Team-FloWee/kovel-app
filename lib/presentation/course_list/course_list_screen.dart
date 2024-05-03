@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
@@ -36,15 +37,7 @@ class CourseListScreen extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              CategoryList(textdata: [
-                '전체',
-                '가족코스',
-                '나홀로코스',
-                '힐링코스',
-                '전체',
-                '가족코스',
-                '나홀로코스',
-              ]),
+              CategoryList(categoryData: CourseCategoryTypeList.typeList),
               SizedBox(
                 height: 16,
               ),
