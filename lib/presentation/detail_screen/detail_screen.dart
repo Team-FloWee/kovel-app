@@ -99,7 +99,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       children: [
                         CommonText(
                           badgeTitle:
-                              viewModel.detailData.first.contentType.text,
+                              viewModel.detailData.first.contentType.name,
                           title: viewModel.tourDetailData.first.title,
                           tel: (viewModel.tourDetailData.first.tel == '')
                               ? viewModel.detailData.first.infoCenter
@@ -135,8 +135,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           height: 1,
                           color: UiConfig.black.shade500),
                     ),
-                    // ContentType.lodgment.id != 32
-                    viewModel.tourDetailData.first.contentType.id != 32
+                    viewModel.tourDetailData.first.contentType.contentTypeId !=
+                            32
                         ? SizedBox()
                         : Column(
                             children: [
