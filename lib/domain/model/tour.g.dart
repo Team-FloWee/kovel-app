@@ -19,7 +19,7 @@ _$TourImpl _$$TourImplFromJson(Map<String, dynamic> json) => _$TourImpl(
       category2: json['category2'] as String,
       category3: json['category3'] as String,
       categoryType:
-          CategoryType.fromJson(json['categoryType'] as Map<String, dynamic>),
+          _categoryTypeFromJson(json['categoryType'] as Map<String, dynamic>),
       createdTime: json['createdTime'] as String,
       mapx: json['mapx'] as String,
       mapy: json['mapy'] as String,
@@ -39,7 +39,7 @@ Map<String, dynamic> _$$TourImplToJson(_$TourImpl instance) =>
       'category1': instance.category1,
       'category2': instance.category2,
       'category3': instance.category3,
-      'categoryType': instance.categoryType,
+      'categoryType': _categoryTypeToJson(instance.categoryType),
       'createdTime': instance.createdTime,
       'mapx': instance.mapx,
       'mapy': instance.mapy,
