@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../config/ui_config.dart';
-import 'my_page_switch_button.dart';
 
-class MyPageMenuBarSwitch extends StatelessWidget {
+class MyPageMenuBarWidget extends StatelessWidget {
   final String menuBarName;
   final Widget menuBarWidget;
 
-  const MyPageMenuBarSwitch({
+  const MyPageMenuBarWidget({
     super.key,
     required this.menuBarName,
     required this.menuBarWidget,
@@ -36,9 +35,7 @@ class MyPageMenuBarSwitch extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 24.0),
-                child: MyPageSwitchButton(
-                  onToggled: (bool isToggled) {},
-                ),
+                child: menuBarWidget,
               ),
             ],
           ),
