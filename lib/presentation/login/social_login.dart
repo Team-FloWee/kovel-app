@@ -1,4 +1,4 @@
-abstract class SocialLogin {
+abstract interface class SocialLogin {
   Future<bool> login();
 
   Future<bool> logout();

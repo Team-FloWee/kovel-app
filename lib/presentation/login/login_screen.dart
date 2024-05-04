@@ -1,110 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:kovel_app/config/ui_config.dart';
 
-import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LoginViewModel>();
 
-    return Scaffold(
-      body: Center(
-          child: viewModel.isLogined
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        viewModel.logout();
-                      },
-                      child: Card(
-                          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          elevation: 2,
-                          child: const Text('로그아웃')
-                          // Image.asset(
-                          //   'assets/images/kakao_login_medium_wide.png',
-                          //   fit: BoxFit.cover,
-                          // ),
-                          ),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+            child: Column(
+          children: [
+            Stack(
+              children: [
+                Image.asset('assets/images/login_background.png'),
+                Positioned(bottom: MediaQuery.of(context).size.height * 0.09, left: MediaQuery.of(context).size.width * 0.4, child: Image.asset('assets/images/app_icon.png')),
+                Positioned(
+                  bottom: MediaQuery.of(context).size.height * 0.02,
+                  left: MediaQuery.of(context).size.width * 0.4,
+                  child: Text(
+                    '로그인',
+                    style: UiConfig.h1Style.copyWith(
+                      fontWeight: UiConfig.semiBoldFont,
                     ),
-                  ],
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        viewModel.login();
-                      },
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        elevation: 2,
-                        child: Image.asset(
-                          'assets/images/kakao_login_medium_wide.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        signInWithGoogle();
-                      },
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        elevation: 2,
-                        child: Image.asset(
-                          'assets/images/Google Login.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.26,
-                    )
-                  ],
-                )),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            Text(
+              '로그인하여 다양한 여행정보를\n 탐색해 보세요',
+              textAlign: TextAlign.center,
+              style: UiConfig.h4Style.copyWith(color: UiConfig.black.shade700),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            InkWell(
+              onTap: () {
+                viewModel.login(platform: LoginPlatform.kakao);
+              },
+              child: Card(
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                elevation: 2,
+                child: Image.asset(
+                  'assets/images/kakao_login_medium_wide.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            InkWell(
+              onTap: () {
+                viewModel.login(platform: LoginPlatform.google);
+              },
+              child: Card(
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                elevation: 2,
+                child: Image.asset(
+                  'assets/images/Google Login.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
+        )),
+      ),
     );
   }
-}
-
-Future<void> signInWithGoogle() async {
-  // Trigger the authentication flow
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-  // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-  // Create a new credential
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-  // Once signed in, return the UserCredential
-  await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
-    debugPrint('####email : ${value.user?.email}');
-  }).onError((error, stackTrace) {
-    debugPrint('error : $error');
-  });
 }
