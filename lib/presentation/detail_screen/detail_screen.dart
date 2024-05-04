@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
@@ -6,6 +5,8 @@ import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
 import 'package:kovel_app/presentation/detail_screen/detail_screen_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/method/get_cached_network_image.dart';
 
 class DetailScreen extends StatefulWidget {
   final int id;
@@ -78,26 +79,8 @@ class _DetailScreenState extends State<DetailScreen> {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
-              AspectRatio(
-                aspectRatio: 1 / 1,
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: viewModel.tourDetailData.first.imagePath,
-                  placeholder: (context, url) =>
-                      Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Image.asset('assets/images/blank_image.png'),
-                ),
-                // child:
-                //     Image.network(errorBuilder: (context, error, stackTrace) {
-                //   return Image.asset('assets/images/blank_image.png');
-                // }, loadingBuilder: (context, child, progress) {
-                //   if (progress == null) {
-                //     return child;
-                //   }
-                //   return Center(child: CircularProgressIndicator());
-                // }, fit: BoxFit.cover, viewModel.tourDetailData.first.imagePath),
-              ),
+              getCachedNetworkImage(
+                  imagePath: viewModel.tourDetailData.first.imagePath),
               Padding(
                 padding: EdgeInsets.all(16),
                 child: Column(
