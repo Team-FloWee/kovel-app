@@ -16,6 +16,7 @@ class LoginScreen extends StatelessWidget {
         body: Center(
             child: Column(
           children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             Stack(
               children: [
                 Image.asset('assets/images/login_background.png'),
@@ -50,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 elevation: 2,
                 child: Image.asset(
-                  'assets/images/kakao_login_medium_wide.png',
+                  'assets/images/kakao_login_icon.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -67,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 elevation: 2,
                 child: Image.asset(
-                  'assets/images/Google Login.png',
+                  'assets/images/google_login_icon.png',
                   fit: BoxFit.cover,
                 ),
               ),
