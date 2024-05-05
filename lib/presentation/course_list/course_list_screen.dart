@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/presentation/components/category_item.dart';
-import 'package:kovel_app/presentation/components/category_item.dart';
+import 'package:kovel_app/domain/model/category/category.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
+import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
@@ -36,7 +37,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
           )
         : Scaffold(
             appBar: const CommonAppBar(
-              title: '전체 여행코스',
+              title: '여행코스',
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -60,47 +61,27 @@ class _CourseListScreenState extends State<CourseListScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    // CategoryList(textdata: [
-                    //   '전체',
-                    //   'C0112',
-                    //   'C0113',
-                    //   'C0114',
-                    //   'C0115',
-                    //   'C0116',
-                    //   'C0117',
-                    // ]),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Row(
-                          // children: widget.textdata
-                          //     .map((e) => GestureDetector(onTap: onTapCourseData(e) ,child: CategoryItem(e,)))
-                          //     .toList(),
-                          children: viewModel.textdata
-                              .map((e) => GestureDetector(
-                                  onTap: () {
-                                    viewModel.onTapCourseData(e);
-                                  },
-                                  child: CategoryItem(e)))
-                              .toList(),
-                        ), //This expression has a type of
-                        // 'void' so its value can't be used. (Documentation)
-                      ),
-                    ),
+                    CategoryList(
+                        categoryData: CourseCategoryTypeList.typeList,
+                        onSelect: (Category category) {
+                          // 카테고리 가져오기
+                          context.read<CourseListViewModel>().getCourseData(widget.areaCode, category.id);
+                        }),
                     const SizedBox(
                       height: 16,
                     ),
                     Column(
-                      children: viewModel.TourDetailData.map((e) => Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: CourseRecommendation(
-                              url: e.imagePath,
-                              course: '음식점',
-                              title: e.title,
-                              content: e.overview,
-                            ),
-                          )).toList(),
+                      children: viewModel.courseDetail
+                          .map((e) => Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: CourseRecommendation(
+                                  url: e.imagePath,
+                                  course: e.categoryType.name,
+                                  title: e.title,
+                                  content: e.overview,
+                                ),
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),
