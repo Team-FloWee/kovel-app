@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/domain/model/category/category.dart';
 
 class CategoryItem extends StatelessWidget {
-  final Category item;
+  final String text;
 
-  const CategoryItem({super.key, required this.item});
+  const CategoryItem(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class CategoryItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             child: Text(
-              item.name,
+              text,
               style: UiConfig.smallStyle.copyWith(
                 fontWeight: UiConfig.semiBoldFont,
                 color: UiConfig.black.shade900,

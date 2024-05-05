@@ -1,15 +1,13 @@
+import 'package:kovel_app/core/enums/category_type.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 import 'package:kovel_app/data/dto/tour_dto.dart';
-import 'package:kovel_app/domain/model/category/category_type.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
-import 'package:kovel_app/domain/model/category/course_category_type.dart';
-import 'package:kovel_app/domain/model/category/dummy_category_type.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 
 extension ToTour on TourDto {
   Tour toTour() {
     return Tour(
       id: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       title: title ?? '',
       address1: addr1 ?? '',
       address2: addr2 ?? '',
@@ -29,9 +27,9 @@ extension ToTour on TourDto {
 
   CategoryType _getCategoryType() {
     if (contenttypeid == '25') {
-      return CourseCategoryType(courseCategoryId: cat2 ?? '');
+      return CategoryType.getByCode(code: cat2 ?? '');
     } else {
-      return DummyCategoryType(id: '');
+      return CategoryType.getByCode(code: '');
     }
   }
 }

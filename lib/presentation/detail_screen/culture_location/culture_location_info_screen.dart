@@ -59,7 +59,7 @@ class _CultureLocationInfoScreenState extends State<CultureLocationInfoScreen> {
                           children: [
                             CommonText(
                               badgeTitle: viewModel
-                                  .tourDetailData.first.contentType.name,
+                                  .tourDetailData.first.contentType.text,
                               title: viewModel.tourDetailData.first.title,
                               tel: (viewModel.tourDetailData.first.tel == '')
                                   ? viewModel.cultureLocationDetailData.first

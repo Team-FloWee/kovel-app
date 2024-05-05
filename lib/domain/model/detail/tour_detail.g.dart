@@ -9,8 +9,7 @@ part of 'tour_detail.dart';
 _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
     _$TourDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentType:
-          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
+      contentType: $enumDecode(_$ContentTypeEnumMap, json['contentType']),
       title: json['title'] as String,
       address1: json['address1'] as String,
       address2: json['address2'] as String,
@@ -19,8 +18,6 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
       category1: json['category1'] as String,
       category2: json['category2'] as String,
       category3: json['category3'] as String,
-      categoryType:
-          _categoryTypeFromJson(json['categoryType'] as Map<String, dynamic>),
       createdTime: json['createdTime'] as String,
       mapx: json['mapx'] as String,
       mapy: json['mapy'] as String,
@@ -33,7 +30,7 @@ _$TourDetailImpl _$$TourDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentType': instance.contentType,
+      'contentType': _$ContentTypeEnumMap[instance.contentType]!,
       'title': instance.title,
       'address1': instance.address1,
       'address2': instance.address2,
@@ -42,7 +39,6 @@ Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
       'category1': instance.category1,
       'category2': instance.category2,
       'category3': instance.category3,
-      'categoryType': _categoryTypeToJson(instance.categoryType),
       'createdTime': instance.createdTime,
       'mapx': instance.mapx,
       'mapy': instance.mapy,
@@ -51,3 +47,15 @@ Map<String, dynamic> _$$TourDetailImplToJson(_$TourDetailImpl instance) =>
       'telName': instance.telName,
       'overview': instance.overview,
     };
+
+const _$ContentTypeEnumMap = {
+  ContentType.all: 'all',
+  ContentType.touristSpot: 'touristSpot',
+  ContentType.cultureLocation: 'cultureLocation',
+  ContentType.festival: 'festival',
+  ContentType.course: 'course',
+  ContentType.leports: 'leports',
+  ContentType.lodgment: 'lodgment',
+  ContentType.shopping: 'shopping',
+  ContentType.restaurant: 'restaurant',
+};

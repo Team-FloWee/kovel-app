@@ -1,5 +1,5 @@
+import 'package:kovel_app/core/enums/content_type.dart';
 import 'package:kovel_app/data/dto/content_detail_dto.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/detail/course/course_detail.dart';
 import 'package:kovel_app/domain/model/detail/culture_location/culture_location_detail.dart';
 import 'package:kovel_app/domain/model/detail/festival/festival_detail.dart';
@@ -15,7 +15,7 @@ extension ToContentDetail on ContentDetailDto {
   CourseDetail toCourseDetail() {
     return CourseDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       takeTime: taketime ?? '',
       distance: distance ?? '',
     );
@@ -24,7 +24,7 @@ extension ToContentDetail on ContentDetailDto {
   CultureLocationDetail toCultureLocationDetail() {
     return CultureLocationDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterculture ?? '',
       useFee: usefee ?? '',
       useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
@@ -38,7 +38,7 @@ extension ToContentDetail on ContentDetailDto {
   FestivalDetail toFestivalDetail() {
     return FestivalDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: placeinfo ?? '',
       startDate: eventstartdate ?? '',
       endDate: eventenddate ?? '',
@@ -55,7 +55,7 @@ extension ToContentDetail on ContentDetailDto {
   LeportsDetail toLeportsDetail() {
     return LeportsDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterleports ?? '',
       restDay: restdateleports ?? '',
       useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
@@ -67,7 +67,7 @@ extension ToContentDetail on ContentDetailDto {
   LodgmentDetail toLodgmentDetail() {
     return LodgmentDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterlodging ?? '',
       reservationUrl: HtmlUtil().removeHtmlTags(reservationurl ?? ''),
       roomCount: roomcount ?? '',
@@ -96,7 +96,7 @@ extension ToContentDetail on ContentDetailDto {
   RestaurantDetail toRestaurantDetail() {
     return RestaurantDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterfood ?? '',
       firstMenu: firstmenu ?? '',
       treatMenu: treatmenu ?? '',
@@ -109,7 +109,7 @@ extension ToContentDetail on ContentDetailDto {
   ShoppingDetail toShoppingDetail() {
     return ShoppingDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocentershopping ?? '',
       saleItem: saleitem ?? '',
       saleItemCost: saleitemcost ?? '',
@@ -123,7 +123,7 @@ extension ToContentDetail on ContentDetailDto {
   TouristSpotDetail toTouristSpotDetail() {
     return TouristSpotDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenter ?? '',
       expGuide: expguide ?? '',
       parking: parking ?? '',

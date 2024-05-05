@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
-import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
@@ -32,7 +30,15 @@ class LocationListScreen extends StatelessWidget {
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: CategoryList(categoryData: CourseCategoryTypeList.typeList),
+              child: CategoryList(textdata: [
+                '전체',
+                '가족코스',
+                '나홀로코스',
+                '힐링코스',
+                '도보코스',
+                '캠핑코스',
+                '맛코스'
+              ]),
             ),
             SizedBox(
               height: 16,
@@ -106,7 +112,8 @@ class LocationListScreen extends StatelessWidget {
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: CategoryList(categoryData: ContentTypeList.typeList,),
+              child: CategoryList(
+                  textdata: ['전체', '관광지', '문화시설', '축제공연행사', '숙박', '캠핑', '맛']),
             ),
             SizedBox(
               height: 16,
