@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 
+import '../../config/ui_config.dart';
 import '../components/common_app_bar.dart';
 import 'components/my_page_menu_list.dart';
 import 'components/my_page_user_profile.dart';
@@ -10,21 +11,22 @@ class MyPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CommonAppBar(title: ''),
+      appBar: const CommonAppBar(title: ''),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(16.0),
               child: ContentTitle(
                 title: '내 프로필',
-                withMore: true,
+                // withMore: true,
               ),
             ),
-            Padding(
+            const SizedBox(height: 16.0),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: MyPageUserProfile(
                 userName: '김코블',
@@ -34,8 +36,12 @@ class MyPageScreen extends StatelessWidget {
                     '',
               ),
             ),
-            SizedBox(height: 24.0),
             Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              child: Divider(height: 1, color: UiConfig.black.shade500),
+            ),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: MyPageMenuList(),
             ),

@@ -12,19 +12,19 @@ class MyPageMenuList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MyPageMenuBar(
+        const MyPageMenuBar(
           menuBarName: '계정 설정',
           menuBarIcon: Icons.account_circle_outlined,
         ),
-        MyPageMenuBar(
+        const MyPageMenuBar(
           menuBarName: '공지사항',
           menuBarIcon: Icons.notifications_outlined,
         ),
-        MyPageMenuBar(
+        const MyPageMenuBar(
           menuBarName: 'FAQ',
           menuBarIcon: Icons.chat_bubble_outline_outlined,
         ),
-        MyPageMenuBar(
+        const MyPageMenuBar(
           menuBarName: '언어',
           menuBarIcon: Icons.language_outlined,
         ),
@@ -34,7 +34,12 @@ class MyPageMenuList extends StatelessWidget {
             onToggled: (bool isToggled) {},
           ),
         ),
-        MyPageMenuBarWidget(
+        // MyPageMenuBar(
+        //   menuBarName: '로그아웃',
+        //   menuBarIcon: Icons.logout_outlined,
+        //   menuBarWidget: LogoutDialog(),
+        // ),
+        const MyPageMenuBarWidget(
           menuBarName: '로그아웃',
           menuBarWidget: LogoutDialog(),
         ),

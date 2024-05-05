@@ -4,9 +4,11 @@ import 'package:kovel_app/config/ui_config.dart';
 class MyPageMenuBar extends StatelessWidget {
   final String menuBarName;
   final IconData menuBarIcon;
+  final Widget? menuBarWidget;
 
   const MyPageMenuBar({
     super.key,
+    this.menuBarWidget,
     required this.menuBarName,
     required this.menuBarIcon,
   });
@@ -16,13 +18,15 @@ class MyPageMenuBar extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            menuBarWidget;
+          },
           borderRadius: BorderRadius.circular(8.0),
           splashColor: UiConfig.primaryColor.withOpacity(0.05),
           highlightColor: UiConfig.primaryColor.withOpacity(0.1),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: 64.0,
+            height: 56.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
               border: Border.all(
@@ -47,7 +51,7 @@ class MyPageMenuBar extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 24.0),
+        const SizedBox(height: 16.0),
       ],
     );
   }
