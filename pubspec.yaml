@@ -52,6 +52,7 @@ dependencies:
   kakao_flutter_sdk_user: ^1.9.1+2
   flutter_config: ^2.0.2
   flutter_screenutil: ^5.9.0
+  cloud_firestore: ^4.17.2
   cached_network_image: ^3.3.1
 
 dev_dependencies:
