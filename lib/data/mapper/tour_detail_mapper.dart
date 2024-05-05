@@ -1,5 +1,5 @@
+import 'package:kovel_app/core/enums/content_type.dart';
 import 'package:kovel_app/data/dto/tour_detail_dto.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 
 import '../../core/utils/html_util.dart';
@@ -8,7 +8,7 @@ extension ToTourDetail on TourDetailDto {
   TourDetail toTourDetail() {
     return TourDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       title: title ?? '',
       address1: addr1 ?? '',
       address2: addr2 ?? '',

@@ -92,7 +92,7 @@ class _ContentsDetailScreenState extends State<ContentsDetailScreen> {
                       children: [
                         // 공통 정보 리스트
                         CommonText(
-                          badgeTitle: viewModel.tourDetailData?.contentType.name ?? '',
+                          badgeTitle: viewModel.tourDetailData?.contentType.text ?? '',
                           title: viewModel.tourDetailData?.title ?? '',
                           tel: detailTel,
                           address: viewModel.tourDetailData?.address1 ?? '',

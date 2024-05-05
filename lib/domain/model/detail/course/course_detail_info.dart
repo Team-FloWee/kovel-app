@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
+import 'package:kovel_app/core/enums/content_type.dart';
 
 part 'course_detail_info.freezed.dart';
 part 'course_detail_info.g.dart';

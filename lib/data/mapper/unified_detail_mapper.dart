@@ -1,5 +1,5 @@
+import 'package:kovel_app/core/enums/content_type.dart';
 import 'package:kovel_app/data/dto/content_detail_dto.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 
 import '../../core/utils/html_util.dart';
@@ -8,7 +8,7 @@ extension ToUnifiedDetail on ContentDetailDto {
   UnifiedDetail toUnifiedDetail() {
     return UnifiedDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType: ContentType.getById(id: int.tryParse(contenttypeid!) ?? 0),
       takeTime: taketime ?? '',
       distance: distance ?? '',
       infoCenter: infocenterculture ??

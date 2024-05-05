@@ -30,7 +30,6 @@ mixin _$Tour {
   String get category1 => throw _privateConstructorUsedError;
   String get category2 => throw _privateConstructorUsedError;
   String get category3 => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
   CategoryType get categoryType => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get mapx => throw _privateConstructorUsedError;
@@ -59,7 +58,6 @@ abstract class $TourCopyWith<$Res> {
       String category1,
       String category2,
       String category3,
-      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
       CategoryType categoryType,
       String createdTime,
       String mapx,
@@ -185,7 +183,6 @@ abstract class _$$TourImplCopyWith<$Res> implements $TourCopyWith<$Res> {
       String category1,
       String category2,
       String category3,
-      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
       CategoryType categoryType,
       String createdTime,
       String mapx,
@@ -304,7 +301,6 @@ class _$TourImpl implements _Tour {
       required this.category1,
       required this.category2,
       required this.category3,
-      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
       required this.categoryType,
       required this.createdTime,
       required this.mapx,
@@ -336,7 +332,6 @@ class _$TourImpl implements _Tour {
   @override
   final String category3;
   @override
-  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
   final CategoryType categoryType;
   @override
   final String createdTime;
@@ -434,7 +429,6 @@ abstract class _Tour implements Tour {
       required final String category1,
       required final String category2,
       required final String category3,
-      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
       required final CategoryType categoryType,
       required final String createdTime,
       required final String mapx,
@@ -465,7 +459,6 @@ abstract class _Tour implements Tour {
   @override
   String get category3;
   @override
-  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
   CategoryType get categoryType;
   @override
   String get createdTime;
