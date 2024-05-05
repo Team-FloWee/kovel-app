@@ -20,9 +20,9 @@ class CourseListViewModel with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  bool _isFavorite = false;
+  final bool _isFavorite = false;
 
-  int _areaCode = 1; //서울, 경기...
+  final int _areaCode = 1; //서울, 경기...
 
   CourseListViewModel({
     required TourInfoRepository tourInfoRepository,
@@ -36,7 +36,7 @@ class CourseListViewModel with ChangeNotifier {
 
   List<TourDetail> get courseDetail => _courseDetail;
 
-  List<TourDetail> _tourDetail = [];
+  final List<TourDetail> _tourDetail = [];
 
   List<TourDetail> get tourDetail => _tourDetail;
 
@@ -46,12 +46,10 @@ class CourseListViewModel with ChangeNotifier {
     // 지역기반조회 컨텐트 아이디 25 넣고 -> 공통정보조회에 아이디 넣고 -> getCommonData
     _isLoading = true;
     notifyListeners();
-    _areaBasedDataList =
-        await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
 
     _areaBasedDataList.forEach((element) async {
-      _courseDetail
-          .addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+      _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
     });
 
     notifyListeners();
@@ -66,14 +64,11 @@ class CourseListViewModel with ChangeNotifier {
     // 지역기반조회 지역, 카테고리 받고 -> 공통정보조회 아이디 받음.
     // _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(
-        contentTypeId: 25, areaCode: areaCode, cat2: cat2);
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25, areaCode: areaCode, cat2: cat2);
     _courseDetail = [];
     _areaBasedDataList.forEach((element) async {
-      _courseDetail
-          .addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+      _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
       notifyListeners();
-
     });
     // _isLoading = false;
     notifyListeners();
@@ -84,12 +79,10 @@ class CourseListViewModel with ChangeNotifier {
 
     // _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(
-        areaCode: areaCode, contentTypeId: contentTypeId);
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(areaCode: areaCode, contentTypeId: contentTypeId);
 
     _areaBasedDataList.forEach((element) async {
-      _tourDetail
-          .addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+      _tourDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
       notifyListeners();
     });
     print(_tourDetail);

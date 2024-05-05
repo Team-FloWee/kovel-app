@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 class CourseListScreen extends StatefulWidget {
   final String areaCode;
-  
+
   const CourseListScreen({super.key, required this.areaCode});
 
   @override
@@ -32,11 +32,11 @@ class _CourseListScreenState extends State<CourseListScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<CourseListViewModel>();
     return viewModel.isLoading == true
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : Scaffold(
-            appBar: CommonAppBar(
+            appBar: const CommonAppBar(
               title: '여행코스',
             ),
             body: SingleChildScrollView(
@@ -45,7 +45,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                     ),
                     Padding(
@@ -58,28 +58,30 @@ class _CourseListScreenState extends State<CourseListScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CategoryList(
-                      categoryData: CourseCategoryTypeList.typeList,
-                        onSelect: (Category category) {  // 카테고리 가져오기
+                        categoryData: CourseCategoryTypeList.typeList,
+                        onSelect: (Category category) {
+                          // 카테고리 가져오기
                           context.read<CourseListViewModel>().getCourseData(widget.areaCode, category.id);
                         }),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Column(
-                      children: viewModel.courseDetail.map((e) => Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: CourseRecommendation(
-                              url: e.imagePath,
-                              course: e.categoryType.name,
-                              title: e.title,
-                              content: e.overview,
-                            ),
-                          )).toList(),
+                      children: viewModel.courseDetail
+                          .map((e) => Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: CourseRecommendation(
+                                  url: e.imagePath,
+                                  course: e.categoryType.name,
+                                  title: e.title,
+                                  content: e.overview,
+                                ),
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),

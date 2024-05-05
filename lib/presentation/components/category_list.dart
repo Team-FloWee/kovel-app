@@ -21,6 +21,7 @@ class _CategoryListState extends State<CategoryList> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

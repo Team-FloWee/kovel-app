@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/category/category.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
@@ -11,6 +12,7 @@ class CategoryItem extends StatelessWidget {
     required this.isSelected,
     required this.onSelect,
   });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +33,6 @@ class CategoryItem extends StatelessWidget {
                   fontWeight: UiConfig.semiBoldFont,
                   color: isSelected ? UiConfig.black.shade100 : UiConfig.black.shade800,
                 ),
-
               ),
             ),
           ),
