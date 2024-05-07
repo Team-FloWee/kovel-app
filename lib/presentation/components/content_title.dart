@@ -5,8 +5,9 @@ import '../../config/ui_config.dart';
 class ContentTitle extends StatelessWidget {
   final String title;
   final bool withMore;
+  final Function()? onTapMore;
 
-  const ContentTitle({super.key, required this.title, this.withMore = false});
+  const ContentTitle({super.key, required this.title, this.withMore = false, this.onTapMore,});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class ContentTitle extends StatelessWidget {
         withMore
             ? InkWell(
                 onTap: () {
+                  onTapMore!();
                   // TODO: router 기능 추가 >> 이동할 screen을 변수로 받기
                 },
                 child: Text(

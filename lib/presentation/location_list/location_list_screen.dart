@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -23,10 +24,13 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+    Future.microtask(() =>
+        context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+
   }
 
   @override
@@ -40,11 +44,14 @@ class _LocationListScreenState extends State<LocationListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     child: ContentTitle(
                       title: '추천 코스',
                       withMore: true,
+                      onTapMore: (){
+                        context.pushNamed('courseList', queryParameters:{'areaCode':widget.areaCode});
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -55,7 +62,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     child: CategoryList(
                         categoryData: CourseCategoryTypeList.typeList,
                         onSelect: (Category category) {
-                          context.read<LocationListViewModel>().getCourseData(widget.areaCode, category.id);
+                          context
+                              .read<LocationListViewModel>()
+                              .getCourseData(widget.areaCode, category.id);
                         }),
                   ),
                   const SizedBox(
@@ -69,7 +78,8 @@ class _LocationListScreenState extends State<LocationListScreen> {
                         children: viewModel.courseDetail
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
-                                  child: FavoriteImage(imagePath: e.imagePath, imageSize: 100),
+                                  child: FavoriteImage(
+                                      imagePath: e.imagePath, imageSize: 100),
                                 ))
                             .toList(),
                       ),
@@ -124,7 +134,8 @@ class _LocationCommonDataState extends State<LocationCommonData> {
               CategoryList(
                 categoryData: ContentTypeList.typeList,
                 onSelect: (Category category) {
-                  context.read<LocationListViewModel>().getCommonData(widget.areaCode, int.parse(category.id ?? '0'));
+                  context.read<LocationListViewModel>().getCommonData(
+                      widget.areaCode, int.parse(category.id ?? '0'));
                 },
               ),
               const SizedBox(height: 16),
@@ -134,23 +145,30 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                   children: viewModel.tourDetail
                       .map((e) => Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                viewModel.isLoading
-                                    ? const Center(child: CircularProgressIndicator())
-                                    : FavoriteImage(
-                                        imagePath: e.imagePath,
-                                        imageSize: 145,
-                                      ),
-                                const SizedBox(width: 8),
-                                CommonText(
-                                  badgeTitle: '음식점',
-                                  title: e.title,
-                                  tel: e.tel,
-                                  address: e.address1,
-                                ),
-                              ],
+                            child: InkWell(
+                              onTap: (){
+                                context.pushNamed('detail', queryParameters:{'id': e.contentId.toString(), 'contentTypeId': e.contentType.id, 'title': e.title});
+
+                              },
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  viewModel.isLoading
+                                      ? const Center(
+                                          child: CircularProgressIndicator())
+                                      : FavoriteImage(
+                                          imagePath: e.imagePath,
+                                          imageSize: 145,
+                                        ),
+                                  const SizedBox(width: 8),
+                                  CommonText(
+                                    badgeTitle: '음식점',
+                                    title: e.title,
+                                    tel: e.tel,
+                                    address: e.address1,
+                                  ),
+                                ],
+                              ),
                             ),
                           ))
                       .toList(),
