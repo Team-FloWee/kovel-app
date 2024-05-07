@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/domain/model/detail/course/course_detail_info.dart';
+import 'package:kovel_app/domain/model/detail/unified_info.dart';
 
 class RelatedCourseItem extends StatelessWidget {
-  final CourseDetailInfo info;
+  final UnifiedInfo info;
   const RelatedCourseItem({super.key, required this.info});
 
   @override
@@ -35,6 +35,9 @@ class RelatedCourseItem extends StatelessWidget {
                       color: UiConfig.black.shade500,
                     ),
                   );
+                },
+                errorBuilder: (context, error, stacktrace) {
+                  return Image.asset('assets/images/blank_image.png', width: 100, height: 100);
                 },
               ),
             ),

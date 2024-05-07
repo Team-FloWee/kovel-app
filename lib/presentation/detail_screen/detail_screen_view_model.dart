@@ -81,8 +81,19 @@ class DetailScreenViewModel with ChangeNotifier {
   void getInfoData(int id, int contentTypeId) async {
     _infoData =
         await _getInfoDataUseCase.execute(id: id, contentTypeId: contentTypeId);
-
     notifyListeners();
+
+    if (contentTypeId == 25) { // 여행코스
+      for (int i = 0; i < _infoData.length; i++) {
+        if (_infoData[i].imagePath == '') {
+          String imagePath = '';
+          imagePath = (await _getCommonDataUseCase.execute(id: _infoData[i].subContentId)).imagePath;
+          _infoData[i] = _infoData[i]
+              .copyWith(imagePath: imagePath);
+        }
+      }
+      notifyListeners();
+    }
   }
 
   void showDetailData() async {
