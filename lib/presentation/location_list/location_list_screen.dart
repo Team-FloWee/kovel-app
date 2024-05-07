@@ -75,7 +75,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: Row(
-                        children: viewModel.courseDetail
+                        children: viewModel.courseDetailList
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: FavoriteImage(
@@ -142,7 +142,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
-                  children: viewModel.tourDetail
+                  children: viewModel.tourDetailList
                       .map((e) => Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: InkWell(
