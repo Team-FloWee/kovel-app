@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
+import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
@@ -67,8 +68,15 @@ final goRouter = GoRouter(
       builder: (context, state) {
         return ChangeNotifierProvider(
           create: (context) => LocationListViewModel(
-            tourInfoRepository: TourInfoRepositoryImpl(
-              tourInfoDataSource: TourInfoDataSourceImpl(),
+            getCommonDataUseCase: GetCommonDataUseCase(
+              tourInfoRepository: TourInfoRepositoryImpl(
+                tourInfoDataSource: TourInfoDataSourceImpl(),
+              ),
+            ),
+            getAreaDataUseCase: GetAreaDataUseCase(
+              tourInfoRepository: TourInfoRepositoryImpl(
+                tourInfoDataSource: TourInfoDataSourceImpl(),
+              ),
             ),
           ),
           child: LocationListScreen(

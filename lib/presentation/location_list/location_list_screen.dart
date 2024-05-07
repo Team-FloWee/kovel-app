@@ -75,7 +75,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: Row(
-                        children: viewModel.courseDetail
+                        children: viewModel.courseDetailList
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: FavoriteImage(
@@ -142,7 +142,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
-                  children: viewModel.tourDetail
+                  children: viewModel.tourDetailList
                       .map((e) => Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: InkWell(
@@ -162,7 +162,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                                         ),
                                   const SizedBox(width: 8),
                                   CommonText(
-                                    badgeTitle: '음식점',
+                                    badgeTitle: e.contentType.name,
                                     title: e.title,
                                     tel: e.tel,
                                     address: e.address1,
