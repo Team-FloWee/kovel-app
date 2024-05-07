@@ -71,7 +71,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                       height: 16,
                     ),
                     Column(
-                      children: viewModel.courseDetail
+                      children: viewModel.courseDetailList
                           .map((e) => Padding(
                                 padding: const EdgeInsets.only(bottom: 16.0),
                                 child: CourseRecommendation(

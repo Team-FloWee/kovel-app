@@ -92,10 +92,12 @@ final goRouter = GoRouter(
         final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => CourseListViewModel(
-            tourInfoRepository: TourInfoRepositoryImpl(
-              tourInfoDataSource: TourInfoDataSourceImpl(),
-            ),
-          ),
+              getCommonDataUseCase: GetCommonDataUseCase(
+                  tourInfoRepository: TourInfoRepositoryImpl(
+                      tourInfoDataSource: TourInfoDataSourceImpl())),
+              getAreaDataUseCase: GetAreaDataUseCase(
+                  tourInfoRepository: TourInfoRepositoryImpl(
+                      tourInfoDataSource: TourInfoDataSourceImpl()))),
           child: CourseListScreen(
             areaCode: areaCode,
           ),
