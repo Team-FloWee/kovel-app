@@ -1,12 +1,14 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/course/course_detail_info.dart';
+import 'package:kovel_app/domain/model/detail/unified_info.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
-import 'package:kovel_app/presentation/course/components/related_course_item.dart';
+import 'package:kovel_app/presentation/detail_screen/components/course/related_course_item.dart';
 
 class RelatedCourseList extends StatelessWidget {
-  final List<CourseDetailInfo> courseDetailInfoData;
-  const RelatedCourseList({super.key, required this.courseDetailInfoData});
+  final List<UnifiedInfo> courseInfoData;
+
+  const RelatedCourseList({super.key, required this.courseInfoData});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class RelatedCourseList extends StatelessWidget {
         ContentTitle(title: '🏃🏼‍♀️ 이 여행과 관련된 코스'),
         SizedBox(height: 16),
         Column(
-          children: courseDetailInfoData.mapIndexed(
+          children: courseInfoData.mapIndexed(
                   (index, element) => RelatedCourseItem(info: element))
               .toList()
         ),
