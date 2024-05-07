@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/category/area_type.dart';
+import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
-import 'package:kovel_app/presentation/components/location_selector.dart';
-import 'package:kovel_app/presentation/components/nearby_tourist_information_recommendations.dart';
-import 'package:kovel_app/presentation/components/ongoing_festivals.dart';
-import 'package:kovel_app/presentation/components/top_10_popular_landmarks.dart';
+import 'package:kovel_app/presentation/home/components/location_selector.dart';
+import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
+import 'package:kovel_app/presentation/home/components/top_10_popular_landmarks.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // 드롭다운 리스트
 
     List<String> radiusList = ['1km', '3km', '5km', '10km']; // TODO: 따로 모아야할까요
-
     // radius 초기값 설정
     if (_selectedRadius == '') {
       _selectedRadius = radiusList.first;
@@ -207,24 +205,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: 4,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 10,
-                    children: const [
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                    ],
+                    children: List.generate(
+                        AreaTypeList.typeList.length,
+                        (index) => LocationSelector(
+                              category: AreaTypeList.typeList[index],
+                              onSelect: (Category selectedCategory) {
+                                print(selectedCategory.id);
+                              },
+                            )),
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Row(children: [
@@ -271,14 +259,14 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: SizedBox(
-                height: 150,
+                height: 230,
                 child: GridView.count(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     crossAxisCount: 1,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 0,
-                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: e.areaCode, title: e.title, url: e.imagePath)).toList()),
+                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: AreaType(areaCode: e.areaCode).name, title: e.title, url: e.imagePath)).toList()),
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
