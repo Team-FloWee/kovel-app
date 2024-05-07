@@ -10,9 +10,18 @@ import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
+import 'package:kovel_app/domain/use_case/get_area_course_data_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 
 class CourseListViewModel with ChangeNotifier {
-  final TourInfoRepository _tourInfoRepository;
+  final GetAreaCourseDataUseCase _getAreaCourseDataUseCase;
+  final GetCommonDataUseCase _getCommonDataUseCase;
+
+  CourseListViewModel({
+    required GetCommonDataUseCase getCommonDataUseCase,
+    required GetAreaCourseDataUseCase getAreaCourseDataUseCase,
+  }) : _getAreaCourseDataUseCase = getAreaCourseDataUseCase, _getCommonDataUseCase = getCommonDataUseCase;
+
 
   String code = '';
 
@@ -24,9 +33,7 @@ class CourseListViewModel with ChangeNotifier {
 
   final int _areaCode = 1; //서울, 경기...
 
-  CourseListViewModel({
-    required TourInfoRepository tourInfoRepository,
-  }) : _tourInfoRepository = tourInfoRepository;
+
 
   List<Tour> _areaBasedDataList = [];
 
@@ -46,14 +53,13 @@ class CourseListViewModel with ChangeNotifier {
     // 지역기반조회 컨텐트 아이디 25 넣고 -> 공통정보조회에 아이디 넣고 -> getCommonData
     _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25);
+    _areaBasedDataList = await _getAreaCourseDataUseCase.execute(areaCode: '', cat2: '');
 
     _areaBasedDataList.forEach((element) async {
-      _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+      _courseDetail.add(await _getCommonDataUseCase.execute(id: element.id));
     });
 
     notifyListeners();
-    await getCommonData(areaCode, contentTypeId);
 
     notifyListeners();
     _isLoading = false;
@@ -64,29 +70,17 @@ class CourseListViewModel with ChangeNotifier {
     // 지역기반조회 지역, 카테고리 받고 -> 공통정보조회 아이디 받음.
     // _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(contentTypeId: 25, areaCode: areaCode, cat2: cat2);
+    _areaBasedDataList = await _getAreaCourseDataUseCase.execute(areaCode: areaCode, cat2: cat2);
     _courseDetail = [];
     _areaBasedDataList.forEach((element) async {
-      _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
+      _courseDetail.add(await _getCommonDataUseCase.execute(id: element.id));
       notifyListeners();
     });
     // _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> getCommonData(String areaCode, int contentTypeId) async {
-    // 지역코드, 컨텐트타입아이디 받고 지역기반조회에 넣고 아이디를 받아 공통정보조회에 넣음 .
 
-    // _isLoading = true;
-    notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(areaCode: areaCode, contentTypeId: contentTypeId);
 
-    _areaBasedDataList.forEach((element) async {
-      _tourDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
-      notifyListeners();
-    });
-    print(_tourDetail);
-    // _isLoading = false;
-    notifyListeners();
-  }
+
 }
