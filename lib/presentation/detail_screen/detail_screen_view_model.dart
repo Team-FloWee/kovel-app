@@ -3,22 +3,30 @@ import 'package:kovel_app/core/method/get_detail_icon.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
-import 'package:kovel_app/domain/repository/unified_detail_repository.dart';
+import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/presentation/components/icon_text_row.dart';
 
 class DetailScreenViewModel with ChangeNotifier {
-  final UnifiedDetailRepository _unifiedDetailRepository;
+  final GetCommonDataUseCase _getCommonDataUseCase;
+  final GetDetailDataUseCase _getDetailDataUseCase;
+  final GetInfoDataUseCase _getInfoDataUseCase;
 
   DetailScreenViewModel({
-    required UnifiedDetailRepository unifiedDetailRepository,
-  }) : _unifiedDetailRepository = unifiedDetailRepository;
+    required GetCommonDataUseCase getCommonDataUseCase,
+    required GetDetailDataUseCase getDetailDataUseCase,
+    required GetInfoDataUseCase getInfoDataUseCase,
+  })  : _getCommonDataUseCase = getCommonDataUseCase,
+        _getDetailDataUseCase = getDetailDataUseCase,
+        _getInfoDataUseCase = getInfoDataUseCase;
 
   Exception? error;
   bool _isLoading = true;
   bool _isFavorite = false;
   List<Widget> _widgets = [];
-  List<TourDetail> _tourDetailData = [];
-  List<UnifiedDetail> _detailData = [];
+  late TourDetail _tourDetailData;
+  late UnifiedDetail _detailData;
   List<UnifiedInfo> _infoData = [];
 
   bool get isLoading => _isLoading;
@@ -27,17 +35,17 @@ class DetailScreenViewModel with ChangeNotifier {
 
   List<Widget> get widgets => _widgets;
 
-  List<TourDetail> get tourDetailData => _tourDetailData;
+  TourDetail get tourDetailData => _tourDetailData;
 
-  List<UnifiedDetail> get detailData => _detailData;
+  UnifiedDetail get detailData => _detailData;
 
   List<UnifiedInfo> get infoData => _infoData;
 
   void onRefresh() {
     _isLoading = false;
     _widgets = [];
-    _tourDetailData = [];
-    _detailData = [];
+    _tourDetailData;
+    _detailData;
     _infoData = [];
     error = null;
 
@@ -54,9 +62,8 @@ class DetailScreenViewModel with ChangeNotifier {
     notifyListeners();
 
     try {
-      _tourDetailData = await _unifiedDetailRepository.getDetailCommon(id: id);
-
-      _detailData = await _unifiedDetailRepository.getUnifiedDetail(
+      _tourDetailData = await _getCommonDataUseCase.execute(id: id);
+      _detailData = await _getDetailDataUseCase.execute(
           id: id, contentTypeId: contentTypeId);
 
       showDetailData();
@@ -72,14 +79,14 @@ class DetailScreenViewModel with ChangeNotifier {
   }
 
   void getInfoData(int id, int contentTypeId) async {
-    _infoData = await _unifiedDetailRepository.getUnifiedInfo(
-        id: id, contentTypeId: contentTypeId);
+    _infoData =
+        await _getInfoDataUseCase.execute(id: id, contentTypeId: contentTypeId);
 
     notifyListeners();
   }
 
   void showDetailData() async {
-    _detailData.first.toJson().forEach((key, value) {
+    _detailData.toJson().forEach((key, value) {
       if (value != null &&
           value != '' &&
           value != true &&

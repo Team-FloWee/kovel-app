@@ -15,9 +15,9 @@ class DetailScreen extends StatefulWidget {
 
   DetailScreen(
       {super.key,
-        required this.id,
-        required this.contentTypeId,
-        required this.title});
+      required this.id,
+      required this.contentTypeId,
+      required this.title});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -28,10 +28,10 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     Future.microtask(() => {
-      context
-          .read<DetailScreenViewModel>()
-          .getDetailData(widget.id, widget.contentTypeId),
-    });
+          context
+              .read<DetailScreenViewModel>()
+              .getDetailData(widget.id, widget.contentTypeId),
+        });
   }
 
   @override
@@ -56,7 +56,7 @@ class _DetailScreenState extends State<DetailScreen> {
             }
           },
           child: SingleChildScrollView(
-            // 짧은 화면에서 스크롤 먹음
+              // 짧은 화면에서 스크롤 먹음
               physics: const AlwaysScrollableScrollPhysics(),
               child: Text('error ${viewModel.error.toString()}')),
         ),
@@ -80,7 +80,7 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             children: [
               getCachedNetworkImage(
-                  imagePath: viewModel.tourDetailData.first.imagePath),
+                  imagePath: viewModel.tourDetailData.imagePath),
               Padding(
                 padding: EdgeInsets.all(16),
                 child: Column(
@@ -90,13 +90,12 @@ class _DetailScreenState extends State<DetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CommonText(
-                          badgeTitle:
-                          viewModel.detailData.first.contentType.name,
-                          title: viewModel.tourDetailData.first.title,
-                          tel: (viewModel.tourDetailData.first.tel == '')
-                              ? viewModel.detailData.first.infoCenter
+                          badgeTitle: viewModel.detailData.contentType.name,
+                          title: viewModel.tourDetailData.title,
+                          tel: (viewModel.tourDetailData.tel == '')
+                              ? viewModel.detailData.infoCenter
                               : '',
-                          address: viewModel.tourDetailData.first.address1,
+                          address: viewModel.tourDetailData.address1,
                         ),
                         Transform.translate(
                           offset: Offset(16, -16),
@@ -127,29 +126,28 @@ class _DetailScreenState extends State<DetailScreen> {
                           height: 1,
                           color: UiConfig.black.shade500),
                     ),
-                    viewModel.tourDetailData.first.contentType.contentTypeId !=
-                        32
+                    viewModel.tourDetailData.contentType.contentTypeId != 32
                         ? SizedBox()
                         : Column(
-                      children: [
-                        Text(
-                          viewModel.tourDetailData.first.overview,
-                          style: UiConfig.bodyStyle.copyWith(
-                            fontWeight: UiConfig.regularFont,
+                            children: [
+                              Text(
+                                viewModel.tourDetailData.overview,
+                                style: UiConfig.bodyStyle.copyWith(
+                                  fontWeight: UiConfig.regularFont,
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                            ],
                           ),
-                        ),
-                        const SizedBox(height: 16.0),
-                      ],
-                    ),
                     ...viewModel.widgets,
                     widget.contentTypeId == 12 ||
-                        widget.contentTypeId == 14 ||
-                        widget.contentTypeId == 15 ||
-                        widget.contentTypeId == 28
+                            widget.contentTypeId == 14 ||
+                            widget.contentTypeId == 15 ||
+                            widget.contentTypeId == 28
                         ? InfoSection(
-                      id: widget.id,
-                      contentTypeId: widget.contentTypeId,
-                    )
+                            id: widget.id,
+                            contentTypeId: widget.contentTypeId,
+                          )
                         : SizedBox(),
                   ],
                 ),
@@ -181,10 +179,10 @@ class _InfoSectionState extends State<InfoSection> {
   void initState() {
     super.initState();
     Future.microtask(() => {
-      context
-          .read<DetailScreenViewModel>()
-          .getInfoData(widget.id, widget.contentTypeId),
-    });
+          context
+              .read<DetailScreenViewModel>()
+              .getInfoData(widget.id, widget.contentTypeId),
+        });
   }
 
   @override
@@ -195,7 +193,7 @@ class _InfoSectionState extends State<InfoSection> {
         Padding(
           padding: const EdgeInsets.only(top: 18, bottom: 16),
           child:
-          Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
+              Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
         ),
         Container(
           padding: EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
@@ -207,7 +205,7 @@ class _InfoSectionState extends State<InfoSection> {
             children: [
               Container(
                 padding:
-                EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
+                    EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: UiConfig.black.shade500,
@@ -216,8 +214,8 @@ class _InfoSectionState extends State<InfoSection> {
                   children: viewModel.infoData
                       .map(
                         (e) =>
-                        InfoText(title: e.infoName, contents: e.infoText),
-                  )
+                            InfoText(title: e.infoName, contents: e.infoText),
+                      )
                       .toList(),
                 ),
               ),
