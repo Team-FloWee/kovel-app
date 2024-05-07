@@ -30,15 +30,14 @@ class MyPageMenuList extends StatelessWidget {
         ),
         MyPageMenuBarWidget(
           menuBarName: 'Dark Mode',
-          menuBarWidget: MyPageSwitchButton(
-            onToggled: (bool isToggled) {},
-          ),
+          menuBarWidget: MyPageSwitchButton(),
         ),
         // MyPageMenuBar(
         //   menuBarName: '로그아웃',
         //   menuBarIcon: Icons.logout_outlined,
         //   menuBarWidget: LogoutDialog(),
         // ),
+        // TODO: 로그아웃 바 전체로
         const MyPageMenuBarWidget(
           menuBarName: '로그아웃',
           menuBarWidget: LogoutDialog(),
