@@ -21,7 +21,7 @@ TourDetail _$TourDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TourDetail {
   int get contentId => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get address1 => throw _privateConstructorUsedError;
   String get address2 => throw _privateConstructorUsedError;
@@ -30,6 +30,8 @@ mixin _$TourDetail {
   String get category1 => throw _privateConstructorUsedError;
   String get category2 => throw _privateConstructorUsedError;
   String get category3 => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+  CategoryType get categoryType => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get mapx => throw _privateConstructorUsedError;
   String get mapy => throw _privateConstructorUsedError;
@@ -52,7 +54,7 @@ abstract class $TourDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String title,
       String address1,
       String address2,
@@ -61,6 +63,8 @@ abstract class $TourDetailCopyWith<$Res> {
       String category1,
       String category2,
       String category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      CategoryType categoryType,
       String createdTime,
       String mapx,
       String mapy,
@@ -84,7 +88,7 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? title = null,
     Object? address1 = null,
     Object? address2 = null,
@@ -93,6 +97,7 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
     Object? category1 = null,
     Object? category2 = null,
     Object? category3 = null,
+    Object? categoryType = null,
     Object? createdTime = null,
     Object? mapx = null,
     Object? mapy = null,
@@ -106,10 +111,10 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -142,6 +147,10 @@ class _$TourDetailCopyWithImpl<$Res, $Val extends TourDetail>
           ? _value.category3
           : category3 // ignore: cast_nullable_to_non_nullable
               as String,
+      categoryType: null == categoryType
+          ? _value.categoryType
+          : categoryType // ignore: cast_nullable_to_non_nullable
+              as CategoryType,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -184,7 +193,7 @@ abstract class _$$TourDetailImplCopyWith<$Res>
   @useResult
   $Res call(
       {int contentId,
-      int contentTypeId,
+      ContentType contentType,
       String title,
       String address1,
       String address2,
@@ -193,6 +202,8 @@ abstract class _$$TourDetailImplCopyWith<$Res>
       String category1,
       String category2,
       String category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      CategoryType categoryType,
       String createdTime,
       String mapx,
       String mapy,
@@ -214,7 +225,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? title = null,
     Object? address1 = null,
     Object? address2 = null,
@@ -223,6 +234,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
     Object? category1 = null,
     Object? category2 = null,
     Object? category3 = null,
+    Object? categoryType = null,
     Object? createdTime = null,
     Object? mapx = null,
     Object? mapy = null,
@@ -236,10 +248,10 @@ class __$$TourDetailImplCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as ContentType,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -272,6 +284,10 @@ class __$$TourDetailImplCopyWithImpl<$Res>
           ? _value.category3
           : category3 // ignore: cast_nullable_to_non_nullable
               as String,
+      categoryType: null == categoryType
+          ? _value.categoryType
+          : categoryType // ignore: cast_nullable_to_non_nullable
+              as CategoryType,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -309,7 +325,7 @@ class __$$TourDetailImplCopyWithImpl<$Res>
 class _$TourDetailImpl implements _TourDetail {
   const _$TourDetailImpl(
       {required this.contentId,
-      required this.contentTypeId,
+      required this.contentType,
       required this.title,
       required this.address1,
       required this.address2,
@@ -318,6 +334,8 @@ class _$TourDetailImpl implements _TourDetail {
       required this.category1,
       required this.category2,
       required this.category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      required this.categoryType,
       required this.createdTime,
       required this.mapx,
       required this.mapy,
@@ -332,7 +350,7 @@ class _$TourDetailImpl implements _TourDetail {
   @override
   final int contentId;
   @override
-  final int contentTypeId;
+  final ContentType contentType;
   @override
   final String title;
   @override
@@ -350,6 +368,9 @@ class _$TourDetailImpl implements _TourDetail {
   @override
   final String category3;
   @override
+  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+  final CategoryType categoryType;
+  @override
   final String createdTime;
   @override
   final String mapx;
@@ -366,7 +387,7 @@ class _$TourDetailImpl implements _TourDetail {
 
   @override
   String toString() {
-    return 'TourDetail(contentId: $contentId, contentTypeId: $contentTypeId, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel, telName: $telName, overview: $overview)';
+    return 'TourDetail(contentId: $contentId, contentType: $contentType, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, categoryType: $categoryType, createdTime: $createdTime, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel, telName: $telName, overview: $overview)';
   }
 
   @override
@@ -376,8 +397,8 @@ class _$TourDetailImpl implements _TourDetail {
             other is _$TourDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.address1, address1) ||
                 other.address1 == address1) &&
@@ -392,6 +413,8 @@ class _$TourDetailImpl implements _TourDetail {
                 other.category2 == category2) &&
             (identical(other.category3, category3) ||
                 other.category3 == category3) &&
+            (identical(other.categoryType, categoryType) ||
+                other.categoryType == categoryType) &&
             (identical(other.createdTime, createdTime) ||
                 other.createdTime == createdTime) &&
             (identical(other.mapx, mapx) || other.mapx == mapx) &&
@@ -409,7 +432,7 @@ class _$TourDetailImpl implements _TourDetail {
   int get hashCode => Object.hash(
       runtimeType,
       contentId,
-      contentTypeId,
+      contentType,
       title,
       address1,
       address2,
@@ -418,6 +441,7 @@ class _$TourDetailImpl implements _TourDetail {
       category1,
       category2,
       category3,
+      categoryType,
       createdTime,
       mapx,
       mapy,
@@ -443,7 +467,7 @@ class _$TourDetailImpl implements _TourDetail {
 abstract class _TourDetail implements TourDetail {
   const factory _TourDetail(
       {required final int contentId,
-      required final int contentTypeId,
+      required final ContentType contentType,
       required final String title,
       required final String address1,
       required final String address2,
@@ -452,6 +476,8 @@ abstract class _TourDetail implements TourDetail {
       required final String category1,
       required final String category2,
       required final String category3,
+      @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+      required final CategoryType categoryType,
       required final String createdTime,
       required final String mapx,
       required final String mapy,
@@ -466,7 +492,7 @@ abstract class _TourDetail implements TourDetail {
   @override
   int get contentId;
   @override
-  int get contentTypeId;
+  ContentType get contentType;
   @override
   String get title;
   @override
@@ -483,6 +509,9 @@ abstract class _TourDetail implements TourDetail {
   String get category2;
   @override
   String get category3;
+  @override
+  @JsonKey(fromJson: _categoryTypeFromJson, toJson: _categoryTypeToJson)
+  CategoryType get categoryType;
   @override
   String get createdTime;
   @override

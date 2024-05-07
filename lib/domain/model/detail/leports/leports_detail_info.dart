@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'leports_detail_info.freezed.dart';
 part 'leports_detail_info.g.dart';
@@ -7,7 +8,7 @@ part 'leports_detail_info.g.dart';
 class LeportsDetailInfo with _$LeportsDetailInfo {
   const factory LeportsDetailInfo({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String infoName,
     required String infoText,
   }) = _LeportsDetailInfo;

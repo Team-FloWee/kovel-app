@@ -13,7 +13,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: UiConfig.black.shade100,
-      leading: Icon(Icons.arrow_back_ios),
+      // leading: Icon(Icons.arrow_back_ios),
       centerTitle: true,
       title: Text(
         title,

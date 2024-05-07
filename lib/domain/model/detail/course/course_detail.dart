@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'course_detail.freezed.dart';
 part 'course_detail.g.dart';
@@ -7,7 +8,7 @@ part 'course_detail.g.dart';
 class CourseDetail with _$CourseDetail {
   const factory CourseDetail({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String takeTime,
     required String distance,
   }) = _CourseDetail;

@@ -9,7 +9,8 @@ part of 'shopping_detail.dart';
 _$ShoppingDetailImpl _$$ShoppingDetailImplFromJson(Map<String, dynamic> json) =>
     _$ShoppingDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoCenter: json['infoCenter'] as String,
       saleItem: json['saleItem'] as String,
       saleItemCost: json['saleItemCost'] as String,
@@ -23,7 +24,7 @@ Map<String, dynamic> _$$ShoppingDetailImplToJson(
         _$ShoppingDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'infoCenter': instance.infoCenter,
       'saleItem': instance.saleItem,
       'saleItemCost': instance.saleItemCost,

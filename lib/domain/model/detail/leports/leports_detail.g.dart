@@ -9,7 +9,8 @@ part of 'leports_detail.dart';
 _$LeportsDetailImpl _$$LeportsDetailImplFromJson(Map<String, dynamic> json) =>
     _$LeportsDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoCenter: json['infoCenter'] as String,
       restDay: json['restDay'] as String,
       useTime: json['useTime'] as String,
@@ -20,7 +21,7 @@ _$LeportsDetailImpl _$$LeportsDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$LeportsDetailImplToJson(_$LeportsDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'infoCenter': instance.infoCenter,
       'restDay': instance.restDay,
       'useTime': instance.useTime,

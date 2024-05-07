@@ -26,8 +26,9 @@ class CourseRecommendation extends StatelessWidget {
         children: [
           FavoriteImage(
             imagePath: url,
-            title: 'data',
-            area: '145',
+            title: '',
+            area: '', imageSize: 145,
+            
           ),
           SizedBox(
             width: 8,
@@ -41,8 +42,8 @@ class CourseRecommendation extends StatelessWidget {
                   child: Container(
                     color: Color(0xFF00D1FF),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 5,top: 3,left: 10,right: 10),
                       child: Text(
                         course,
 

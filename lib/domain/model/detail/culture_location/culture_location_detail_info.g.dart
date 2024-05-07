@@ -10,7 +10,8 @@ _$CultureLocationDetailInfoImpl _$$CultureLocationDetailInfoImplFromJson(
         Map<String, dynamic> json) =>
     _$CultureLocationDetailInfoImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoName: json['infoName'] as String,
       infoText: json['infoText'] as String,
     );
@@ -19,7 +20,7 @@ Map<String, dynamic> _$$CultureLocationDetailInfoImplToJson(
         _$CultureLocationDetailInfoImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'infoName': instance.infoName,
       'infoText': instance.infoText,
     };

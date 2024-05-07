@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
+
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // 드롭다운 리스트
 
     List<String> radiusList = ['1km', '3km', '5km', '10km']; // TODO: 따로 모아야할까요
+
     // radius 초기값 설정
     if (_selectedRadius == '') {
       _selectedRadius = radiusList.first;
@@ -94,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       )
                     ],
+
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
@@ -213,6 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 print(selectedCategory.id);
                               },
                             )),
+
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Row(children: [

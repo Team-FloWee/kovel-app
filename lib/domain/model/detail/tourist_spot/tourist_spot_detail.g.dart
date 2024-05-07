@@ -10,7 +10,8 @@ _$TouristSpotDetailImpl _$$TouristSpotDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$TouristSpotDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoCenter: json['infoCenter'] as String,
       expGuide: json['expGuide'] as String,
       parking: json['parking'] as String,
@@ -22,7 +23,7 @@ Map<String, dynamic> _$$TouristSpotDetailImplToJson(
         _$TouristSpotDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'infoCenter': instance.infoCenter,
       'expGuide': instance.expGuide,
       'parking': instance.parking,

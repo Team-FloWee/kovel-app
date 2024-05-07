@@ -1,13 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'restaurant_detail.freezed.dart';
 part 'restaurant_detail.g.dart';
 
 @freezed
 class RestaurantDetail with _$RestaurantDetail {
-  const factory RestaurantDetail(
-      {required int contentId,
-      required int contentTypeId,
+  const factory RestaurantDetail({
+      required int contentId,
+      required ContentType contentType,
       required String infoCenter,
       required String firstMenu,
       required String treatMenu,

@@ -9,7 +9,8 @@ part of 'festival_detail.dart';
 _$FestivalDetailImpl _$$FestivalDetailImplFromJson(Map<String, dynamic> json) =>
     _$FestivalDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoCenter: json['infoCenter'] as String,
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
@@ -26,7 +27,7 @@ Map<String, dynamic> _$$FestivalDetailImplToJson(
         _$FestivalDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'infoCenter': instance.infoCenter,
       'startDate': instance.startDate,
       'endDate': instance.endDate,

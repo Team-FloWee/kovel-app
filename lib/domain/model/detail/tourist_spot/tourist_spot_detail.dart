@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'tourist_spot_detail.freezed.dart';
 part 'tourist_spot_detail.g.dart';
@@ -7,7 +8,7 @@ part 'tourist_spot_detail.g.dart';
 class TouristSpotDetail with _$TouristSpotDetail {
   const factory TouristSpotDetail({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String infoCenter,
     required String expGuide,
     required String parking,

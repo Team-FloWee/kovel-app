@@ -9,7 +9,8 @@ part of 'course_detail.dart';
 _$CourseDetailImpl _$$CourseDetailImplFromJson(Map<String, dynamic> json) =>
     _$CourseDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       takeTime: json['takeTime'] as String,
       distance: json['distance'] as String,
     );
@@ -17,7 +18,7 @@ _$CourseDetailImpl _$$CourseDetailImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$CourseDetailImplToJson(_$CourseDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'takeTime': instance.takeTime,
       'distance': instance.distance,
     };

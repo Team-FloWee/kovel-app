@@ -3,6 +3,8 @@ import 'package:kovel_app/data/mapper/content_detail_info_mapper.dart';
 import 'package:kovel_app/data/mapper/content_detail_mapper.dart';
 import 'package:kovel_app/data/mapper/tour_detail_mapper.dart';
 import 'package:kovel_app/data/mapper/tour_mapper.dart';
+import 'package:kovel_app/data/mapper/unified_detail_mapper.dart';
+import 'package:kovel_app/data/mapper/unified_info_mapper.dart';
 import 'package:kovel_app/domain/model/detail/course/course_detail.dart';
 import 'package:kovel_app/domain/model/detail/course/course_detail_info.dart';
 import 'package:kovel_app/domain/model/detail/culture_location/culture_location_detail.dart';
@@ -17,6 +19,8 @@ import 'package:kovel_app/domain/model/detail/shopping/shopping_detail.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/tourist_spot/tourist_spot_detail.dart';
 import 'package:kovel_app/domain/model/detail/tourist_spot/tourist_spot_detail_info.dart';
+import 'package:kovel_app/domain/model/detail/unified_detail.dart';
+import 'package:kovel_app/domain/model/detail/unified_info.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
 import '../../domain/model/tour.dart';
@@ -34,8 +38,13 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 지역 기반 관광 정보 조회 (area based list)
   @override
-  Future<List<Tour>> getAreaBasedList({int pageNo = 1}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList();
+  Future<List<Tour>> getAreaBasedList(
+      {int pageNo = 1,
+      int? contentTypeId,
+      String areaCode = '',
+      String cat2 = ''}) async {
+    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
+        contentTypeId: contentTypeId, areaCode: areaCode, cat2: cat2);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -266,5 +275,31 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     return touristSpotDetailInfo
         .map((e) => e.toTouristSpotDetailInfo())
         .toList();
+  }
+
+  @override
+  Future<List<UnifiedDetail>> getUnifiedDetail({
+    int pageNo = 1,
+    required int id,
+    required int contentTypeId,
+  }) async {
+    final List<ContentDetailDto> detailDto = await _tourInfoDataSource
+        .getDetailIntro(id: id, contentTypeId: contentTypeId);
+    return detailDto.map((e) => e.toUnifiedDetail()).toList();
+  }
+
+  // 반복 정보 조회 - 컨텐츠 별 (detail info - content detail info)
+  // (12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠)
+
+  // 25: 여행 코스
+  @override
+  Future<List<UnifiedInfo>> getUnifiedInfo({
+    int pageNo = 1,
+    required int id,
+    required int contentTypeId,
+  }) async {
+    final List<ContentDetailInfoDto> infoDto = await _tourInfoDataSource
+        .getDetailInfo(id: id, contentTypeId: contentTypeId);
+    return infoDto.map((e) => e.toUnifiedInfo()).toList();
   }
 }

@@ -9,7 +9,8 @@ part of 'lodgment_detail.dart';
 _$LodgmentDetailImpl _$$LodgmentDetailImplFromJson(Map<String, dynamic> json) =>
     _$LodgmentDetailImpl(
       contentId: (json['contentId'] as num).toInt(),
-      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       infoCenter: json['infoCenter'] as String,
       reservationUrl: json['reservationUrl'] as String,
       roomCount: json['roomCount'] as String,
@@ -38,7 +39,7 @@ Map<String, dynamic> _$$LodgmentDetailImplToJson(
         _$LodgmentDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
-      'contentTypeId': instance.contentTypeId,
+      'contentType': instance.contentType,
       'infoCenter': instance.infoCenter,
       'reservationUrl': instance.reservationUrl,
       'roomCount': instance.roomCount,

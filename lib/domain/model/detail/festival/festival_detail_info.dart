@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'festival_detail_info.freezed.dart';
 part 'festival_detail_info.g.dart';
@@ -7,7 +8,7 @@ part 'festival_detail_info.g.dart';
 class FestivalDetailInfo with _$FestivalDetailInfo {
   const factory FestivalDetailInfo({
     required int contentId,
-    required int contentTypeId,
+    required ContentType contentType,
     required String infoName,
     required String infoText,
   }) = _FestivalDetailInfo;
