@@ -3,8 +3,8 @@ import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
-import 'package:kovel_app/presentation/detail_screen/components/course/related_course_list.dart';
-import 'package:kovel_app/presentation/detail_screen/detail_screen_view_model.dart';
+import 'package:kovel_app/presentation/detail/components/course/related_course_list.dart';
+import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/method/get_cached_network_image.dart';
@@ -30,14 +30,14 @@ class _DetailScreenState extends State<DetailScreen> {
     super.initState();
     Future.microtask(() => {
           context
-              .read<DetailScreenViewModel>()
+              .read<DetailViewModel>()
               .getDetailData(widget.id, widget.contentTypeId),
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<DetailScreenViewModel>();
+    final viewModel = context.watch<DetailViewModel>();
     if (viewModel.isLoading) {
       return Scaffold(
         body: Center(
@@ -50,9 +50,9 @@ class _DetailScreenState extends State<DetailScreen> {
         body: RefreshIndicator(
           onRefresh: () async {
             if (!viewModel.isLoading) {
-              context.read<DetailScreenViewModel>().onRefresh();
+              context.read<DetailViewModel>().onRefresh();
               context
-                  .read<DetailScreenViewModel>()
+                  .read<DetailViewModel>()
                   .getDetailData(widget.id, widget.contentTypeId);
             }
           },
@@ -187,14 +187,14 @@ class _InfoSectionState extends State<InfoSection> {
     super.initState();
     Future.microtask(() => {
           context
-              .read<DetailScreenViewModel>()
+              .read<DetailViewModel>()
               .getInfoData(widget.id, widget.contentTypeId),
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<DetailScreenViewModel>();
+    final viewModel = context.watch<DetailViewModel>();
     return Column(
       children: [
         Padding(

@@ -6,7 +6,7 @@ import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
-import 'package:kovel_app/presentation/detail_screen/detail_screen_view_model.dart';
+import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -23,7 +23,7 @@ void diSetup() {
   // registerFactory
 
   // ViewModel & UseCase
-  getIt.registerFactory<DetailScreenViewModel>(() => DetailScreenViewModel(
+  getIt.registerFactory<DetailViewModel>(() => DetailViewModel(
       getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
       getDetailDataUseCase: GetDetailDataUseCase(tourInfoRepository: getIt()),
       getInfoDataUseCase: GetInfoDataUseCase(tourInfoRepository: getIt())
