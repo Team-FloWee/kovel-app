@@ -162,7 +162,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                                         ),
                                   const SizedBox(width: 8),
                                   CommonText(
-                                    badgeTitle: '음식점',
+                                    badgeTitle: e.contentType.name,
                                     title: e.title,
                                     tel: e.tel,
                                     address: e.address1,

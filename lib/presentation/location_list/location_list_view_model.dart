@@ -5,7 +5,6 @@ import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 
 import '../../domain/model/tour.dart';
-import '../../domain/repository/tour_info_repository.dart';
 import '../../domain/use_case/get_area_data_use_case.dart';
 
 class LocationListViewModel with ChangeNotifier {
