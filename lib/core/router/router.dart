@@ -36,7 +36,7 @@ final goRouter = GoRouter(
       path: '/detail',
       name: 'detail',
       builder: (context, state) {
-        print(state.uri.queryParameters);
+
         final id = int.parse(state.uri.queryParameters['id']!);
         final contentTypeId =
             int.parse(state.uri.queryParameters['contentTypeId']!);
@@ -56,8 +56,7 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/locationList',
       builder: (context, state) {
-        print(state);
-        // final areaCode = state.pathParameters['areaCode']!;
+
         return ChangeNotifierProvider(
           create: (context) => LocationListViewModel(
             tourInfoRepository: TourInfoRepositoryImpl(
