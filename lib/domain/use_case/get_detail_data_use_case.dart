@@ -1,10 +1,10 @@
 import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
-class GetCommonDataUseCase {
+class GetDetailDataUseCase {
   final TourInfoRepository _tourInfoRepository;
 
-  GetCommonDataUseCase({
+  GetDetailDataUseCase({
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
