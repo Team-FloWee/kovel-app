@@ -1,16 +1,17 @@
-import 'package:kovel_app/domain/model/detail/tour_detail.dart';
+import 'package:kovel_app/domain/model/detail/unified_info.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
-class GetCommonDataUseCase {
+class GetInfoDataUseCase {
   final TourInfoRepository _tourInfoRepository;
 
-  GetCommonDataUseCase({
+  GetInfoDataUseCase({
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  Future<TourDetail> execute(
+  Future<UnifiedInfo> execute(
       {required int id, required int contentTypeId}) async {
-    final result = await _tourInfoRepository.getDetailCommon(id: id);
+    final result = await _tourInfoRepository.getUnifiedInfo(
+        id: id, contentTypeId: contentTypeId);
     return result.first;
   }
 }
