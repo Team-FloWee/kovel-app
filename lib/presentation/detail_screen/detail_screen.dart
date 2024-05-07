@@ -3,6 +3,7 @@ import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
+import 'package:kovel_app/presentation/detail_screen/components/course/related_course_list.dart';
 import 'package:kovel_app/presentation/detail_screen/detail_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -90,7 +91,9 @@ class _DetailScreenState extends State<DetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CommonText(
-                          badgeTitle: viewModel.detailData.contentType.name,
+                          badgeTitle: viewModel.tourDetailData.contentType.contentTypeId == 25
+                          ? viewModel.tourDetailData.categoryType.name
+                          : viewModel.tourDetailData.contentType.name,
                           title: viewModel.tourDetailData.title,
                           tel: (viewModel.tourDetailData.tel == '')
                               ? viewModel.detailData.infoCenter
@@ -119,6 +122,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ],
                     ),
+                    widget.contentTypeId == 25
+                        ? Text(viewModel.tourDetailData.overview, style: UiConfig.bodyStyle)
+                        : SizedBox(),
                     Padding(
                       padding: const EdgeInsets.only(top: 18, bottom: 16),
                       child: Divider(
@@ -126,7 +132,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           height: 1,
                           color: UiConfig.black.shade500),
                     ),
-                    viewModel.tourDetailData.contentType.contentTypeId != 32
+                    widget.contentTypeId != 32
                         ? SizedBox()
                         : Column(
                             children: [
@@ -143,6 +149,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     widget.contentTypeId == 12 ||
                             widget.contentTypeId == 14 ||
                             widget.contentTypeId == 15 ||
+                            widget.contentTypeId == 25 ||
                             widget.contentTypeId == 28
                         ? InfoSection(
                             id: widget.id,
@@ -195,7 +202,7 @@ class _InfoSectionState extends State<InfoSection> {
           child:
               Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
         ),
-        Container(
+        widget.contentTypeId != 25 ? Container(
           padding: EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -221,7 +228,7 @@ class _InfoSectionState extends State<InfoSection> {
               ),
             ],
           ),
-        ),
+        ) : RelatedCourseList(courseInfoData: viewModel.infoData)
       ],
     );
   }
