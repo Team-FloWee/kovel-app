@@ -16,40 +16,48 @@ import '../../presentation/home/home_screen.dart';
 import '../../presentation/home/home_view_model.dart';
 
 final goRouter = GoRouter(
+  initialLocation: '/locationList',
   routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => HomeViewModel(
-            tourInfoRepository: TourInfoRepositoryImpl(
-              tourInfoDataSource: TourInfoDataSourceImpl(),
-            ),
-          ),
-            child: const HomeScreen(),
-        );
-      },
-    ),
+    //
+    // GoRoute(
+    //   path: '/',
+    //   builder: (context, state) {
+    //     return ChangeNotifierProvider(
+    //       create: (context) => HomeViewModel(
+    //         tourInfoRepository: TourInfoRepositoryImpl(
+    //           tourInfoDataSource: TourInfoDataSourceImpl(),
+    //         ),
+    //       ),
+    //         child: const HomeScreen(),
+    //     );
+    //   },
+    // ),
     GoRoute(
       path: '/detail',
+      name: 'detail',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
-        final contentTypeId = int.parse(state.pathParameters['contentTypeId']!);
-        final title = state.pathParameters['title']!;
+        print(state.uri.queryParameters);
+        final id = int.parse(state.uri.queryParameters['id']!);
+        final contentTypeId =
+            int.parse(state.uri.queryParameters['contentTypeId']!);
+        final title = state.uri.queryParameters['title']!;
+
         return ChangeNotifierProvider(
           create: (context) => DetailScreenViewModel(
             unifiedDetailRepository: UnifiedDetailRepositoryImpl(
               tourInfoDataSource: TourInfoDataSourceImpl(),
             ),
           ),
-          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child:
+              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
     GoRoute(
       path: '/locationList',
       builder: (context, state) {
-        final areaCode = state.pathParameters['areaCode']!;
+        print(state);
+        // final areaCode = state.pathParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => LocationListViewModel(
             tourInfoRepository: TourInfoRepositoryImpl(
@@ -57,14 +65,16 @@ final goRouter = GoRouter(
             ),
           ),
           child: LocationListScreen(
-             areaCode: areaCode,),
+            areaCode: '32',
+          ),
         );
       },
     ),
     GoRoute(
       path: '/courseList',
+      name: 'courseList',
       builder: (context, state) {
-        final areaCode = state.pathParameters['areaCode']!;
+        final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => CourseListViewModel(
             tourInfoRepository: TourInfoRepositoryImpl(
@@ -72,22 +82,22 @@ final goRouter = GoRouter(
             ),
           ),
           child: CourseListScreen(
-            areaCode: areaCode,),
+            areaCode: areaCode,
+          ),
         );
       },
     ),
     GoRoute(
       path: '/courseInfo',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.parse(state.uri.queryParameters['id']!);
         return ChangeNotifierProvider(
           create: (context) => CourseInfoViewModel(
             tourInfoRepository: TourInfoRepositoryImpl(
               tourInfoDataSource: TourInfoDataSourceImpl(),
             ),
           ),
-          child: CourseInfoScreen(
-              id: id, ), //TODO 파라미터 설정되면 넣기
+          child: CourseInfoScreen(), //TODO 파라미터 설정되면 넣기
         );
       },
     ),
