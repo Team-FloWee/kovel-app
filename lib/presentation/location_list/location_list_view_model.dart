@@ -38,7 +38,8 @@ class LocationListViewModel with ChangeNotifier {
   Future<void> getData(String areaCode) async {
     _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(areaCode:areaCode,contentTypeId: 25);
+    _areaBasedDataList = await _tourInfoRepository.getAreaBasedList(areaCode:areaCode,
+        contentTypeId: 25);
 
     _areaBasedDataList.forEach((element) async {
       _courseDetail.addAll(await _tourInfoRepository.getDetailCommon(id: element.id));
