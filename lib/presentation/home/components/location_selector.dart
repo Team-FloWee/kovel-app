@@ -2,26 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 
-class LocationSelector extends StatefulWidget {
-  // final List<Category> categoryData;
-  // final void Function(Category category)? onSelect;
+class LocationSelector extends StatelessWidget {
+  final Category category;
+  final void Function(Category category)? onSelect;
 
-  // const LocationSelector({super.key, required this.categoryData, required this.onSelect});
-  const LocationSelector({super.key});
+  const LocationSelector({
+    super.key,
+    required this.onSelect,
+    required this.category,
+  });
 
-  @override
-  State<LocationSelector> createState() => _LocationSelectorListState();
-}
-
-class _LocationSelectorListState extends State<LocationSelector> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: UiConfig.black.shade500,
+    return GestureDetector(
+      onTap: () {
+        onSelect?.call(category);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: UiConfig.black.shade500,
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Text(
+          category.name,
+          style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+          textAlign: TextAlign.center,
+        ),
       ),
-      padding: const EdgeInsets.all(8),
     );
   }
 }

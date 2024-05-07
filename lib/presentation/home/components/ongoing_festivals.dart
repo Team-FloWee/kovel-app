@@ -43,12 +43,12 @@ class OngoingFestivals extends StatelessWidget {
                 borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
                 color: UiConfig.black.shade900.withOpacity(0.5),
               ),
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.06,
               width: MediaQuery.of(context).size.width * 1,
             ),
           ),
           Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.029,
+              bottom: MediaQuery.of(context).size.height * 0.035,
               left: MediaQuery.of(context).size.width * 0.04,
               child: Text(
                 area,

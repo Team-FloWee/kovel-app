@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+
+import 'package:kovel_app/domain/model/category/area_type.dart';
+import 'package:kovel_app/domain/model/category/category.dart';
+
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
@@ -93,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       )
                     ],
+
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
@@ -204,24 +209,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: 4,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 10,
-                    children: const [
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                      LocationSelector(),
-                    ],
+                    children: List.generate(
+                        AreaTypeList.typeList.length,
+                        (index) => LocationSelector(
+                              category: AreaTypeList.typeList[index],
+                              onSelect: (Category selectedCategory) {
+                                print(selectedCategory.id);
+                              },
+                            )),
+
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Row(children: [
@@ -275,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: 1,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 0,
-                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: e.areaCode, title: e.title, url: e.imagePath)).toList()),
+                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: AreaType(areaCode: e.areaCode).name, title: e.title, url: e.imagePath)).toList()),
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),

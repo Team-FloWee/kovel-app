@@ -32,10 +32,8 @@ class HomeViewModel with ChangeNotifier {
     isLoading = true;
     notifyListeners();
     fetchOnGoingFestival();
-    print('festival 패치됨');
     notifyListeners();
     isLoading = false;
-    print('==============fetch됨');
   }
 
   // 주소 새로고침
@@ -76,23 +74,17 @@ class HomeViewModel with ChangeNotifier {
     /* 위도 경도 가져오기 끝 */
 
     // 위도,경도로 주소 가져오기
-    //fetchAddressData(longitude: _longitude!.toString(), latitude: _latitude!.toString());
-    fetchAddressData(longitude: '127.1216721795', latitude: '36.4529297875');
+    fetchAddressData(longitude: _longitude!.toString(), latitude: _latitude!.toString());
 
     // 내 주변 관광정보 추천
-    //fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
-    fetchLocationBasedList(longitude: '127.1216721795', latitude: '36.4529297875', radius: radius);
+    fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
 
-    print('#############distanceList: $distanceList');
     notifyListeners();
-    print('================notifyListeners1');
+
   }
 
   // 위도,경도로 주소 가져오기
   void fetchAddressData({required String longitude, required String latitude}) async {
-    print('===fetchAddressData시작');
-    print('latitude: $latitude');
-    print('longitude: $longitude');
     // 주소 받아옴
     final dataList = await AddressInfoRepositoryImpl(addressInfoDataSource: AddressInfoDataSourceImpl()).getAddress(longitude: longitude, latitude: latitude);
 
@@ -108,15 +100,11 @@ class HomeViewModel with ChangeNotifier {
       selectedLocation = locationList.first;
     }
 
-    // locationList에 첫 번째 요소로 새 주소 추가
-    //locationList.insert(0, newLocation);
-    // '현재 위치' 요소가 있으면 삭제
-
     // selectedLocation 변수에 새로운 주소 할당
     selectedLocation = locationList.first;
 
     notifyListeners(); // TODO: await 때문에 notifyListeners()실행 후 주소가져옴. 해결방법은?
-    print('================notifyListeners2');
+
   }
 
   // 내 주변 관광정보
@@ -124,21 +112,15 @@ class HomeViewModel with ChangeNotifier {
     locationBasedList = await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getLocationBasedList(mapX: longitude, mapY: latitude, radius: radius);
     // TODO: address datasource에 null체크 추가 필요함
 
-    print('locationBasedList.length: ${locationBasedList.length}');
+
     // 내 주변 관광정보까지 거리 구하기
-    // TODO: 내 주변 관광정보 받아오는 게 늦어서 여기가 돌질 않음
     for (int i = 0; i < locationBasedList.length; i++) {
       distanceList.add({
-        locationBasedList[i].id.toString(): getDistanceToLocation(
-            lat1: double.parse('36.4529297875'), lon1: double.parse('127.1216721795'), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx)),
+        locationBasedList[i].id.toString():
+            getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx)),
       });
-      print('계산된 distance$i');
-      print(getDistanceToLocation(
-          lat1: double.parse('36.4529297875'), lon1: double.parse('127.1216721795'), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx)));
     }
-    print('내 주변 관광정보: $locationBasedList');
-    print('계산 테스트 : ');
-    print(getDistanceToLocation(lat1: 36.2708, lon1: 127.3020, lat2: 36.2800, lon2: 127.2930).toString());
+
     notifyListeners();
   }
 
@@ -158,7 +140,6 @@ class HomeViewModel with ChangeNotifier {
 
     // 최종 거리 계산
     double distance = earthRadius * c;
-    print('==============distance: $distance');
     return distance;
   }
 
@@ -171,16 +152,12 @@ class HomeViewModel with ChangeNotifier {
   void fetchOnGoingFestival() async {
     isLoading = true;
     final today = DateTime.now();
-    final tomorrow = today.add(const Duration(days: 1));
-    print(DateFormat('yyyyMMdd').format(tomorrow));
+
     notifyListeners();
     onGoingTourList =
         await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getSearchFestival(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today));
     isLoading = false;
     notifyListeners();
-    //print('onGoingTourList: ${onGoingTourList[0].imagePath}');
-    for (var element in onGoingTourList) {
-      print(element);
-    }
+
   }
 }
