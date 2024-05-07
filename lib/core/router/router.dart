@@ -1,42 +1,47 @@
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
-
 import 'package:kovel_app/di/di_setup.dart';
-import 'package:kovel_app/presentation/course/course_info_screen.dart';
-import 'package:kovel_app/presentation/course/course_info_view_model.dart';
-
 import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
-import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
-import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
-
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail_screen/detail_screen.dart';
 import 'package:kovel_app/presentation/detail_screen/detail_screen_view_model.dart';
+import 'package:kovel_app/presentation/home/home_screen.dart';
+import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
+import 'package:kovel_app/presentation/login/login_screen.dart';
+import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/repository_impl/tour_info_repository_impl.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/locationList',
+  initialLocation: '/login',
   routes: [
-    //
-    // GoRoute(
-    //   path: '/',
-    //   builder: (context, state) {
-    //     return ChangeNotifierProvider(
-    //       create: (context) => HomeViewModel(
-    //         tourInfoRepository: TourInfoRepositoryImpl(
-    //           tourInfoDataSource: TourInfoDataSourceImpl(),
-    //         ),
-    //       ),
-    //         child: const HomeScreen(),
-    //     );
-    //   },
-    // ),
+    GoRoute(
+      path: '/',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => HomeViewModel(
+            tourInfoRepository: TourInfoRepositoryImpl(
+              tourInfoDataSource: TourInfoDataSourceImpl(),
+            ),
+          ),
+          child: const HomeScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => LoginViewModel(),
+          child: LoginScreen(),
+        );
+      },
+    ),
     GoRoute(
       path: '/detail',
       name: 'detail',
