@@ -3,8 +3,6 @@ import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
-import 'package:kovel_app/presentation/course/course_info_screen.dart';
-import 'package:kovel_app/presentation/course/course_info_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail_screen/detail_screen.dart';
@@ -93,20 +91,6 @@ final goRouter = GoRouter(
           child: CourseListScreen(
             areaCode: areaCode,
           ),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/courseInfo',
-      builder: (context, state) {
-        final id = int.parse(state.uri.queryParameters['id']!);
-        return ChangeNotifierProvider(
-          create: (context) => CourseInfoViewModel(
-            tourInfoRepository: TourInfoRepositoryImpl(
-              tourInfoDataSource: TourInfoDataSourceImpl(),
-            ),
-          ),
-          child: CourseInfoScreen(), //TODO 파라미터 설정되면 넣기
         );
       },
     ),
