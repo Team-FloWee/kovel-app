@@ -1,35 +1,29 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kovel_app/presentation/login/google_login.dart';
-import 'package:kovel_app/presentation/login/kakao_login.dart';
-import 'package:kovel_app/presentation/login/social_login.dart';
-
-enum LoginPlatform {
-  google('google', 0),
-  kakao('kakao', 1);
-
-  const LoginPlatform(this.platform, this.platformIndex);
-  final String platform;
-  final int platformIndex;
-}
+import 'package:kovel_app/core/enum/login_platform.dart';
+import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
+import 'package:kovel_app/domain/use_case/auth/logout_use_case.dart';
 
 class LoginViewModel with ChangeNotifier {
-  final List<SocialLogin> _socialLoginMethod = [
-    GoogleLogin(),
-    KakaoLogin(),
-  ];
+  LoginUseCase _loginUseCase;
+  LogoutUseCase _logoutUseCase;
+
+  LoginViewModel({required LoginUseCase loginUseCase, required LogoutUseCase logoutUseCase})
+      : _loginUseCase = loginUseCase, _logoutUseCase = logoutUseCase;
+
+
   bool isLogined = false;
 
-  Future login({required LoginPlatform platform}) async {
-    isLogined = await _socialLoginMethod[platform.platformIndex].login();
+  Future<bool> login({required LoginPlatform platform}) async {
+    isLogined = await _loginUseCase.execute(platform: platform);
     notifyListeners();
+    return isLogined;
   }
 
-  Future logout({required LoginPlatform platform}) async {
-    isLogined = await _socialLoginMethod[platform.platformIndex].logout();
-    await FirebaseAuth.instance.signOut();
+  Future<void> logout({required LoginPlatform platform}) async {
+    isLogined = await _logoutUseCase.execute(platform: platform);
     notifyListeners();
   }
 }
+
