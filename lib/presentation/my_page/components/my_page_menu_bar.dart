@@ -4,13 +4,16 @@ import 'package:kovel_app/config/ui_config.dart';
 class MyPageMenuBar extends StatelessWidget {
   final String menuBarName;
   final IconData menuBarIcon;
+  final Function()? onTapMenuBar;
+
   final Widget? menuBarWidget;
 
   const MyPageMenuBar({
     super.key,
-    this.menuBarWidget,
     required this.menuBarName,
     required this.menuBarIcon,
+    this.onTapMenuBar,
+    this.menuBarWidget,
   });
 
   @override
@@ -19,7 +22,9 @@ class MyPageMenuBar extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            menuBarWidget;
+            if (onTapMenuBar != null) {
+              onTapMenuBar!();
+            }
           },
           borderRadius: BorderRadius.circular(8.0),
           splashColor: UiConfig.primaryColor.withOpacity(0.05),
@@ -45,7 +50,6 @@ class MyPageMenuBar extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 24.0),
                   child: Icon(menuBarIcon,
                       size: 18, color: UiConfig.black.shade800),
-                  // menuBarWidget,
                 ),
               ],
             ),

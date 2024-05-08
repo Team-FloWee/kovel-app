@@ -18,7 +18,7 @@ class MyPageMenuBarWidget extends StatelessWidget {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: 64.0,
+          height: 56.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             border: Border.all(
@@ -40,7 +40,7 @@ class MyPageMenuBarWidget extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 24.0),
+        const SizedBox(height: 16.0),
       ],
     );
   }

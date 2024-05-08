@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kovel_app/presentation/my_page/components/logout_dialog.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_menu_bar_widget.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_switch_button.dart';
 
+import 'logout_dialog.dart';
 import 'my_page_menu_bar.dart';
 
 class MyPageMenuList extends StatelessWidget {
@@ -30,18 +30,18 @@ class MyPageMenuList extends StatelessWidget {
         ),
         MyPageMenuBarWidget(
           menuBarName: 'Dark Mode',
-          menuBarWidget: MyPageSwitchButton(
-            onToggled: (bool isToggled) {},
-          ),
+          menuBarWidget: MyPageSwitchButton(),
         ),
-        // MyPageMenuBar(
-        //   menuBarName: '로그아웃',
-        //   menuBarIcon: Icons.logout_outlined,
-        //   menuBarWidget: LogoutDialog(),
-        // ),
-        const MyPageMenuBarWidget(
+        MyPageMenuBar(
           menuBarName: '로그아웃',
-          menuBarWidget: LogoutDialog(),
+          menuBarIcon: Icons.logout_outlined,
+          onTapMenuBar: () {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => logoutDialog(context),
+            );
+          },
+          // menuBarWidget: LogoutDialog(),
         ),
       ],
     );
