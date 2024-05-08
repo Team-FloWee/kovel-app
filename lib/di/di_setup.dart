@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
+import 'package:kovel_app/data/data_source/firebase/user_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
@@ -23,7 +25,7 @@ void diSetup() {
 
   // DataSource
   getIt.registerSingleton<TourInfoDataSource>(TourInfoDataSourceImpl());
-  getIt.registerSingleton<UserRepository>(UserRepositoryImpl());
+  getIt.registerSingleton<UserDataSource>(UserDataSourceImpl());
 
   // Repository
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
