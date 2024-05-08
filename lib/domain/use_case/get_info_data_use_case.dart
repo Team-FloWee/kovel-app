@@ -8,10 +8,8 @@ class GetInfoDataUseCase {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  Future<List<UnifiedInfo>> execute(
-      {required int id, required int contentTypeId}) async {
-    final result = await _tourInfoRepository.getUnifiedInfo(
-        id: id, contentTypeId: contentTypeId);
+  Future<List<UnifiedInfo>> execute({int pageNo = 1, required int id, required int contentTypeId}) async {
+    final result = await _tourInfoRepository.getUnifiedInfo(id: id, contentTypeId: contentTypeId);
     return result;
   }
 }

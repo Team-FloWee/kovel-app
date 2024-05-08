@@ -8,10 +8,8 @@ class GetDetailDataUseCase {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  Future<UnifiedDetail> execute(
-      {required int id, required int contentTypeId}) async {
-    final result = await _tourInfoRepository.getUnifiedDetail(
-        id: id, contentTypeId: contentTypeId);
+  Future<UnifiedDetail> execute({int pageNo = 1, required int id, required int contentTypeId}) async {
+    final result = await _tourInfoRepository.getUnifiedDetail(id: id, contentTypeId: contentTypeId);
     return result.first;
   }
 }
