@@ -6,10 +6,10 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   const factory User({
-    required int id,
+    required String userId,
     required String name,
     required String email,
-    required String profilePath,
+    required String imageUrl,
     //Todo 보관함,배낭톡,일정
   }) = _User;
 
