@@ -56,6 +56,8 @@ dependencies:
   shimmer: ^3.0.0
   cloud_firestore: ^4.17.2
   cached_network_image: ^3.3.1
+  image_picker: ^1.1.1
+  firebase_storage: ^11.7.5
 
 
 dev_dependencies:
