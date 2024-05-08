@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
+import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../config/ui_config.dart';
-import '../components/common_app_bar.dart';
 import 'components/my_page_menu_list.dart';
 import 'components/my_page_user_profile.dart';
 
-class MyPageScreen extends StatelessWidget {
+class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
 
   @override
+  State<MyPageScreen> createState() => _MyPageScreenState();
+}
+
+class _MyPageScreenState extends State<MyPageScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<MyPageViewModel>();
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: const CommonAppBar(title: ''),
@@ -27,19 +40,17 @@ class MyPageScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: MyPageUserProfile(
-                  userName: '김코블',
-                  userEmail: 'kovel@trip.com',
-                  userProfilePath:
-                      // 'https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833552.jpg?w=1060&t=st=1714144594~exp=1714145194~hmac=af74a04de4f0eba5788d15dc2579b9a75a9ced94d03fba12091bfbf47c3d9b60',
-                      '',
+                  userName: viewModel.user.name,
+                  userEmail: viewModel.user.email,
+                  userProfilePath: viewModel.user.imageUrl,
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 24.0),
                 child: Divider(height: 1, color: UiConfig.black.shade500),
               ),
               const Padding(
