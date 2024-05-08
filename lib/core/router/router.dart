@@ -1,8 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/di/di_setup.dart';
-import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
-import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -15,7 +12,6 @@ import 'package:kovel_app/presentation/login/login_screen.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/repository_impl/tour_info_repository_impl.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/login',
@@ -24,11 +20,7 @@ final goRouter = GoRouter(
       path: '/',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          create: (context) => HomeViewModel(
-            tourInfoRepository: TourInfoRepositoryImpl(
-              tourInfoDataSource: TourInfoDataSourceImpl(),
-            ),
-          ),
+          create: (context) => getIt<HomeViewModel>(),
           child: const HomeScreen(),
         );
       },
@@ -37,7 +29,7 @@ final goRouter = GoRouter(
       path: '/login',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          create: (context) => LoginViewModel(),
+          create: (context) => getIt<LoginViewModel>(),
           child: LoginScreen(),
         );
       },
@@ -61,21 +53,11 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/locationList',
       builder: (context, state) {
+        final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
-          create: (context) => LocationListViewModel(
-            getCommonDataUseCase: GetCommonDataUseCase(
-              tourInfoRepository: TourInfoRepositoryImpl(
-                tourInfoDataSource: TourInfoDataSourceImpl(),
-              ),
-            ),
-            getAreaDataUseCase: GetAreaDataUseCase(
-              tourInfoRepository: TourInfoRepositoryImpl(
-                tourInfoDataSource: TourInfoDataSourceImpl(),
-              ),
-            ),
-          ),
+          create: (context) => getIt<LocationListViewModel>(),
           child: LocationListScreen(
-            areaCode: '32',
+            areaCode: areaCode,
           ),
         );
       },
@@ -86,13 +68,7 @@ final goRouter = GoRouter(
       builder: (context, state) {
         final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
-          create: (context) => CourseListViewModel(
-              getCommonDataUseCase: GetCommonDataUseCase(
-                  tourInfoRepository: TourInfoRepositoryImpl(
-                      tourInfoDataSource: TourInfoDataSourceImpl())),
-              getAreaDataUseCase: GetAreaDataUseCase(
-                  tourInfoRepository: TourInfoRepositoryImpl(
-                      tourInfoDataSource: TourInfoDataSourceImpl()))),
+          create: (context) => getIt<CourseListViewModel>(),
           child: CourseListScreen(
             areaCode: areaCode,
           ),
