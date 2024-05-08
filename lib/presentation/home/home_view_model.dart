@@ -5,28 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
-import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/tour.dart';
+import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 class HomeViewModel with ChangeNotifier {
-  final TourInfoRepositoryImpl _tourInfoRepository;
+  final GetSearchFestivalUseCase _getSearchFestivalUseCase;
   HomeViewModel({
-    required TourInfoRepositoryImpl tourInfoRepository,
-  }) : _tourInfoRepository = tourInfoRepository;
+    required GetSearchFestivalUseCase getSearchFestivalUseCase,
+  }) : _getSearchFestivalUseCase = getSearchFestivalUseCase;
   bool isLoading = false;
   double? _longitude;
   double? _latitude;
   double distance = 0;
   String selectedLocation = '현재 위치';
   Position? currentPosition;
-  List<String> locationList = ['현재 위치']; // TODO:초기값은 firebase연결 후에 이전 연결주소
   List<Tour> onGoingTourList = [];
+  List<String> locationList = ['현재 위치']; // TODO:초기값은 firebase연결 후에 이전 연결주소
+  List<Map<String, double>> distanceList = [];
   // 내 주변 관광정보
   List<Tour> locationBasedList = []; // TODO: 초기값 firebase연결 후에 이전 받아온 관광정보
-  List<Map<String, double>> distanceList = [];
 
   void onFetch() {
     isLoading = true;
@@ -80,14 +80,12 @@ class HomeViewModel with ChangeNotifier {
     fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
 
     notifyListeners();
-
   }
 
   // 위도,경도로 주소 가져오기
   void fetchAddressData({required String longitude, required String latitude}) async {
     // 주소 받아옴
     final dataList = await AddressInfoRepositoryImpl(addressInfoDataSource: AddressInfoDataSourceImpl()).getAddress(longitude: longitude, latitude: latitude);
-
     // 구/신주소 중 데이터가 있는 것을 locationList에 넣음
     if (dataList.first.roadAddress.addressName != '' && dataList.first.oldAddress.addressName != '' && !locationList.contains(dataList.first.oldAddress.addressName)) {
       locationList.insert(0, dataList.first.roadAddress.addressName);
@@ -99,20 +97,15 @@ class HomeViewModel with ChangeNotifier {
       locationList.removeWhere((element) => element == '현재 위치');
       selectedLocation = locationList.first;
     }
-
     // selectedLocation 변수에 새로운 주소 할당
     selectedLocation = locationList.first;
-
     notifyListeners(); // TODO: await 때문에 notifyListeners()실행 후 주소가져옴. 해결방법은?
-
   }
 
   // 내 주변 관광정보
   void fetchLocationBasedList({required String latitude, required String longitude, required String radius}) async {
     locationBasedList = await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getLocationBasedList(mapX: longitude, mapY: latitude, radius: radius);
     // TODO: address datasource에 null체크 추가 필요함
-
-
     // 내 주변 관광정보까지 거리 구하기
     for (int i = 0; i < locationBasedList.length; i++) {
       distanceList.add({
@@ -120,7 +113,6 @@ class HomeViewModel with ChangeNotifier {
             getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx)),
       });
     }
-
     notifyListeners();
   }
 
@@ -128,19 +120,15 @@ class HomeViewModel with ChangeNotifier {
   double getDistanceToLocation({required double lat1, required double lon1, required double lat2, required double lon2}) {
     // 지구 반지름 (km 단위)
     const double earthRadius = 6371.0;
-
     // 두 지점의 위도와 경도 차이를 라디안으로 변환
     double deltaLat = _toRadians(lat2 - lat1);
     double deltaLon = _toRadians(lon2 - lon1);
-
     // Haversine 공식
-    double a = sin(deltaLat / 2) * sin(deltaLat / 2) + cos(_toRadians(lat1)) * cos(_toRadians(lat2)) * sin(deltaLon / 2) * sin(deltaLon / 2);
-
-    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-
+    double squareRoot = sin(deltaLat / 2) * sin(deltaLat / 2) + cos(_toRadians(lat1)) * cos(_toRadians(lat2)) * sin(deltaLon / 2) * sin(deltaLon / 2);
+    double distance = 2 * atan2(sqrt(squareRoot), sqrt(1 - squareRoot));
     // 최종 거리 계산
-    double distance = earthRadius * c;
-    return distance;
+    double result = earthRadius * distance;
+    return result;
   }
 
 // 각도를 라디안으로 변환하는 도우미 함수
@@ -152,12 +140,9 @@ class HomeViewModel with ChangeNotifier {
   void fetchOnGoingFestival() async {
     isLoading = true;
     final today = DateTime.now();
-
     notifyListeners();
-    onGoingTourList =
-        await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getSearchFestival(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today));
+    onGoingTourList = await _getSearchFestivalUseCase.execute(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today));
     isLoading = false;
     notifyListeners();
-
   }
 }

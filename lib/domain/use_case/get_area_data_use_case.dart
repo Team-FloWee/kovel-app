@@ -9,12 +9,8 @@ class GetAreaDataUseCase {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  Future<List<Tour>> execute(
-      {required String areaCode,
-      required String cat2,
-      required int contentTypeId}) async {
-    final result = await _tourInfoRepository.getAreaBasedList(
-        areaCode: areaCode, cat2: cat2, contentTypeId: contentTypeId);
+  Future<List<Tour>> execute({int pageNo = 1, required String areaCode, required String cat2, required int contentTypeId}) async {
+    final result = await _tourInfoRepository.getAreaBasedList(areaCode: areaCode, cat2: cat2, contentTypeId: contentTypeId);
     return result;
   }
 }
