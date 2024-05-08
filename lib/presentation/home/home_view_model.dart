@@ -155,7 +155,7 @@ class HomeViewModel with ChangeNotifier {
     final today = DateTime.now();
 
     notifyListeners();
-    onGoingTourList = await _tourInfoRepository.getSearchFestival(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today));
+    onGoingTourList = await _getSearchFestivalUseCase.execute(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(DateTime.now()));
 
     isLoading = false;
     notifyListeners();
