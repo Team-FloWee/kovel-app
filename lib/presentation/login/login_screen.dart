@@ -44,10 +44,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 InkWell(
                   onTap: () async {
-                    bool result = await viewModel.login(platform: LoginPlatform.kakao);
-                    if (result) {
-                      context.go('/locationList');
-                    }
+                    await viewModel.login(context: context, platform: LoginPlatform.kakao);
                   },
                   child: Card(
                     margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -64,11 +61,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 InkWell(
                   onTap: () async {
-                    bool result = await viewModel.login(platform: LoginPlatform.google);
-                    print(result);
-                    if (result) {
-                      context.go('/locationList');
-                    }
+                    await viewModel.login(context: context, platform: LoginPlatform.google);
                   },
                   child: Card(
                     margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),

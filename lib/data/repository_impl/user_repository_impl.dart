@@ -12,7 +12,7 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required UserDataSource userDataSource}) : _userDataSource = userDataSource;
 
   @override
-  Future<bool> login({required LoginPlatform platform}) async {
+  Future<User?> login({required LoginPlatform platform}) async {
     User? result;
     try {
       switch (platform) {
@@ -22,10 +22,10 @@ class UserRepositoryImpl implements UserRepository {
           result = await KakaoAuth().login();
       }
       _userDataSource.createUser(user: result!);
-      return true;
+      return result;
     } catch(e) {
       print(e);
-      return false;
+      return null;
     }
   }
 
@@ -34,9 +34,9 @@ class UserRepositoryImpl implements UserRepository {
     bool result = false;
     switch (platform) {
       case LoginPlatform.google:
-        result = await GoogleAuth().logout();
+        await GoogleAuth().logout();
       case LoginPlatform.kakao:
-        result = await KakaoAuth().logout();
+        await KakaoAuth().logout();
     }
     await auth.FirebaseAuth.instance.signOut();
     return result;

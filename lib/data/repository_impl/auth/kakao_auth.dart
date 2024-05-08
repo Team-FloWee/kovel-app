@@ -88,13 +88,12 @@ class KakaoAuth implements SocialAuth {
   }
 
   @override
-  Future<bool> logout() async {
+  Future<void> logout() async {
     try {
       kakao.UserApi user = kakao.UserApi.instance;
       await user.logout();
-      return true;
     } catch (error) {
-      return false;
+      print(error);
     }
   }
 }

@@ -7,7 +7,7 @@ class GoogleAuth implements SocialAuth {
   @override
   Future<User?> login() async {
     // Trigger the authentication flow
-    await GoogleSignIn().disconnect();
+    await logout();
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
@@ -37,8 +37,8 @@ class GoogleAuth implements SocialAuth {
   }
 
   @override
-  Future<bool> logout() async {
-    return false;
+  Future<void> logout() async {
+    await GoogleSignIn().signOut();
   }
 }
 
