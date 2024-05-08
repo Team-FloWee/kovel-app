@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                   onTap: () async {
                     bool result = await viewModel.login(platform: LoginPlatform.kakao);
                     if (result) {
-                      context.go('/');
+                      context.go('/locationList');
                     }
                   },
                   child: Card(
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                     bool result = await viewModel.login(platform: LoginPlatform.google);
                     print(result);
                     if (result) {
-                      context.go('/');
+                      context.go('/locationList');
                     }
                   },
                   child: Card(

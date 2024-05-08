@@ -29,7 +29,7 @@ void diSetup() {
 
   // Repository
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
-  getIt.registerSingleton<UserRepository>(UserRepositoryImpl());
+  getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
 
 
   // registerFactory

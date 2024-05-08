@@ -1,4 +1,6 @@
+import 'package:kovel_app/domain/model/user.dart';
+
 abstract interface class SocialAuth {
-  Future<bool> login();
-  Future<bool> logout();
+  Future<User?> login();
+  Future<void> logout();
 }
