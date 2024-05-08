@@ -3,7 +3,7 @@ import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
-import 'package:kovel_app/presentation/detail_screen/culture_location/culture_location_info_view_model.dart';
+import 'package:kovel_app/presentation/detail/culture_location/culture_location_info_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CultureLocationInfoScreen extends StatefulWidget {

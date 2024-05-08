@@ -13,8 +13,6 @@ import 'package:provider/provider.dart';
 
 import 'data/data_source/tour_info_data_source_impl.dart';
 import 'data/repository_impl/unified_detail_repositorty_impl.dart';
-import 'presentation/detail_screen/detail_screen.dart';
-import 'presentation/detail_screen/detail_screen_view_model.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');

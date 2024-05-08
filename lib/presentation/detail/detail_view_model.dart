@@ -8,12 +8,12 @@ import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/presentation/components/icon_text_row.dart';
 
-class DetailScreenViewModel with ChangeNotifier {
+class DetailViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetDetailDataUseCase _getDetailDataUseCase;
   final GetInfoDataUseCase _getInfoDataUseCase;
 
-  DetailScreenViewModel({
+  DetailViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetDetailDataUseCase getDetailDataUseCase,
     required GetInfoDataUseCase getInfoDataUseCase,

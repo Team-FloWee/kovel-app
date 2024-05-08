@@ -1,9 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:kovel_app/domain/model/detail/course/course_detail_info.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
-import 'package:kovel_app/presentation/detail_screen/components/course/related_course_item.dart';
+import 'package:kovel_app/presentation/detail/components/course/related_course_item.dart';
 
 class RelatedCourseList extends StatelessWidget {
   final List<UnifiedInfo> courseInfoData;

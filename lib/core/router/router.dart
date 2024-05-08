@@ -2,8 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
-import 'package:kovel_app/presentation/detail_screen/detail_screen.dart';
-import 'package:kovel_app/presentation/detail_screen/detail_screen_view_model.dart';
+import 'package:kovel_app/presentation/detail/detail_screen.dart';
+import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/home/home_screen.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
@@ -44,12 +44,9 @@ final goRouter = GoRouter(
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
-          create: (context) => getIt<DetailScreenViewModel>(),
-          child: DetailScreen(
-            id: id,
-            contentTypeId: contentTypeId,
-            title: title,
-          ),
+          create: (context) => getIt<DetailViewModel>(),
+          child:
+              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
