@@ -10,12 +10,16 @@ import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/tour.dart';
+import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 class HomeViewModel with ChangeNotifier {
   final TourInfoRepositoryImpl _tourInfoRepository;
+  final GetSearchFestivalUseCase _getSearchFestivalUseCase;
   HomeViewModel({
+    required GetSearchFestivalUseCase getSearchFestivalUseCase,
     required TourInfoRepositoryImpl tourInfoRepository,
-  }) : _tourInfoRepository = tourInfoRepository;
+  })  : _tourInfoRepository = tourInfoRepository,
+        _getSearchFestivalUseCase = getSearchFestivalUseCase;
   bool isLoading = false;
   double? _longitude;
   double? _latitude;
@@ -80,7 +84,6 @@ class HomeViewModel with ChangeNotifier {
     fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
 
     notifyListeners();
-
   }
 
   // 위도,경도로 주소 가져오기
@@ -104,14 +107,12 @@ class HomeViewModel with ChangeNotifier {
     selectedLocation = locationList.first;
 
     notifyListeners(); // TODO: await 때문에 notifyListeners()실행 후 주소가져옴. 해결방법은?
-
   }
 
   // 내 주변 관광정보
   void fetchLocationBasedList({required String latitude, required String longitude, required String radius}) async {
     locationBasedList = await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getLocationBasedList(mapX: longitude, mapY: latitude, radius: radius);
     // TODO: address datasource에 null체크 추가 필요함
-
 
     // 내 주변 관광정보까지 거리 구하기
     for (int i = 0; i < locationBasedList.length; i++) {
@@ -154,10 +155,9 @@ class HomeViewModel with ChangeNotifier {
     final today = DateTime.now();
 
     notifyListeners();
-    onGoingTourList =
-        await TourInfoRepositoryImpl(tourInfoDataSource: TourInfoDataSourceImpl(dio: Dio())).getSearchFestival(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today));
+    onGoingTourList = await _tourInfoRepository.getSearchFestival(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today));
+
     isLoading = false;
     notifyListeners();
-
   }
 }
