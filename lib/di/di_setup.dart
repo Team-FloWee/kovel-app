@@ -17,6 +17,7 @@ import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
+import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -55,4 +56,7 @@ void diSetup() {
       loginUseCase: LoginUseCase(userRepository: getIt()),
       logoutUseCase: LogoutUseCase(userRepository: getIt()))
   );
+
+  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
+  ));
 }
