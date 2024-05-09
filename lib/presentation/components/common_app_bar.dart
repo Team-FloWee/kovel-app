@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,9 +12,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isCanPop = Navigator.of(context).canPop();
     return AppBar(
       backgroundColor: UiConfig.black.shade100,
-      // leading: Icon(Icons.arrow_back_ios),
+      leading: isCanPop ? InkWell(
+          onTap: () => context.pop(),
+          child: Icon(Icons.arrow_back_ios)
+      ) : SizedBox(),
       centerTitle: true,
       title: Text(
         title,
