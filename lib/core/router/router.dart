@@ -11,13 +11,15 @@ import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/login/login_screen.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
+import 'package:kovel_app/presentation/my_page/my_page_edit_screen.dart';
+import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
+import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
 
-
 final goRouter = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/mypage',
   routes: [
     GoRoute(
       path: '/',
@@ -34,6 +36,24 @@ final goRouter = GoRouter(
         return ChangeNotifierProvider(
           create: (context) => getIt<LoginViewModel>(),
           child: LoginScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/mypage',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => MyPageViewModel(),
+          child: MyPageScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/mypageedit',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => MyPageViewModel(),
+          child: MyPageEditScreen(),
         );
       },
     ),

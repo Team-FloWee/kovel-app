@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_menu_bar_widget.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_switch_button.dart';
+import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
+import 'package:provider/provider.dart';
 
 import 'logout_dialog.dart';
 import 'my_page_menu_bar.dart';
 
-class MyPageMenuList extends StatelessWidget {
+class MyPageMenuList extends StatefulWidget {
   const MyPageMenuList({super.key});
 
   @override
+  State<MyPageMenuList> createState() => _MyPageMenuListState();
+}
+
+class _MyPageMenuListState extends State<MyPageMenuList> {
+  @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<MyPageViewModel>();
     return Column(
       children: [
-        const MyPageMenuBar(
+        MyPageMenuBar(
           menuBarName: '계정 설정',
           menuBarIcon: Icons.account_circle_outlined,
+          onTapMenuBar: () async {
+            await context.push('/mypageedit');
+            viewModel.getProfile();
+          },
         ),
         const MyPageMenuBar(
           menuBarName: '공지사항',
