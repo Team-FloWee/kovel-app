@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -48,5 +49,9 @@ class MyPageViewModel with ChangeNotifier {
     //업데이트된거 다시 불러오기
     getProfile();
     notifyListeners();
+  }
+
+  void logout() async {
+    await auth.FirebaseAuth.instance.signOut();
   }
 }
