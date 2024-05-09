@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
+import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -10,6 +11,8 @@ import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/login/login_screen.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
+import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
+import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
 
 
@@ -75,5 +78,17 @@ final goRouter = GoRouter(
         );
       },
     ),
+    GoRoute(
+      path: '/signUp',
+      name: 'signUp',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => getIt<SignUpViewModel>(),
+          child: SignUpScreen(
+            user: state.extra as User,
+          ),
+        );
+      }
+    )
   ],
 );

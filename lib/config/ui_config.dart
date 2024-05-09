@@ -10,6 +10,7 @@ class UiConfig {
   static const MaterialColor black = MaterialColor(0xff282828, color);
   static const Map<int, Color> color = {
     100: Color(0xffFFFFFF),
+    200: Color(0xffe2e8f0),
     500: Color(0xffF5F5F5),
     600: Color(0xffE9E9E9),
     700: Color(0xff828282),
