@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
@@ -106,7 +107,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )
                               ),
                               onPressed: () {
-                                viewModel.clickSignUpButton(context: context, name: _textEditingController.text);
+                                viewModel.clickSignUpButton(name: _textEditingController.text);
+                                context.go('/');
                               },
                               child: Text('가입 완료', style: UiConfig.bodyStyle
                                 .copyWith(color: UiConfig.black.shade100, fontWeight: UiConfig.semiBoldFont),)
