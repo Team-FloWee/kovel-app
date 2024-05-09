@@ -47,6 +47,7 @@ class LoginScreen extends StatelessWidget {
             InkWell(
               onTap: () async {
                 await viewModel.login(platform: LoginPlatform.kakao);
+                if (viewModel.user == null) return;
                 if (viewModel.isNewUser) {
                   context.go('/signUp', extra: viewModel.user);
                 } else {
@@ -69,6 +70,7 @@ class LoginScreen extends StatelessWidget {
             InkWell(
               onTap: () async {
                 await viewModel.login(platform: LoginPlatform.google);
+                if (viewModel.user == null) return;
                 if (viewModel.isNewUser) {
                   context.go('/signUp', extra: viewModel.user);
                 } else {
