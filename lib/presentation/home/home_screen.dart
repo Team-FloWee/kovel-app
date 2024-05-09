@@ -155,45 +155,57 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Container(
-                    child: GridView.count(
-                        physics: const NeverScrollableScrollPhysics(),
-                        childAspectRatio: 3 / 1,
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        children: viewModel.locationBasedList
-                            .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
-                            .map(
-                              (index, e) => MapEntry(
-                                index,
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    e.title.length > 10
-                                        ? Expanded(
-                                            child: Text(
-                                            '${e.title.substring(0, 10)}...',
-                                            style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
-                                          ))
-                                        : Expanded(
-                                            child: Text(
-                                              e.title,
-                                              style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
-                                            ),
+                  viewModel.locationBasedList.isNotEmpty
+                      ? Container(
+                          child: GridView.count(
+                              physics: const NeverScrollableScrollPhysics(),
+                              childAspectRatio: 3 / 1,
+                              shrinkWrap: true,
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              children: viewModel.locationBasedList
+                                  .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
+                                  .map(
+                                    (index, e) => MapEntry(
+                                      index,
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          e.title.length > 10
+                                              ? Expanded(
+                                                  child: Text(
+                                                  '${e.title.substring(0, 10)}...',
+                                                  style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                                ))
+                                              : Expanded(
+                                                  child: Text(
+                                                    e.title,
+                                                    style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                                  ),
+                                                ),
+                                          Text(
+                                            '${viewModel.distanceList[index][e.id] ?? '가까이 있음'}',
+                                            style: UiConfig.smallStyle,
                                           ),
-                                    Text(
-                                      '${viewModel.distanceList[index][e.id] ?? '가까이 있음'}',
-                                      style: UiConfig.smallStyle,
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            )
-                            .values // MapEntry의 값들만 추출
-                            .toList()),
-                  ),
+                                  )
+                                  .values // MapEntry의 값들만 추출
+                                  .toList()),
+                        )
+                      : Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.1,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: Image.asset('assets/images/search_icon.png'),
+                            ),
+                            const Text('현재 위치에는 관광정보가 없습니다.'),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                          ],
+                        ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Row(children: [
                     Text(
