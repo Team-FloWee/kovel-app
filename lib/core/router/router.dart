@@ -19,7 +19,7 @@ import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:provider/provider.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/mypage',
+  initialLocation: '/login',
   routes: [
     GoRoute(
       path: '/',

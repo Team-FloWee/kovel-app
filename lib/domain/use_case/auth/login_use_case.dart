@@ -8,7 +8,7 @@ class LoginUseCase {
   LoginUseCase({required UserRepository userRepository}) : _userRepository = userRepository;
 
   Future<User?> execute({required LoginPlatform platform}) async {
-    final result = _userRepository.login(platform: platform);
+    final result = await _userRepository.login(platform: platform);
     return result;
   }
 }
