@@ -51,7 +51,9 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           onTapMenuBar: () {
             showDialog<String>(
               context: context,
-              builder: (BuildContext context) => logoutDialog(context),
+              builder: (BuildContext context) => LogoutDialog(logout: () {
+                viewModel.logout();
+              }),
             );
           },
           // menuBarWidget: LogoutDialog(),
