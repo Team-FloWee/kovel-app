@@ -47,7 +47,11 @@ class LoginScreen extends StatelessWidget {
             InkWell(
               onTap: () async {
                 await viewModel.login(platform: LoginPlatform.kakao);
-                context.go('/signUp', extra: viewModel.user);
+                if (viewModel.isNewUser) {
+                  context.go('/signUp', extra: viewModel.user);
+                } else {
+                  context.go('/');
+                }
               },
               child: Card(
                 margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -65,7 +69,11 @@ class LoginScreen extends StatelessWidget {
             InkWell(
               onTap: () async {
                 await viewModel.login(platform: LoginPlatform.google);
-                context.go('/signUp', extra: viewModel.user);
+                if (viewModel.isNewUser) {
+                  context.go('/signUp', extra: viewModel.user);
+                } else {
+                  context.go('/');
+                }
               },
               child: Card(
                 margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
