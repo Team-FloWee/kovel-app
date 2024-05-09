@@ -33,4 +33,12 @@ class UserDataSourceImpl implements UserDataSource {
   Future<void> signOut() async {
     await auth.FirebaseAuth.instance.signOut();
   }
+
+  @override
+  Future<bool> existUser({required String id}) async {
+    final result = await _userRef.doc(id).get().then((s) => s.data()!)
+        .then((value) => true)
+        .onError((error, stackTrace) => false);
+    return result;
+  }
 }

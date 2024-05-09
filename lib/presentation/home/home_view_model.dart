@@ -32,6 +32,7 @@ class HomeViewModel with ChangeNotifier {
     isLoading = true;
     notifyListeners();
     fetchOnGoingFestival();
+    refreshPosition('1000');
     notifyListeners();
     isLoading = false;
   }
@@ -40,7 +41,6 @@ class HomeViewModel with ChangeNotifier {
   void refreshPosition(String radiusData) async {
     List<String> radiusList = radiusData.split('km');
     String radius = radiusList[0];
-    print('radius: $radius');
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -78,7 +78,6 @@ class HomeViewModel with ChangeNotifier {
 
     // 내 주변 관광정보 추천
     fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
-
     notifyListeners();
   }
 
