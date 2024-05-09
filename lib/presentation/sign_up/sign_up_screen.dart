@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
+import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   final User user;
@@ -28,6 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<SignUpViewModel>();
     return Scaffold(
       appBar: CommonAppBar(title: ''),
       body: SafeArea(
@@ -103,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )
                               ),
                               onPressed: () {
-                                // TODO
+                                viewModel.clickSignUpButton(context: context, name: _textEditingController.text);
                               },
                               child: Text('가입 완료', style: UiConfig.bodyStyle
                                 .copyWith(color: UiConfig.black.shade100, fontWeight: UiConfig.semiBoldFont),)
