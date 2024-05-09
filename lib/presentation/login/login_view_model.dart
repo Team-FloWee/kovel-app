@@ -22,7 +22,7 @@ class LoginViewModel with ChangeNotifier {
   Future<void> login({required BuildContext context, required LoginPlatform platform}) async {
     _user = await _loginUseCase.execute(platform: platform);
     notifyListeners();
-    context.push('/signUp', extra: _user);
+    context.go('/signUp', extra: _user);
   }
 
   Future<void> logout({required LoginPlatform platform}) async {

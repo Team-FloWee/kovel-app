@@ -41,4 +41,27 @@ class UserRepositoryImpl implements UserRepository {
     await auth.FirebaseAuth.instance.signOut();
     return result;
   }
+
+  @override
+  Future<bool> updateUser({required User user}) async {
+    bool result = false;
+    try {
+      await _userDataSource.updateUser(user: user);
+      result = true;
+    } catch (error) {
+      result = false;
+    }
+    return result;
+  }
+
+  @override
+  Future<User> getUser({required String id}) async {
+    User user;
+    try {
+      user = await _userDataSource.getUser(id: id);
+    } catch (error) {
+      user = const User(userId: '', name: '', email: '', imageUrl: '');
+    }
+    return user;
+  }
 }
