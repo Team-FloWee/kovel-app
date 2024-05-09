@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
@@ -33,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
+    int selectedIndex = 0;
     // 드롭다운 리스트
-
     List<String> radiusList = ['1km', '3km', '5km', '10km']; // TODO: 따로 모아야할까요
 
     // radius 초기값 설정
@@ -97,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       )
                     ],
-
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
@@ -143,7 +144,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 }).toList(),
                                 value: _selectedRadius,
                                 onChanged: (value) {
-                                  print(value);
                                   setState(() {
                                     _selectedRadius = value!;
                                   });
@@ -214,10 +214,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         (index) => LocationSelector(
                               category: AreaTypeList.typeList[index],
                               onSelect: (Category selectedCategory) {
-                                print(selectedCategory.id);
+                                context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id});
                               },
                             )),
-
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Row(children: [
@@ -266,12 +265,25 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(
                 height: 230,
                 child: GridView.count(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 0,
-                    children: viewModel.onGoingTourList.map((e) => OngoingFestivals(area: AreaType(areaCode: e.areaCode).name, title: e.title, url: e.imagePath)).toList()),
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  crossAxisCount: 1,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 0,
+                  children: List.generate(
+                    viewModel.onGoingTourList.length,
+                    (index) => OngoingFestivals(
+                      tourData: viewModel.onGoingTourList[index],
+                      onSelect: (Tour selectedTour) {
+                        context.pushNamed('detail', queryParameters: {
+                          'areaCode': selectedTour.areaCode,
+                          'id': selectedTour.id.toString(),
+                          'contentTypeId': selectedTour.contentType.contentTypeId.toString(),
+                        });
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
