@@ -32,10 +32,11 @@ final goRouter = GoRouter(
       },
     ),
     GoRoute(
-        path: '/splash',
-        builder: (context, state) {
-          return const SplashScreen();
-        }),
+      path: '/splash',
+      builder: (context, state) {
+        return SplashScreen();
+      }
+    ),
     GoRoute(
       path: '/login',
       builder: (context, state) {
