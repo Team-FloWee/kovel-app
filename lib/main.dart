@@ -5,14 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:kovel_app/config/firebase_options.dart';
 import 'package:kovel_app/core/router/router.dart';
-import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/di/di_setup.dart';
-import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
-import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
-import 'package:provider/provider.dart';
-
-import 'data/data_source/tour_info_data_source_impl.dart';
-import 'data/repository_impl/unified_detail_repositorty_impl.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -44,10 +37,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp
-            .router(
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          routerConfig:goRouter,
+          routerConfig: goRouter,
           title: 'Flutter Demo',
           theme: ThemeData(
             fontFamily: 'Inter',
@@ -69,7 +61,6 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-
         );
       },
     );
