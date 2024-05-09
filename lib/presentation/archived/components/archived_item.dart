@@ -4,16 +4,13 @@ import 'package:kovel_app/config/ui_config.dart';
 
 class ArchivedItem extends StatefulWidget {
   final String imagePath;
-  final double imageSize;
   final String badgeTitle;
   final String title;
 
-  const ArchivedItem(
-      {super.key,
-        required this.imagePath,
-        required this.imageSize,
-        this.badgeTitle = '',
-        this.title = ''});
+  const ArchivedItem({super.key,
+    required this.imagePath,
+    this.badgeTitle = '',
+    this.title = ''});
 
   @override
   State<ArchivedItem> createState() => _ArchivedItemState();
@@ -40,16 +37,12 @@ class _ArchivedItemState extends State<ArchivedItem> {
           borderRadius: BorderRadius.circular(8),
           child: Image.network(
             widget.imagePath,
-            width: widget.imageSize,
-            height: widget.imageSize,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
                   'assets/images/blank_image.png',
-                  width: widget.imageSize,
-                  height: widget.imageSize,
                   fit: BoxFit.cover,
                 ),
               );
@@ -76,29 +69,31 @@ class _ArchivedItemState extends State<ArchivedItem> {
           left: 16.w,
           bottom: 16.w,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  color: UiConfig.primaryColor,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 5, top: 3, left: 10, right: 10),
-                    child: Text(
-                      widget.badgeTitle,
-                      style: UiConfig.smallStyle.copyWith(
-                          fontWeight: UiConfig.semiBoldFont,
-                          color: UiConfig.black.shade100),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    color: UiConfig.primaryColor,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 5, top: 3, left: 10, right: 10),
+                      child: Text(
+                        widget.badgeTitle,
+                        style: UiConfig.smallStyle.copyWith(
+                            fontWeight: UiConfig.semiBoldFont,
+                            color: UiConfig.black.shade100),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Text(widget.title,
+                SizedBox(height: 4,),
+                Text(
+                  widget.title,
                   style: UiConfig.h4Style.copyWith(
-                      fontWeight: UiConfig.semiBoldFont,
-                      color: UiConfig.black.shade100))
-            ],
+                    fontWeight: UiConfig.semiBoldFont,
+                    color: UiConfig.black.shade100,),),
+              ],
           ),
         )
       ],
