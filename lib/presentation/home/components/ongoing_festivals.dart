@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/category/area_type.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 
 class OngoingFestivals extends StatelessWidget {
-  final String area;
-  final String title;
-  final String url;
-  const OngoingFestivals({super.key, required this.url, required this.area, required this.title});
+  final Tour tourData;
+
+  final Function onSelect;
+  const OngoingFestivals({super.key, required this.onSelect, required this.tourData});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +16,22 @@ class OngoingFestivals extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(url),
+            child: GestureDetector(
+              onTap: () {
+                onSelect.call(tourData);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(tourData.imagePath),
+                  ),
                 ),
-              ),
 
-              height: 350, // 내용의 높이
-              width: 350,
+                height: 350, // 내용의 높이
+                width: 350,
+              ),
             ),
           ),
           Positioned(
@@ -51,14 +58,14 @@ class OngoingFestivals extends StatelessWidget {
               bottom: MediaQuery.of(context).size.height * 0.035,
               left: MediaQuery.of(context).size.width * 0.04,
               child: Text(
-                area,
+                AreaType(areaCode: tourData.areaCode).name,
                 style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade100),
               )),
           Positioned(
             bottom: MediaQuery.of(context).size.height * 0.006,
             left: MediaQuery.of(context).size.width * 0.04,
             child: Text(
-              title,
+              tourData.title,
               style: UiConfig.bodyStyle.copyWith(color: UiConfig.black.shade100, fontWeight: UiConfig.semiBoldFont),
             ),
           ),

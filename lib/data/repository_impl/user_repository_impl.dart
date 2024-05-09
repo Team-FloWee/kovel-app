@@ -22,7 +22,6 @@ class UserRepositoryImpl implements UserRepository {
         case LoginPlatform.kakao:
           result = await KakaoAuth().login();
       }
-      _userDataSource.createUser(user: result!);
       return result;
     } catch (e) {
       print(e);
@@ -69,5 +68,22 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<void> signOut() async {
     await _userDataSource.signOut();
+  }
+
+  @override
+  Future<bool> existUser({required String id}) async {
+    final result = await _userDataSource.existUser(id: id);
+    return result;
+  }
+
+  @override
+  Future<bool> createUser({required User user}) async {
+    try {
+      await _userDataSource.createUser(user: user);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }
