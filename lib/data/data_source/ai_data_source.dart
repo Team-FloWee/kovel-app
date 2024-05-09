@@ -1,3 +1,3 @@
 abstract interface class AiDataSource {
-  Future<String> getTranslateEn(String text);
+  Future<String> getTranslateEn(String request);
 }
