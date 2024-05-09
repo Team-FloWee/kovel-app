@@ -103,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 10),
                   TextFormField(
                     onFieldSubmitted: (value) {},
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
                     decoration: const InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
