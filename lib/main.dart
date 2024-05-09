@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:kovel_app/config/firebase_options.dart';
+import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/router/router.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/di/di_setup.dart';
@@ -66,7 +67,10 @@ class MyApp extends StatelessWidget {
             //
             // This works for code too, not just values: Most code changes can be
             // tested with just a hot reload.
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: UiConfig.primaryColor,
+                primary: UiConfig.primaryColor
+            ),
             useMaterial3: true,
           ),
 
