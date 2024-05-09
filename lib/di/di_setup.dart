@@ -65,7 +65,8 @@ void diSetup() {
       loginUseCase: LoginUseCase(userRepository: getIt()),
       logoutUseCase: LogoutUseCase(userRepository: getIt()),
       checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
-      createUserUseCase: CreateUserUseCase(userRepository: getIt())));
+      createUserUseCase: CreateUserUseCase(userRepository: getIt())
+  ));
 
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt())));
