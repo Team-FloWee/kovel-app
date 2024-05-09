@@ -11,6 +11,8 @@ import 'package:kovel_app/data/repository_impl/user_repository_impl.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
+import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
+import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/logout_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
@@ -61,7 +63,9 @@ void diSetup() {
 
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
       loginUseCase: LoginUseCase(userRepository: getIt()),
-      logoutUseCase: LogoutUseCase(userRepository: getIt())
+      logoutUseCase: LogoutUseCase(userRepository: getIt()),
+      checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
+      createUserUseCase: CreateUserUseCase(userRepository: getIt())
   ));
 
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(

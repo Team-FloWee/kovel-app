@@ -53,7 +53,11 @@ class LoginScreen extends StatelessWidget {
               child: InkWell(
                 onTap: () async {
                   await viewModel.login(platform: LoginPlatform.kakao);
-                  context.go('/signUp', extra: viewModel.user);
+                  if (viewModel.isNewUser) {
+                    context.go('/signUp', extra: viewModel.user);
+                  } else {
+                    context.go('/');
+                  }
                 },
                 child: Image.asset(
                   'assets/images/kakao_login_icon.png',
@@ -71,7 +75,11 @@ class LoginScreen extends StatelessWidget {
               child: InkWell(
                 onTap: () async {
                   await viewModel.login(platform: LoginPlatform.google);
-                  context.go('/signUp', extra: viewModel.user);
+                  if (viewModel.isNewUser) {
+                    context.go('/signUp', extra: viewModel.user);
+                  } else {
+                    context.go('/');
+                  }
                 },
                 child: Image.asset(
                   'assets/images/google_login_icon.png',
