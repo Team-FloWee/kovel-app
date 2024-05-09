@@ -7,4 +7,5 @@ abstract interface class UserRepository {
 
   Future<User> getUser({required String id});
   Future<bool> updateUser({required User user});
+  Future<void> signOut();
 }

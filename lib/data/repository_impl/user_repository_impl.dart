@@ -9,7 +9,8 @@ import 'package:kovel_app/domain/repository/user_repository.dart';
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource _userDataSource;
 
-  UserRepositoryImpl({required UserDataSource userDataSource}) : _userDataSource = userDataSource;
+  UserRepositoryImpl({required UserDataSource userDataSource})
+      : _userDataSource = userDataSource;
 
   @override
   Future<User?> login({required LoginPlatform platform}) async {
@@ -23,7 +24,7 @@ class UserRepositoryImpl implements UserRepository {
       }
       _userDataSource.createUser(user: result!);
       return result;
-    } catch(e) {
+    } catch (e) {
       print(e);
       return null;
     }
@@ -63,5 +64,10 @@ class UserRepositoryImpl implements UserRepository {
       user = const User(userId: '', name: '', email: '', imageUrl: '');
     }
     return user;
+  }
+
+  @override
+  Future<void> signOut() async {
+    await _userDataSource.signOut();
   }
 }
