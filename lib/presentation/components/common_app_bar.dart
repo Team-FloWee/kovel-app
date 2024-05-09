@@ -14,6 +14,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     bool isCanPop = Navigator.of(context).canPop();
     return AppBar(
+      scrolledUnderElevation: 0,
       backgroundColor: UiConfig.black.shade100,
       leading: isCanPop ? InkWell(
           onTap: () => context.pop(),
