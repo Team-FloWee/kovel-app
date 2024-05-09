@@ -8,9 +8,8 @@ class SignUpViewModel with ChangeNotifier {
 
   SignUpViewModel({required UpdateUserNameUseCase updateUserNameUseCase}) : _updateUserNameUseCase = updateUserNameUseCase;
 
-  Future<void> clickSignUpButton({required BuildContext context, required String name}) async {
+  Future<void> clickSignUpButton({required String name}) async {
     final userId = CurrentUserService().getUserId();
     final result = await _updateUserNameUseCase.execute(id: userId, name: name);
-    if (result) context.go('/');
   }
 }
