@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/archived/components/archived_item.dart';
+import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 
 class ArchivedScreen extends StatefulWidget {
   const ArchivedScreen({super.key});
@@ -18,8 +19,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.location_on_rounded),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -45,6 +45,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNaviBar(),
     );
   }
 }
