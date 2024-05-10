@@ -15,8 +15,10 @@ import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
+import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
@@ -35,34 +37,30 @@ void diSetup() {
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
   getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
 
-
   // registerFactory
 
   // ViewModel & UseCase
   getIt.registerFactory<DetailViewModel>(() => DetailViewModel(
       getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
       getDetailDataUseCase: GetDetailDataUseCase(tourInfoRepository: getIt()),
-      getInfoDataUseCase: GetInfoDataUseCase(tourInfoRepository: getIt())
-  ));
+      getInfoDataUseCase: GetInfoDataUseCase(tourInfoRepository: getIt())));
 
   getIt.registerFactory<LocationListViewModel>(() => LocationListViewModel(
-      getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
-      getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
-  ));
+        getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
+        getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
+      ));
 
   getIt.registerFactory<CourseListViewModel>(() => CourseListViewModel(
-    getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
-    getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
-  ));
+        getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
+        getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
+      ));
 
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
       loginUseCase: LoginUseCase(userRepository: getIt()),
       logoutUseCase: LogoutUseCase(userRepository: getIt()),
       checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
-      createUserUseCase: CreateUserUseCase(userRepository: getIt())
-  ));
+      createUserUseCase: CreateUserUseCase(userRepository: getIt())));
 
-  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
-      updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())
-  ));
+  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
+  getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt())));
 }
