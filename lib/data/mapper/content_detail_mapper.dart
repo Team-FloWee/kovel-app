@@ -15,7 +15,8 @@ extension ToContentDetail on ContentDetailDto {
   CourseDetail toCourseDetail() {
     return CourseDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       takeTime: taketime ?? '',
       distance: distance ?? '',
     );
@@ -24,8 +25,9 @@ extension ToContentDetail on ContentDetailDto {
   CultureLocationDetail toCultureLocationDetail() {
     return CultureLocationDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
-      infoCenter: infocenterculture ?? '',
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      infoCenter: HtmlUtil().removeHtmlTags(infocenterculture ?? ''),
       useFee: usefee ?? '',
       useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
       restDay: restdateculture ?? '',
@@ -38,7 +40,8 @@ extension ToContentDetail on ContentDetailDto {
   FestivalDetail toFestivalDetail() {
     return FestivalDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: placeinfo ?? '',
       startDate: eventstartdate ?? '',
       endDate: eventenddate ?? '',
@@ -55,7 +58,8 @@ extension ToContentDetail on ContentDetailDto {
   LeportsDetail toLeportsDetail() {
     return LeportsDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterleports ?? '',
       restDay: restdateleports ?? '',
       useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
@@ -67,7 +71,8 @@ extension ToContentDetail on ContentDetailDto {
   LodgmentDetail toLodgmentDetail() {
     return LodgmentDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterlodging ?? '',
       reservationUrl: HtmlUtil().removeHtmlTags(reservationurl ?? ''),
       roomCount: roomcount ?? '',
@@ -96,7 +101,8 @@ extension ToContentDetail on ContentDetailDto {
   RestaurantDetail toRestaurantDetail() {
     return RestaurantDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocenterfood ?? '',
       firstMenu: firstmenu ?? '',
       treatMenu: treatmenu ?? '',
@@ -109,7 +115,8 @@ extension ToContentDetail on ContentDetailDto {
   ShoppingDetail toShoppingDetail() {
     return ShoppingDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       infoCenter: infocentershopping ?? '',
       saleItem: saleitem ?? '',
       saleItemCost: saleitemcost ?? '',
@@ -123,8 +130,9 @@ extension ToContentDetail on ContentDetailDto {
   TouristSpotDetail toTouristSpotDetail() {
     return TouristSpotDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
-      infoCenter: infocenter ?? '',
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      infoCenter: HtmlUtil().removeHtmlTags(infocenter ?? ''),
       expGuide: expguide ?? '',
       parking: parking ?? '',
       restDay: restdate ?? '',
