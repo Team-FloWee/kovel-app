@@ -1,9 +1,12 @@
 import 'package:kovel_app/domain/model/user.dart';
 
+import '../../../domain/model/archived.dart';
+
 abstract interface class UserDataSource {
   Future<void> createUser({required User user});
   Future<void> updateUser({required User user});
   Future<User> getUser({required String id});
   Future<void> signOut();
   Future<bool> existUser({required String id});
+  Future<List<Archived>> updateArchivedList({required List<Archived> archivedList});
 }
