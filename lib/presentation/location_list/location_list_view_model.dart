@@ -1,7 +1,10 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/auth/current_user_service.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
+import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 
 import '../../domain/model/archived.dart';
@@ -11,31 +14,28 @@ import '../../domain/use_case/get_area_data_use_case.dart';
 class LocationListViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetAreaDataUseCase _getAreaDataUseCase;
+  final UserRepository _userRepository;
 
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
+    required UserRepository userRepository,
   })  : _getCommonDataUseCase = getCommonDataUseCase,
-        _getAreaDataUseCase = getAreaDataUseCase;
+        _getAreaDataUseCase = getAreaDataUseCase,
+        _userRepository = userRepository;
 
   bool _isLoading = false;
+  bool _isArchived = false;
 
-  bool get isLoading => _isLoading;
-
-  late Archived _archived;
-
-  Archived get archived => _archived;
-
+  late User _user;
   List<Tour> _areaBasedDataList = [];
-
-  List<Tour> get areaBasedDataList => _areaBasedDataList;
-
   List<TourDetail> _courseDetailList = [];
-
-  List<TourDetail> get courseDetailList => _courseDetailList;
-
   List<TourDetail> _tourDetailList = [];
 
+  bool get isLoading => _isLoading;
+  bool get isArchived => _isArchived;
+  List<Tour> get areaBasedDataList => _areaBasedDataList;
+  List<TourDetail> get courseDetailList => _courseDetailList;
   List<TourDetail> get tourDetailList => _tourDetailList;
 
   int get contentTypeId => 0;
@@ -93,15 +93,19 @@ class LocationListViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getArchived({Tour? tour, TourDetail? tourDetail}) async {
+  void updateArchivedList(Archived clickedArchived) async {
+    _user = await _userRepository.getUser(
+        id: CurrentUserService().currentUser.toString());
+    !_isArchived;
     notifyListeners();
-    Archived(
-        id: tour?.id ?? tourDetail?.contentId ?? 0,
-        contentType: tour?.contentType.contentTypeId ?? tourDetail?.contentType.contentTypeId ?? 0,
-        title: tour?.title ?? tourDetail?.title ?? '',
-        mapx: tour?.mapx ?? tourDetail?.mapx ?? '',
-        mapy: tour?.mapy ?? tourDetail?.mapy ?? '',
-        imagePath: tour?.imagePath ?? tourDetail?.imagePath ?? '',
-        tel: tour?.tel ?? tourDetail?.tel ?? '');
+    if (_isArchived) {
+      _user.archivedList.add(clickedArchived);
+      await _userRepository.updateUser(user: _user);
+    } else {
+      _user.archivedList
+          .removeWhere((archived) => archived.id == clickedArchived.id);
+      await _userRepository.updateUser(user: _user);
+    }
+    notifyListeners();
   }
 }

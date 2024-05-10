@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -24,13 +22,11 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
-
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
         context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
-
   }
 
   @override
@@ -49,8 +45,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     child: ContentTitle(
                       title: '추천 코스',
                       withMore: true,
-                      onTapMore: (){
-                        context.pushNamed('courseList', queryParameters:{'areaCode':widget.areaCode});
+                      onTapMore: () {
+                        context.pushNamed('courseList',
+                            queryParameters: {'areaCode': widget.areaCode});
                       },
                     ),
                   ),
@@ -79,7 +76,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: FavoriteImage(
-                                      imagePath: e.imagePath, imageSize: 100),
+                                      archived: ArchivedUtil.getArchived(
+                                          tourDetail: e),
+                                      imageSize: 100),
                                 ))
                             .toList(),
                       ),
@@ -146,9 +145,12 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                       .map((e) => Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: InkWell(
-                              onTap: (){
-                                context.pushNamed('detail', queryParameters:{'id': e.contentId.toString(), 'contentTypeId': e.contentType.id, 'title': e.title});
-
+                              onTap: () {
+                                context.pushNamed('detail', queryParameters: {
+                                  'id': e.contentId.toString(),
+                                  'contentTypeId': e.contentType.id,
+                                  'title': e.title
+                                });
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +159,8 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                                       ? const Center(
                                           child: CircularProgressIndicator())
                                       : FavoriteImage(
-                                          imagePath: e.imagePath,
+                                          archived: ArchivedUtil.getArchived(
+                                              tourDetail: e),
                                           imageSize: 145,
                                         ),
                                   const SizedBox(width: 8),
