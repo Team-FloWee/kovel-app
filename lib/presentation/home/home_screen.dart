@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         (index) => LocationSelector(
                               category: AreaTypeList.typeList[index],
                               onSelect: (Category selectedCategory) {
-                                context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id});
+                                context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id.toString()});
                               },
                             )),
                   )),
@@ -288,11 +288,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     (index) => OngoingFestivals(
                       tourData: viewModel.onGoingTourList[index],
                       onSelect: (Tour selectedTour) {
-                        context.pushNamed('detail', queryParameters: {
-                          'areaCode': selectedTour.areaCode,
-                          'id': selectedTour.id.toString(),
-                          'contentTypeId': selectedTour.contentType.contentTypeId.toString(),
-                        });
+                        selectedTour.contentType.contentTypeId;
+                        context.pushNamed('detail',
+                            queryParameters: {'id': selectedTour.id.toString(), 'contentTypeId': selectedTour.contentType.contentTypeId.toString(), 'title': selectedTour.contentType.name});
                       },
                     ),
                   ),
