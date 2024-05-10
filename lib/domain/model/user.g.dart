@@ -11,6 +11,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       name: json['name'] as String,
       email: json['email'] as String,
       imageUrl: json['imageUrl'] as String,
+      archivedList: (json['archivedList'] as List<dynamic>)
+          .map((e) => Tour.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -19,4 +22,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'name': instance.name,
       'email': instance.email,
       'imageUrl': instance.imageUrl,
+      'archivedList': instance.archivedList,
     };
