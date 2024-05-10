@@ -65,6 +65,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
               onTap: () {
                 setState(() {
                   isLiked = !isLiked;
+                  //Todo 여기 클릭하면 보관함에 담기는 메서드가 수행되도록 해주세요.updateArchivedList()
                 });
               },
               child: SizedBox(
