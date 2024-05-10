@@ -12,7 +12,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       email: json['email'] as String,
       imageUrl: json['imageUrl'] as String,
       archivedList: (json['archivedList'] as List<dynamic>)
-          .map((e) => Tour.fromJson(e as Map<String, dynamic>))
+          .map((e) => Archived.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
