@@ -16,10 +16,11 @@ import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
+import 'package:kovel_app/presentation/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/splash',
   routes: [
     GoRoute(
       path: '/',
@@ -29,6 +30,12 @@ final goRouter = GoRouter(
           child: const HomeScreen(),
         );
       },
+    ),
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) {
+        return SplashScreen();
+      }
     ),
     GoRoute(
       path: '/login',
