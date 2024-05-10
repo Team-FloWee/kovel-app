@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart' as kakao;
-import 'package:kovel_app/domain/repository/auth/social_auth.dart';
 import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/domain/repository/auth/social_auth.dart';
 
 class KakaoAuth implements SocialAuth {
   @override
@@ -10,7 +10,8 @@ class KakaoAuth implements SocialAuth {
     // 카카오톡 실행이 가능하면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
     if (await kakao.isKakaoTalkInstalled()) {
       try {
-        kakao.OAuthToken token = await kakao.UserApi.instance.loginWithKakaoTalk();
+        kakao.OAuthToken token =
+            await kakao.UserApi.instance.loginWithKakaoTalk();
 
         var credential = auth.OAuthProvider("oidc.kovel").credential(
           idToken: token.idToken,
@@ -18,15 +19,17 @@ class KakaoAuth implements SocialAuth {
         );
 
         // firebase 로그인
-        final userCredential = await auth.FirebaseAuth.instance.signInWithCredential(credential);
+        final userCredential =
+            await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
-            userId: userCredential.user!.uid,
-            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-            email: kakaoUser.kakaoAccount?.email ?? '',
-            imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? ''
+          userId: userCredential.user!.uid,
+          name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+          email: kakaoUser.kakaoAccount?.email ?? '',
+          imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          archivedList: [],
         );
         return user;
       } catch (error) {
@@ -36,22 +39,25 @@ class KakaoAuth implements SocialAuth {
         }
         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
         try {
-          kakao.OAuthToken token = await kakao.UserApi.instance.loginWithKakaoAccount();
+          kakao.OAuthToken token =
+              await kakao.UserApi.instance.loginWithKakaoAccount();
           var credential = auth.OAuthProvider("oidc.kovel").credential(
             idToken: token.idToken,
             accessToken: token.accessToken,
           );
 
           // firebase 로그인
-          final userCredential = await auth.FirebaseAuth.instance.signInWithCredential(credential);
+          final userCredential =
+              await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
           final kakaoUser = await kakao.UserApi.instance.me();
 
           final user = User(
-              userId: userCredential.user!.uid,
-              name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-              email: kakaoUser.kakaoAccount?.email ?? '',
-              imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? ''
+            userId: userCredential.user!.uid,
+            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+            email: kakaoUser.kakaoAccount?.email ?? '',
+            imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+            archivedList: [],
           );
           return user;
         } catch (error) {
@@ -63,22 +69,25 @@ class KakaoAuth implements SocialAuth {
     } else {
       try {
         // kakao 계정으로 token 생성
-        kakao.OAuthToken token = await kakao.UserApi.instance.loginWithKakaoAccount();
+        kakao.OAuthToken token =
+            await kakao.UserApi.instance.loginWithKakaoAccount();
         // 생성된 토큰으로 firebase credential 생성
         var credential = auth.OAuthProvider("oidc.kovel").credential(
           idToken: token.idToken,
           accessToken: token.accessToken,
         );
         // firebase 로그인
-        final userCredential = await auth.FirebaseAuth.instance.signInWithCredential(credential);
+        final userCredential =
+            await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
-            userId: userCredential.user!.uid,
-            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-            email: kakaoUser.kakaoAccount?.email ?? '',
-            imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? ''
+          userId: userCredential.user!.uid,
+          name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+          email: kakaoUser.kakaoAccount?.email ?? '',
+          imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          archivedList: [],
         );
         return user;
       } catch (error) {
@@ -97,4 +106,3 @@ class KakaoAuth implements SocialAuth {
     }
   }
 }
-

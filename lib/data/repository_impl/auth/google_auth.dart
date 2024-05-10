@@ -11,7 +11,8 @@ class GoogleAuth implements SocialAuth {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
     // Create a new credential
     final credential = auth.GoogleAuthProvider.credential(
@@ -21,13 +22,15 @@ class GoogleAuth implements SocialAuth {
 
     // Once signed in, return the UserCredential
     try {
-      final userCredential = await auth.FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
       final user = User(
-          userId: userCredential.user!.uid,
-          name: userCredential.user!.displayName!,
-          email: userCredential.user!.email!,
-          imageUrl: userCredential.user!.photoURL ?? ''
+        userId: userCredential.user!.uid,
+        name: userCredential.user!.displayName!,
+        email: userCredential.user!.email!,
+        imageUrl: userCredential.user!.photoURL ?? '',
+        archivedList: [],
       );
       return user;
     } catch (error) {
@@ -41,4 +44,3 @@ class GoogleAuth implements SocialAuth {
     await GoogleSignIn().signOut();
   }
 }
-
