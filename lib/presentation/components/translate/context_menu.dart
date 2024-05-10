@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class ContextMenu extends StatelessWidget {
   final Widget child;
-  const ContextMenu({super.key, required this.child});
+  final String text;
+  const ContextMenu({super.key, required this.child, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoContextMenu.builder(
         actions: [
           CupertinoContextMenuAction(
-            onPressed: (){},
+            onPressed: (){
+              Clipboard.setData(ClipboardData(text: text));
+              context.pop();
+            },
             child: Text('Copy'),
             trailingIcon: Icons.copy,
           ),
