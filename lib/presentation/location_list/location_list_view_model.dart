@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 
+import '../../domain/model/archived.dart';
 import '../../domain/model/tour.dart';
 import '../../domain/use_case/get_area_data_use_case.dart';
 
@@ -14,23 +15,28 @@ class LocationListViewModel with ChangeNotifier {
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
-  })
-      : _getCommonDataUseCase = getCommonDataUseCase,
+  })  : _getCommonDataUseCase = getCommonDataUseCase,
         _getAreaDataUseCase = getAreaDataUseCase;
 
-
   bool _isLoading = false;
+
   bool get isLoading => _isLoading;
 
+  late Archived _archived;
+
+  Archived get archived => _archived;
+
   List<Tour> _areaBasedDataList = [];
+
   List<Tour> get areaBasedDataList => _areaBasedDataList;
 
   List<TourDetail> _courseDetailList = [];
+
   List<TourDetail> get courseDetailList => _courseDetailList;
 
   List<TourDetail> _tourDetailList = [];
-  List<TourDetail> get tourDetailList => _tourDetailList;
 
+  List<TourDetail> get tourDetailList => _tourDetailList;
 
   int get contentTypeId => 0;
 
@@ -40,10 +46,11 @@ class LocationListViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(areaCode: areaCode, cat2: '', contentTypeId: 25);
+    _areaBasedDataList = await _getAreaDataUseCase.execute(
+        areaCode: areaCode, cat2: '', contentTypeId: 25);
     _areaBasedDataList.forEach((element) async {
-      _courseDetailList.add(
-          await _getCommonDataUseCase.execute(id: element.id));
+      _courseDetailList
+          .add(await _getCommonDataUseCase.execute(id: element.id));
     }); //이렇게 쓰면 ID 리스트 필요없을 거 같음
 
     notifyListeners();
@@ -56,12 +63,13 @@ class LocationListViewModel with ChangeNotifier {
   Future<void> getCourseData(String areaCode, String cat2) async {
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(areaCode: areaCode, cat2: '', contentTypeId: 25);
+    _areaBasedDataList = await _getAreaDataUseCase.execute(
+        areaCode: areaCode, cat2: '', contentTypeId: 25);
 
     _courseDetailList = [];
     _areaBasedDataList.forEach((element) async {
-      _courseDetailList.add(
-          (await _getCommonDataUseCase.execute(id: element.id)));
+      _courseDetailList
+          .add((await _getCommonDataUseCase.execute(id: element.id)));
       notifyListeners();
     });
     notifyListeners();
@@ -72,15 +80,28 @@ class LocationListViewModel with ChangeNotifier {
     //_isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
+    _areaBasedDataList = await _getAreaDataUseCase.execute(
+        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
 
     _tourDetailList = [];
     _areaBasedDataList.forEach((element) async {
-      _tourDetailList.add(
-          (await _getCommonDataUseCase.execute(id: element.id)));
+      _tourDetailList
+          .add((await _getCommonDataUseCase.execute(id: element.id)));
       notifyListeners();
     });
     //_isLoading = false;
     notifyListeners();
+  }
+
+  Future<void> getArchived({Tour? tour, TourDetail? tourDetail}) async {
+    notifyListeners();
+    Archived(
+        id: tour?.id ?? tourDetail?.contentId ?? 0,
+        contentType: tour?.contentType.contentTypeId ?? tourDetail?.contentType.contentTypeId ?? 0,
+        title: tour?.title ?? tourDetail?.title ?? '',
+        mapx: tour?.mapx ?? tourDetail?.mapx ?? '',
+        mapy: tour?.mapy ?? tourDetail?.mapy ?? '',
+        imagePath: tour?.imagePath ?? tourDetail?.imagePath ?? '',
+        tel: tour?.tel ?? tourDetail?.tel ?? '');
   }
 }
