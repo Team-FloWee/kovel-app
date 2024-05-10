@@ -60,7 +60,8 @@ class UserRepositoryImpl implements UserRepository {
     try {
       user = await _userDataSource.getUser(id: id);
     } catch (error) {
-      user = const User(userId: '', name: '', email: '', imageUrl: '');
+      user = const User(
+          userId: '', name: '', email: '', imageUrl: '', archivedList: []);
     }
     return user;
   }
