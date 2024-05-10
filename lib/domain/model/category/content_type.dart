@@ -22,6 +22,14 @@ class ContentType extends Category {
     32 => '숙박',
     38 => '쇼핑',
     39 => '음식점',
+    75 => 'Leports',
+    76 => 'Tourist',
+    77 => 'Traffic',
+    78 => 'Culture',
+    79 => 'Shopping',
+    80 => 'Lodgment',
+    82 => 'Restaurant',
+    85 => 'Festival',
     _ => '전체'
   };
 }
@@ -37,5 +45,12 @@ class ContentTypeList {
     ContentType(contentTypeId: 32),
     ContentType(contentTypeId: 38),
     ContentType(contentTypeId: 39),
+    ContentType(contentTypeId: 75),
+    ContentType(contentTypeId: 76),
+    ContentType(contentTypeId: 77),
+    ContentType(contentTypeId: 78),
+    ContentType(contentTypeId: 79),
+    ContentType(contentTypeId: 80),
+    ContentType(contentTypeId: 82),
   ];
 }
