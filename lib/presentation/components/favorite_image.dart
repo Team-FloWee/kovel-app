@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/archived.dart';
 
 class FavoriteImage extends StatefulWidget {
-  final String imagePath;
+  final Archived archived;
   final double imageSize;
   final String area;
   final String title;
 
-  const FavoriteImage(
-      {super.key,
-      required this.imagePath,
-      required this.imageSize,
-      this.area = '',
-      this.title = ''});
+  const FavoriteImage({
+    super.key,
+    required this.archived,
+    required this.imageSize,
+    this.area = '',
+    this.title = '',
+  });
 
   @override
   State<FavoriteImage> createState() => _FavoriteImageState();
@@ -39,7 +41,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.network(
-            widget.imagePath,
+            widget.archived.imagePath,
             width: widget.imageSize,
             height: widget.imageSize,
             fit: BoxFit.cover,
