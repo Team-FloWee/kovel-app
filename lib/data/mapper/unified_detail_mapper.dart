@@ -8,17 +8,18 @@ extension ToUnifiedDetail on ContentDetailDto {
   UnifiedDetail toUnifiedDetail() {
     return UnifiedDetail(
       contentId: int.tryParse(contentid!) ?? 0,
-      contentType: ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
+      contentType:
+          ContentType(contentTypeId: int.tryParse(contenttypeid!) ?? 0),
       takeTime: taketime ?? '',
       distance: distance ?? '',
-      infoCenter: infocenterculture ??
+      infoCenter: HtmlUtil().removeHtmlTags(infocenterculture ??
           placeinfo ??
           infocenterleports ??
           infocenterlodging ??
           infocenterfood ??
           infocentershopping ??
           infocenter ??
-          '',
+          ''),
       useFee: usefee ?? usetimefestival ?? '',
       useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
       restDay: restdateculture ??
