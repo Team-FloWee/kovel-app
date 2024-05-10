@@ -44,22 +44,22 @@ class LoginScreen extends StatelessWidget {
               style: UiConfig.h4Style.copyWith(color: UiConfig.black.shade700),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            InkWell(
-              onTap: () async {
-                await viewModel.login(platform: LoginPlatform.kakao);
-                if (viewModel.user == null) return;
-                if (viewModel.isNewUser) {
-                  context.go('/signUp', extra: viewModel.user);
-                } else {
-                  context.go('/');
-                }
-              },
-              child: Card(
-                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                elevation: 2,
+            Card(
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+              ),
+              elevation: 2,
+              child: InkWell(
+                onTap: () async {
+                  await viewModel.login(platform: LoginPlatform.kakao);
+                  if (viewModel.user == null) return;
+                  if (viewModel.isNewUser) {
+                    context.go('/signUp', extra: viewModel.user);
+                  } else {
+                    context.go('/');
+                  }
+                },
                 child: Image.asset(
                   'assets/images/kakao_login_icon.png',
                   fit: BoxFit.cover,
@@ -67,22 +67,22 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            InkWell(
-              onTap: () async {
-                await viewModel.login(platform: LoginPlatform.google);
-                if (viewModel.user == null) return;
-                if (viewModel.isNewUser) {
-                  context.go('/signUp', extra: viewModel.user);
-                } else {
-                  context.go('/');
-                }
-              },
-              child: Card(
-                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                elevation: 2,
+            Card(
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+              ),
+              elevation: 2,
+              child: InkWell(
+                onTap: () async {
+                  await viewModel.login(platform: LoginPlatform.google);
+                  if (viewModel.user == null) return;
+                  if (viewModel.isNewUser) {
+                    context.go('/signUp', extra: viewModel.user);
+                  } else {
+                    context.go('/');
+                  }
+                },
                 child: Image.asset(
                   'assets/images/google_login_icon.png',
                   fit: BoxFit.cover,

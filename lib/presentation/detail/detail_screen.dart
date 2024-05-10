@@ -203,7 +203,6 @@ class _InfoSectionState extends State<InfoSection> {
               Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
         ),
         widget.contentTypeId != 25 ? Container(
-          padding: EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: UiConfig.black.shade500,
