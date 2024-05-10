@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
-import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 class UserDataSourceImpl implements UserDataSource {
@@ -20,8 +19,12 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<void> updateUser({required User user}) async {
-    await _userRef.doc(user.userId).update(
-        {'email': user.email, 'imageUrl': user.imageUrl, 'name': user.name});
+    await _userRef.doc(user.userId).update({
+      'email': user.email,
+      'imageUrl': user.imageUrl,
+      'name': user.name,
+      'archivedList': user.archivedList
+    });
   }
 
   @override
@@ -37,15 +40,12 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<bool> existUser({required String id}) async {
-    final result = await _userRef.doc(id).get().then((s) => s.data()!)
+    final result = await _userRef
+        .doc(id)
+        .get()
+        .then((s) => s.data()!)
         .then((value) => true)
         .onError((error, stackTrace) => false);
     return result;
-  }
-
-  @override
-  Future<List<Archived>> updateArchivedList({required List<Archived> archivedList}) {
-    // TODO: implement updateArchivedList
-    throw UnimplementedError();
   }
 }
