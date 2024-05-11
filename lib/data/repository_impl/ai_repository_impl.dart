@@ -1,3 +1,4 @@
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
 
@@ -6,12 +7,14 @@ class AiRepositoryImpl implements AiRepository {
 
   AiRepositoryImpl({required AiDataSource aiDataSource}) : _aiDataSource = aiDataSource;
 
-  Future<String> getTranslation({required String request, required String language}) async {
+  @override
+  Stream<GenerateContentResponse>? getTranslation({required String request, required String language}) {
     try {
-      final response = await _aiDataSource.chatToAi(query: 'please translate to $language $request');
-      return response.text ?? '';
+      final response = _aiDataSource.chatToAi(query: 'please translate to $language $request');
+      return response;
     } catch (e) {
-      return 'Ai getTranslation() Error';
+      print(e);
+      return null;
     }
   }
 }
