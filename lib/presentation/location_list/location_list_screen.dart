@@ -78,7 +78,13 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                   child: FavoriteImage(
                                       archived: ArchivedUtil.getArchived(
                                           tourDetail: e),
-                                      imageSize: 100),
+                                      imageSize: 100,
+                                    onFavoriteChanged: (archived, isLiked) {
+                                      // 여기에서 아무 작업도 하지 않아도 됩니다.
+                                      // 콜백 함수는 이미지 위젯에서만 상태를 업데이트하는 역할을 합니다.
+                                    },
+                                    upDateArchivedList: viewModel.updateArchivedList,
+                                    ),
                                 ))
                             .toList(),
                       ),
@@ -162,6 +168,10 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                                           archived: ArchivedUtil.getArchived(
                                               tourDetail: e),
                                           imageSize: 145,
+                                          onFavoriteChanged:
+                                              (Archived, isLiked) {},
+                                          upDateArchivedList:
+                                              viewModel.updateArchivedList,
                                         ),
                                   const SizedBox(width: 8),
                                   CommonText(
