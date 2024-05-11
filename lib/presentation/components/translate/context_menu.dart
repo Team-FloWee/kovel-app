@@ -38,12 +38,11 @@ class ContextMenu extends StatelessWidget {
               padding: padding,
               width: MediaQuery.of(context).size.width,
               child: Material(
-                  child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(90)
-                      ),
+                  borderRadius: BorderRadius.circular(16),
+                  child: Padding(
                       padding: padding,
-                      child: child)
+                      child: child
+                  )
               )
           );
         }
