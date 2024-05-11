@@ -7,9 +7,9 @@ class AiDataSourceImpl implements AiDataSource {
   final GenerativeModel _model = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY'));
 
   @override
-  Future<GenerateContentResponse> chatToAi({required String query}) async {
+  Stream<GenerateContentResponse> chatToAi({required String query}) {
     final content = [Content.text(query)];
-    final response = await _model.generateContent(content);
+    final response = _model.generateContentStream(content);
     return response;
   }
 }
