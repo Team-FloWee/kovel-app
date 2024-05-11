@@ -1,3 +1,5 @@
+import 'package:google_generative_ai/google_generative_ai.dart';
+
 abstract interface class AiDataSource {
-  Future<String> getTranslateEn(String request);
+  Future<GenerateContentResponse> chatToAi({required String query});
 }
