@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kovel_app/domain/model/archived.dart';
-import 'package:kovel_app/domain/model/tour.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -13,6 +12,7 @@ class User with _$User {
     required String email,
     required String imageUrl,
     required List<Archived> archivedList,
+    required List<String> stringList,
     //Todo 보관함,배낭톡,일정
   }) = _User;
 

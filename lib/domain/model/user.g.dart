@@ -14,6 +14,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       archivedList: (json['archivedList'] as List<dynamic>)
           .map((e) => Archived.fromJson(e as Map<String, dynamic>))
           .toList(),
+      stringList: (json['stringList'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -23,4 +26,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'email': instance.email,
       'imageUrl': instance.imageUrl,
       'archivedList': instance.archivedList,
+      'stringList': instance.stringList,
     };
