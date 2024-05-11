@@ -25,7 +25,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           menuBarName: '계정 설정',
           menuBarIcon: Icons.account_circle_outlined,
           onTapMenuBar: () async {
-            await context.push('/mypageedit');
+            await context.push('/mypage/edit');
             viewModel.getProfile();
           },
         ),

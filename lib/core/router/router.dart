@@ -20,7 +20,7 @@ import 'package:kovel_app/presentation/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: '/mypage',
   routes: [
     GoRoute(
       path: '/',
@@ -53,15 +53,17 @@ final goRouter = GoRouter(
           child: const MyPageScreen(),
         );
       },
-    ),
-    GoRoute(
-      path: '/mypageedit',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => MyPageViewModel(),
-          child: const MyPageEditScreen(),
-        );
-      },
+      routes: [
+        GoRoute(
+          path: 'edit',
+          builder: (context, state) {
+            return ChangeNotifierProvider(
+              create: (context) => MyPageViewModel(),
+              child: const MyPageEditScreen(),
+            );
+          },
+        )
+      ]
     ),
     GoRoute(
       path: '/detail',
