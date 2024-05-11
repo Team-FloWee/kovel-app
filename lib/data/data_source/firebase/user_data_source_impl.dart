@@ -23,7 +23,16 @@ class UserDataSourceImpl implements UserDataSource {
       'email': user.email,
       'imageUrl': user.imageUrl,
       'name': user.name,
-      'archivedList': user.archivedList
+      'archivedList': user.archivedList,
+      'stringList': user.stringList,
+    });
+  }
+
+  @override
+  Future<void> updateArchivedList(
+      {required User user, required String data}) async {
+    await _userRef.doc(user.userId).update({
+      'stringList': data,
     });
   }
 
