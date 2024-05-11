@@ -8,6 +8,8 @@ class FavoriteImage extends StatefulWidget {
   final double imageSize;
   final String area;
   final String title;
+  final Function(Archived, bool) onFavoriteChanged; //좋아요 버튼 누를 때 상태 변경 (해당아이템을 아카이브에 전달, 좋아요 상태를 전달)
+  final Function(Archived) upDateArchivedList; //보관함 목록을 업데이트하는 역할 (한번에 하나만을 처리하므로 하나만 인자로 받음)
 
   const FavoriteImage({
     super.key,
@@ -15,6 +17,8 @@ class FavoriteImage extends StatefulWidget {
     required this.imageSize,
     this.area = '',
     this.title = '',
+    required this.onFavoriteChanged,
+    required this.upDateArchivedList,
   });
 
   @override
@@ -65,6 +69,8 @@ class _FavoriteImageState extends State<FavoriteImage> {
               onTap: () {
                 setState(() {
                   isLiked = !isLiked;
+                  widget.onFavoriteChanged(widget.archived, isLiked);
+                  widget.upDateArchivedList(widget.archived); // updateArchivedList 호출
                   //Todo 여기 클릭하면 보관함에 담기는 메서드가 수행되도록 해주세요.updateArchivedList()
                 });
               },
