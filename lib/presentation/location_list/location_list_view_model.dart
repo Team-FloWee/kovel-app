@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'dart:core';
 
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:kovel_app/core/auth/current_user_service.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
@@ -15,7 +16,6 @@ class LocationListViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetAreaDataUseCase _getAreaDataUseCase;
   final UserRepository _userRepository;
-
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
@@ -26,7 +26,9 @@ class LocationListViewModel with ChangeNotifier {
 
   bool _isLoading = false;
   bool _isArchived = false;
-
+  late List<Archived> decodedData;
+  List<Archived> archivedList = [];
+  List<String> stringList = [];
   late User _user;
   List<Tour> _areaBasedDataList = [];
   List<TourDetail> _courseDetailList = [];
@@ -93,18 +95,28 @@ class LocationListViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateArchivedList(Archived clickedArchived) async {
+  void getArchivedList() async {
     _user = await _userRepository.getUser(
-        id: CurrentUserService().currentUser.toString());
-    !_isArchived;
+        id: auth.FirebaseAuth.instance.currentUser!.uid);
+
+    decodedData = (jsonDecode(_user.stringList.toString()) as List<dynamic>)
+        .map((e) => Archived.fromJson(e))
+        .toList();
+  }
+
+  void updateArchivedList(Archived clickedArchived) async {
     notifyListeners();
-    if (_isArchived) {
-      _user.archivedList.add(clickedArchived);
-      await _userRepository.updateUser(user: _user);
+    print('유저아이디${_user}');
+    if (_isArchived == false) {
+      decodedData.add(clickedArchived);
+      String data = jsonEncode(decodedData);
+      await _userRepository.saveArchivedList(user: _user, data: data);
+      !_isArchived;
     } else {
-      _user.archivedList
-          .removeWhere((archived) => archived.id == clickedArchived.id);
-      await _userRepository.updateUser(user: _user);
+      decodedData.removeWhere((archived) => archived.id == clickedArchived.id);
+      String data = jsonEncode(decodedData);
+      await _userRepository.deleteArchivedList(user: _user, data: data);
+      !_isArchived;
     }
     notifyListeners();
   }

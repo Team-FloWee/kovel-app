@@ -25,8 +25,10 @@ class _LocationListScreenState extends State<LocationListScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+    Future.microtask(() {
+      context.read<LocationListViewModel>().getData(widget.areaCode);
+      context.read<LocationListViewModel>().getArchivedList();
+    }); //세트
   }
 
   @override
@@ -76,15 +78,16 @@ class _LocationListScreenState extends State<LocationListScreen> {
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: FavoriteImage(
-                                      archived: ArchivedUtil.getArchived(
-                                          tourDetail: e),
-                                      imageSize: 100,
+                                    archived:
+                                        ArchivedUtil.getArchived(tourDetail: e),
+                                    imageSize: 100,
                                     onFavoriteChanged: (archived, isLiked) {
                                       // 여기에서 아무 작업도 하지 않아도 됩니다.
                                       // 콜백 함수는 이미지 위젯에서만 상태를 업데이트하는 역할을 합니다.
                                     },
-                                    upDateArchivedList: viewModel.updateArchivedList,
-                                    ),
+                                    upDateArchivedList:
+                                        viewModel.updateArchivedList,
+                                  ),
                                 ))
                             .toList(),
                       ),
