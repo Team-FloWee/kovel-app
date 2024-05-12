@@ -6,7 +6,7 @@ import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/data/data_source/ai_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
 import 'package:kovel_app/di/di_setup.dart';
-import 'package:kovel_app/domain/use_case/ai_translate_use_case.dart';
+import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
 
 class ContextMenu extends StatefulWidget {
   final Widget child;
@@ -95,10 +95,7 @@ class _ContextMenuState extends State<ContextMenu> {
                           ),
                           Divider(),
                           StreamBuilder(
-                              stream: AiTranslateUseCase(aiRepository: getIt())
-                                  .execute(
-                                      request: widget.text,
-                                      language: 'english'),
+                              stream: GetTranslatedDataStreamUseCase(aiRepository: getIt()).execute(request: widget.text, language: 'english'),
                               builder: (context, snapshot) {
                                 translateData += snapshot.data?.text ?? '';
                                 // print(translateData);

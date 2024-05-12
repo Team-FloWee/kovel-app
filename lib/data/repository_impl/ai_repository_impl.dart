@@ -8,13 +8,8 @@ class AiRepositoryImpl implements AiRepository {
   AiRepositoryImpl({required AiDataSource aiDataSource}) : _aiDataSource = aiDataSource;
 
   @override
-  Stream<GenerateContentResponse>? getTranslation({required String request, required String language}) {
-    try {
-      final response = _aiDataSource.chatToAi(query: 'please translate to $language $request');
-      return response;
-    } catch (e) {
-      print(e);
-      return null;
-    }
+  Stream<GenerateContentResponse> getTranslatedDataStream({required String request, required String language}) {
+    final response = _aiDataSource.chatToAi(query: 'please translate to $language $request');
+    return response;
   }
 }
