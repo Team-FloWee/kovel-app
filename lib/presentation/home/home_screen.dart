@@ -209,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Row(children: [
                     Text(
-                      '어디로 여행갈까?',
+                      '🧐 어디로 여행갈까?',
                       style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont),
                     ),
                   ]),
