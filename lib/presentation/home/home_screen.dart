@@ -88,10 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             '주소 새로고침',
-                            style: UiConfig.smallStyle,
+                            style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade800),
                           ),
                           CustomIconButton(
-                            icon: Icons.refresh,
+                            icon: Icons.refresh_rounded,
                             onPressed: () {
                               viewModel.refreshPosition(_selectedRadius);
                             },
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   TextFormField(
                     onFieldSubmitted: (value) {},
                     onTapOutside: (event) => FocusScope.of(context).unfocus(),
@@ -120,16 +120,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Text('내주변 관광정보 추천', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
                       const Spacer(),
                       DecoratedBox(
-                        decoration: const BoxDecoration(color: UiConfig.primaryColor, borderRadius: BorderRadius.all(Radius.circular(10))),
+                        decoration: const BoxDecoration(color: UiConfig.primaryColor, borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.04,
-                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: MediaQuery.of(context).size.height * 0.036,
+                          width: MediaQuery.of(context).size.width * 0.22,
                           child: Center(
                             child: DropdownButton(
                                 dropdownColor: UiConfig.primaryColor, //TODO: dropdown 밖의 색과 선택했을 때의 배경색이 같이 감. border radius 주는 방법?
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
                   viewModel.locationBasedList.isNotEmpty
                       ? Container(
                           child: GridView.count(
@@ -202,25 +202,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: MediaQuery.of(context).size.width * 0.8,
                               child: Image.asset('assets/images/search_icon.png'),
                             ),
-                            const Text('현재 위치에는 관광정보가 없습니다.'),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                             Text('현재 위치에는 관광정보가 없습니다.', style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade700, fontWeight: UiConfig.semiBoldFont),),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                           ],
                         ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Row(children: [
                     Text(
                       '어디로 여행갈까?',
                       style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont),
                     ),
                   ]),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Container(
                       child: GridView.count(
                     physics: const NeverScrollableScrollPhysics(),
                     childAspectRatio: 2 / 1,
                     shrinkWrap: true,
                     crossAxisCount: 4,
-                    crossAxisSpacing: 15,
+                    crossAxisSpacing: 16,
                     mainAxisSpacing: 10,
                     children: List.generate(
                         AreaTypeList.typeList.length,
@@ -231,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             )),
                   )),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                   Row(children: [
                     Text('🔥 가장 인기 있는 명소 Top 10', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
                   ]),
