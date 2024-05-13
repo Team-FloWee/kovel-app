@@ -16,6 +16,7 @@ class TranslateBottomSheet extends StatefulWidget {
 }
 
 class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
+  final ScrollController _translatedDataController = ScrollController();
   List<String> _languageList = ['한국어', 'English', '日本語'];
   String _selectedLanguage = 'English';
   bool _isMore = false;
@@ -124,7 +125,11 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                                   context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: _selectedLanguage);
                                 }
                             ),
-                            _buildTranslatedSection(isMore: _isMore, translatedData: aiProvider.translatedData)
+                            _buildTranslatedSection(
+                                isMore: _isMore,
+                                translatedData: aiProvider.translatedData,
+                                controller: _translatedDataController
+                            )
                           ],
                         ),
                       ),
@@ -166,37 +171,52 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
   }
 }
 
-Widget _buildTranslatedSection({required bool isMore, required String translatedData}) {
-  return isMore ? Padding(
-    padding: const EdgeInsets.only(right: 8),
-    child: Column(
-      children: [
-        Text(
-            translatedData,
-            style: UiConfig.h4Style.copyWith(
-                fontWeight: UiConfig.semiBoldFont)
+Widget _buildTranslatedSection({
+  required bool isMore, required String translatedData, required ScrollController controller
+}) {
+  return Stack(
+    children: [
+      Opacity(
+        opacity: translatedData == '' ? 1 : 0,
+        child: Align(
+            alignment: Alignment.center,
+            child: CircularProgressIndicator()
         ),
-      ],
-    ),
-  ) : Container(
-    constraints: BoxConstraints(
-      maxHeight: 180.h
-    ),
-    child: Scrollbar(
-      child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Column(
-              children: [
-                Text(
-                    translatedData,
-                    style: UiConfig.h4Style.copyWith(
-                        fontWeight: UiConfig.semiBoldFont)
-                ),
-              ],
-            ),
-          )
       ),
-    ),
+      isMore ? Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: Column(
+          children: [
+            Text(
+                translatedData,
+                style: UiConfig.h4Style.copyWith(
+                    fontWeight: UiConfig.semiBoldFont)
+            ),
+          ],
+        ),
+      ) : Container(
+        constraints: BoxConstraints(
+          maxHeight: 180.h
+        ),
+        child: Scrollbar(
+          controller: controller,
+          thumbVisibility: true,
+          child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Column(
+                  children: [
+                    Text(
+                        translatedData,
+                        style: UiConfig.h4Style.copyWith(
+                            fontWeight: UiConfig.semiBoldFont)
+                    ),
+                  ],
+                ),
+              )
+          ),
+        ),
+      ),
+    ],
   );
 }
