@@ -103,6 +103,8 @@ class _ArchivedItemState extends State<ArchivedItem> {
                           style: UiConfig.smallStyle.copyWith(
                               fontWeight: UiConfig.semiBoldFont,
                               color: UiConfig.black.shade100),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
