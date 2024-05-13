@@ -142,7 +142,7 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                         child: InkWell(
                           borderRadius: BorderRadius.circular(16),
                           onTap: () {
-                            Clipboard.setData(ClipboardData(text: widget.text));
+                            Clipboard.setData(ClipboardData(text: aiProvider.translatedData));
                           },
                           child: Container(
                             padding: EdgeInsets.all(16),
