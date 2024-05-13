@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:kovel_app/core/service/ai_provider.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
 import 'package:kovel_app/data/data_source/ai_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
@@ -11,6 +12,7 @@ import 'package:kovel_app/data/repository_impl/user_repository_impl.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
+import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
@@ -42,6 +44,9 @@ void diSetup() {
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
   getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
   getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
+
+  // Service
+  getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())));
 
   // registerFactory
 

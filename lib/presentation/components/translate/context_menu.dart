@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/data/data_source/ai_data_source_impl.dart';
-import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
+import 'package:kovel_app/core/service/ai_provider.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
+import 'package:kovel_app/presentation/components/translate/translate_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
 class ContextMenu extends StatefulWidget {
   final Widget child;
@@ -21,7 +21,6 @@ class ContextMenu extends StatefulWidget {
 class _ContextMenuState extends State<ContextMenu> {
   @override
   Widget build(BuildContext context) {
-    String translateData = '';
     return CupertinoContextMenu.builder(
         actions: [
           CupertinoContextMenuAction(
@@ -39,86 +38,9 @@ class _ContextMenuState extends State<ContextMenu> {
                   elevation: 0,
                   context: context,
                   builder: (BuildContext context) {
-                    return Container(
-                      padding: EdgeInsets.all(16),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Spacer(),
-                              Text('Translate',
-                                  style: UiConfig.h4Style.copyWith(
-                                      fontWeight: UiConfig.semiBoldFont)),
-                              Spacer(),
-                              Icon(Icons.close)
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('Detected as'),
-                                  DropdownButton<String>(
-                                    items: [
-                                      DropdownMenuItem<String>(
-                                          value: 'English',
-                                          child: Text('English (US)')),
-                                      DropdownMenuItem<String>(
-                                          value: 'Korea',
-                                          child: Text('Korean (KR)')),
-                                    ],
-                                    isExpanded: false,
-                                    onChanged: (dynamic value) {},
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                      width: 300,
-                                      child: Text(
-                                        widget.text,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      )),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    'more',
-                                    style: TextStyle(color: Colors.blue),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                          StreamBuilder(
-                              stream: GetTranslatedDataStreamUseCase(aiRepository: getIt()).execute(request: widget.text, language: 'english'),
-                              builder: (context, snapshot) {
-                                translateData += snapshot.data?.text ?? '';
-                                // print(translateData);
-                                return Container(height: 150,
-                                  child: SingleChildScrollView(
-                                      scrollDirection: Axis.vertical,
-                                      child: Column(
-                                        children: [
-                                          Text(translateData.toString()),
-                                        ],
-                                      )),
-                                );
-                              }),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Text('Copy Translation'),
-                              Spacer(),
-                              Icon(Icons.copy),
-                            ],
-                          ),
-                        ],
-                      ),
+                    return ChangeNotifierProvider(
+                      create: (_) => AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())),
+                        child: TranslateBottomSheet(text: widget.text)
                     );
                   },
                 );
