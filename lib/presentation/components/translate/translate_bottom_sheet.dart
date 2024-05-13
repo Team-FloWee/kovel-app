@@ -121,26 +121,29 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                         ),
                       ),
                       SizedBox(height: 24),
-                      InkWell(
-                        onTap: () {
-                          Clipboard.setData(ClipboardData(text: widget.text));
-                        },
-                        splashColor: Colors.blue.withOpacity(0.1),
-                        highlightColor: Colors.blue.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(16),
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              color: UiConfig.black.shade100,
+                      Ink(
+                        decoration: BoxDecoration(
+                          color: UiConfig.black.shade100,
+                          borderRadius: BorderRadius.circular(16)
+                        ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(16),
+                          onTap: () {
+                            Clipboard.setData(ClipboardData(text: widget.text));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16)
+                            ),
+                            child: Row(
+                              children: [
+                                Text('Copy Translation'),
+                                Spacer(),
+                                Icon(Icons.copy),
+                              ],
+                            )
                           ),
-                          child: Row(
-                            children: [
-                              Text('Copy Translation'),
-                              Spacer(),
-                              Icon(Icons.copy),
-                            ],
-                          )
                         ),
                       ),
                     ],
