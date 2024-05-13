@@ -71,11 +71,21 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                             ) : Row(
                               children: [
                                 Expanded(
-                                  child: Text(
-                                    widget.text,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.clip,
-                                    style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                  child: ShaderMask(
+                                    shaderCallback: (bounds) {
+                                      return LinearGradient(
+                                          begin: Alignment(0.5, 0.5),
+                                          end: Alignment(1.0, 0.5),
+                                          colors: [UiConfig.black.shade900, Colors.transparent],
+                                          stops: [0.0, 1.0]
+                                      ).createShader(bounds);
+                                    },
+                                    child: Text(
+                                      widget.text,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                      style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                    ),
                                   ),
                                 ),
                                 InkWell(
