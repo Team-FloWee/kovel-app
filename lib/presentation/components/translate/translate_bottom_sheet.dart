@@ -146,7 +146,7 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                             ),
                             child: Row(
                               children: [
-                                Text('Copy Translation'),
+                                Text('Copy Translation', style: UiConfig.bodyStyle),
                                 Spacer(),
                                 Icon(Icons.copy),
                               ],
