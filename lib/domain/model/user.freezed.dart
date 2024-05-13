@@ -25,7 +25,6 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   List<Archived> get archivedList => throw _privateConstructorUsedError;
-  List<String> get stringList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +41,7 @@ abstract class $UserCopyWith<$Res> {
       String name,
       String email,
       String imageUrl,
-      List<Archived> archivedList,
-      List<String> stringList});
+      List<Archived> archivedList});
 }
 
 /// @nodoc
@@ -64,7 +62,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = null,
     Object? imageUrl = null,
     Object? archivedList = null,
-    Object? stringList = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -87,10 +84,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.archivedList
           : archivedList // ignore: cast_nullable_to_non_nullable
               as List<Archived>,
-      stringList: null == stringList
-          ? _value.stringList
-          : stringList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ) as $Val);
   }
 }
@@ -107,8 +100,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String name,
       String email,
       String imageUrl,
-      List<Archived> archivedList,
-      List<String> stringList});
+      List<Archived> archivedList});
 }
 
 /// @nodoc
@@ -126,7 +118,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? email = null,
     Object? imageUrl = null,
     Object? archivedList = null,
-    Object? stringList = null,
   }) {
     return _then(_$UserImpl(
       userId: null == userId
@@ -146,13 +137,9 @@ class __$$UserImplCopyWithImpl<$Res>
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       archivedList: null == archivedList
-          ? _value._archivedList
+          ? _value.archivedList
           : archivedList // ignore: cast_nullable_to_non_nullable
               as List<Archived>,
-      stringList: null == stringList
-          ? _value._stringList
-          : stringList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ));
   }
 }
@@ -165,10 +152,7 @@ class _$UserImpl implements _User {
       required this.name,
       required this.email,
       required this.imageUrl,
-      required final List<Archived> archivedList,
-      required final List<String> stringList})
-      : _archivedList = archivedList,
-        _stringList = stringList;
+      required this.archivedList});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -181,25 +165,12 @@ class _$UserImpl implements _User {
   final String email;
   @override
   final String imageUrl;
-  final List<Archived> _archivedList;
   @override
-  List<Archived> get archivedList {
-    if (_archivedList is EqualUnmodifiableListView) return _archivedList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_archivedList);
-  }
-
-  final List<String> _stringList;
-  @override
-  List<String> get stringList {
-    if (_stringList is EqualUnmodifiableListView) return _stringList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_stringList);
-  }
+  final List<Archived> archivedList;
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imageUrl: $imageUrl, archivedList: $archivedList, stringList: $stringList)';
+    return 'User(userId: $userId, name: $name, email: $email, imageUrl: $imageUrl, archivedList: $archivedList)';
   }
 
   @override
@@ -213,21 +184,13 @@ class _$UserImpl implements _User {
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             const DeepCollectionEquality()
-                .equals(other._archivedList, _archivedList) &&
-            const DeepCollectionEquality()
-                .equals(other._stringList, _stringList));
+                .equals(other.archivedList, archivedList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      userId,
-      name,
-      email,
-      imageUrl,
-      const DeepCollectionEquality().hash(_archivedList),
-      const DeepCollectionEquality().hash(_stringList));
+  int get hashCode => Object.hash(runtimeType, userId, name, email, imageUrl,
+      const DeepCollectionEquality().hash(archivedList));
 
   @JsonKey(ignore: true)
   @override
@@ -249,8 +212,7 @@ abstract class _User implements User {
       required final String name,
       required final String email,
       required final String imageUrl,
-      required final List<Archived> archivedList,
-      required final List<String> stringList}) = _$UserImpl;
+      required final List<Archived> archivedList}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -264,8 +226,6 @@ abstract class _User implements User {
   String get imageUrl;
   @override
   List<Archived> get archivedList;
-  @override
-  List<String> get stringList;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

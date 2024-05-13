@@ -24,7 +24,6 @@ class UserDataSourceImpl implements UserDataSource {
       'imageUrl': user.imageUrl,
       'name': user.name,
       'archivedList': user.archivedList,
-      'stringList': user.stringList,
     });
   }
 

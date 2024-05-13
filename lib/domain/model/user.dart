@@ -4,7 +4,7 @@ import 'package:kovel_app/domain/model/archived.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class User with _$User {
   const factory User({
     required String userId,
@@ -12,7 +12,6 @@ class User with _$User {
     required String email,
     required String imageUrl,
     required List<Archived> archivedList,
-    required List<String> stringList,
     //Todo 보관함,배낭톡,일정
   }) = _User;
 

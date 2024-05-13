@@ -66,7 +66,6 @@ class UserRepositoryImpl implements UserRepository {
         email: '',
         imageUrl: '',
         archivedList: [],
-        stringList: [],
       );
     }
     return user;
