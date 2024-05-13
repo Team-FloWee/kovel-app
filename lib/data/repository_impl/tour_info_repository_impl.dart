@@ -29,7 +29,10 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
       String areaCode = '',
       String cat2 = ''}) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
-        contentTypeId: contentTypeId, areaCode: areaCode, cat2: cat2);
+        contentTypeId: contentTypeId,
+        areaCode: areaCode,
+        cat2: cat2,
+        pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -39,8 +42,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     int pageNo = 1,
     required String keyword,
   }) async {
-    final List<TourDto> tourDto =
-        await _tourInfoDataSource.getSearchKeyword(keyword: keyword);
+    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchKeyword(
+        keyword: keyword, pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -52,7 +55,9 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required String eventEndDate,
   }) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getSearchFestival(
-        eventStartDate: eventStartDate, eventEndDate: eventEndDate);
+        eventStartDate: eventStartDate,
+        eventEndDate: eventEndDate,
+        pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -64,15 +69,16 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required String mapY,
     required String radius,
   }) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource
-        .getLocationBasedList(mapX: mapX, mapY: mapY, radius: radius);
+    final List<TourDto> tourDto =
+        await _tourInfoDataSource.getLocationBasedList(
+            mapX: mapX, mapY: mapY, radius: radius, pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
   // 숙박 정보 조회 (search stay)
   @override
   Future<List<Tour>> getSearchStay({int pageNo = 1}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchStay();
+    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchStay(pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -83,7 +89,7 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int id,
   }) async {
     final List<TourDetailDto> tourDetailDto =
-        await _tourInfoDataSource.getDetailCommon(id: id);
+        await _tourInfoDataSource.getDetailCommon(id: id, pageNo: pageNo);
     return tourDetailDto.map((e) => e.toTourDetail()).toList();
   }
 
@@ -94,7 +100,7 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int contentTypeId,
   }) async {
     final List<ContentDetailDto> detailDto = await _tourInfoDataSource
-        .getDetailIntro(id: id, contentTypeId: contentTypeId);
+        .getDetailIntro(id: id, contentTypeId: contentTypeId, pageNo: pageNo);
     return detailDto.map((e) => e.toUnifiedDetail()).toList();
   }
 
@@ -109,7 +115,7 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     required int contentTypeId,
   }) async {
     final List<ContentDetailInfoDto> infoDto = await _tourInfoDataSource
-        .getDetailInfo(id: id, contentTypeId: contentTypeId);
+        .getDetailInfo(id: id, contentTypeId: contentTypeId, pageNo: pageNo);
     return infoDto.map((e) => e.toUnifiedInfo()).toList();
   }
 }

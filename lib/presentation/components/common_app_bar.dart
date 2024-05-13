@@ -4,11 +4,15 @@ import 'package:kovel_app/config/ui_config.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-
-  const CommonAppBar({Key? key, required this.title}) : super(key: key);
+  final ScrollController? controller;
+  const CommonAppBar({
+    super.key,
+    required this.title,
+    this.controller,
+  });
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +20,24 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       scrolledUnderElevation: 0,
       backgroundColor: UiConfig.black.shade100,
-      leading: isCanPop ? InkWell(
-          onTap: () => context.pop(),
-          child: Icon(Icons.arrow_back_ios)
-      ) : SizedBox(),
+      leading: isCanPop ? InkWell(onTap: () => context.pop(), child: const Icon(Icons.arrow_back_ios)) : const SizedBox(),
       centerTitle: true,
-      title: Text(
-        title,
-        style: UiConfig.h3Style.copyWith(
-          fontWeight: UiConfig.semiBoldFont,
-          overflow: TextOverflow.ellipsis,
+      title: GestureDetector(
+        onDoubleTap: () {
+          if (controller != null && controller!.hasClients) {
+            controller!.animateTo(
+              0.0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+            );
+          }
+        },
+        child: Text(
+          title,
+          style: UiConfig.h3Style.copyWith(
+            fontWeight: UiConfig.semiBoldFont,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );
