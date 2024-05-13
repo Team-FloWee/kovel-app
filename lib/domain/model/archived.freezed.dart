@@ -21,7 +21,7 @@ Archived _$ArchivedFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Archived {
   int get id => throw _privateConstructorUsedError;
-  int get contentType => throw _privateConstructorUsedError;
+  ContentType get contentType => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get mapx => throw _privateConstructorUsedError;
   String get mapy => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $ArchivedCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int contentType,
+      ContentType contentType,
       String title,
       String mapx,
       String mapy,
@@ -78,7 +78,7 @@ class _$ArchivedCopyWithImpl<$Res, $Val extends Archived>
       contentType: null == contentType
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
-              as int,
+              as ContentType,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -113,7 +113,7 @@ abstract class _$$ArchivedImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      int contentType,
+      ContentType contentType,
       String title,
       String mapx,
       String mapy,
@@ -148,7 +148,7 @@ class __$$ArchivedImplCopyWithImpl<$Res>
       contentType: null == contentType
           ? _value.contentType
           : contentType // ignore: cast_nullable_to_non_nullable
-              as int,
+              as ContentType,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ class _$ArchivedImpl implements _Archived {
   @override
   final int id;
   @override
-  final int contentType;
+  final ContentType contentType;
   @override
   final String title;
   @override
@@ -246,7 +246,7 @@ class _$ArchivedImpl implements _Archived {
 abstract class _Archived implements Archived {
   const factory _Archived(
       {required final int id,
-      required final int contentType,
+      required final ContentType contentType,
       required final String title,
       required final String mapx,
       required final String mapy,
@@ -259,7 +259,7 @@ abstract class _Archived implements Archived {
   @override
   int get id;
   @override
-  int get contentType;
+  ContentType get contentType;
   @override
   String get title;
   @override

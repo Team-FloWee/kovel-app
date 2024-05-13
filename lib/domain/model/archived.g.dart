@@ -9,7 +9,8 @@ part of 'archived.dart';
 _$ArchivedImpl _$$ArchivedImplFromJson(Map<String, dynamic> json) =>
     _$ArchivedImpl(
       id: (json['id'] as num).toInt(),
-      contentType: (json['contentType'] as num).toInt(),
+      contentType:
+          ContentType.fromJson(json['contentType'] as Map<String, dynamic>),
       title: json['title'] as String,
       mapx: json['mapx'] as String,
       mapy: json['mapy'] as String,

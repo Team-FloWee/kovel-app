@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 part 'archived.freezed.dart';
 part 'archived.g.dart';
@@ -7,7 +8,7 @@ part 'archived.g.dart';
 class Archived with _$Archived {
   const factory Archived({
     required int id,
-    required int contentType,
+    required ContentType contentType,
     required String title,
     required String mapx,
     required String mapy,
