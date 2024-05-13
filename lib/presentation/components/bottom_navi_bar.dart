@@ -9,8 +9,8 @@ class BottomNaviBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: UiConfig.primaryColor, width: 0.5)), // 라인효과
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: UiConfig.black.shade200, width: 0.5)), // 라인효과
       ),
       child: BottomNavigationBar(
         elevation: 0,
