@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/service/ai_provider.dart';
@@ -16,6 +18,7 @@ class TranslateBottomSheet extends StatefulWidget {
 class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
   List<String> _languageList = ['한국어', 'English', '日本語'];
   String _selectedLanguage = 'English';
+  bool _isMore = false;
 
   @override
   void initState() {
@@ -26,9 +29,12 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final aiProvider = context.watch<AiProvider>();
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
       padding: EdgeInsets.all(16),
-      width: MediaQuery.of(context).size.width,
+      width: 1.sw,
+      height: _isMore ? 0.95.sh : 0.6.sh,
       child: Stack(
         children: [
           Positioned(
@@ -45,64 +51,101 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
               Text('Translate',
                   style: UiConfig.h4Style.copyWith(
                       fontWeight: UiConfig.semiBoldFont)),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Text('Detected as'),
-                      DropdownButton<String>(
-                        value: _selectedLanguage,
-                        items: _languageList.map((e) => DropdownMenuItem<String>(
-                          value: e,
-                          child: Text(e),
-                        )).toList(),
-                        isExpanded: false,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _selectedLanguage = value ?? 'English';
-                          });
-                          context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: _selectedLanguage);
-                        }
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                          width: 300,
-                          child: Text(
-                            widget.text,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          )),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        'more',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Divider(),
-              Container(height: 150,
+              SizedBox(height: 16),
+              Expanded(
                 child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: [
-                        Text(aiProvider.translatedData),
-                      ],
-                    )),
-              ),
-              Spacer(),
-              Row(
-                children: [
-                  Text('Copy Translation'),
-                  Spacer(),
-                  Icon(Icons.copy),
-                ],
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: UiConfig.black.shade100,
+                          borderRadius: BorderRadius.circular(16)
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _isMore
+                                ? Text(
+                          widget.text,
+                          style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                        )
+                                : Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    widget.text,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
+                                    style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _isMore = true;
+                                    });
+                                  },
+                                  child: Text(
+                                    'more',
+                                    style: UiConfig.bodyStyle.copyWith(
+                                      color: UiConfig.primaryColor,
+                                      fontWeight: UiConfig.semiBoldFont
+                                    )
+                                  )
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 16),
+                            Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
+                            DropdownButton<String>(
+                                underline: SizedBox(),
+                                style: UiConfig.smallStyle.copyWith(
+                                    fontWeight: UiConfig.semiBoldFont,
+                                ),
+                                value: _selectedLanguage,
+                                items: _languageList.map((e) => DropdownMenuItem<String>(
+                                  value: e,
+                                  child: Text(e),
+                                )).toList(),
+                                isExpanded: false,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _selectedLanguage = value ?? 'English';
+                                  });
+                                  context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: _selectedLanguage);
+                                }
+                            ),
+                            _buildTranslatedSection(isMore: _isMore, translatedData: aiProvider.translatedData)
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      InkWell(
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(text: widget.text));
+                        },
+                        splashColor: Colors.blue.withOpacity(0.1),
+                        highlightColor: Colors.blue.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              color: UiConfig.black.shade100,
+                              borderRadius: BorderRadius.circular(16)
+                          ),
+                          child: Row(
+                            children: [
+                              Text('Copy Translation'),
+                              Spacer(),
+                              Icon(Icons.copy),
+                            ],
+                          )
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -110,4 +153,39 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
       ),
     );
   }
+}
+
+Widget _buildTranslatedSection({required bool isMore, required String translatedData}) {
+  return isMore ? Padding(
+    padding: const EdgeInsets.only(right: 8),
+    child: Column(
+      children: [
+        Text(
+            translatedData,
+            style: UiConfig.h4Style.copyWith(
+                fontWeight: UiConfig.semiBoldFont)
+        ),
+      ],
+    ),
+  ) : Container(
+    constraints: BoxConstraints(
+      maxHeight: 180.h
+    ),
+    child: Scrollbar(
+      child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Column(
+              children: [
+                Text(
+                    translatedData,
+                    style: UiConfig.h4Style.copyWith(
+                        fontWeight: UiConfig.semiBoldFont)
+                ),
+              ],
+            ),
+          )
+      ),
+    ),
+  );
 }
