@@ -45,7 +45,7 @@ void diSetup() {
   getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
   getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
 
-  // Service
+  // Provider
   getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())));
 
   // registerFactory
