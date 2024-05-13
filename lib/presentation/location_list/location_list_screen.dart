@@ -80,7 +80,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                     child: ContentTitle(
                       title: '추천 코스',
                       withMore: true,
@@ -120,13 +120,17 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                   imagePath: e.imagePath, imageSize: 100),
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 24.0),
-                            child: Center(
-                                child: CircularProgressIndicator(
-                              color: UiConfig.primaryColor,
-                            )),
-                          ),
+                          viewModel.isCourseDataLoading == true
+                              ? const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 24.0),
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: UiConfig.primaryColor,
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                     ),
@@ -135,12 +139,14 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     height: 24,
                   ),
                   LocationCommonData(areaCode: widget.areaCode),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 40.0),
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: UiConfig.primaryColor,
-                    )),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 40.0),
+                    child: viewModel.isCommonDataLoading == true
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                            color: UiConfig.primaryColor,
+                          ))
+                        : const SizedBox(),
                   ),
                 ],
               ),
