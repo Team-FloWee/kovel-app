@@ -36,14 +36,16 @@ final goRouter = GoRouter(
     GoRoute(
         path: '/splash',
         builder: (context, state) {
+
           return SplashScreen();
+
         }),
     GoRoute(
       path: '/login',
       builder: (context, state) {
         return ChangeNotifierProvider(
           create: (context) => getIt<LoginViewModel>(),
-          child: LoginScreen(),
+          child: const LoginScreen(),
         );
       },
     ),
@@ -52,7 +54,7 @@ final goRouter = GoRouter(
       builder: (context, state) {
         return ChangeNotifierProvider(
           create: (context) => MyPageViewModel(),
-          child: MyPageScreen(),
+          child: const MyPageScreen(),
         );
       },
     ),
@@ -61,7 +63,7 @@ final goRouter = GoRouter(
       builder: (context, state) {
         return ChangeNotifierProvider(
           create: (context) => MyPageViewModel(),
-          child: MyPageEditScreen(),
+          child: const MyPageEditScreen(),
         );
       },
     ),
@@ -79,19 +81,18 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId =
-            int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child:
-              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
     GoRoute(
       path: '/locationList',
+      name: 'locationList',
       builder: (context, state) {
         //final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(

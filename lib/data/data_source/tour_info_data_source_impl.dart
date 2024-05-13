@@ -12,24 +12,34 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
   final String baseUrl = dotenv.get('Base_URL');
   final String key = dotenv.get('TOUR_API_KEY');
 
-  TourInfoDataSourceImpl({Dio? dio})
-      : _dio = dio ?? Dio(); // 지역기반 관광정보조회(areaBasedList1)
+  // TODO: [language] firebase user language 정보를 담아야 한다 ?
+  // TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
+  // final String language = 'KorService1';
+  final String language = 'EngService1';
+
+  // final String language = 'JpnService1';
+
+  TourInfoDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio();
+
+  // 지역기반 관광정보조회(areaBasedList1)
   @override
   Future<List<TourDto>> getAreaBasedList(
       {int pageNo = 1,
-        int? contentTypeId,
-        String areaCode = '',
-        String cat2 = ''}) async {
+      int? contentTypeId,
+      String areaCode = '',
+      String cat2 = ''}) async {
     // TODO: parameter는 unnamed or named?
     const String apiName = 'areaBasedList1';
     final Response response;
 
     if (contentTypeId == null || contentTypeId == 0) {
       response = await _dio.get(
-          '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+          '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+      // 'https://apis.data.go.kr/B551011/EngService1/areaBasedList1?pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=1&serviceKey=8wUgZbYoVdhgj4cmbqiQAA0aAkX3mOtCRKfFGwLzfV%2FPSH68pPr1uxU0jrKUqKuVDMYqzlOv1%2BAD7U9W6CZ90A%3D%3D');
     } else {
       response = await _dio.get(
-          '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&contentTypeId=$contentTypeId&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+          '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&contentTypeId=$contentTypeId&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+      // 'https://apis.data.go.kr/B551011/EngService1/areaBasedList1?pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=1&serviceKey=8wUgZbYoVdhgj4cmbqiQAA0aAkX3mOtCRKfFGwLzfV%2FPSH68pPr1uxU0jrKUqKuVDMYqzlOv1%2BAD7U9W6CZ90A%3D%3D');
     }
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
@@ -49,7 +59,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     const String apiName = 'locationBasedList1';
     final Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&mapX=$mapX&mapY=$mapY&radius=$radius&serviceKey=$key');
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&mapX=$mapX&mapY=$mapY&radius=$radius&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
@@ -64,7 +74,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     const String apiName = 'searchKeyword1';
     final Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&keyword=$keyword&serviceKey=$key');
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&keyword=$keyword&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
@@ -74,10 +84,14 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 행사정보조회
   @override
-  Future<List<TourDto>> getSearchFestival({required String eventStartDate, required String eventEndDate, int pageNo = 1}) async {
+  Future<List<TourDto>> getSearchFestival(
+      {required String eventStartDate,
+      required String eventEndDate,
+      int pageNo = 1}) async {
     const String apiName = 'searchFestival1';
     final Response response;
-    response = await _dio.get('$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&eventStartDate=$eventStartDate&eventEndDate=$eventEndDate&serviceKey=$key');
+    response = await _dio.get(
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&eventStartDate=$eventStartDate&eventEndDate=$eventEndDate&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
@@ -91,7 +105,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     const String apiName = 'searchStay1';
     final Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&serviceKey=$key');
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&serviceKey=$key');
 
     final List tourInfoList =
         response.data['response']['body']['items']['item'];
@@ -105,7 +119,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     const String apiName = 'detailCommon1';
     Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&pageNo=$pageNo&serviceKey=$key');
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&pageNo=$pageNo&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
@@ -121,7 +135,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
     final Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
@@ -137,7 +151,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
     final Response response;
     response = await _dio.get(
-        '$baseUrl/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
+        '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&contentId=$id&contentTypeId=$contentTypeId&pageNo=$pageNo&serviceKey=$key');
 
     final List tourInfoList = response.data['response']['body']['items'] != ''
         ? response.data['response']['body']['items']['item']
