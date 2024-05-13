@@ -16,7 +16,7 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: 'chinese'));
+    Future.microtask(() => context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: 'english'));
   }
 
   @override
