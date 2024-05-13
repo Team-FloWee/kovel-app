@@ -9,14 +9,17 @@ class GetDetailDataUseCase {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  Future<UnifiedDetail> execute(
-      {int pageNo = 1, required int id, required int contentTypeId}) async {
+  Future<UnifiedDetail> execute({
+    int pageNo = 1,
+    required int id,
+    required int contentTypeId,
+  }) async {
     if (language == 'KorService1') {
       final result = await _tourInfoRepository.getUnifiedDetail(
           id: id, contentTypeId: contentTypeId);
       return result.first;
     } else if (language != 'KorService1' && contentTypeId == 25) {
-      contentTypeId = 80;
+      contentTypeId = 0;
       final result = await _tourInfoRepository.getUnifiedDetail(
           id: id, contentTypeId: contentTypeId);
       return result.first;
