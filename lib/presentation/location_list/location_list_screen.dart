@@ -28,8 +28,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+    Future.microtask(() => context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
     Future.microtask(() => _courseDataScrollController.addListener(() {
           _onCourseDataScroll();
         }));
@@ -48,22 +47,14 @@ class _LocationListScreenState extends State<LocationListScreen> {
   }
 
   void _onCourseDataScroll() {
-    if (_courseDataScrollController.position.pixels ==
-            _courseDataScrollController.position.maxScrollExtent &&
-        !context.read<LocationListViewModel>().isCourseDataLoading) {
-      context
-          .read<LocationListViewModel>()
-          .fetchMoreCourseData(widget.areaCode);
+    if (_courseDataScrollController.position.pixels == _courseDataScrollController.position.maxScrollExtent && !context.read<LocationListViewModel>().isCourseDataLoading) {
+      context.read<LocationListViewModel>().fetchMoreCourseData(widget.areaCode);
     }
   }
 
   void _onCommonDataScroll() {
-    if (_commonDataScrollController.position.pixels ==
-            _commonDataScrollController.position.maxScrollExtent &&
-        !context.read<LocationListViewModel>().isCommonDataLoading) {
-      context
-          .read<LocationListViewModel>()
-          .fetchMoreCommonData(widget.areaCode);
+    if (_commonDataScrollController.position.pixels == _commonDataScrollController.position.maxScrollExtent && !context.read<LocationListViewModel>().isCommonDataLoading) {
+      context.read<LocationListViewModel>().fetchMoreCommonData(widget.areaCode);
     }
   }
 
@@ -71,7 +62,10 @@ class _LocationListScreenState extends State<LocationListScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>(); //세트
     return Scaffold(
-      appBar: const CommonAppBar(title: '뷰모델 전체'),
+      appBar: CommonAppBar(
+        title: '뷰모델 전체',
+        controller: _commonDataScrollController,
+      ),
       body: viewModel.isLoading == true
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -85,8 +79,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                       title: '추천 코스',
                       withMore: true,
                       onTapMore: () {
-                        context.pushNamed('courseList',
-                            queryParameters: {'areaCode': widget.areaCode});
+                        context.pushNamed('courseList', queryParameters: {'areaCode': widget.areaCode});
                       },
                     ),
                   ),
@@ -98,9 +91,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     child: CategoryList(
                         categoryData: CourseCategoryTypeList.typeList,
                         onSelect: (Category category) {
-                          context
-                              .read<LocationListViewModel>()
-                              .getCourseData(widget.areaCode, category.id);
+                          context.read<LocationListViewModel>().getCourseData(widget.areaCode, category.id);
                         }),
                   ),
                   const SizedBox(
@@ -116,14 +107,12 @@ class _LocationListScreenState extends State<LocationListScreen> {
                           ...viewModel.courseDetailList.map(
                             (e) => Padding(
                               padding: const EdgeInsets.only(right: 8.0),
-                              child: FavoriteImage(
-                                  imagePath: e.imagePath, imageSize: 100),
+                              child: FavoriteImage(imagePath: e.imagePath, imageSize: 100),
                             ),
                           ),
                           viewModel.isCourseDataLoading == true
                               ? const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 24.0),
+                                  padding: EdgeInsets.symmetric(horizontal: 24.0),
                                   child: Center(
                                     child: CircularProgressIndicator(
                                       color: UiConfig.primaryColor,
@@ -193,8 +182,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
               CategoryList(
                 categoryData: ContentTypeList.typeList,
                 onSelect: (Category category) {
-                  context.read<LocationListViewModel>().getCommonData(
-                      widget.areaCode, int.parse(category.id ?? '0'));
+                  context.read<LocationListViewModel>().getCommonData(widget.areaCode, int.parse(category.id ?? '0'));
                 },
               ),
               const SizedBox(height: 16),
@@ -206,18 +194,13 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: InkWell(
                               onTap: () {
-                                context.pushNamed('detail', queryParameters: {
-                                  'id': e.contentId.toString(),
-                                  'contentTypeId': e.contentType.id,
-                                  'title': e.title
-                                });
+                                context.pushNamed('detail', queryParameters: {'id': e.contentId.toString(), 'contentTypeId': e.contentType.id, 'title': e.title});
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   viewModel.isLoading
-                                      ? const Center(
-                                          child: CircularProgressIndicator())
+                                      ? const Center(child: CircularProgressIndicator())
                                       : FavoriteImage(
                                           imagePath: e.imagePath,
                                           imageSize: 145,
