@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/service/ai_provider.dart';
 import 'package:provider/provider.dart';
@@ -25,73 +26,79 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
     return Container(
       padding: EdgeInsets.all(16),
       width: MediaQuery.of(context).size.width,
-      child: Column(
+      child: Stack(
         children: [
-          Row(
-            children: [
-              Spacer(),
-              Text('Translate',
-                  style: UiConfig.h4Style.copyWith(
-                      fontWeight: UiConfig.semiBoldFont)),
-              Spacer(),
-              Icon(Icons.close)
-            ],
+          Positioned(
+            right: 0,
+            child: InkWell(
+              onTap: () {
+                context.pop();
+              },
+                child: Icon(Icons.close),
+            )
           ),
           Column(
             children: [
-              Row(
+              Text('Translate',
+                  style: UiConfig.h4Style.copyWith(
+                      fontWeight: UiConfig.semiBoldFont)),
+              Column(
                 children: [
-                  Text('Detected as'),
-                  DropdownButton<String>(
-                    items: [
-                      DropdownMenuItem<String>(
-                          value: 'English',
-                          child: Text('English (US)')),
-                      DropdownMenuItem<String>(
-                          value: 'Korea',
-                          child: Text('Korean (KR)')),
+                  Row(
+                    children: [
+                      Text('Detected as'),
+                      DropdownButton<String>(
+                        items: [
+                          DropdownMenuItem<String>(
+                              value: 'English',
+                              child: Text('English (US)')),
+                          DropdownMenuItem<String>(
+                              value: 'Korea',
+                              child: Text('Korean (KR)')),
+                        ],
+                        isExpanded: false,
+                        onChanged: (dynamic value) {},
+                      ),
                     ],
-                    isExpanded: false,
-                    onChanged: (dynamic value) {},
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                          width: 300,
+                          child: Text(
+                            widget.text,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          )),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'more',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
                   ),
                 ],
               ),
+              Divider(),
+              Container(height: 150,
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        Text(aiProvider.translatedData),
+                      ],
+                    )),
+              ),
+              Spacer(),
               Row(
                 children: [
-                  SizedBox(
-                      width: 300,
-                      child: Text(
-                        widget.text,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      )),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'more',
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                  Text('Copy Translation'),
+                  Spacer(),
+                  Icon(Icons.copy),
                 ],
               ),
-            ],
-          ),
-          Divider(),
-          Container(height: 150,
-            child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    Text(aiProvider.translatedData),
-                  ],
-                )),
-          ),
-          Spacer(),
-          Row(
-            children: [
-              Text('Copy Translation'),
-              Spacer(),
-              Icon(Icons.copy),
             ],
           ),
         ],
