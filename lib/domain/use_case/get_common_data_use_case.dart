@@ -9,7 +9,10 @@ class GetCommonDataUseCase {
   }) : _tourInfoRepository = tourInfoRepository;
 
   Future<TourDetail> execute({int pageNo = 1, required int id}) async {
-    final result = await _tourInfoRepository.getDetailCommon(id: id);
+    final result = await _tourInfoRepository.getDetailCommon(
+      id: id,
+      pageNo: pageNo,
+    );
     return result.first;
   }
 }

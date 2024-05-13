@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -21,42 +22,48 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
-  final ScrollController _scrollController = ScrollController();
-
-  // _LocationListScreenState({
-  //   this.opacity = 0.5,
-  //   this.dismissibles = false,
-  //   this.color = UiConfig.black,
-  //   this.loadingTxt,
-  // });
-  //
-  // final double opacity;
-  // final bool dismissibles;
-  // final Color color;
-  // final String loadingTxt;
+  final ScrollController _courseDataScrollController = ScrollController();
+  final ScrollController _commonDataScrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
         context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
-    Future.microtask(() => _scrollController.addListener(() {
-          _onScroll();
+    Future.microtask(() => _courseDataScrollController.addListener(() {
+          _onCourseDataScroll();
+        }));
+    Future.microtask(() => _commonDataScrollController.addListener(() {
+          _onCommonDataScroll();
         }));
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
+    _courseDataScrollController.removeListener(_onCourseDataScroll);
+    _commonDataScrollController.removeListener(_onCommonDataScroll);
+    _courseDataScrollController.dispose();
+    _commonDataScrollController.dispose();
     super.dispose();
   }
 
-  void _onScroll() {
-    if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent &&
-        !context.read<LocationListViewModel>().isLoading) {
-      context.read<LocationListViewModel>().fetchMoreData();
+  void _onCourseDataScroll() {
+    if (_courseDataScrollController.position.pixels ==
+            _courseDataScrollController.position.maxScrollExtent &&
+        !context.read<LocationListViewModel>().isCourseDataLoading) {
+      context
+          .read<LocationListViewModel>()
+          .fetchMoreCourseData(widget.areaCode);
+    }
+  }
+
+  void _onCommonDataScroll() {
+    if (_commonDataScrollController.position.pixels ==
+            _commonDataScrollController.position.maxScrollExtent &&
+        !context.read<LocationListViewModel>().isCommonDataLoading) {
+      context
+          .read<LocationListViewModel>()
+          .fetchMoreCommonData(widget.areaCode);
     }
   }
 
@@ -68,7 +75,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
       body: viewModel.isLoading == true
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-              controller: _scrollController,
+              controller: _commonDataScrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -100,17 +107,27 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     height: 16,
                   ),
                   SingleChildScrollView(
+                    controller: _courseDataScrollController,
                     scrollDirection: Axis.horizontal,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: Row(
-                        children: viewModel.courseDetailList
-                            .map((e) => Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
-                                  child: FavoriteImage(
-                                      imagePath: e.imagePath, imageSize: 100),
-                                ))
-                            .toList(),
+                        children: [
+                          ...viewModel.courseDetailList.map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: FavoriteImage(
+                                  imagePath: e.imagePath, imageSize: 100),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24.0),
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: UiConfig.primaryColor,
+                            )),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -120,7 +137,10 @@ class _LocationListScreenState extends State<LocationListScreen> {
                   LocationCommonData(areaCode: widget.areaCode),
                   const Padding(
                     padding: EdgeInsets.only(bottom: 40.0),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: UiConfig.primaryColor,
+                    )),
                   ),
                 ],
               ),

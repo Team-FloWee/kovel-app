@@ -35,13 +35,21 @@ class LocationListViewModel with ChangeNotifier {
 
   int get contentTypeId => 0;
 
-  // 페이지네이션에 사용되는 페이지 변수
-  int _pageNo = 1;
+  // 추천 코스 페이지네이션에 사용되는 페이지 변수
+  int _coursePageNo = 1;
 
-  // 전체 데이터 로딩과 페이지네이션 로딩 처리 분리 변수
-  bool _isDataLoading = false;
+  // 추천 코스 전체 데이터 로딩과 페이지네이션 로딩 처리 분리 변수
+  bool _isCourseDataLoading = false;
 
-  bool get isDataLoading => _isDataLoading;
+  bool get isCourseDataLoading => _isCourseDataLoading;
+
+  // 테마별 장소 페이지네이션에 사용되는 페이지 변수
+  int _commonPageNo = 1;
+
+  // 테마별 장소 전체 데이터 로딩과 페이지네이션 로딩 처리 분리 변수
+  bool _isCommonDataLoading = false;
+
+  bool get isCommonDataLoading => _isCommonDataLoading;
 
   //서울 areacode에 있는 contentTypeId :25(여행정보)의 contentId를 받아와야 함
   //추천코스 [전체]
@@ -103,14 +111,17 @@ class LocationListViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  // 리스트 끝에 도달하면 데이터 더 보여줌
-  void fetchMoreData() async {
-    _isDataLoading = true;
+  // 테마별 장소 페이지네이션
+  void fetchMoreCommonData(String areaCode) async {
+    _isCommonDataLoading = true;
     notifyListeners();
 
     _areaBasedDataList = [];
     _areaBasedDataList.addAll((await _getAreaDataUseCase.execute(
-        areaCode: '1', cat2: '', contentTypeId: 0, pageNo: ++_pageNo)));
+        areaCode: areaCode,
+        cat2: '',
+        contentTypeId: 0,
+        pageNo: ++_commonPageNo)));
 
     // for (Tour element in _areaBasedDataList) {
     //   _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
@@ -122,7 +133,29 @@ class LocationListViewModel with ChangeNotifier {
     }));
     notifyListeners();
 
-    _isDataLoading = false;
+    _isCommonDataLoading = false;
+    notifyListeners();
+  }
+
+  // 추천코스 페이지네이션
+  void fetchMoreCourseData(String areaCode) async {
+    _isCourseDataLoading = true;
+    notifyListeners();
+
+    _areaBasedDataList = [];
+    _areaBasedDataList.addAll((await _getAreaDataUseCase.execute(
+        areaCode: areaCode,
+        cat2: '',
+        contentTypeId: 25,
+        pageNo: ++_coursePageNo)));
+
+    await Future.wait(_areaBasedDataList.map((element) async {
+      _courseDetailList
+          .add(await _getCommonDataUseCase.execute(id: element.id));
+    }));
+    notifyListeners();
+
+    _isCourseDataLoading = false;
     notifyListeners();
   }
 }
