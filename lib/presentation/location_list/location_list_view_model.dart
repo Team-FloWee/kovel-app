@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:core';
 
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/user.dart';
@@ -92,32 +90,6 @@ class LocationListViewModel with ChangeNotifier {
       notifyListeners();
     });
     //_isLoading = false;
-    notifyListeners();
-  }
-
-  void getArchivedList() async {
-    _user = await _userRepository.getUser(
-        id: auth.FirebaseAuth.instance.currentUser!.uid);
-
-    decodedData = (jsonDecode(_user.stringList.toString()) as List<dynamic>)
-        .map((e) => Archived.fromJson(e))
-        .toList();
-  }
-
-  void updateArchivedList(Archived clickedArchived) async {
-    notifyListeners();
-    print('유저아이디${_user}');
-    if (_isArchived == false) {
-      decodedData.add(clickedArchived);
-      String data = jsonEncode(decodedData);
-      await _userRepository.saveArchivedList(user: _user, data: data);
-      !_isArchived;
-    } else {
-      decodedData.removeWhere((archived) => archived.id == clickedArchived.id);
-      String data = jsonEncode(decodedData);
-      await _userRepository.deleteArchivedList(user: _user, data: data);
-      !_isArchived;
-    }
     notifyListeners();
   }
 }

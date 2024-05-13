@@ -10,6 +10,7 @@ import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
+import 'package:kovel_app/presentation/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LocationListScreen extends StatefulWidget {
@@ -27,13 +28,15 @@ class _LocationListScreenState extends State<LocationListScreen> {
     super.initState();
     Future.microtask(() {
       context.read<LocationListViewModel>().getData(widget.areaCode);
-      context.read<LocationListViewModel>().getArchivedList();
+      context.read<UserViewModel>().getArchived();
+      //Todo UserViewModel 안쓰면 지우고 작동확인
     }); //세트
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>(); //세트
+    final userViewModel = context.watch<UserViewModel>(); //세트
     return viewModel.isLoading == true
         ? const Center(child: CircularProgressIndicator())
         : Scaffold(
@@ -81,12 +84,6 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                     archived:
                                         ArchivedUtil.getArchived(tourDetail: e),
                                     imageSize: 100,
-                                    onFavoriteChanged: (archived, isLiked) {
-                                      // 여기에서 아무 작업도 하지 않아도 됩니다.
-                                      // 콜백 함수는 이미지 위젯에서만 상태를 업데이트하는 역할을 합니다.
-                                    },
-                                    upDateArchivedList:
-                                        viewModel.updateArchivedList,
                                   ),
                                 ))
                             .toList(),
@@ -125,6 +122,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>();
+    final userViewModel = context.watch<UserViewModel>(); //세트
 
     return SingleChildScrollView(
       child: Column(
@@ -171,10 +169,6 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                                           archived: ArchivedUtil.getArchived(
                                               tourDetail: e),
                                           imageSize: 145,
-                                          onFavoriteChanged:
-                                              (Archived, isLiked) {},
-                                          upDateArchivedList:
-                                              viewModel.updateArchivedList,
                                         ),
                                   const SizedBox(width: 8),
                                   CommonText(
