@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
@@ -24,23 +21,54 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
+  final ScrollController _scrollController = ScrollController();
+
+  // _LocationListScreenState({
+  //   this.opacity = 0.5,
+  //   this.dismissibles = false,
+  //   this.color = UiConfig.black,
+  //   this.loadingTxt,
+  // });
+  //
+  // final double opacity;
+  // final bool dismissibles;
+  // final Color color;
+  // final String loadingTxt;
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
         context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+    Future.microtask(() => _scrollController.addListener(() {
+          _onScroll();
+        }));
+  }
 
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent &&
+        !context.read<LocationListViewModel>().isLoading) {
+      context.read<LocationListViewModel>().fetchMoreData();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>(); //세트
-    return viewModel.isLoading == true
-        ? const Center(child: CircularProgressIndicator())
-        : Scaffold(
-            appBar: const CommonAppBar(title: '뷰모델 전체'),
-            body: SingleChildScrollView(
+    return Scaffold(
+      appBar: const CommonAppBar(title: '뷰모델 전체'),
+      body: viewModel.isLoading == true
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              controller: _scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,8 +77,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     child: ContentTitle(
                       title: '추천 코스',
                       withMore: true,
-                      onTapMore: (){
-                        context.pushNamed('courseList', queryParameters:{'areaCode':widget.areaCode});
+                      onTapMore: () {
+                        context.pushNamed('courseList',
+                            queryParameters: {'areaCode': widget.areaCode});
                       },
                     ),
                   ),
@@ -88,11 +117,15 @@ class _LocationListScreenState extends State<LocationListScreen> {
                   const SizedBox(
                     height: 24,
                   ),
-                  LocationCommonData(areaCode: widget.areaCode)
+                  LocationCommonData(areaCode: widget.areaCode),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 40.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
                 ],
               ),
             ),
-          );
+    );
   }
 }
 
@@ -146,9 +179,12 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                       .map((e) => Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: InkWell(
-                              onTap: (){
-                                context.pushNamed('detail', queryParameters:{'id': e.contentId.toString(), 'contentTypeId': e.contentType.id, 'title': e.title});
-
+                              onTap: () {
+                                context.pushNamed('detail', queryParameters: {
+                                  'id': e.contentId.toString(),
+                                  'contentTypeId': e.contentType.id,
+                                  'title': e.title
+                                });
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
