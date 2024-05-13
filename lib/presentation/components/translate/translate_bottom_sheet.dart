@@ -65,12 +65,10 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _isMore
-                                ? Text(
-                          widget.text,
-                          style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
-                        )
-                                : Row(
+                            _isMore ? Text(
+                              widget.text,
+                              style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                            ) : Row(
                               children: [
                                 Expanded(
                                   child: Text(
