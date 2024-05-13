@@ -54,7 +54,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
                 archived: archived,
                 imagePath: archived.imagePath,
                 title: archived.title,
-                badgeTitle: ContentType(contentTypeId: archived.contentType).name,
+                badgeTitle: archived.contentType.name,
               );
             },
           ),
