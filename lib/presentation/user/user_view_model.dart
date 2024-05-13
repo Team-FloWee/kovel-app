@@ -10,10 +10,10 @@ import 'package:kovel_app/domain/model/user.dart';
 import '../../domain/model/archived.dart';
 
 class UserViewModel with ChangeNotifier {
-  final CurrentUserService _currentUserService;
+  final UserProvider _currentUserService;
 
   UserViewModel({
-    required CurrentUserService currentUserService,
+    required UserProvider currentUserService,
   }) : _currentUserService = currentUserService;
 
   late User user;

@@ -42,8 +42,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return ChangeNotifierProvider(
-          create: (_) =>
-              UserViewModel(currentUserService: CurrentUserService()),
+          create: (_) => UserViewModel(currentUserService: UserProvider()),
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerConfig: goRouter,

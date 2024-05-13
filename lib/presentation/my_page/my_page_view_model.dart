@@ -10,7 +10,7 @@ import 'package:kovel_app/domain/model/user.dart';
 
 class MyPageViewModel with ChangeNotifier {
   late User _user;
-  String userId = CurrentUserService().getUserId();
+  String userId = UserProvider().getUserId();
   final userRef = FirebaseFirestore.instance
       .collection('user')
       .withConverter<User>(

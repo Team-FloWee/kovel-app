@@ -20,7 +20,7 @@ class GoogleAuth implements SocialAuth {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    CurrentUserService().getUser();
+    UserProvider().getUser();
     // Once signed in, return the UserCredential
     try {
       final userCredential =
