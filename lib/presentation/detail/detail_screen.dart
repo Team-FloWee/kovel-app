@@ -3,6 +3,7 @@ import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
+import 'package:kovel_app/presentation/components/translate/context_menu.dart';
 import 'package:kovel_app/presentation/detail/components/course/related_course_list.dart';
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:provider/provider.dart';
@@ -136,10 +137,13 @@ class _DetailScreenState extends State<DetailScreen> {
                         ? SizedBox()
                         : Column(
                             children: [
-                              Text(
-                                viewModel.tourDetailData.overview,
-                                style: UiConfig.bodyStyle.copyWith(
-                                  fontWeight: UiConfig.regularFont,
+                              ContextMenu(
+                                text: viewModel.tourDetailData.overview,
+                                child: Text(
+                                  viewModel.tourDetailData.overview,
+                                  style: UiConfig.bodyStyle.copyWith(
+                                    fontWeight: UiConfig.regularFont,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 16.0),
