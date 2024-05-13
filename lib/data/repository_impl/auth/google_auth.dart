@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kovel_app/core/auth/current_user_service.dart';
@@ -21,14 +20,7 @@ class GoogleAuth implements SocialAuth {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    final userId = CurrentUserService().currentUser!.uid;
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    var data = await firestore
-        .collection('user')
-        .doc(userId)
-        .get()
-        .then((value) => value.data());
-    print('구글어스데이타콘솔$data');
+    CurrentUserService().getUser();
     // Once signed in, return the UserCredential
     try {
       final userCredential =
@@ -40,7 +32,6 @@ class GoogleAuth implements SocialAuth {
         email: userCredential.user!.email!,
         imageUrl: userCredential.user!.photoURL ?? '',
         archivedList: [],
-        stringList: User.fromJson(data as Map<String, dynamic>).stringList,
       );
       return user;
     } catch (error) {

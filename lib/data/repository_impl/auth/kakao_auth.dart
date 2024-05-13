@@ -30,7 +30,6 @@ class KakaoAuth implements SocialAuth {
           email: kakaoUser.kakaoAccount?.email ?? '',
           imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           archivedList: [],
-          stringList: [],
         );
         return user;
       } catch (error) {
@@ -59,7 +58,6 @@ class KakaoAuth implements SocialAuth {
             email: kakaoUser.kakaoAccount?.email ?? '',
             imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
             archivedList: [],
-            stringList: [],
           );
           return user;
         } catch (error) {
@@ -90,7 +88,6 @@ class KakaoAuth implements SocialAuth {
           email: kakaoUser.kakaoAccount?.email ?? '',
           imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           archivedList: [],
-          stringList: [],
         );
         return user;
       } catch (error) {
