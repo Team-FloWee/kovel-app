@@ -14,10 +14,13 @@ class TranslateBottomSheet extends StatefulWidget {
 }
 
 class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
+  List<String> _languageList = ['한국어', 'English', '日本語'];
+  String _selectedLanguage = 'English';
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: 'english'));
+    Future.microtask(() => context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: _selectedLanguage));
   }
 
   @override
@@ -48,16 +51,18 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                     children: [
                       Text('Detected as'),
                       DropdownButton<String>(
-                        items: [
-                          DropdownMenuItem<String>(
-                              value: 'English',
-                              child: Text('English (US)')),
-                          DropdownMenuItem<String>(
-                              value: 'Korea',
-                              child: Text('Korean (KR)')),
-                        ],
+                        value: _selectedLanguage,
+                        items: _languageList.map((e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: Text(e),
+                        )).toList(),
                         isExpanded: false,
-                        onChanged: (dynamic value) {},
+                        onChanged: (String? value) {
+                          setState(() {
+                            _selectedLanguage = value ?? 'English';
+                          });
+                          context.read<AiProvider>().getTranslatedDataStream(request: widget.text, language: _selectedLanguage);
+                        }
                       ),
                     ],
                   ),
