@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/presentation/user/user_view_model.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<UserViewModel>().getUser());
+    Future.microtask(() => context.read<UserProvider>().getUser());
     _controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
 

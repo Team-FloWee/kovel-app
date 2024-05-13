@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kovel_app/core/auth/current_user_service.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/auth/social_auth.dart';
+
+import '../../../core/auth/user_provider.dart';
 
 class GoogleAuth implements SocialAuth {
   @override

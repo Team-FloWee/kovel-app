@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:kovel_app/core/auth/current_user_service.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
@@ -24,14 +23,13 @@ import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
-import 'package:kovel_app/presentation/user/user_view_model.dart';
+
+import '../core/auth/user_provider.dart';
 
 final getIt = GetIt.instance;
 
 void diSetup() {
   // registerSingleton
-  getIt.registerSingleton<UserViewModel>(
-      UserViewModel(currentUserService: getIt()));
   // DataSource
   getIt.registerSingleton<TourInfoDataSource>(TourInfoDataSourceImpl());
   getIt.registerSingleton<UserDataSource>(UserDataSourceImpl());

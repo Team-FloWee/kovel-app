@@ -22,7 +22,7 @@ import 'package:kovel_app/presentation/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/locationList',
+  initialLocation: '/splash',
   routes: [
     GoRoute(
       path: '/',

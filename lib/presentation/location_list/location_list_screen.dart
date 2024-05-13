@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
@@ -10,7 +11,6 @@ import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
-import 'package:kovel_app/presentation/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LocationListScreen extends StatefulWidget {
@@ -28,15 +28,13 @@ class _LocationListScreenState extends State<LocationListScreen> {
     super.initState();
     Future.microtask(() {
       context.read<LocationListViewModel>().getData(widget.areaCode);
-      context.read<UserViewModel>().getArchived();
-      //Todo UserViewModel 안쓰면 지우고 작동확인
+      //Todo UserViewModel 안쓰면 지우고 작동확인 크..
     }); //세트
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>(); //세트
-    final userViewModel = context.watch<UserViewModel>(); //세트
     return viewModel.isLoading == true
         ? const Center(child: CircularProgressIndicator())
         : Scaffold(
@@ -122,7 +120,6 @@ class _LocationCommonDataState extends State<LocationCommonData> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>();
-    final userViewModel = context.watch<UserViewModel>(); //세트
 
     return SingleChildScrollView(
       child: Column(

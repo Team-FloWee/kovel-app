@@ -37,7 +37,6 @@ class CourseRecommendation extends StatelessWidget {
             title: '',
             area: '',
             imageSize: 145,
-            onFavoriteChanged: (archived, isLiked) {}, upDateArchivedList: (Archived ) {  },
           ),
           SizedBox(
             width: 8,

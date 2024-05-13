@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/domain/model/archived.dart';
-import 'package:kovel_app/presentation/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteImage extends StatefulWidget {
@@ -40,7 +40,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
 
   @override
   Widget build(BuildContext context) {
-    final userViewModel = context.watch<UserViewModel>();
+    final userViewModel = context.watch<UserProvider>();
     isLiked = userViewModel.isArchived(widget.archived.id);
     return Stack(
       children: [

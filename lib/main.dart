@@ -5,10 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:kovel_app/config/firebase_options.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/core/auth/current_user_service.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/router/router.dart';
 import 'package:kovel_app/di/di_setup.dart';
-import 'package:kovel_app/presentation/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return ChangeNotifierProvider(
-          create: (_) => UserViewModel(currentUserService: UserProvider()),
+          create: (_) => UserProvider(),
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerConfig: goRouter,

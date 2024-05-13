@@ -1,11 +1,16 @@
 import 'dart:convert';
+import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:kovel_app/domain/model/archived.dart';
+import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
-class UserProvider {
+import '../../domain/model/archived.dart';
+
+class UserProvider with ChangeNotifier {
+
+
   late User user;
 
   final currentUser = auth.FirebaseAuth.instance.currentUser;
@@ -23,13 +28,19 @@ class UserProvider {
     }
   }
 
+  bool isArchived(int id) {
+    return user.archivedList.any((element) => element.id == id);
+  }
+
   Future<User> getUser() async {
     try {
       final data = await _userRef
-          .doc(UserProvider().getUserId())
+          .doc(auth.FirebaseAuth.instance.currentUser!.uid)
           .get()
           .then((s) => s.data()!);
-      user = User.fromJson(data as Map<String, dynamic>);
+
+      user = data;
+      print(data);
     } catch (error) {
       user = const User(
         userId: '',
@@ -49,9 +60,22 @@ class UserProvider {
   }
 
   Future<void> updateArchived(List<Archived> archivedList) async {
-    print(user.userId);
     await _userRef
         .doc(user.userId)
-        .update({'archivedList': archivedList.map((e) => jsonEncode(e))});
+        .update({'archivedList': archivedList.map((e) => e.toJson())});
+  }
+
+  void updateArchivedList(Archived clickedArchived) async {
+    if (isArchived(clickedArchived.id) == false) {
+      user.archivedList.add(clickedArchived);
+      await updateArchived(user.archivedList);
+      notifyListeners();
+    } else {
+      user.archivedList
+          .removeWhere((archived) => archived.id == clickedArchived.id);
+      await updateArchived(user.archivedList);
+      notifyListeners();
+    }
+    notifyListeners();
   }
 }

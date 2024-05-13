@@ -5,8 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kovel_app/core/auth/current_user_service.dart';
 import 'package:kovel_app/domain/model/user.dart';
+
+import '../../core/auth/user_provider.dart';
 
 class MyPageViewModel with ChangeNotifier {
   late User _user;
