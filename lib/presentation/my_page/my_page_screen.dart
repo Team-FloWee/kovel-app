@@ -62,7 +62,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(),
+      bottomNavigationBar: BottomNaviBar(selectedIndex: 2),
     );
   }
 }
