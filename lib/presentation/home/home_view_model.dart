@@ -4,20 +4,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
-import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/tour.dart';
-import 'package:kovel_app/domain/repository/address_info_repository.dart';
+import 'package:kovel_app/domain/use_case/get_address_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 class HomeViewModel with ChangeNotifier {
   final GetSearchFestivalUseCase _getSearchFestivalUseCase;
+  final GetAddressUseCase _addressInfoRepository;
 
-  final AddressInfoRepository _addressInfoRepository;
-
-  HomeViewModel({required GetSearchFestivalUseCase getSearchFestivalUseCase, required AddressInfoRepository addressInfoRepository})
+  HomeViewModel({required GetSearchFestivalUseCase getSearchFestivalUseCase, required GetAddressUseCase addressInfoRepository})
       : _getSearchFestivalUseCase = getSearchFestivalUseCase,
         _addressInfoRepository = addressInfoRepository;
   bool isLoading = false;
@@ -88,7 +85,7 @@ class HomeViewModel with ChangeNotifier {
   // 위도,경도로 주소 가져오기
   void fetchAddressData({required String longitude, required String latitude}) async {
     // 주소 받아옴
-    final dataList = await _addressInfoRepository.getAddress(longitude: longitude, latitude: latitude);
+    final dataList = await _addressInfoRepository.execute(longitude: longitude, latitude: latitude);
     // 구/신주소 중 데이터가 있는 것을 locationList에 넣음
     if (dataList.first.roadAddress.addressName != '' && dataList.first.oldAddress.addressName != '' && !locationList.contains(dataList.first.oldAddress.addressName)) {
       locationList.insert(0, dataList.first.roadAddress.addressName);
