@@ -8,6 +8,8 @@ import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/home/home_screen.dart';
+import 'package:kovel_app/presentation/home/home_search_screen.dart';
+import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
@@ -36,9 +38,7 @@ final goRouter = GoRouter(
     GoRoute(
         path: '/splash',
         builder: (context, state) {
-
-          return SplashScreen();
-
+          return const SplashScreen();
         }),
     GoRoute(
       path: '/login',
@@ -72,7 +72,7 @@ final goRouter = GoRouter(
       builder: (context, state) {
         return ChangeNotifierProvider(
           create: (context) => ArchivedViewModel(userRepository: getIt()),
-          child: ArchivedScreen(),
+          child: const ArchivedScreen(),
         );
       },
     ),
@@ -97,7 +97,7 @@ final goRouter = GoRouter(
         //final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => getIt<LocationListViewModel>(),
-          child: LocationListScreen(
+          child: const LocationListScreen(
             areaCode: '1',
           ),
         );
@@ -126,6 +126,16 @@ final goRouter = GoRouter(
               user: state.extra as User,
             ),
           );
-        })
+        }),
+    GoRoute(
+      path: '/homeSearchScreen',
+      name: 'homeSearchScreen',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => getIt<HomeSearchViewModel>(),
+          child: const HomeSearchScreen(),
+        ); // HomeSearchScreen을 반환합니다.
+      },
+    ),
   ],
 );
