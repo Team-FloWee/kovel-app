@@ -96,13 +96,10 @@ class LocationListViewModel with ChangeNotifier {
     //_isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList.forEach((element) async {
-      _tourDetailList
-          .add((await _getCommonDataUseCase.execute(id: element.id)));
-      notifyListeners();
-    });
-    //_isLoading = false;
-    notifyListeners();
+    _areaBasedDataList = await _getAreaDataUseCase.execute(
+        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
+
+    _tourDetailList = [];
 
     // for (Tour element in _areaBasedDataList) {
     //   final result = await _getCommonDataUseCase.execute(id: element.id);
