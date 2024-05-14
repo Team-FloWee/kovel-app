@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
 class BottomNaviBar extends StatefulWidget {
-final int selectedIndex;
-
+  final int selectedIndex;
 
   const BottomNaviBar({
-    Key? key, required this.selectedIndex,
+    Key? key,
+    required this.selectedIndex,
   }) : super(key: key);
 
   @override
@@ -15,7 +15,6 @@ final int selectedIndex;
 }
 
 class _BottomNaviBarState extends State<BottomNaviBar> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
