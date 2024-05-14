@@ -14,9 +14,9 @@ class HomeViewModel with ChangeNotifier {
   final GetSearchFestivalUseCase _getSearchFestivalUseCase;
   final GetAddressUseCase _addressInfoRepository;
 
-  HomeViewModel({required GetSearchFestivalUseCase getSearchFestivalUseCase, required GetAddressUseCase addressInfoRepository})
+  HomeViewModel({required GetSearchFestivalUseCase getSearchFestivalUseCase, required GetAddressUseCase getAddressUseCase})
       : _getSearchFestivalUseCase = getSearchFestivalUseCase,
-        _addressInfoRepository = addressInfoRepository;
+        _addressInfoRepository = getAddressUseCase;
   bool isLoading = false;
   double? _longitude;
   double? _latitude;
