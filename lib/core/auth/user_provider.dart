@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:kovel_app/di/di_setup.dart';
@@ -71,18 +72,25 @@ class UserProvider with ChangeNotifier {
   }
 
   void updateArchivedList(Archived clickedArchived) async {
-    if (isArchived(clickedArchived.id) == false) {
-      _likeTourUseCase.execute(id: clickedArchived.id);
-      user.archivedList.add(clickedArchived);
-      await updateArchived(user.archivedList);
-      notifyListeners();
-    } else {
-      _unLikeTourUseCase.execute(id: clickedArchived.id);
-      user.archivedList
-          .removeWhere((archived) => archived.id == clickedArchived.id);
-      await updateArchived(user.archivedList);
-      notifyListeners();
-    }
-    notifyListeners();
+    EasyDebounce.debounce(
+        'like_debounce',
+        Duration(milliseconds: 500),
+            () {
+              if (isArchived(clickedArchived.id) == false) {
+                _likeTourUseCase.execute(id: clickedArchived.id);
+                user.archivedList.add(clickedArchived);
+                print('좋아요 누름 ${user.archivedList}');
+                updateArchived(user.archivedList);
+                notifyListeners();
+              } else {
+                _unLikeTourUseCase.execute(id: clickedArchived.id);
+                user.archivedList
+                    .removeWhere((archived) => archived.id == clickedArchived.id);
+                updateArchived(user.archivedList);
+                notifyListeners();
+              }
+              notifyListeners();
+        }
+    );
   }
 }

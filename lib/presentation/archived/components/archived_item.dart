@@ -21,11 +21,12 @@ class ArchivedItem extends StatefulWidget {
 }
 
 class _ArchivedItemState extends State<ArchivedItem> {
-  bool isLiked = false;
+  bool isLiked = true;
 
   @override
   void initState() {
     super.initState();
+    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
   }
 
   @override
@@ -36,8 +37,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    isLiked = userProvider.isArchived(widget.archived.id);
-    return InkWell(
+    return isLiked ? InkWell(
       onTap: () {
         context.pushNamed('detail', queryParameters: {
           'id': widget.archived.id.toString(),
@@ -76,18 +76,18 @@ class _ArchivedItemState extends State<ArchivedItem> {
                 right: 8,
                 child: InkWell(
                   onTap: () {
-                    userProvider.updateArchivedList(widget.archived);
                     setState(() {
                       isLiked = !isLiked;
                     });
+                    userProvider.updateArchivedList(widget.archived);
                   },
                   child: SizedBox(
                       width: 24.w,
                       height: 24.w,
-                      child: isLiked
-                          ? Icon(Icons.favorite, color: UiConfig.primaryColor)
-                          : Icon(Icons.favorite_border, color: Colors.white)),
-                )),
+                      child: Icon(Icons.favorite, color: UiConfig.primaryColor)
+                  )
+                )
+            ),
             Positioned(
               left: 16.w,
               bottom: 16.w,
@@ -130,6 +130,6 @@ class _ArchivedItemState extends State<ArchivedItem> {
           ],
         ),
       ),
-    );
+    ) : SizedBox();
   }
 }
