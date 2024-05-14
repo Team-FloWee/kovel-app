@@ -8,7 +8,7 @@ class GetSearchKeywordUseCase {
     required TourInfoRepository tourInfoRepository,
   }) : _tourInfoRepository = tourInfoRepository;
 
-  Future<List<Tour>> execute({String query = ''}) async {
+  Future<List<Tour>> execute({required String query}) async {
     return await _tourInfoRepository.getSearchKeyword(keyword: query);
   }
 }
