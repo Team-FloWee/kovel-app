@@ -2,28 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/domain/model/archived.dart';
-import 'package:kovel_app/domain/model/category/category_type.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
-import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
 
 import '../../core/utils/archived_util.dart';
-import '../../domain/model/category/category.dart';
 
 class CourseRecommendation extends StatelessWidget {
-  final String url;
-  final String course;
-  final String title;
-  final String content;
+  final TourDetail tourDetail;
 
-  const CourseRecommendation(
-      {super.key,
-      required this.url,
-      required this.course,
-      required this.title,
-      required this.content});
+  const CourseRecommendation({super.key, required this.tourDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +21,8 @@ class CourseRecommendation extends StatelessWidget {
         children: [
           FavoriteImage(
             archived: ArchivedUtil.getArchived(
-                tourDetail: TourDetail(contentId: 0, contentType: ContentType(contentTypeId: 0), title: title, address1: 'address1', address2: 'address2', zipCode: 'zipCode', areaCode: 'areaCode', category1: 'category1', category2: 'category2', category3: 'category3', categoryType: CourseCategoryType(courseCategoryId: '0'), createdTime: 'createdTime', mapx: 'mapx', mapy: 'mapy', imagePath: 'imagePath', tel: 'tel', telName: 'telName', overview: 'overview')),
+              tourDetail: tourDetail,
+            ),
             imageSize: 145,
           ),
           SizedBox(
@@ -52,7 +40,7 @@ class CourseRecommendation extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           bottom: 5, top: 3, left: 10, right: 10),
                       child: Text(
-                        course,
+                        tourDetail.categoryType.name,
                         style: UiConfig.smallStyle.copyWith(
                             color: UiConfig.black.shade100,
                             fontWeight: UiConfig.semiBoldFont),
@@ -64,7 +52,7 @@ class CourseRecommendation extends StatelessWidget {
                   height: 8,
                 ),
                 Text(
-                  title,
+                  tourDetail.title,
                   style: UiConfig.h4Style
                       .copyWith(fontWeight: UiConfig.semiBoldFont),
                   maxLines: 2,
@@ -74,7 +62,7 @@ class CourseRecommendation extends StatelessWidget {
                   height: 8,
                 ),
                 Text(
-                  content,
+                  tourDetail.overview,
                   style: UiConfig.bodyStyle
                       .copyWith(fontWeight: UiConfig.regularFont),
                   maxLines: 3,

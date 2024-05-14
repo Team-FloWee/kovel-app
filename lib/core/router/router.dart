@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
-import 'package:kovel_app/presentation/archived/archived_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -93,7 +92,6 @@ final goRouter = GoRouter(
       pageBuilder: (context, state) {
         return CustomTransitionPage(
             child: ChangeNotifierProvider(
-              create: (context) => ArchivedViewModel(userRepository: getIt()),
               child: ArchivedScreen(),
             ),
             transitionsBuilder: (BuildContext context,
