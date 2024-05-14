@@ -103,7 +103,6 @@ class LocationListViewModel with ChangeNotifier {
     });
     //_isLoading = false;
     notifyListeners();
-  }
 
     // for (Tour element in _areaBasedDataList) {
     //   final result = await _getCommonDataUseCase.execute(id: element.id);
