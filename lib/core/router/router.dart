@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
@@ -26,10 +27,17 @@ final goRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => getIt<HomeViewModel>(),
-          child: const HomeScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (context) => getIt<HomeViewModel>(),
+              child: HomeScreen(),
+            ), transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+          return FadeTransition(
+            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+            child: child,
+          );
+        }
         );
       },
     ),
@@ -51,10 +59,17 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/mypage',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => MyPageViewModel(),
-          child: const MyPageScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (context) => MyPageViewModel(),
+              child: MyPageScreen(),
+            ), transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+          return FadeTransition(
+            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+            child: child,
+          );
+        }
         );
       },
     ),
@@ -69,10 +84,17 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/archived',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => ArchivedViewModel(userRepository: getIt()),
-          child: ArchivedScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (context) => ArchivedViewModel(userRepository: getIt()),
+              child: ArchivedScreen(),
+            ), transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+          return FadeTransition(
+            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+            child: child,
+          );
+        }
         );
       },
     ),
