@@ -10,4 +10,6 @@ abstract interface class UserRepository {
   Future<void> signOut();
   Future<bool> existUser({required String id});
   Future<bool> createUser({required User user});
+  Future<void> saveArchivedList({required User user, required String data});
+  Future<void> deleteArchivedList({required User user, required String data});
 }

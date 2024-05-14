@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
+import 'package:kovel_app/presentation/components/favorite_icon.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
 import 'package:kovel_app/presentation/components/translate/context_menu.dart';
 import 'package:kovel_app/presentation/detail/components/course/related_course_list.dart';
@@ -92,39 +94,26 @@ class _DetailScreenState extends State<DetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CommonText(
-                          badgeTitle: viewModel.tourDetailData.contentType.contentTypeId == 25
-                          ? viewModel.tourDetailData.categoryType.name
-                          : viewModel.tourDetailData.contentType.name,
+                          badgeTitle: viewModel.tourDetailData.contentType
+                                      .contentTypeId ==
+                                  25
+                              ? viewModel.tourDetailData.categoryType.name
+                              : viewModel.tourDetailData.contentType.name,
                           title: viewModel.tourDetailData.title,
                           tel: (viewModel.tourDetailData.tel == '')
                               ? viewModel.detailData.infoCenter
                               : '',
                           address: viewModel.tourDetailData.address1,
                         ),
-                        Transform.translate(
-                          offset: Offset(16, -16),
-                          child: InkWell(
-                            onTap: () {
-                              viewModel.toggleFavorite();
-                            },
-                            borderRadius: BorderRadius.circular(888.0),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16.0, 16.0, 16.0, 16.0),
-                              child: Icon(
-                                Icons.favorite,
-                                size: 24.0,
-                                color: viewModel.isFavorite
-                                    ? UiConfig.primaryColor
-                                    : UiConfig.black.shade600,
-                              ),
-                            ),
-                          ),
+                        FavoriteIcon(
+                          archived: ArchivedUtil.getArchived(
+                              tourDetail: viewModel.tourDetailData),
                         ),
                       ],
                     ),
                     widget.contentTypeId == 25
-                        ? Text(viewModel.tourDetailData.overview, style: UiConfig.bodyStyle)
+                        ? Text(viewModel.tourDetailData.overview,
+                            style: UiConfig.bodyStyle)
                         : SizedBox(),
                     Padding(
                       padding: const EdgeInsets.only(top: 18, bottom: 16),
@@ -206,32 +195,34 @@ class _InfoSectionState extends State<InfoSection> {
           child:
               Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
         ),
-        widget.contentTypeId != 25 ? Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: UiConfig.black.shade500,
-          ),
-          child: Column(
-            children: [
-              Container(
-                padding:
-                    EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 8),
+        widget.contentTypeId != 25
+            ? Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: UiConfig.black.shade500,
                 ),
                 child: Column(
-                  children: viewModel.infoData
-                      .map(
-                        (e) =>
-                            InfoText(title: e.infoName, contents: e.infoText),
-                      )
-                      .toList(),
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: 16, top: 16, right: 16, bottom: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: UiConfig.black.shade500,
+                      ),
+                      child: Column(
+                        children: viewModel.infoData
+                            .map(
+                              (e) => InfoText(
+                                  title: e.infoName, contents: e.infoText),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ) : RelatedCourseList(courseInfoData: viewModel.infoData)
+              )
+            : RelatedCourseList(courseInfoData: viewModel.infoData)
       ],
     );
   }

@@ -19,8 +19,20 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<void> updateUser({required User user}) async {
-    await _userRef.doc(user.userId).update(
-        {'email': user.email, 'imageUrl': user.imageUrl, 'name': user.name});
+    await _userRef.doc(user.userId).update({
+      'email': user.email,
+      'imageUrl': user.imageUrl,
+      'name': user.name,
+      'archivedList': user.archivedList,
+    });
+  }
+
+  @override
+  Future<void> updateArchivedList(
+      {required User user, required String data}) async {
+    await _userRef.doc(user.userId).update({
+      'stringList': data,
+    });
   }
 
   @override
@@ -36,7 +48,10 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<bool> existUser({required String id}) async {
-    final result = await _userRef.doc(id).get().then((s) => s.data()!)
+    final result = await _userRef
+        .doc(id)
+        .get()
+        .then((s) => s.data()!)
         .then((value) => true)
         .onError((error, stackTrace) => false);
     return result;

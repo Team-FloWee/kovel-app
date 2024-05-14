@@ -24,6 +24,7 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
+  List<Archived> get archivedList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String userId, String name, String email, String imageUrl});
+  $Res call(
+      {String userId,
+      String name,
+      String email,
+      String imageUrl,
+      List<Archived> archivedList});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = null,
     Object? imageUrl = null,
+    Object? archivedList = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -73,6 +80,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      archivedList: null == archivedList
+          ? _value.archivedList
+          : archivedList // ignore: cast_nullable_to_non_nullable
+              as List<Archived>,
     ) as $Val);
   }
 }
@@ -84,7 +95,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String name, String email, String imageUrl});
+  $Res call(
+      {String userId,
+      String name,
+      String email,
+      String imageUrl,
+      List<Archived> archivedList});
 }
 
 /// @nodoc
@@ -101,6 +117,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? name = null,
     Object? email = null,
     Object? imageUrl = null,
+    Object? archivedList = null,
   }) {
     return _then(_$UserImpl(
       userId: null == userId
@@ -119,6 +136,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      archivedList: null == archivedList
+          ? _value.archivedList
+          : archivedList // ignore: cast_nullable_to_non_nullable
+              as List<Archived>,
     ));
   }
 }
@@ -130,7 +151,8 @@ class _$UserImpl implements _User {
       {required this.userId,
       required this.name,
       required this.email,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.archivedList});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -143,10 +165,12 @@ class _$UserImpl implements _User {
   final String email;
   @override
   final String imageUrl;
+  @override
+  final List<Archived> archivedList;
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imageUrl: $imageUrl)';
+    return 'User(userId: $userId, name: $name, email: $email, imageUrl: $imageUrl, archivedList: $archivedList)';
   }
 
   @override
@@ -158,12 +182,15 @@ class _$UserImpl implements _User {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.archivedList, archivedList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, name, email, imageUrl);
+  int get hashCode => Object.hash(runtimeType, userId, name, email, imageUrl,
+      const DeepCollectionEquality().hash(archivedList));
 
   @JsonKey(ignore: true)
   @override
@@ -184,7 +211,8 @@ abstract class _User implements User {
       {required final String userId,
       required final String name,
       required final String email,
-      required final String imageUrl}) = _$UserImpl;
+      required final String imageUrl,
+      required final List<Archived> archivedList}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -196,6 +224,8 @@ abstract class _User implements User {
   String get email;
   @override
   String get imageUrl;
+  @override
+  List<Archived> get archivedList;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

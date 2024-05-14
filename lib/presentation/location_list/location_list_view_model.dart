@@ -2,20 +2,25 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
+import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 
+import '../../domain/model/archived.dart';
 import '../../domain/model/tour.dart';
 import '../../domain/use_case/get_area_data_use_case.dart';
 
 class LocationListViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetAreaDataUseCase _getAreaDataUseCase;
-
+  final UserRepository _userRepository;
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
+    required UserRepository userRepository,
   })  : _getCommonDataUseCase = getCommonDataUseCase,
-        _getAreaDataUseCase = getAreaDataUseCase;
+        _getAreaDataUseCase = getAreaDataUseCase,
+        _userRepository = userRepository;
 
   bool _isLoading = false;
 
@@ -91,10 +96,14 @@ class LocationListViewModel with ChangeNotifier {
     //_isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
-
-    _tourDetailList = [];
+    _areaBasedDataList.forEach((element) async {
+      _tourDetailList
+          .add((await _getCommonDataUseCase.execute(id: element.id)));
+      notifyListeners();
+    });
+    //_isLoading = false;
+    notifyListeners();
+  }
 
     // for (Tour element in _areaBasedDataList) {
     //   final result = await _getCommonDataUseCase.execute(id: element.id);

@@ -24,17 +24,22 @@ import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
+
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
+
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
+import 'package:kovel_app/presentation/home/home_view_model.dart';
+import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
+
+import '../core/auth/user_provider.dart';
 
 final getIt = GetIt.instance;
 
 void diSetup() {
   // registerSingleton
-
   // DataSource
   getIt.registerSingleton<TourInfoDataSource>(TourInfoDataSourceImpl());
   getIt.registerSingleton<UserDataSource>(UserDataSourceImpl());
@@ -47,6 +52,7 @@ void diSetup() {
 
   // Provider
   getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())));
+  getIt.registerSingleton<UserProvider>(UserProvider());
 
   // registerFactory
 
@@ -59,6 +65,7 @@ void diSetup() {
   getIt.registerFactory<LocationListViewModel>(() => LocationListViewModel(
         getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
         getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
+        userRepository: UserRepositoryImpl(userDataSource: getIt()),
       ));
 
   getIt.registerFactory<CourseListViewModel>(() => CourseListViewModel(
@@ -69,9 +76,11 @@ void diSetup() {
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
       loginUseCase: LoginUseCase(userRepository: getIt()),
       logoutUseCase: LogoutUseCase(userRepository: getIt()),
-      checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
+      checkUserDuplicatedUseCase:
+          CheckUserDuplicatedUseCase(userRepository: getIt()),
       createUserUseCase: CreateUserUseCase(userRepository: getIt())));
 
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt())));
+
 }
