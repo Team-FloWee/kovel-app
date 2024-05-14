@@ -94,17 +94,10 @@ class LocationListViewModel with ChangeNotifier {
     //_isLoading = true;
     notifyListeners();
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
-    //_isLoading = false;
-    notifyListeners();
+    _areaBasedDataList = await _getAreaDataUseCase.execute(
+        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
 
-    // for (Tour element in _areaBasedDataList) {
-    //   final result = await _getCommonDataUseCase.execute(id: element.id);
-    //   _tourDetailList.add(result);
-    //   notifyListeners();
-    // }
+    _tourDetailList = [];
 
     await Future.wait(_areaBasedDataList.map((element) async {
       _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
@@ -126,11 +119,6 @@ class LocationListViewModel with ChangeNotifier {
         cat2: '',
         contentTypeId: 0,
         pageNo: ++_commonPageNo)));
-
-    // for (Tour element in _areaBasedDataList) {
-    //   _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
-    //   notifyListeners();
-    // }
 
     await Future.wait(_areaBasedDataList.map((element) async {
       _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
