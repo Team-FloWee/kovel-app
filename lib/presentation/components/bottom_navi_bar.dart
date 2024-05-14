@@ -19,8 +19,13 @@ class BottomNaviBar extends StatelessWidget {
           switch (value) {
             case 0:
               context.go('/');
+              break;
             case 1:
               context.go('/archived');
+              break;
+            case 2:
+              context.go('/mypage');
+              break;
           }
         },
         items: [
