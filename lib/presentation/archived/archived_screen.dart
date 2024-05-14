@@ -56,7 +56,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(),
+      bottomNavigationBar: BottomNaviBar(selectedIndex: 1),
     );
   }
 }
