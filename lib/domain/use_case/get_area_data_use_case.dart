@@ -15,14 +15,13 @@ class GetAreaDataUseCase {
     required String cat2,
     required int contentTypeId,
   }) async {
-    if (language == 'KorService1') {
-      final result = await _tourInfoRepository.getAreaBasedList(
-          areaCode: areaCode, cat2: cat2, contentTypeId: contentTypeId);
-      return result;
-    } else if (language != 'KorService1' && contentTypeId == 25) {
+    if (language != 'KorService1' && contentTypeId == 25) {
+      // 코스 정보를 매직넘버로 주입하는 곳이 있어서 변환, null로 처리하는게 나은지 의논 필요
       contentTypeId = 0;
+
       final result = await _tourInfoRepository.getAreaBasedList(
           areaCode: areaCode, cat2: cat2, contentTypeId: contentTypeId);
+
       return result;
     }
     final result = await _tourInfoRepository.getAreaBasedList(
