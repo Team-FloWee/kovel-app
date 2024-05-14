@@ -41,7 +41,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
       onTap: () {
         context.pushNamed('detail', queryParameters: {
           'id': widget.archived.id.toString(),
-          'contentTypeId': widget.archived.contentType,
+          'contentTypeId': widget.archived.contentType.toString(),
           'title': widget.archived.title
         });
       },
