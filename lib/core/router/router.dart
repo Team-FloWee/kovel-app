@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
-import 'package:kovel_app/presentation/archived/archived_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -36,9 +35,7 @@ final goRouter = GoRouter(
     GoRoute(
         path: '/splash',
         builder: (context, state) {
-
           return SplashScreen();
-
         }),
     GoRoute(
       path: '/login',
@@ -70,10 +67,7 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/archived',
       builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => ArchivedViewModel(userRepository: getIt()),
-          child: ArchivedScreen(),
-        );
+        return ArchivedScreen();
       },
     ),
     GoRoute(
@@ -81,12 +75,14 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId =
+            int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child:
+              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
