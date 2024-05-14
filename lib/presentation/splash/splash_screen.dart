@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,7 +12,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,10 +21,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: Duration(seconds: 2),
-      vsync: this
-    );
+    Future.microtask(() => context.read<UserProvider>().getUser());
+    _controller =
+        AnimationController(duration: Duration(seconds: 2), vsync: this);
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -50,14 +52,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: FadeTransition(
+        body: SafeArea(
+      child: Center(
+        child: FadeTransition(
             opacity: _fadeAnimation,
-            child: Image.asset('assets/images/splash_image.png', width: 284.w, height: 226.w,)
-          ),
-        ),
-      )
-    );
+            child: Image.asset(
+              'assets/images/splash_image.png',
+              width: 284.w,
+              height: 226.w,
+            )),
+      ),
+    ));
   }
 }

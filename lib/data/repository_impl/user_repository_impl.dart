@@ -60,7 +60,13 @@ class UserRepositoryImpl implements UserRepository {
     try {
       user = await _userDataSource.getUser(id: id);
     } catch (error) {
-      user = const User(userId: '', name: '', email: '', imageUrl: '');
+      user = const User(
+        userId: '',
+        name: '',
+        email: '',
+        imageUrl: '',
+        archivedList: [],
+      );
     }
     return user;
   }
@@ -85,5 +91,17 @@ class UserRepositoryImpl implements UserRepository {
       print(e);
       return false;
     }
+  }
+
+  @override
+  Future<void> deleteArchivedList(
+      {required User user, required String data}) async {
+    await _userDataSource.updateArchivedList(user: user, data: data);
+  }
+
+  @override
+  Future<void> saveArchivedList(
+      {required User user, required String data}) async {
+    await _userDataSource.updateArchivedList(user: user, data: data);
   }
 }

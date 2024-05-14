@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/presentation/archived/archived_screen.dart';
+import 'package:kovel_app/presentation/archived/archived_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -34,7 +36,9 @@ final goRouter = GoRouter(
     GoRoute(
         path: '/splash',
         builder: (context, state) {
-          return const SplashScreen();
+
+          return SplashScreen();
+
         }),
     GoRoute(
       path: '/login',
@@ -64,6 +68,15 @@ final goRouter = GoRouter(
       },
     ),
     GoRoute(
+      path: '/archived',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => ArchivedViewModel(userRepository: getIt()),
+          child: ArchivedScreen(),
+        );
+      },
+    ),
+    GoRoute(
       path: '/detail',
       name: 'detail',
       builder: (context, state) {
@@ -81,11 +94,11 @@ final goRouter = GoRouter(
       path: '/locationList',
       name: 'locationList',
       builder: (context, state) {
-        final areaCode = state.uri.queryParameters['areaCode']!;
+        //final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => getIt<LocationListViewModel>(),
           child: LocationListScreen(
-            areaCode: areaCode,
+            areaCode: '1',
           ),
         );
       },

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/presentation/archived/components/archived_item.dart';
+import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
+import 'package:provider/provider.dart';
+
+import '../../domain/model/archived.dart';
 
 class ArchivedScreen extends StatefulWidget {
   const ArchivedScreen({super.key});
@@ -10,7 +16,14 @@ class ArchivedScreen extends StatefulWidget {
 
 class _ArchivedScreenState extends State<ArchivedScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => context.read<UserProvider>().getUser());
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -18,8 +31,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.location_on_rounded),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -28,7 +40,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
         child: Align(
           alignment: Alignment.center,
           child: GridView.builder(
-            itemCount: 20, // 아이템 개수
+            itemCount: userProvider.user.archivedList.length, // 아이템 개수
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 16,
@@ -36,15 +48,19 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
               childAspectRatio: 1,
             ),
             itemBuilder: (BuildContext context, int index) {
+              // index에 해당하는 archived를 가져옴
+              Archived archived = userProvider.user.archivedList[index];
               return ArchivedItem(
-                imagePath: '',
-                title: '타이틀',
-                badgeTitle: '음식점',
+                archived: archived,
+                imagePath: archived.imagePath,
+                title: archived.title,
+                badgeTitle: ContentType(contentTypeId: archived.contentType).name,
               );
             },
           ),
         ),
       ),
+      bottomNavigationBar: BottomNaviBar(),
     );
   }
 }

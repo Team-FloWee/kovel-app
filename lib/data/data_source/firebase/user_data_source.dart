@@ -6,4 +6,5 @@ abstract interface class UserDataSource {
   Future<User> getUser({required String id});
   Future<void> signOut();
   Future<bool> existUser({required String id});
+  Future<void> updateArchivedList({required User user, required String data});
 }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/utils/archived_util.dart';
+
 import 'package:kovel_app/config/ui_config.dart';
+
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -22,20 +27,25 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
-  final ScrollController _courseDataScrollController = ScrollController();
-  final ScrollController _commonDataScrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
+    Future.microtask(() {
+      context.read<LocationListViewModel>().getData(widget.areaCode);
+      //Todo UserViewModel 안쓰면 지우고 작동확인 크..
+    }); //세트
+   Future.microtask(() => context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
     Future.microtask(() => _courseDataScrollController.addListener(() {
           _onCourseDataScroll();
         }));
     Future.microtask(() => _commonDataScrollController.addListener(() {
           _onCommonDataScroll();
         }));
-  }
+
+  final ScrollController _courseDataScrollController = ScrollController();
+  final ScrollController _commonDataScrollController = ScrollController();
+
 
   @override
   void dispose() {
@@ -107,7 +117,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                           ...viewModel.courseDetailList.map(
                             (e) => Padding(
                               padding: const EdgeInsets.only(right: 8.0),
-                              child: FavoriteImage(imagePath: e.imagePath, imageSize: 100),
+                              child: FavoriteImage(archived:
+                                        ArchivedUtil.getArchived(tourDetail: e),
+                                    imageSize: 100,),
                             ),
                           ),
                           viewModel.isCourseDataLoading == true
@@ -202,7 +214,8 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                                   viewModel.isLoading
                                       ? const Center(child: CircularProgressIndicator())
                                       : FavoriteImage(
-                                          imagePath: e.imagePath,
+                                          archived: ArchivedUtil.getArchived(
+                                              tourDetail: e),
                                           imageSize: 145,
                                         ),
                                   const SizedBox(width: 8),
