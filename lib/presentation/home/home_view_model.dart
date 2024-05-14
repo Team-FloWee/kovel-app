@@ -9,13 +9,19 @@ import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/tour.dart';
+
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 
 class HomeViewModel with ChangeNotifier {
   final GetSearchFestivalUseCase _getSearchFestivalUseCase;
+  final GetSearchKeywordUseCase _getSearchKeywordUseCase;
+
   HomeViewModel({
     required GetSearchFestivalUseCase getSearchFestivalUseCase,
-  }) : _getSearchFestivalUseCase = getSearchFestivalUseCase;
+    required GetSearchKeywordUseCase getSearchKeywordUseCase,
+  })  : _getSearchFestivalUseCase = getSearchFestivalUseCase,
+        _getSearchKeywordUseCase = getSearchKeywordUseCase;
   bool isLoading = false;
   double? _longitude;
   double? _latitude;
