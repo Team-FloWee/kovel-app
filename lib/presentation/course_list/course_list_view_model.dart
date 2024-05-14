@@ -42,11 +42,9 @@ class CourseListViewModel with ChangeNotifier {
     _areaBasedDataList = await _getAreaDataUseCase.execute(
         areaCode: areaCode, cat2: '', contentTypeId: 25);
 
-    _areaBasedDataList.forEach((element) async {
-      _courseDetailList
-          .add(await _getCommonDataUseCase.execute(id: element.id));
-      notifyListeners();
-    });
+    await Future.wait(_areaBasedDataList.map((element) async {
+      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+    }));
 
     _isLoading = false;
     notifyListeners();
@@ -59,11 +57,9 @@ class CourseListViewModel with ChangeNotifier {
     _areaBasedDataList = await _getAreaDataUseCase.execute(
         areaCode: areaCode, cat2: cat2, contentTypeId: 25);
     _courseDetailList = [];
-    _areaBasedDataList.forEach((element) async {
-      _courseDetailList
-          .add(await _getCommonDataUseCase.execute(id: element.id));
-      notifyListeners();
-    });
+    await Future.wait(_areaBasedDataList.map((element) async {
+      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+    }));
     // _isLoading = false;
     notifyListeners();
   }
