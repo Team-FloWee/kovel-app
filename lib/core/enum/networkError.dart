@@ -1,0 +1,4 @@
+enum NetworkError{
+  requestTimeout,
+  unknow,
+}
