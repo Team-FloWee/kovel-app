@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
@@ -65,7 +64,9 @@ class _CourseListScreenState extends State<CourseListScreen> {
                         categoryData: CourseCategoryTypeList.typeList,
                         onSelect: (Category category) {
                           // 카테고리 가져오기
-                          context.read<CourseListViewModel>().getCourseData(widget.areaCode, category.id);
+                          context
+                              .read<CourseListViewModel>()
+                              .getCourseData(widget.areaCode, category.id);
                         }),
                     const SizedBox(
                       height: 16,
@@ -75,10 +76,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
                           .map((e) => Padding(
                                 padding: const EdgeInsets.only(bottom: 16.0),
                                 child: CourseRecommendation(
-                                  url: e.imagePath,
-                                  course: e.categoryType.name,
-                                  title: e.title,
-                                  content: e.overview,
+                                  tourDetail: e,
                                 ),
                               ))
                           .toList(),
