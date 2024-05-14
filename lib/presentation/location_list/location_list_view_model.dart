@@ -64,10 +64,10 @@ class LocationListViewModel with ChangeNotifier {
 
     _areaBasedDataList = await _getAreaDataUseCase.execute(
         areaCode: areaCode, cat2: '', contentTypeId: 25);
-    _areaBasedDataList.forEach((element) async {
-      _courseDetailList
-          .add(await _getCommonDataUseCase.execute(id: element.id));
-    }); //이렇게 쓰면 ID 리스트 필요없을 거 같음
+
+    await Future.wait(_areaBasedDataList.map((element) async {
+      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+    }));
 
     notifyListeners();
     await getCommonData(areaCode, contentTypeId);
@@ -83,11 +83,9 @@ class LocationListViewModel with ChangeNotifier {
         areaCode: areaCode, cat2: '', contentTypeId: 25);
 
     _courseDetailList = [];
-    _areaBasedDataList.forEach((element) async {
-      _courseDetailList
-          .add((await _getCommonDataUseCase.execute(id: element.id)));
-      notifyListeners();
-    });
+    await Future.wait(_areaBasedDataList.map((element) async {
+      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+    }));
     notifyListeners();
   }
 
@@ -96,11 +94,9 @@ class LocationListViewModel with ChangeNotifier {
     //_isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList.forEach((element) async {
-      _tourDetailList
-          .add((await _getCommonDataUseCase.execute(id: element.id)));
-      notifyListeners();
-    });
+    await Future.wait(_areaBasedDataList.map((element) async {
+      _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+    }));
     //_isLoading = false;
     notifyListeners();
 
