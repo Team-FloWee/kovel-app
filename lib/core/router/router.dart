@@ -32,21 +32,23 @@ final goRouter = GoRouter(
             child: ChangeNotifierProvider(
               create: (context) => getIt<HomeViewModel>(),
               child: HomeScreen(),
-            ), transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-          return FadeTransition(
-            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-            child: child,
-          );
-        }
-        );
+            ),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            });
       },
     ),
     GoRoute(
         path: '/splash',
         builder: (context, state) {
-
           return SplashScreen();
-
         }),
     GoRoute(
       path: '/login',
@@ -64,13 +66,17 @@ final goRouter = GoRouter(
             child: ChangeNotifierProvider(
               create: (context) => MyPageViewModel(),
               child: MyPageScreen(),
-            ), transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-          return FadeTransition(
-            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-            child: child,
-          );
-        }
-        );
+            ),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            });
       },
     ),
     GoRoute(
@@ -89,13 +95,17 @@ final goRouter = GoRouter(
             child: ChangeNotifierProvider(
               create: (context) => ArchivedViewModel(userRepository: getIt()),
               child: ArchivedScreen(),
-            ), transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-          return FadeTransition(
-            opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-            child: child,
-          );
-        }
-        );
+            ),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            });
       },
     ),
     GoRoute(
@@ -103,12 +113,14 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId =
+            int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child:
+              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
