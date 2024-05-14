@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -24,33 +25,39 @@ class LocationListScreen extends StatefulWidget {
 }
 
 class _LocationListScreenState extends State<LocationListScreen> {
-
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
         context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
-
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>(); //세트
-    return viewModel.isLoading == true
-        ? const Center(child: CircularProgressIndicator())
-        : Scaffold(
-            appBar: const CommonAppBar(title: '뷰모델 전체'),
-            body: SingleChildScrollView(
-              child: Column(
+    return Scaffold(
+      appBar: const CommonAppBar(title: '뷰모델 전체'),
+      body: SafeArea(
+        child: viewModel.isLoading == true
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+          child: Column(
+            children: [
+              language == 'KorService1'
+                  ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    padding:
+                    EdgeInsets.only(left: 16.0, right: 16.0),
                     child: ContentTitle(
                       title: '추천 코스',
                       withMore: true,
-                      onTapMore: (){
-                        context.pushNamed('courseList', queryParameters:{'areaCode':widget.areaCode});
+                      onTapMore: () {
+                        context.pushNamed('courseList',
+                            queryParameters: {
+                              'areaCode': widget.areaCode
+                            });
                       },
                     ),
                   ),
@@ -60,11 +67,13 @@ class _LocationListScreenState extends State<LocationListScreen> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: CategoryList(
-                        categoryData: CourseCategoryTypeList.typeList,
+                        categoryData:
+                        CourseCategoryTypeList.typeList,
                         onSelect: (Category category) {
                           context
                               .read<LocationListViewModel>()
-                              .getCourseData(widget.areaCode, category.id);
+                              .getCourseData(
+                              widget.areaCode, category.id);
                         }),
                   ),
                   const SizedBox(
@@ -77,10 +86,12 @@ class _LocationListScreenState extends State<LocationListScreen> {
                       child: Row(
                         children: viewModel.courseDetailList
                             .map((e) => Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
-                                  child: FavoriteImage(
-                                      imagePath: e.imagePath, imageSize: 100),
-                                ))
+                          padding: const EdgeInsets.only(
+                              right: 8.0),
+                          child: FavoriteImage(
+                              imagePath: e.imagePath,
+                              imageSize: 100),
+                        ))
                             .toList(),
                       ),
                     ),
@@ -88,11 +99,15 @@ class _LocationListScreenState extends State<LocationListScreen> {
                   const SizedBox(
                     height: 24,
                   ),
-                  LocationCommonData(areaCode: widget.areaCode)
                 ],
-              ),
-            ),
-          );
+              )
+                  : const SizedBox(),
+              LocationCommonData(areaCode: widget.areaCode)
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -144,33 +159,36 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                 child: Column(
                   children: viewModel.tourDetailList
                       .map((e) => Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: InkWell(
-                              onTap: (){
-                                context.pushNamed('detail', queryParameters:{'id': e.contentId.toString(), 'contentTypeId': e.contentType.id, 'title': e.title});
-
-                              },
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  viewModel.isLoading
-                                      ? const Center(
-                                          child: CircularProgressIndicator())
-                                      : FavoriteImage(
-                                          imagePath: e.imagePath,
-                                          imageSize: 145,
-                                        ),
-                                  const SizedBox(width: 8),
-                                  CommonText(
-                                    badgeTitle: e.contentType.name,
-                                    title: e.title,
-                                    tel: e.tel,
-                                    address: e.address1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ))
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: InkWell(
+                      onTap: () {
+                        context.pushNamed('detail', queryParameters: {
+                          'id': e.contentId.toString(),
+                          'contentTypeId': e.contentType.id,
+                          'title': e.title
+                        });
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          viewModel.isLoading
+                              ? const Center(
+                              child: CircularProgressIndicator())
+                              : FavoriteImage(
+                            imagePath: e.imagePath,
+                            imageSize: 145,
+                          ),
+                          const SizedBox(width: 8),
+                          CommonText(
+                            badgeTitle: e.contentType.name,
+                            title: e.title,
+                            tel: e.tel,
+                            address: e.address1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ))
                       .toList(),
                 ),
               ),

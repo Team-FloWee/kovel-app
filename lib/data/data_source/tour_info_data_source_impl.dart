@@ -6,18 +6,17 @@ import 'package:kovel_app/data/dto/content_detail_info_dto.dart';
 import 'package:kovel_app/data/dto/tour_detail_dto.dart';
 import 'package:kovel_app/data/dto/tour_dto.dart';
 
+// TODO: [language] firebase user language 정보를 담아야 한다 ?
+// TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
+// const String language = 'KorService1';
+const String language = 'EngService1';
+// const String language = 'JpnService1';
+
 class TourInfoDataSourceImpl implements TourInfoDataSource {
   final Dio _dio;
   final _mobileOs = 'AND'; // TODO: Core에 Enum으로 만들 예정
   final String baseUrl = dotenv.get('Base_URL');
   final String key = dotenv.get('TOUR_API_KEY');
-
-  // TODO: [language] firebase user language 정보를 담아야 한다 ?
-  // TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
-  // final String language = 'KorService1';
-  final String language = 'EngService1';
-
-  // final String language = 'JpnService1';
 
   TourInfoDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio();
 
