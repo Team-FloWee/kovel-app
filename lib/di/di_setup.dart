@@ -4,16 +4,20 @@ import 'package:kovel_app/data/data_source/address_info_data_source.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
 import 'package:kovel_app/data/data_source/ai_data_source_impl.dart';
+import 'package:kovel_app/data/data_source/firebase/liked_tour_data_source.dart';
+import 'package:kovel_app/data/data_source/firebase/liked_tour_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
+import 'package:kovel_app/data/repository_impl/firebase/liked_tour_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/user_repository_impl.dart';
 import 'package:kovel_app/domain/repository/address_info_repository.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
+import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
@@ -48,12 +52,14 @@ void diSetup() {
   getIt.registerSingleton<UserDataSource>(UserDataSourceImpl());
   getIt.registerSingleton<AiDataSource>(AiDataSourceImpl());
   getIt.registerSingleton<AddressInfoDataSource>(AddressInfoDataSourceImpl());
+  getIt.registerSingleton<LikedTourDataSource>(LikedTourDataSourceImpl());
 
   // Repository
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
   getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
   getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
   getIt.registerSingleton<AddressInfoRepository>(AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
+  getIt.registerSingleton<LikedTourRepository>(LikedTourRepositoryImpl(likedTourDataSource: getIt()));
 
   // Provider
   getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())));
@@ -87,4 +93,4 @@ void diSetup() {
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
   getIt.registerFactory<HomeViewModel>(
       () => HomeViewModel(getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt()), getAddressUseCase: GetAddressUseCase(addressInfoRepository: getIt())));
-}
+

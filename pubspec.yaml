@@ -59,6 +59,7 @@ dependencies:
   image_picker: ^1.1.1
   firebase_storage: ^11.7.5
   google_generative_ai: ^0.3.3
+  easy_debounce: ^2.0.3
 
 
 dev_dependencies:
