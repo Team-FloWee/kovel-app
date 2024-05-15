@@ -21,7 +21,7 @@ class ChatBotViewModel with ChangeNotifier {
   List<Chat> _chatList = [];
   List<Chat> get chatList => _chatList;
 
-  void getChatSession() {
+  void fetchChatList() {
     _chatList = [];
     final chatSession = _getChatSessionUseCase.execute();
     for (var content in chatSession.history) {
