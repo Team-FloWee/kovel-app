@@ -5,13 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 import '../../core/auth/user_provider.dart';
 
 class MyPageViewModel with ChangeNotifier {
   late User _user;
-  String userId = UserProvider().getUserId();
+  String userId =
+      UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt())
+          .getUserId();
   final userRef = FirebaseFirestore.instance
       .collection('user')
       .withConverter<User>(

@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
@@ -14,10 +13,14 @@ import '../../domain/model/archived.dart';
 
 class UserProvider with ChangeNotifier {
   // TODO : UseCase 생성자로 받기
-  final LikeTourUseCase _likeTourUseCase =
-      LikeTourUseCase(likedTourRepository: getIt());
-  final UnLikeTourUseCase _unLikeTourUseCase =
-      UnLikeTourUseCase(likedTourRepository: getIt());
+  final LikeTourUseCase _likeTourUseCase;
+  final UnLikeTourUseCase _unLikeTourUseCase;
+
+  UserProvider({
+    required LikeTourUseCase likeTourUseCase,
+    required UnLikeTourUseCase unLikeTourUseCase,
+  })  : _likeTourUseCase = likeTourUseCase,
+        _unLikeTourUseCase = unLikeTourUseCase;
 
   late User user;
 
