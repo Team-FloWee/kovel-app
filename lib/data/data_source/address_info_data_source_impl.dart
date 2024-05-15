@@ -17,15 +17,16 @@ class AddressInfoDataSourceImpl implements AddressInfoDataSource {
   @override
   Future<Result<List<AddressDto>, NetworkError>> getAddress(
       {required String longitude, required String latitude}) async {
-    final Response response;
-    String url = '$baseUrl?x=$longitude&y=$latitude&input_coord=WGS84';
 
-    response =
-        await _dio.get(url, options: Options(headers: {'Authorization': key}));
-
-    final List jsonList = response.data['documents'];
 
     try {
+      final Response response;
+      String url = '$baseUrl?x=$longitude&y=$latitude&input_coord=WGS84';
+
+      response =
+      await _dio.get(url, options: Options(headers: {'Authorization': key}));
+
+      final List jsonList = response.data['documents'];
       switch (response.statusCode) {
         case 200:
           if (response.data['documents'] != null) {
