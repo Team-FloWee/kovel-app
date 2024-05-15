@@ -4,6 +4,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
+import 'package:kovel_app/presentation/chat_bot/components/chat_input.dart';
 import 'package:kovel_app/presentation/chat_bot/components/model_chat_widget.dart';
 import 'package:kovel_app/presentation/chat_bot/components/user_chat_widget.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
@@ -22,7 +23,12 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     super.initState();
     Future.microtask(() => context.read<ChatBotViewModel>().fetchChatList());
   }
-  TextEditingController _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<ChatBotViewModel>();
@@ -48,7 +54,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                         return _buildChatWidget(chat: viewModel.chatList[index]);
                       }
                     ),
-                    SizedBox(height: 40)
+                    SizedBox(height: 100)
                   ],
                 ),
               ),
@@ -56,30 +62,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        onSubmitted: (value) {
-                          viewModel.sendChat(request: value);
-                          _textController.text = '';
-                        },
-                        onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                        controller: _textController,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 40, height: 40,
-                      child: IconButton(
-                        onPressed: () {
-                          viewModel.sendChat(request: _textController.text);
-                          _textController.text = '';
-                        },
-                        icon: Icon(Icons.send),
-                      ),
-                    )
-                  ],
-                ),
+                child: ChatInput()
               ),
             ],
           ),
