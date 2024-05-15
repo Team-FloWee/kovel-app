@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/dto/content_detail_dto.dart';
 import 'package:kovel_app/data/dto/content_detail_info_dto.dart';
@@ -14,7 +16,8 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // TODO: [language] firebase user language 정보를 담아야 한다 ?
   // TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
-  final String language = 'KorService1';
+
+  final String language = languageUtil(UserProvider().user.language);
   // final String language = 'EngService1';
 
   // final String language = 'JpnService1';
