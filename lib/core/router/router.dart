@@ -1,8 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
+import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
 import 'package:kovel_app/presentation/archived/archived_view_model.dart';
+import 'package:kovel_app/presentation/chat_bot/chat_bot_screen.dart';
+import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -126,6 +130,20 @@ final goRouter = GoRouter(
               user: state.extra as User,
             ),
           );
-        })
+        }
+    ),
+    GoRoute(
+      path: '/chatBot',
+      name: 'chatBot',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (_) => ChatBotViewModel(
+              sendChatToAiUseCase: SendChatToAiUseCase(aiRepository: getIt()),
+              getChatSessionUseCase: GetChatSessionUseCase(aiRepository: getIt()),
+          ),
+          child: ChatBotScreen(),
+        );
+      }
+    )
   ],
 );
