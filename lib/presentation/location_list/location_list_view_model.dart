@@ -180,10 +180,6 @@ class LocationListViewModel with ChangeNotifier {
     _coursePageNo = 1;
     _courseDetailList = [];
 
-    Logger()
-        .i('viewModel -> _selectedCourseCategory  $_selectedCourseCategory');
-    Logger().i(
-        'viewModel -> _selectedCourseCategory type  ${_selectedCourseCategory.runtimeType}');
     notifyListeners();
   }
 }
