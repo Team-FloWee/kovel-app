@@ -20,7 +20,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<ChatBotViewModel>().getChatSession());
+    Future.microtask(() => context.read<ChatBotViewModel>().fetchChatList());
   }
   TextEditingController _textController = TextEditingController();
   @override
