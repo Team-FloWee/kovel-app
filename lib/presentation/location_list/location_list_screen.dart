@@ -113,10 +113,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                         categoryData: CourseCategoryTypeList.typeList,
                         onSelect: (Category category) {
                           context.read<LocationListViewModel>().getCourseData(
-                              widget.areaCode,
-                              category.id,
-                              userProvider
-                                  .languageUtil(userProvider.user.language));
+                                widget.areaCode,
+                                category.id,
+                              );
                         }),
                   ),
                   const SizedBox(

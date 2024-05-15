@@ -60,7 +60,7 @@ class LocationListViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: 25, lang: lang);
+        areaCode: areaCode, cat2: '', contentTypeId: 0, lang: lang);
 
     await Future.wait(_areaBasedDataList.map((element) async {
       _courseDetailList
@@ -74,11 +74,14 @@ class LocationListViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getCourseData(String areaCode, String cat2, String lang) async {
+  Future<void> getCourseData(String areaCode, String cat2) async {
     notifyListeners();
 
     _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: 25, lang: lang);
+      areaCode: areaCode,
+      cat2: '',
+      contentTypeId: 25,
+    );
 
     _courseDetailList = [];
     await Future.wait(_areaBasedDataList.map((element) async {
