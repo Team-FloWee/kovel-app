@@ -344,6 +344,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push('/chatBot');
+        },
+        child: Text('AI'),
+      ),
       bottomNavigationBar: const BottomNaviBar(selectedIndex: 0),
     );
   }

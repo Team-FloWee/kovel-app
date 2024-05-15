@@ -12,4 +12,17 @@ class AiDataSourceImpl implements AiDataSource {
     final response = _model.generateContentStream(content);
     return response;
   }
+
+  final ChatSession _chat = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY')).startChat();
+
+  @override
+  Future<GenerateContentResponse> chatToAi({required String query}) async {
+    final content = Content.text(query);
+    return await _chat.sendMessage(content);
+  }
+
+  @override
+  ChatSession getChatSession() {
+    return _chat;
+  }
 }
