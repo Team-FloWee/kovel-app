@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/presentation/archived/components/archived_item.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:provider/provider.dart';
@@ -52,10 +51,6 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
               Archived archived = userProvider.user.archivedList[index];
               return ArchivedItem(
                 archived: archived,
-                imagePath: archived.imagePath,
-                title: archived.title,
-                badgeTitle:
-                    ContentType(contentTypeId: archived.contentType).name,
               );
             },
           ),
