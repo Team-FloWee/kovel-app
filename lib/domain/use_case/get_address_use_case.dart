@@ -1,3 +1,6 @@
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
+import 'package:kovel_app/data/dto/address_dto/address_dto.dart';
 import 'package:kovel_app/domain/model/address.dart';
 import 'package:kovel_app/domain/repository/address_info_repository.dart';
 
@@ -8,8 +11,22 @@ class GetAddressUseCase {
     required AddressInfoRepository addressInfoRepository,
   }) : _addressInfoRepository = addressInfoRepository;
 
-  Future<List<Address>> execute({required String longitude, required String latitude}) async {
-    final result = await _addressInfoRepository.getAddress(longitude: longitude, latitude: latitude);
-    return result;
+  Future<Result<List<Address>, NetworkError>> execute(
+      {required String longitude, required String latitude}) async {
+    final result = await _addressInfoRepository.getAddress(
+        longitude: longitude, latitude: latitude);
+    switch (result) {
+      case Success<List<Address>, NetworkError>():
+        return Result.success(result.data);
+      case Error<List<Address>, NetworkError>():
+        {
+          switch (result.error) {
+            case NetworkError.requestTimeout:
+              return Result.error(NetworkError.requestTimeout);
+            case NetworkError.unknown:
+              return Result.error(NetworkError.unknown);
+          }
+        }
+    }
   }
 }

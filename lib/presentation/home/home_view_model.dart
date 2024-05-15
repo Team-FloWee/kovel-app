@@ -4,8 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
+import 'package:kovel_app/domain/model/address.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/use_case/get_address_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
@@ -87,19 +90,31 @@ class HomeViewModel with ChangeNotifier {
     // 주소 받아옴
     final dataList = await _addressInfoRepository.execute(longitude: longitude, latitude: latitude);
     // 구/신주소 중 데이터가 있는 것을 locationList에 넣음
-    if (dataList.first.roadAddress.addressName != '' && dataList.first.oldAddress.addressName != '' && !locationList.contains(dataList.first.oldAddress.addressName)) {
-      locationList.insert(0, dataList.first.roadAddress.addressName);
-    } else if (dataList.first.oldAddress.addressName != '' && !locationList.contains(dataList.first.oldAddress.addressName)) {
-      locationList.insert(0, dataList.first.oldAddress.addressName);
+    switch(dataList){
+      case Success<List<Address>, NetworkError>():
+        if (dataList.data.first.roadAddress.addressName != '' && dataList.data.first.oldAddress.addressName != '' && !locationList.contains(dataList.data.first.oldAddress.addressName)) {
+          locationList.insert(0, dataList.data.first.roadAddress.addressName);
+        } else if (dataList.data.first.oldAddress.addressName != '' && !locationList.contains(dataList.data.first.oldAddress.addressName)) {
+          locationList.insert(0, dataList.data.first.oldAddress.addressName);
+        }
+        // 위치 목록이 2이상 되면(주소 받아오면) 초기값 삭제
+        if (locationList.contains('현재 위치')) {
+          locationList.removeWhere((element) => element == '현재 위치');
+          selectedLocation = locationList.first;
+        }
+        // selectedLocation 변수에 새로운 주소 할당
+        selectedLocation = locationList.first;
+        notifyListeners(); // TODO: await 때문에 notifyListeners()실행 후 주소가져옴. 해결방법은?
+case Error<List<Address>, NetworkError>():
+  {
+    switch (dataList.error) {
+      case NetworkError.requestTimeout:
+       //  TODO:
+      case NetworkError.unknown:
+    //    TODO
     }
-    // 위치 목록이 2이상 되면(주소 받아오면) 초기값 삭제
-    if (locationList.contains('현재 위치')) {
-      locationList.removeWhere((element) => element == '현재 위치');
-      selectedLocation = locationList.first;
+  }
     }
-    // selectedLocation 변수에 새로운 주소 할당
-    selectedLocation = locationList.first;
-    notifyListeners(); // TODO: await 때문에 notifyListeners()실행 후 주소가져옴. 해결방법은?
   }
 
   // 내 주변 관광정보
