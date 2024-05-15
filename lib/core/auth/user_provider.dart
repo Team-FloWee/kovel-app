@@ -14,8 +14,10 @@ import '../../domain/model/archived.dart';
 
 class UserProvider with ChangeNotifier {
   // TODO : UseCase 생성자로 받기
-  final LikeTourUseCase _likeTourUseCase = LikeTourUseCase(likedTourRepository: getIt());
-  final UnLikeTourUseCase _unLikeTourUseCase = UnLikeTourUseCase(likedTourRepository: getIt());
+  final LikeTourUseCase _likeTourUseCase =
+      LikeTourUseCase(likedTourRepository: getIt());
+  final UnLikeTourUseCase _unLikeTourUseCase =
+      UnLikeTourUseCase(likedTourRepository: getIt());
 
   late User user;
 
@@ -53,6 +55,7 @@ class UserProvider with ChangeNotifier {
         name: '',
         email: '',
         imageUrl: '',
+        language: 'kor',
         archivedList: [],
       );
     }
@@ -72,25 +75,21 @@ class UserProvider with ChangeNotifier {
   }
 
   void updateArchivedList(Archived clickedArchived) async {
-    EasyDebounce.debounce(
-        'like_debounce',
-        Duration(milliseconds: 500),
-            () {
-              if (isArchived(clickedArchived.id) == false) {
-                _likeTourUseCase.execute(id: clickedArchived.id);
-                user.archivedList.add(clickedArchived);
-                print('좋아요 누름 ${user.archivedList}');
-                updateArchived(user.archivedList);
-                notifyListeners();
-              } else {
-                _unLikeTourUseCase.execute(id: clickedArchived.id);
-                user.archivedList
-                    .removeWhere((archived) => archived.id == clickedArchived.id);
-                updateArchived(user.archivedList);
-                notifyListeners();
-              }
-              notifyListeners();
-        }
-    );
+    EasyDebounce.debounce('like_debounce', Duration(milliseconds: 500), () {
+      if (isArchived(clickedArchived.id) == false) {
+        _likeTourUseCase.execute(id: clickedArchived.id);
+        user.archivedList.add(clickedArchived);
+        print('좋아요 누름 ${user.archivedList}');
+        updateArchived(user.archivedList);
+        notifyListeners();
+      } else {
+        _unLikeTourUseCase.execute(id: clickedArchived.id);
+        user.archivedList
+            .removeWhere((archived) => archived.id == clickedArchived.id);
+        updateArchived(user.archivedList);
+        notifyListeners();
+      }
+      notifyListeners();
+    });
   }
 }
