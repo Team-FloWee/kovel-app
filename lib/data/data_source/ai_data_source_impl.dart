@@ -13,7 +13,11 @@ class AiDataSourceImpl implements AiDataSource {
     return response;
   }
 
-  final ChatSession _chat = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY')).startChat();
+  final ChatSession _chat = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY')).startChat(
+    history: [
+      Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')])
+    ]
+  );
 
   @override
   Future<GenerateContentResponse> chatToAi({required String query}) async {
