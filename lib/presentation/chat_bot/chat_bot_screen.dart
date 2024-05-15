@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/chat.dart';
@@ -29,12 +30,16 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       appBar: CommonAppBar(title: 'AI 챗봇'),
       body: SafeArea(
         child: Container(
+          constraints: BoxConstraints(
+            minHeight: 1.sh
+          ),
           color: UiConfig.black.shade500,
           child: Stack(
             children: [
               SingleChildScrollView(
                 child: Column(
                   children: [
+                    SizedBox(height: 24),
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

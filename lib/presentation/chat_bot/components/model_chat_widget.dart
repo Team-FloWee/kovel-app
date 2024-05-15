@@ -7,14 +7,18 @@ class ModelChatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        decoration: BoxDecoration(
-          color: UiConfig.black.shade100,
-          borderRadius: BorderRadius.circular(8)
+    return Padding(
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+            color: UiConfig.black.shade100,
+            borderRadius: BorderRadius.circular(8)
+          ),
+          child: Text(text, style: UiConfig.h4Style),
         ),
-        child: Text(text) ,
       ),
     );
   }
