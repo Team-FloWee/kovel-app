@@ -124,11 +124,11 @@ final goRouter = GoRouter(
       path: '/locationList',
       name: 'locationList',
       builder: (context, state) {
-        //final areaCode = state.uri.queryParameters['areaCode']!;
+        final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => getIt<LocationListViewModel>(),
           child: LocationListScreen(
-            areaCode: '1',
+            areaCode: areaCode,
           ),
         );
       },
