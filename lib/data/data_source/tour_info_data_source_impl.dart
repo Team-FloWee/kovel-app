@@ -14,8 +14,8 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // TODO: [language] firebase user language 정보를 담아야 한다 ?
   // TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
+  String language = 'KorService1';
 
-  final String language = 'KorService1';
   // final String language = 'EngService1';
 
   // final String language = 'JpnService1';
@@ -24,15 +24,19 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 지역기반 관광정보조회(areaBasedList1)
   @override
-  Future<List<TourDto>> getAreaBasedList(
-      {int pageNo = 1,
-      int? contentTypeId,
-      String areaCode = '',
-      String cat2 = ''}) async {
+  Future<List<TourDto>> getAreaBasedList({
+    int pageNo = 1,
+    int? contentTypeId,
+    String areaCode = '',
+    String cat2 = '',
+    String lang = 'KorService1',
+  }) async {
     // TODO: parameter는 unnamed or named?
     const String apiName = 'areaBasedList1';
     final Response response;
-
+    language = lang;
+    print(
+        '주소$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
     if (contentTypeId == null || contentTypeId == 0) {
       response = await _dio.get(
           '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');

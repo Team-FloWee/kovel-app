@@ -27,12 +27,14 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
       {int pageNo = 1,
       int? contentTypeId,
       String areaCode = '',
-      String cat2 = ''}) async {
+      String cat2 = '',
+      String lang = 'KorService1'}) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
         contentTypeId: contentTypeId,
         areaCode: areaCode,
         cat2: cat2,
-        pageNo: pageNo);
+        pageNo: pageNo,
+        lang: lang);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
@@ -78,7 +80,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
   // 숙박 정보 조회 (search stay)
   @override
   Future<List<Tour>> getSearchStay({int pageNo = 1}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchStay(pageNo: pageNo);
+    final List<TourDto> tourDto =
+        await _tourInfoDataSource.getSearchStay(pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 
