@@ -1,11 +1,12 @@
 import 'dart:core';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
+import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
-import 'package:logger/logger.dart';
 
+import '../../domain/model/archived.dart';
 import '../../domain/model/tour.dart';
 import '../../domain/use_case/get_area_data_use_case.dart';
 
@@ -74,7 +75,8 @@ class LocationListViewModel with ChangeNotifier {
         areaCode: areaCode, cat2: '', contentTypeId: 25);
 
     await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+      _courseDetailList
+          .add(await _getCommonDataUseCase.execute(id: element.id));
     }));
 
     notifyListeners();
@@ -94,7 +96,8 @@ class LocationListViewModel with ChangeNotifier {
 
     _courseDetailList = [];
     await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
+      _courseDetailList
+          .add(await _getCommonDataUseCase.execute(id: element.id));
     }));
     notifyListeners();
   }
@@ -168,7 +171,6 @@ class LocationListViewModel with ChangeNotifier {
     _commonPageNo = 1;
     _tourDetailList = [];
 
-    Logger().i('viewModel -> _selectedCategory  $_selectedCategory');
     notifyListeners();
   }
 

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/config/ui_config.dart';
+
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
+
+import 'package:kovel_app/config/ui_config.dart';
+
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
