@@ -91,9 +91,7 @@ final goRouter = GoRouter(
       path: '/archived',
       pageBuilder: (context, state) {
         return CustomTransitionPage(
-            child: ChangeNotifierProvider(
-              child: ArchivedScreen(),
-            ),
+            child: ArchivedScreen(),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,
