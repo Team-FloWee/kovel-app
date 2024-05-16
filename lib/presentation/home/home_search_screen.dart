@@ -8,14 +8,9 @@ import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:provider/provider.dart';
 
-class HomeSearchScreen extends StatefulWidget {
+class HomeSearchScreen extends StatelessWidget {
   const HomeSearchScreen({super.key});
 
-  @override
-  _HomeSearchScreenState createState() => _HomeSearchScreenState();
-}
-
-class _HomeSearchScreenState extends State<HomeSearchScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeSearchViewModel>();
@@ -60,8 +55,9 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                         ),
                         suffixIcon: GestureDetector(
                           onTap: () {
-                            viewModel.onRefresh();
-                            setState(() {});
+                            // viewModel.onRefresh();
+                            // setState(() {});
+                            context.push('/homeSearchScreen');
                           },
                           child: const Icon(
                             Icons.cancel_rounded,
