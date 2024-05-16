@@ -14,18 +14,25 @@ class AddressInfoRepositoryImpl implements AddressInfoRepository {
   }) : _addressInfoDataSource = addressInfoDataSource;
 
   @override
-  Future<Result<List<Address>,NetworkError>> getAddress(
+  Future<Result<List<Address>, NetworkError>> getAddress(
       {required String longitude, required String latitude}) async {
     final addressDto = await _addressInfoDataSource.getAddress(
         longitude: longitude, latitude: latitude);
 
     switch (addressDto) {
       case Success<List<AddressDto>, NetworkError>():
-        return Result.success(addressDto.data.map((e) => e.toAddress()).toList());
+        return Result.success(
+            addressDto.data.map((e) => e.toAddress()).toList());
 
       case Error<List<AddressDto>, NetworkError>():
         {
           switch (addressDto.error) {
+            case NetworkError.unauthorized:
+              return Result.error(NetworkError.unauthorized);
+            case NetworkError.notFound:
+              return Result.error(NetworkError.notFound);
+            case NetworkError.serverError:
+              return Result.error(NetworkError.serverError);
             case NetworkError.requestTimeout:
               return Result.error(NetworkError.requestTimeout);
             case NetworkError.unknown:

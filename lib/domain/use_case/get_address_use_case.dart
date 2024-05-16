@@ -21,6 +21,12 @@ class GetAddressUseCase {
       case Error<List<Address>, NetworkError>():
         {
           switch (result.error) {
+            case NetworkError.unauthorized:
+              return Result.error(NetworkError.unauthorized);
+            case NetworkError.notFound:
+              return Result.error(NetworkError.notFound);
+            case NetworkError.serverError:
+              return Result.error(NetworkError.serverError);
             case NetworkError.requestTimeout:
               return Result.error(NetworkError.requestTimeout);
             case NetworkError.unknown:

@@ -17,26 +17,27 @@ class AddressInfoDataSourceImpl implements AddressInfoDataSource {
   @override
   Future<Result<List<AddressDto>, NetworkError>> getAddress(
       {required String longitude, required String latitude}) async {
-
-
     try {
       final Response response;
       String url = '$baseUrl?x=$longitude&y=$latitude&input_coord=WGS84';
 
-      response =
-      await _dio.get(url, options: Options(headers: {'Authorization': key}));
+      response = await _dio
+          .get(url, options: Options(headers: {'Authorization': key}))
+          .timeout(const Duration(seconds: 5));
 
-      final List jsonList = response.data['documents'];
       switch (response.statusCode) {
         case 200:
-          if (response.data['documents'] != null) {
-            return Result.success(
-                jsonList.map((e) => AddressDto.fromJson(e)).toList());
-          } else {
-            return const Result.success([]);
-          }
+          final List jsonList = response.data['documents'];
+          return Result.success(
+              jsonList.map((e) => AddressDto.fromJson(e)).toList());
+        case 401:
+          return Result.error(NetworkError.unauthorized);
+        case 404:
+          return Result.error(NetworkError.notFound);
+        case 500:
+          return Result.error(NetworkError.serverError);
         default:
-          throw Exception('네트워크 오류');
+          return Result.error(NetworkError.unknown);
       }
     } on TimeoutException {
       return const Result.error(NetworkError.requestTimeout);
