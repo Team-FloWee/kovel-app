@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/utils/archived_util.dart';
 
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
@@ -292,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: List.generate(
                       viewModel.onGoingTourList.length,
                       (index) => OngoingFestivals(
+                        archived: ArchivedUtil.getArchived(tour: viewModel.onGoingTourList[index]),
                         tourData: viewModel.onGoingTourList[index],
                         onSelect: (Tour selectedTour) {
                           selectedTour.contentType.contentTypeId;
