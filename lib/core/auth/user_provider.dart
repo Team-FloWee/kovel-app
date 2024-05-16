@@ -94,13 +94,4 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
     });
   }
-
-  String getLanguage(String language) {
-    switch (language) {
-      case 'en':
-        return 'EngService1';
-      default:
-        return 'KorService1';
-    }
-  }
 }

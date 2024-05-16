@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
@@ -29,7 +30,7 @@ class MyPageViewModel with ChangeNotifier {
   }
 
   void updateLanguage(String lang) async {
-    getLanguage(lang);
+    LanguageUtil().getLanguage(lang);
     await userRef.doc(user.userId).update({'language': lang});
     getProfile();
     notifyListeners();
@@ -63,14 +64,5 @@ class MyPageViewModel with ChangeNotifier {
 
   void logout() async {
     await auth.FirebaseAuth.instance.signOut();
-  }
-
-  String getLanguage(String language) {
-    switch (language) {
-      case 'en':
-        return 'EngService1';
-      default:
-        return 'KorService1';
-    }
   }
 }

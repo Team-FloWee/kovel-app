@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -34,8 +35,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
     Future.microtask(() {
       final userProvider = context.read<UserProvider>();
       context.read<LocationListViewModel>().getData(widget.areaCode,
-          userProvider.getLanguage(userProvider.user.language));
-      //Todo UserViewModel 안쓰면 지우고 작동확인 크..
+          LanguageUtil().getLanguage(userProvider.user.language));
     }); //세트
     Future.microtask(() => _courseDataScrollController.addListener(() {
           _onCourseDataScroll();
@@ -73,7 +73,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
             _commonDataScrollController.position.maxScrollExtent &&
         !context.read<LocationListViewModel>().isCommonDataLoading) {
       context.read<LocationListViewModel>().fetchMoreCommonData(widget.areaCode,
-          userProvider.getLanguage(userProvider.user.language));
+          LanguageUtil().getLanguage(userProvider.user.language));
     }
   }
 
@@ -124,7 +124,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                         .getCourseData(
                                             widget.areaCode,
                                             category.id,
-                                            userProvider.getLanguage(
+                                            LanguageUtil().getLanguage(
                                                 userProvider.user.language));
                                   }),
                             ),
@@ -226,7 +226,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                   context.read<LocationListViewModel>().getCommonData(
                       widget.areaCode,
                       int.parse(category.id ?? '0'),
-                      userProvider.getLanguage(userProvider.user.language));
+                      LanguageUtil().getLanguage(userProvider.user.language));
                 },
               ),
               const SizedBox(height: 16),

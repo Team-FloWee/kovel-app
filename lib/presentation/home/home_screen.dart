@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/tour.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.microtask(() {
       final viewModel = context.read<HomeViewModel>();
       final userProvider = context.read<UserProvider>();
-      viewModel.onFetch(userProvider.getLanguage(userProvider.user.language));
+      viewModel.onFetch(LanguageUtil().getLanguage(userProvider.user.language));
     });
     super.initState();
   }
