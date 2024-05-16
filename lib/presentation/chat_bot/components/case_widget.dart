@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
-class FirstButtonWidget extends StatelessWidget {
+class Case extends StatelessWidget {
   final String text;
-  final Function action;
+  final Function() action;
 
-  const FirstButtonWidget(
+  const Case(
       {super.key, required this.text, required this.action});
 
   @override
@@ -16,6 +16,7 @@ class FirstButtonWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           action();
+          print('object');
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
