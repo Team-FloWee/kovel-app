@@ -36,7 +36,7 @@ class HomeViewModel with ChangeNotifier {
   String selectedLocation = '현재 위치';
 
   // User Profile
-  late User user;
+
   String userId = UserProvider().getUserId();
   final userRef = FirebaseFirestore.instance.collection('user').withConverter<User>(fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!), toFirestore: (snapshot, _) => snapshot.toJson());
 
@@ -56,8 +56,8 @@ class HomeViewModel with ChangeNotifier {
     isLoading = false;
   }
 
-  void getProfile() async {
-    user = await userRef.doc(userId).get().then((value) => value.data()!);
+  void getProfile(User user) async {
+    user = user;
     notifyListeners();
   }
 

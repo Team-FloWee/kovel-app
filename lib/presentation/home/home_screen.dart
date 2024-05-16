@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 
 import 'package:kovel_app/domain/model/category/area_type.dart';
@@ -26,8 +27,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    context.read<HomeViewModel>().getProfile();
     Future.microtask(() {
+      context.read<HomeViewModel>().getProfile(context.read<UserProvider>().user);
       final viewModel = context.read<HomeViewModel>();
       viewModel.onFetch();
     });
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
+    final userProvider = context.watch<UserProvider>();
     // 드롭다운 리스트
     List<String> radiusList = ['1km', '3km', '5km', '10km'];
 
@@ -55,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: MyPageUserProfile(
-                  userName: viewModel.user.name,
-                  userEmail: viewModel.user.email,
-                  userProfilePath: viewModel.user.imageUrl,
+                  userName: userProvider.user.name,
+                  userEmail: userProvider.user.email,
+                  userProfilePath: userProvider.user.imageUrl,
                 ),
               ),
               Padding(
