@@ -60,6 +60,7 @@ dependencies:
   firebase_storage: ^11.7.5
   google_generative_ai: ^0.3.3
   easy_debounce: ^2.0.3
+  fluttertoast: ^8.2.5
 
 
 dev_dependencies:
