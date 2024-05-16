@@ -14,8 +14,8 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // TODO: [language] firebase user language 정보를 담아야 한다 ?
   // TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
-  // final String language = 'KorService1';
-  final String language = 'EngService1';
+  final String language = 'KorService1';
+  // final String language = 'EngService1';
 
   // final String language = 'JpnService1';
 

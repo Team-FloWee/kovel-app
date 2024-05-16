@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
-import 'package:kovel_app/presentation/archived/archived_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_screen.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
@@ -28,17 +28,28 @@ final goRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => getIt<HomeViewModel>(),
-          child: const HomeScreen(),
-        );
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (context) => getIt<HomeViewModel>(),
+              child: HomeScreen(),
+            ),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            });
       },
     ),
     GoRoute(
         path: '/splash',
         builder: (context, state) {
-          return const SplashScreen();
+          return SplashScreen();
         }),
     GoRoute(
       path: '/login',
@@ -51,11 +62,22 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/mypage',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => MyPageViewModel(),
-          child: const MyPageScreen(),
-        );
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (context) => MyPageViewModel(),
+              child: MyPageScreen(),
+            ),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            });
       },
     ),
     GoRoute(
@@ -69,11 +91,19 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: '/archived',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (context) => ArchivedViewModel(userRepository: getIt()),
-          child: const ArchivedScreen(),
-        );
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ArchivedScreen(),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            });
       },
     ),
     GoRoute(
@@ -81,12 +111,14 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId =
+            int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child:
+              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),

@@ -36,10 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _selectedRadius = '';
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
     final userProvider = context.watch<UserProvider>();
+
     // 드롭다운 리스트
     List<String> radiusList = ['1km', '3km', '5km', '10km'];
 
@@ -321,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNaviBar(),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 0),
     );
   }
 }
