@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
+import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ModelButtonChatWidget extends StatelessWidget {
   final String text;
@@ -12,17 +14,20 @@ class ModelButtonChatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<ChatBotViewModel>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
       child: Align(
         alignment: Alignment.centerLeft,
         child: InkWell(
           onTap: () {
+            viewModel.addUserChat(request: text);
             switch (chatCase) {
               case ChatCase.recommendPlan:
-                // TODO: Handle this case.
+                print('recommend');
+                viewModel.recommendPlan();
               case ChatCase.archiveBaseCourse:
-                // TODO: Handle this case.
+                print('archive');
               case ChatCase.text:
                 // TODO: Handle this case.
             }
