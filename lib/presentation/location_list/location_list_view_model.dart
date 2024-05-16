@@ -59,24 +59,26 @@ class LocationListViewModel with ChangeNotifier {
   Future<void> getData(String areaCode, String lang) async {
     _isLoading = true;
     notifyListeners();
-    _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: 0, lang: lang);
+    if (lang == 'KorService1') {
+      _areaBasedDataList = await _getAreaDataUseCase.execute(
+          areaCode: areaCode, cat2: '', contentTypeId: 25, lang: lang);
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList
-          .add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
+      await Future.wait(_areaBasedDataList.map((element) async {
+        _courseDetailList
+            .add(await _getCommonDataUseCase.execute(id: element.id));
+      }));
+    }
 
     notifyListeners();
-    await getCommonData(areaCode, contentTypeId);
+    await getCommonData(areaCode, contentTypeId, lang);
     notifyListeners();
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> getCourseData(String areaCode, String cat2) async {
+  Future<void> getCourseData(String areaCode, String cat2, String lang) async {
     notifyListeners();
-
+    if (lang == 'EngService1') return;
     _areaBasedDataList = await _getAreaDataUseCase.execute(
       areaCode: areaCode,
       cat2: '',
@@ -92,12 +94,13 @@ class LocationListViewModel with ChangeNotifier {
   }
 
   //테마별 여행 [전체]
-  Future<void> getCommonData(String areaCode, int contentTypeId) async {
+  Future<void> getCommonData(
+      String areaCode, int contentTypeId, String lang) async {
     //_isLoading = true;
     notifyListeners();
 
     _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
+        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId, lang: lang);
 
     _tourDetailList = [];
 

@@ -34,7 +34,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
     Future.microtask(() {
       final userProvider = context.read<UserProvider>();
       context.read<LocationListViewModel>().getData(widget.areaCode,
-          userProvider.languageUtil(userProvider.user.language));
+          userProvider.getLanguage(userProvider.user.language));
       //Todo UserViewModel 안쓰면 지우고 작동확인 크..
     }); //세트
     Future.microtask(() => _courseDataScrollController.addListener(() {
@@ -73,7 +73,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
             _commonDataScrollController.position.maxScrollExtent &&
         !context.read<LocationListViewModel>().isCommonDataLoading) {
       context.read<LocationListViewModel>().fetchMoreCommonData(widget.areaCode,
-          userProvider.languageUtil(userProvider.user.language));
+          userProvider.getLanguage(userProvider.user.language));
     }
   }
 
@@ -93,34 +93,46 @@ class _LocationListScreenState extends State<LocationListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: ContentTitle(
-                      title: '추천 코스',
-                      withMore: true,
-                      onTapMore: () {
-                        context.pushNamed('courseList',
-                            queryParameters: {'areaCode': widget.areaCode});
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: CategoryList(
-                        categoryData: CourseCategoryTypeList.typeList,
-                        onSelect: (Category category) {
-                          context.read<LocationListViewModel>().getCourseData(
-                                widget.areaCode,
-                                category.id,
-                              );
-                        }),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  viewModel.courseDetailList.isEmpty
+                      ? SizedBox()
+                      : Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 16.0, right: 16.0),
+                              child: ContentTitle(
+                                title: '추천 코스',
+                                withMore: true,
+                                onTapMore: () {
+                                  context.pushNamed('courseList',
+                                      queryParameters: {
+                                        'areaCode': widget.areaCode
+                                      });
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: CategoryList(
+                                  categoryData: CourseCategoryTypeList.typeList,
+                                  onSelect: (Category category) {
+                                    context
+                                        .read<LocationListViewModel>()
+                                        .getCourseData(
+                                            widget.areaCode,
+                                            category.id,
+                                            userProvider.getLanguage(
+                                                userProvider.user.language));
+                                  }),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                          ],
+                        ),
                   SingleChildScrollView(
                     controller: _courseDataScrollController,
                     scrollDirection: Axis.horizontal,
@@ -194,7 +206,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>();
-
+    final userProvider = context.read<UserProvider>();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -212,7 +224,9 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                 categoryData: ContentTypeList.typeList,
                 onSelect: (Category category) {
                   context.read<LocationListViewModel>().getCommonData(
-                      widget.areaCode, int.parse(category.id ?? '0'));
+                      widget.areaCode,
+                      int.parse(category.id ?? '0'),
+                      userProvider.getLanguage(userProvider.user.language));
                 },
               ),
               const SizedBox(height: 16),
