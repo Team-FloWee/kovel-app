@@ -96,7 +96,7 @@ class UserProvider with ChangeNotifier {
     });
   }
 
-  String languageUtil(String language) {
+  String getLanguage(String language) {
     switch (language) {
       case 'eng':
         return 'EngService1';
