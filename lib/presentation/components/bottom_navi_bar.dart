@@ -21,6 +21,8 @@ class BottomNaviBar extends StatelessWidget {
               context.go('/');
             case 1:
               context.go('/archived');
+            case 2:
+              context.go('/mypage');
           }
         },
         items: [
@@ -37,15 +39,13 @@ class BottomNaviBar extends StatelessWidget {
                 color: UiConfig.black.shade700,
               ),
               label: '보관함'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: '마이페이지'),
+          const BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: '마이페이지'),
         ],
         selectedLabelStyle: const TextStyle(
           fontWeight: UiConfig.semiBoldFont,
         ),
         selectedItemColor: UiConfig.primaryColor,
-        unselectedLabelStyle:
-            const TextStyle(fontWeight: UiConfig.semiBoldFont),
+        unselectedLabelStyle: const TextStyle(fontWeight: UiConfig.semiBoldFont),
       ),
     );
   }
