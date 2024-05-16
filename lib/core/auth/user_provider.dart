@@ -25,7 +25,7 @@ class UserProvider with ChangeNotifier {
   late User user;
 
   final currentUser = auth.FirebaseAuth.instance.currentUser;
-  final _userRef = FirebaseFirestore.instance
+  final userRef = FirebaseFirestore.instance
       .collection('user')
       .withConverter<User>(
           fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
@@ -45,7 +45,7 @@ class UserProvider with ChangeNotifier {
 
   Future<User> getUser() async {
     try {
-      final data = await _userRef
+      final data = await userRef
           .doc(auth.FirebaseAuth.instance.currentUser!.uid)
           .get()
           .then((s) => s.data()!);
@@ -58,7 +58,7 @@ class UserProvider with ChangeNotifier {
         name: '',
         email: '',
         imageUrl: '',
-        language: 'kor',
+        language: 'ko',
         archivedList: [],
       );
     }
@@ -72,7 +72,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> updateArchived(List<Archived> archivedList) async {
-    await _userRef
+    await userRef
         .doc(user.userId)
         .update({'archivedList': archivedList.map((e) => e.toJson())});
   }
@@ -98,7 +98,7 @@ class UserProvider with ChangeNotifier {
 
   String getLanguage(String language) {
     switch (language) {
-      case 'eng':
+      case 'en':
         return 'EngService1';
       default:
         return 'KorService1';

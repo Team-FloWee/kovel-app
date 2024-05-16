@@ -65,7 +65,7 @@ class UserRepositoryImpl implements UserRepository {
         name: '',
         email: '',
         imageUrl: '',
-        language: 'kor',
+        language: 'ko',
         archivedList: [],
       );
     }
