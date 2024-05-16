@@ -24,10 +24,9 @@ class ModelButtonChatWidget extends StatelessWidget {
             viewModel.addUserChat(request: text);
             switch (chatCase) {
               case ChatCase.recommendPlan:
-                print('recommend');
                 viewModel.recommendPlan();
               case ChatCase.archiveBaseCourse:
-                print('archive');
+                // TODO: Handle this case.
               case ChatCase.text:
                 // TODO: Handle this case.
             }

@@ -26,7 +26,6 @@ class AiDataSourceImpl implements AiDataSource {
   Future<GenerateContentResponse> chatToAi({required String query}) async {
     final content = Content.text(query);
     final test = await _chat.sendMessage(content);
-    print(test.text);
     return test;
   }
 
