@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/auth/user_provider.dart';
 import '../../../domain/model/archived.dart';
 
 class ArchivedItem extends StatefulWidget {
   final Archived archived;
-  final String imagePath;
-  final String badgeTitle;
-  final String title;
 
-  const ArchivedItem({super.key,
-    required this.imagePath,
-    this.badgeTitle = '',
-    this.title = '',
+  const ArchivedItem({
+    super.key,
     required this.archived,
   });
 
@@ -25,11 +21,12 @@ class ArchivedItem extends StatefulWidget {
 }
 
 class _ArchivedItemState extends State<ArchivedItem> {
-  bool isLiked = false;
+  bool isLiked = true;
 
   @override
   void initState() {
     super.initState();
+    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
   }
 
   @override
@@ -40,55 +37,61 @@ class _ArchivedItemState extends State<ArchivedItem> {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    isLiked = userProvider.isArchived(widget.archived.id);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity, // 가로 크기 전체로 지정
-            height: double.infinity, // 세로 크기 전체로 지정
-            child: Image.network(
-              widget.imagePath,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/blank_image.png',
-                    fit: BoxFit.cover,
-                  ),
-                );
-              },
-            ),
-
-          ),
-          Positioned.fill(
-            child: Container(
-              color: Color.fromRGBO(0, 0, 0, 0.2), // 검은색(0, 0, 0)에 투명도 50% 적용
-            ),
-          ),
-          Positioned(
-              top: 8,
-              right: 8,
-              child: InkWell(
-                onTap: () {
-                  userProvider.updateArchivedList(widget.archived);
-                  setState(() {
-                    isLiked = !isLiked;
-                  });
+    return isLiked ? InkWell(
+      onTap: () {
+        context.pushNamed('detail', queryParameters: {
+          'id': widget.archived.id.toString(),
+          'contentTypeId': widget.archived.contentType.toString(),
+          'title': widget.archived.title
+        });
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity, // 가로 크기 전체로 지정
+              height: double.infinity, // 세로 크기 전체로 지정
+              child: Image.network(
+                widget.archived.imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'assets/images/blank_image.png',
+                      fit: BoxFit.cover,
+                    ),
+                  );
                 },
-                child: SizedBox(
-                    width: 24.w,
-                    height: 24.w,
-                    child: isLiked
-                        ? Icon(Icons.favorite, color: UiConfig.primaryColor)
-                        : Icon(Icons.favorite_border, color: Colors.white)),
-              )),
-          Positioned(
-            left: 16.w,
-            bottom: 16.w,
-            child: Column(
+              ),
+            ),
+            Positioned.fill(
+              child: Container(
+                color: Color.fromRGBO(0, 0, 0, 0.2), // 검은색(0, 0, 0)에 투명도 50% 적용
+              ),
+            ),
+            Positioned(
+                top: 8,
+                right: 8,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isLiked = !isLiked;
+                    });
+                    userProvider.updateArchivedList(widget.archived);
+                  },
+                  child: SizedBox(
+                      width: 24.w,
+                      height: 24.w,
+                      child: Icon(Icons.favorite, color: UiConfig.primaryColor)
+                  )
+                )
+            ),
+            Positioned(
+              left: 16.w,
+              bottom: 16.w,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
@@ -99,7 +102,9 @@ class _ArchivedItemState extends State<ArchivedItem> {
                         padding: const EdgeInsets.only(
                             bottom: 5, top: 3, left: 10, right: 10),
                         child: Text(
-                          widget.badgeTitle,
+                          ContentType(
+                                  contentTypeId: widget.archived.contentType)
+                              .name,
                           style: UiConfig.smallStyle.copyWith(
                               fontWeight: UiConfig.semiBoldFont,
                               color: UiConfig.black.shade100),
@@ -109,17 +114,22 @@ class _ArchivedItemState extends State<ArchivedItem> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 4,),
+                  SizedBox(
+                    height: 4,
+                  ),
                   Text(
-                    widget.title,
+                    widget.archived.title,
                     style: UiConfig.h4Style.copyWith(
                       fontWeight: UiConfig.semiBoldFont,
-                      color: UiConfig.black.shade100,),),
+                      color: UiConfig.black.shade100,
+                    ),
+                  ),
                 ],
-            ),
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
-    );
+    ) : SizedBox();
   }
 }

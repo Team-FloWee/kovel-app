@@ -4,6 +4,7 @@ import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/ui_config.dart';
+import '../components/bottom_navi_bar.dart';
 import 'components/my_page_menu_list.dart';
 import 'components/my_page_user_profile.dart';
 
@@ -61,6 +62,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNaviBar(selectedIndex: 2),
     );
   }
 }

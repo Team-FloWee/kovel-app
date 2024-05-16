@@ -22,6 +22,7 @@ class _FavoriteIconState extends State<FavoriteIcon> {
   @override
   void initState() {
     super.initState();
+    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
     // Future.microtask(() =>
     //     isLiked = context.read<UserViewModel>().isArchived(widget.archived.id));
   }
@@ -34,14 +35,13 @@ class _FavoriteIconState extends State<FavoriteIcon> {
   @override
   Widget build(BuildContext context) {
     final userViewModel = context.watch<UserProvider>();
-    isLiked = userViewModel.isArchived(widget.archived.id);
     return InkWell(
       borderRadius: BorderRadius.circular(24),
       onTap: () {
-        userViewModel.updateArchivedList(widget.archived);
         setState(() {
           isLiked = !isLiked;
         });
+        userViewModel.updateArchivedList(widget.archived);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

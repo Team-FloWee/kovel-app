@@ -29,6 +29,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
   @override
   void initState() {
     super.initState();
+    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
     // Future.microtask(() =>
     //     isLiked = context.read<UserViewModel>().isArchived(widget.archived.id));
   }
@@ -41,7 +42,6 @@ class _FavoriteImageState extends State<FavoriteImage> {
   @override
   Widget build(BuildContext context) {
     final userViewModel = context.watch<UserProvider>();
-    isLiked = userViewModel.isArchived(widget.archived.id);
     return Stack(
       children: [
         ClipRRect(
@@ -69,10 +69,10 @@ class _FavoriteImageState extends State<FavoriteImage> {
             right: 8,
             child: InkWell(
               onTap: () {
-                userViewModel.updateArchivedList(widget.archived);
                 setState(() {
                   isLiked = !isLiked;
                 });
+                userViewModel.updateArchivedList(widget.archived);
               },
               child: SizedBox(
                   width: 24.w,

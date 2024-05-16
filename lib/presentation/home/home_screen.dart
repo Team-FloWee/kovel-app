@@ -32,10 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _selectedRadius = '';
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
-    int selectedIndex = 0;
     // 드롭다운 리스트
     List<String> radiusList = ['1km', '3km', '5km', '10km']; // TODO: 따로 모아야할까요
 
@@ -70,7 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     value: e,
                                     child: Text(
                                       e,
-                                      style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                      style: UiConfig.smallStyle.copyWith(
+                                          fontWeight: UiConfig.semiBoldFont),
                                     ),
                                   );
                                 }).toList(),
@@ -88,7 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             '주소 새로고침',
-                            style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade800),
+                            style: UiConfig.smallStyle.copyWith(
+                                fontWeight: UiConfig.semiBoldFont,
+                                color: UiConfig.black.shade800),
                           ),
                           CustomIconButton(
                             icon: Icons.refresh_rounded,
@@ -115,7 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       contentPadding: EdgeInsets.symmetric(vertical: 8),
                       hintText: "원하는 정보를 검색하세요",
                       prefixIcon: Padding(
-                        padding: EdgeInsets.only(left: 14.0), //TODO: hintText 오른족으로 조금 옮기는 방법?
+                        padding: EdgeInsets.only(left: 14.0),
+                        //TODO: hintText 오른족으로 조금 옮기는 방법?
                         child: Icon(Icons.search),
                       ),
                     ),
@@ -123,23 +127,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      Text('내주변 관광정보 추천', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
+                      Text('내주변 관광정보 추천',
+                          style: UiConfig.h3Style.copyWith(
+                              color: UiConfig.black,
+                              fontWeight: UiConfig.semiBoldFont)),
                       const Spacer(),
                       DecoratedBox(
-                        decoration: const BoxDecoration(color: UiConfig.primaryColor, borderRadius: BorderRadius.all(Radius.circular(8))),
+                        decoration: const BoxDecoration(
+                            color: UiConfig.primaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.036,
                           width: MediaQuery.of(context).size.width * 0.22,
                           child: Center(
                             child: DropdownButton(
-                                dropdownColor: UiConfig.primaryColor, //TODO: dropdown 밖의 색과 선택했을 때의 배경색이 같이 감. border radius 주는 방법?
+                                dropdownColor: UiConfig.primaryColor,
+                                //TODO: dropdown 밖의 색과 선택했을 때의 배경색이 같이 감. border radius 주는 방법?
                                 iconEnabledColor: UiConfig.black.shade100,
                                 items: radiusList.map((e) {
                                   return DropdownMenuItem<String>(
                                     value: e,
                                     child: Text(
                                       e,
-                                      style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, fontSize: 15.sp, color: UiConfig.black.shade100),
+                                      style: UiConfig.smallStyle.copyWith(
+                                          fontWeight: UiConfig.semiBoldFont,
+                                          fontSize: 15.sp,
+                                          color: UiConfig.black.shade100),
                                     ),
                                   );
                                 }).toList(),
@@ -170,18 +183,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                     (index, e) => MapEntry(
                                       index,
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           e.title.length > 10
                                               ? Expanded(
                                                   child: Text(
                                                   '${e.title.substring(0, 10)}...',
-                                                  style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                                  style: UiConfig.bodyStyle
+                                                      .copyWith(
+                                                          fontWeight: UiConfig
+                                                              .semiBoldFont),
                                                 ))
                                               : Expanded(
                                                   child: Text(
                                                     e.title,
-                                                    style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                                    style: UiConfig.bodyStyle
+                                                        .copyWith(
+                                                            fontWeight: UiConfig
+                                                                .semiBoldFont),
                                                   ),
                                                 ),
                                           Text(
@@ -200,17 +220,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.1,
                               width: MediaQuery.of(context).size.width * 0.8,
-                              child: Image.asset('assets/images/search_icon.png'),
+                              child:
+                                  Image.asset('assets/images/search_icon.png'),
                             ),
-                             Text('현재 위치에는 관광정보가 없습니다.', style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade700, fontWeight: UiConfig.semiBoldFont),),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                            Text(
+                              '현재 위치에는 관광정보가 없습니다.',
+                              style: UiConfig.smallStyle.copyWith(
+                                  color: UiConfig.black.shade700,
+                                  fontWeight: UiConfig.semiBoldFont),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02),
                           ],
                         ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Row(children: [
                     Text(
                       '🧐 어디로 여행갈까?',
-                      style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont),
+                      style: UiConfig.h3Style.copyWith(
+                          color: UiConfig.black,
+                          fontWeight: UiConfig.semiBoldFont),
                     ),
                   ]),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -227,13 +257,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         (index) => LocationSelector(
                               category: AreaTypeList.typeList[index],
                               onSelect: (Category selectedCategory) {
-                                context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id.toString()});
+                                context.pushNamed('locationList',
+                                    queryParameters: {
+                                      'areaCode': selectedCategory.id.toString()
+                                    });
                               },
                             )),
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                   Row(children: [
-                    Text('🔥 가장 인기 있는 명소 Top 10', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
+                    Text('🔥 가장 인기 있는 명소 Top 10',
+                        style: UiConfig.h3Style.copyWith(
+                            color: UiConfig.black,
+                            fontWeight: UiConfig.semiBoldFont)),
                   ]),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                 ],
@@ -269,7 +305,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(children: [
-                Text('🎉 진행중인 축제 모음', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
+                Text('🎉 진행중인 축제 모음',
+                    style: UiConfig.h3Style.copyWith(
+                        color: UiConfig.black,
+                        fontWeight: UiConfig.semiBoldFont)),
               ]),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.015),
@@ -289,8 +328,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       tourData: viewModel.onGoingTourList[index],
                       onSelect: (Tour selectedTour) {
                         selectedTour.contentType.contentTypeId;
-                        context.pushNamed('detail',
-                            queryParameters: {'id': selectedTour.id.toString(), 'contentTypeId': selectedTour.contentType.contentTypeId.toString(), 'title': selectedTour.contentType.name});
+                        context.pushNamed('detail', queryParameters: {
+                          'id': selectedTour.id.toString(),
+                          'contentTypeId':
+                              selectedTour.contentType.contentTypeId.toString(),
+                          'title': selectedTour.contentType.name
+                        });
                       },
                     ),
                   ),
@@ -301,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNaviBar(),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 0),
     );
   }
 }
