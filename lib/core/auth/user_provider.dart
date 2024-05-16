@@ -25,7 +25,7 @@ class UserProvider with ChangeNotifier {
   late User user;
 
   final currentUser = auth.FirebaseAuth.instance.currentUser;
-  final userRef = FirebaseFirestore.instance
+  final _userRef = FirebaseFirestore.instance
       .collection('user')
       .withConverter<User>(
           fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
@@ -45,7 +45,7 @@ class UserProvider with ChangeNotifier {
 
   Future<User> getUser() async {
     try {
-      final data = await userRef
+      final data = await _userRef
           .doc(auth.FirebaseAuth.instance.currentUser!.uid)
           .get()
           .then((s) => s.data()!);
@@ -72,7 +72,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> updateArchived(List<Archived> archivedList) async {
-    await userRef
+    await _userRef
         .doc(user.userId)
         .update({'archivedList': archivedList.map((e) => e.toJson())});
   }
