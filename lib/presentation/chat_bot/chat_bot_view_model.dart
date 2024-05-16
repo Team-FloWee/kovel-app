@@ -41,4 +41,9 @@ class ChatBotViewModel with ChangeNotifier {
     _chatList.add(Chat(text: response.text ?? '', role: 'model'));
     notifyListeners();
   }
+
+  void addUserChat({required String request}) async {
+    _chatList.add(Chat(text: request, role: 'user'));
+    notifyListeners();
+  }
 }
