@@ -55,14 +55,21 @@ void diSetup() {
   getIt.registerSingleton<LikedTourDataSource>(LikedTourDataSourceImpl());
 
   // Repository
-  getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
-  getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
-  getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
-  getIt.registerSingleton<AddressInfoRepository>(AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
-  getIt.registerSingleton<LikedTourRepository>(LikedTourRepositoryImpl(likedTourDataSource: getIt()));
+  getIt.registerSingleton<TourInfoRepository>(
+      TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
+  getIt.registerSingleton<UserRepository>(
+      UserRepositoryImpl(userDataSource: getIt()));
+  getIt
+      .registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
+  getIt.registerSingleton<AddressInfoRepository>(
+      AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
+  getIt.registerSingleton<LikedTourRepository>(
+      LikedTourRepositoryImpl(likedTourDataSource: getIt()));
 
   // Provider
-  getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())));
+  getIt.registerSingleton<AiProvider>(AiProvider(
+      getTranslatedDataStreamUseCase:
+          GetTranslatedDataStreamUseCase(aiRepository: getIt())));
   getIt.registerSingleton<UserProvider>(UserProvider());
 
   // registerFactory
@@ -87,10 +94,14 @@ void diSetup() {
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
       loginUseCase: LoginUseCase(userRepository: getIt()),
       logoutUseCase: LogoutUseCase(userRepository: getIt()),
-      checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
+      checkUserDuplicatedUseCase:
+          CheckUserDuplicatedUseCase(userRepository: getIt()),
       createUserUseCase: CreateUserUseCase(userRepository: getIt())));
 
-  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
-  getIt.registerFactory<HomeViewModel>(
-      () => HomeViewModel(getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt()), getAddressUseCase: GetAddressUseCase(addressInfoRepository: getIt())));
-
+  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
+      updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
+  getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
+      getSearchFestivalUseCase:
+          GetSearchFestivalUseCase(tourInfoRepository: getIt()),
+      getAddressUseCase: GetAddressUseCase(addressInfoRepository: getIt())));
+}
