@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
-
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/tour.dart';
-
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
@@ -26,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     Future.microtask(() {
       final viewModel = context.read<HomeViewModel>();
-      viewModel.onFetch();
+      final userProvider = context.read<UserProvider>();
+      viewModel.onFetch(userProvider.getLanguage(userProvider.user.language));
     });
     super.initState();
   }
