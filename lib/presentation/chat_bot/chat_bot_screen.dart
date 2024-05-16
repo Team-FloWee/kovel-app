@@ -79,7 +79,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       case 'user':
         return UserChatWidget(text: chat.text);
       case 'function':
-        return ModelButtonChatWidget(text: chat.text, action: () {  },);
+        return ModelButtonChatWidget(text: chat.text, chatCase: chat.chatCase);
       default:
         return const SizedBox();
     }

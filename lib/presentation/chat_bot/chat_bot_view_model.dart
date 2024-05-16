@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:kovel_app/core/enum/chat_case.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
@@ -27,9 +28,9 @@ class ChatBotViewModel with ChangeNotifier {
     for (var content in chatSession.history) {
       for (var part in content.parts) {
         if (part is TextPart) {
-          _chatList.add(Chat(text: part.text, role: content.role ?? 'model'));
+          _chatList.add(Chat(text: part.text, role: content.role ?? 'model', chatCase: ChatCase.text));
         } else if (part is FunctionResponse) {
-          _chatList.add(Chat(text: part.name, role: content.role ?? 'function'));
+          _chatList.add(Chat(text: part.name, role: content.role ?? 'function', chatCase: ChatCase.text));
         }
         notifyListeners();
       }
@@ -37,15 +38,15 @@ class ChatBotViewModel with ChangeNotifier {
   }
 
   void sendChat({required String request}) async {
-    _chatList.add(Chat(text: request, role: 'user'));
+    _chatList.add(Chat(text: request, role: 'user', chatCase: ChatCase.text));
     notifyListeners();
     final response = await _sendChatToAiUseCase.execute(request: request);
-    _chatList.add(Chat(text: response.text ?? '', role: 'model'));
+    _chatList.add(Chat(text: response.text ?? '', role: 'model', chatCase: ChatCase.text));
     notifyListeners();
   }
 
   void addUserChat({required String request}) async {
-    _chatList.add(Chat(text: request, role: 'user'));
+    _chatList.add(Chat(text: request, role: 'user', chatCase: ChatCase.text));
     notifyListeners();
   }
 }

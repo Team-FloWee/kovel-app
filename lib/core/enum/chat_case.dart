@@ -1,8 +1,8 @@
 enum ChatCase {
   recommendPlan('recommendPlan'),
   archiveBaseCourse('archiveBaseCourse'),
-  unknown('unknown');
+  text('text');
 
-  const ChatCase(this.text);
-  final String text;
+  const ChatCase(this.value);
+  final String value;
 }

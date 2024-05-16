@@ -22,6 +22,7 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
 mixin _$Chat {
   String get text => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
+  ChatCase get chatCase => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $ChatCopyWith<$Res> {
   factory $ChatCopyWith(Chat value, $Res Function(Chat) then) =
       _$ChatCopyWithImpl<$Res, Chat>;
   @useResult
-  $Res call({String text, String role});
+  $Res call({String text, String role, ChatCase chatCase});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
   $Res call({
     Object? text = null,
     Object? role = null,
+    Object? chatCase = null,
   }) {
     return _then(_value.copyWith(
       text: null == text
@@ -61,6 +63,10 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      chatCase: null == chatCase
+          ? _value.chatCase
+          : chatCase // ignore: cast_nullable_to_non_nullable
+              as ChatCase,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$ChatImplCopyWith<$Res> implements $ChatCopyWith<$Res> {
       __$$ChatImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String role});
+  $Res call({String text, String role, ChatCase chatCase});
 }
 
 /// @nodoc
@@ -87,6 +93,7 @@ class __$$ChatImplCopyWithImpl<$Res>
   $Res call({
     Object? text = null,
     Object? role = null,
+    Object? chatCase = null,
   }) {
     return _then(_$ChatImpl(
       text: null == text
@@ -97,6 +104,10 @@ class __$$ChatImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      chatCase: null == chatCase
+          ? _value.chatCase
+          : chatCase // ignore: cast_nullable_to_non_nullable
+              as ChatCase,
     ));
   }
 }
@@ -104,7 +115,8 @@ class __$$ChatImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ChatImpl implements _Chat {
-  const _$ChatImpl({required this.text, required this.role});
+  const _$ChatImpl(
+      {required this.text, required this.role, required this.chatCase});
 
   factory _$ChatImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatImplFromJson(json);
@@ -113,10 +125,12 @@ class _$ChatImpl implements _Chat {
   final String text;
   @override
   final String role;
+  @override
+  final ChatCase chatCase;
 
   @override
   String toString() {
-    return 'Chat(text: $text, role: $role)';
+    return 'Chat(text: $text, role: $role, chatCase: $chatCase)';
   }
 
   @override
@@ -125,12 +139,14 @@ class _$ChatImpl implements _Chat {
         (other.runtimeType == runtimeType &&
             other is _$ChatImpl &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.chatCase, chatCase) ||
+                other.chatCase == chatCase));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, text, role);
+  int get hashCode => Object.hash(runtimeType, text, role, chatCase);
 
   @JsonKey(ignore: true)
   @override
@@ -148,7 +164,9 @@ class _$ChatImpl implements _Chat {
 
 abstract class _Chat implements Chat {
   const factory _Chat(
-      {required final String text, required final String role}) = _$ChatImpl;
+      {required final String text,
+      required final String role,
+      required final ChatCase chatCase}) = _$ChatImpl;
 
   factory _Chat.fromJson(Map<String, dynamic> json) = _$ChatImpl.fromJson;
 
@@ -156,6 +174,8 @@ abstract class _Chat implements Chat {
   String get text;
   @override
   String get role;
+  @override
+  ChatCase get chatCase;
   @override
   @JsonKey(ignore: true)
   _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>

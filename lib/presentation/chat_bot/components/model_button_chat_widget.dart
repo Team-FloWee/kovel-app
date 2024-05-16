@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/enum/chat_case.dart';
 
 class ModelButtonChatWidget extends StatelessWidget {
   final String text;
-  final void Function() action;
+  final ChatCase chatCase;
 
   const ModelButtonChatWidget(
-      {super.key, required this.text, required this.action});
+      {super.key, required this.text, required this.chatCase});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,14 @@ class ModelButtonChatWidget extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: InkWell(
           onTap: () {
-            action();
+            switch (chatCase) {
+              case ChatCase.recommendPlan:
+                // TODO: Handle this case.
+              case ChatCase.archiveBaseCourse:
+                // TODO: Handle this case.
+              case ChatCase.text:
+                // TODO: Handle this case.
+            }
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
