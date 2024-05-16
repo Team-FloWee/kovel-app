@@ -13,6 +13,7 @@ import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
 import 'package:kovel_app/presentation/home/components/top_10_popular_landmarks.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
+import 'package:kovel_app/presentation/my_page/components/my_page_user_profile.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    context.read<HomeViewModel>().getProfile();
     Future.microtask(() {
       final viewModel = context.read<HomeViewModel>();
       viewModel.onFetch();
@@ -49,8 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: MyPageUserProfile(
+                  userName: viewModel.user.name,
+                  userEmail: viewModel.user.email,
+                  userProfilePath: viewModel.user.imageUrl,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(

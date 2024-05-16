@@ -1,14 +1,17 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/tour.dart';
+import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case%20copy.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
@@ -31,6 +34,12 @@ class HomeViewModel with ChangeNotifier {
   double? _latitude;
   double distance = 0;
   String selectedLocation = '현재 위치';
+
+  // User Profile
+  late User user;
+  String userId = UserProvider().getUserId();
+  final userRef = FirebaseFirestore.instance.collection('user').withConverter<User>(fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!), toFirestore: (snapshot, _) => snapshot.toJson());
+
   Position? currentPosition;
   List<Tour> onGoingTourList = [];
   List<String> locationList = ['현재 위치']; // TODO:초기값은 firebase연결 후에 이전 연결주소
@@ -45,6 +54,11 @@ class HomeViewModel with ChangeNotifier {
     refreshPosition('1000');
     notifyListeners();
     isLoading = false;
+  }
+
+  void getProfile() async {
+    user = await userRef.doc(userId).get().then((value) => value.data()!);
+    notifyListeners();
   }
 
   // 주소 새로고침
