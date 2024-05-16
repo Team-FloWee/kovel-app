@@ -9,6 +9,7 @@ class HomeSearchViewModel with ChangeNotifier {
 
   bool isLoading = false;
   List<Tour> searchDataList = [];
+  List<String> searchKeywordList = [];
 
   onSearch(String query) async {
     isLoading = true;
@@ -16,6 +17,12 @@ class HomeSearchViewModel with ChangeNotifier {
 
     searchDataList = await _getSearchKeywordUseCase.execute(query: query);
     isLoading = false;
+    notifyListeners();
+  }
+
+  onRefresh() {
+    searchDataList = [];
+
     notifyListeners();
   }
 }
