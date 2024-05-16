@@ -82,7 +82,6 @@ class UserProvider with ChangeNotifier {
       if (isArchived(clickedArchived.id) == false) {
         _likeTourUseCase.execute(id: clickedArchived.id);
         user.archivedList.add(clickedArchived);
-        print('좋아요 누름 ${user.archivedList}');
         updateArchived(user.archivedList);
         notifyListeners();
       } else {

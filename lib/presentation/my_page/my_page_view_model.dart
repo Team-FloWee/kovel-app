@@ -12,6 +12,7 @@ import '../../core/auth/user_provider.dart';
 
 class MyPageViewModel with ChangeNotifier {
   late User _user;
+  User get user => _user;
   String userId =
       UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt())
           .getUserId();
@@ -22,10 +23,15 @@ class MyPageViewModel with ChangeNotifier {
           toFirestore: (snapshot, _) => snapshot.toJson());
   final _picker = ImagePicker();
 
-  User get user => _user;
-
   void getProfile() async {
     _user = await userRef.doc(userId).get().then((value) => value.data()!);
+    notifyListeners();
+  }
+
+  void updateLanguage(String lang) async {
+    getLanguage(lang);
+    await userRef.doc(user.userId).update({'language': lang});
+    getProfile();
     notifyListeners();
   }
 
@@ -57,5 +63,14 @@ class MyPageViewModel with ChangeNotifier {
 
   void logout() async {
     await auth.FirebaseAuth.instance.signOut();
+  }
+
+  String getLanguage(String language) {
+    switch (language) {
+      case 'en':
+        return 'EngService1';
+      default:
+        return 'KorService1';
+    }
   }
 }
