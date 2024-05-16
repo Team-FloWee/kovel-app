@@ -17,8 +17,8 @@ class AiDataSourceImpl implements AiDataSource {
   final ChatSession _chat = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY')).startChat(
     history: [
       Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
-      Content.functionResponse('아직 계획중이에요', {'type': 'button', 'chatCase': ChatCase.recommendPlan}),
-      Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'type': 'button', 'chatCase': ChatCase.archiveBaseCourse})
+      Content.functionResponse('아직 계획중이에요', {'type': 'button', 'chatCase': 'recommendPlan'}),
+      Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'type': 'button', 'chatCase': 'archiveBaseCourse'})
     ]
   );
 
