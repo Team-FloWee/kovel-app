@@ -28,8 +28,10 @@ class ChatBotViewModel with ChangeNotifier {
       for (var part in content.parts) {
         if (part is TextPart) {
           _chatList.add(Chat(text: part.text, role: content.role ?? 'model'));
-          notifyListeners();
+        } else if (part is FunctionResponse) {
+          _chatList.add(Chat(text: part.name, role: content.role ?? 'function'));
         }
+        notifyListeners();
       }
     }
   }

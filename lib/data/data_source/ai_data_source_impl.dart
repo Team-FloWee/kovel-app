@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:kovel_app/core/enum/chat_case.dart';
 
 import 'ai_data_source.dart';
 
@@ -15,7 +16,9 @@ class AiDataSourceImpl implements AiDataSource {
 
   final ChatSession _chat = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY')).startChat(
     history: [
-      Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')])
+      Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
+      Content.functionResponse('아직 계획중이에요', {'type': 'button', 'case': ChatCase.recommendPlan}),
+      Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'type': 'button', 'case': ChatCase.archiveBaseCourse})
     ]
   );
 

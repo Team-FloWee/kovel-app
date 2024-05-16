@@ -4,13 +4,12 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
+import 'package:kovel_app/presentation/chat_bot/components/model_button_chat_widget.dart';
 import 'package:kovel_app/presentation/chat_bot/components/chat_input.dart';
 import 'package:kovel_app/presentation/chat_bot/components/model_chat_widget.dart';
 import 'package:kovel_app/presentation/chat_bot/components/user_chat_widget.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:provider/provider.dart';
-
-import 'components/first_button_widget.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -57,8 +56,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                         return _buildChatWidget(chat: viewModel.chatList[index]);
                       }
                     ),
-                    FirstButtonWidget(text: '아직 계획중이에요', action: (){}),
-                    FirstButtonWidget(text: '나의 좋아요 정보를 기반으로 추천받을래요', action: (){},), //테스트
                     SizedBox(height: 100)
                   ],
                 ),
@@ -81,8 +78,8 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         return ModelChatWidget(text: chat.text);
       case 'user':
         return UserChatWidget(text: chat.text);
-      case 'system':
-        return ModelChatWidget(text: chat.text);
+      case 'function':
+        return ModelButtonChatWidget(text: chat.text, action: () {  },);
       default:
         return const SizedBox();
     }
