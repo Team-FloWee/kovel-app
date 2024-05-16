@@ -33,6 +33,7 @@ abstract interface class TourInfoRepository {
     int pageNo = 1,
     required String eventStartDate,
     required String eventEndDate,
+    String lang = 'KorService1',
   });
 
   // 숙박 정보 조회 (search stay)

@@ -55,11 +55,13 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
     int pageNo = 1,
     required String eventStartDate,
     required String eventEndDate,
+    String lang = 'KorService1',
   }) async {
     final List<TourDto> tourDto = await _tourInfoDataSource.getSearchFestival(
         eventStartDate: eventStartDate,
         eventEndDate: eventEndDate,
-        pageNo: pageNo);
+        pageNo: pageNo,
+        lang: lang);
     return tourDto.map((e) => e.toTour()).toList();
   }
 

@@ -89,12 +89,15 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 행사정보조회
   @override
-  Future<List<TourDto>> getSearchFestival(
-      {required String eventStartDate,
-      required String eventEndDate,
-      int pageNo = 1}) async {
+  Future<List<TourDto>> getSearchFestival({
+    required String eventStartDate,
+    required String eventEndDate,
+    int pageNo = 1,
+    String lang = 'KorService1',
+  }) async {
     const String apiName = 'searchFestival1';
     final Response response;
+    language = lang;
     response = await _dio.get(
         '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&eventStartDate=$eventStartDate&eventEndDate=$eventEndDate&serviceKey=$key');
 
