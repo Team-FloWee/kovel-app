@@ -115,14 +115,15 @@ class HomeViewModel with ChangeNotifier {
     for (int i = 0; i < locationBasedList.length; i++) {
       distanceList.add({
         locationBasedList[i].id.toString():
-            getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx)),
+            _getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx)),
       });
     }
     notifyListeners();
   }
 
+  // 스크린에 영향없음 -> private으로 선언
   // 내 위치부터 관광지까지 거리 구하기
-  double getDistanceToLocation({required double lat1, required double lon1, required double lat2, required double lon2}) {
+  double _getDistanceToLocation({required double lat1, required double lon1, required double lat2, required double lon2}) {
     // 지구 반지름 (km 단위)
     const double earthRadius = 6371.0;
     // 두 지점의 위도와 경도 차이를 라디안으로 변환
