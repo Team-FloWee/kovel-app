@@ -11,21 +11,16 @@ class AiRepositoryImpl implements AiRepository {
       : _aiDataSource = aiDataSource;
 
   @override
-  Stream<GenerateContentResponse> getTranslatedDataStream(
+  Result<Stream<GenerateContentResponse>, NetworkError> getTranslatedDataStream(
       {required String request, required String language}) {
     final response =
         _aiDataSource.chatToAi(query: 'please translate to $language $request');
     switch (response) {
       case Success<Stream<GenerateContentResponse>, NetworkError>():
-        return response.data;
+        return Success(response.data);
       case Error<Stream<GenerateContentResponse>, NetworkError>():
         {
-          switch (response.error) {
-            case NetworkError.requestTimeout:
-              throw NetworkError.requestTimeout;
-            case NetworkError.unknown:
-              throw NetworkError.unknown;
-          }
+          return Error(NetworkError.unknown);
         }
     }
   }
