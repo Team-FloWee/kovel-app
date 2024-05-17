@@ -75,11 +75,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget _buildChatWidget({required Chat chat}) {
     switch (chat.role) {
       case 'model':
-        return ModelChatWidget(text: chat.text);
+        return ModelChatWidget(chat: chat);
       case 'user':
-        return UserChatWidget(text: chat.text);
+        return UserChatWidget(chat: chat);
       case 'function':
-        return ModelButtonChatWidget(text: chat.text, chatCase: chat.chatCase);
+        return ModelButtonChatWidget(chat: chat);
       default:
         return const SizedBox();
     }

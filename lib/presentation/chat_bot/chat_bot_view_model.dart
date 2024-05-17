@@ -53,10 +53,13 @@ class ChatBotViewModel with ChangeNotifier {
     }
   }
 
-  void sendChat({required String request}) async {
+  void sendChat({String header = '', required String request}) async {
     String query = request;
     if (_chatList.last.chatCase == ChatCase.recommendPlan && _chatList.last.chatType == ChatType.text) {
       query = '$request 관련된 대한민국에서 갈만한 구체적인 장소 5곳 정도만 부탁해';
+    }
+    if (_chatList.last.chatCase == ChatCase.archiveBasedCourse && _chatList.last.chatType == ChatType.text) {
+      query = '$header$request 대한민국 여행 코스 짜줘';
     }
     _chatList.add(Chat(text: request, role: 'user', chatType: ChatType.text, chatCase: ChatCase.text));
     notifyListeners();
@@ -77,6 +80,17 @@ class ChatBotViewModel with ChangeNotifier {
           role: 'model',
           chatType: ChatType.text,
           chatCase: ChatCase.recommendPlan
+        )
+    );
+  }
+
+  void recommendArchiveBasedCourse() {
+    _chatList.add(
+        Chat(
+            text: '당신의 취향에 맞는 여행 코스를 추천해드릴게요.\n여행할 기간을 선택해 주세요!',
+            role: 'model',
+            chatType: ChatType.text,
+            chatCase: ChatCase.archiveBasedCourse
         )
     );
   }
