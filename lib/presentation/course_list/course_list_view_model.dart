@@ -20,10 +20,6 @@ class CourseListViewModel with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  final bool _isFavorite = false;
-
-  final int _areaCode = 1; //서울, 경기...
-
   List<Tour> _areaBasedDataList = [];
   List<Tour> get areaBasedDataList => _areaBasedDataList;
 

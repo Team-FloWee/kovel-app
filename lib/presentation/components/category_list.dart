@@ -8,7 +8,7 @@ class CategoryList extends StatefulWidget {
   final void Function(Category category)? onSelect;
 
 
-  const CategoryList({required this.categoryData, required this.onSelect});
+  const CategoryList({super.key, required this.categoryData, required this.onSelect});
 
   @override
   _CategoryListState createState() => _CategoryListState();

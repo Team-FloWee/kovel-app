@@ -62,6 +62,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
                   archived: archived,
                 );
               },
+
             ),
           ),
         ),

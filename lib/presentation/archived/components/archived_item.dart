@@ -26,7 +26,8 @@ class _ArchivedItemState extends State<ArchivedItem> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
+    Future.microtask(() =>
+        isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
   }
 
   @override
@@ -37,7 +38,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    return isLiked ? InkWell(
+    return InkWell(
       onTap: () {
         context.pushNamed('detail', queryParameters: {
           'id': widget.archived.id.toString(),
@@ -49,7 +50,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
         borderRadius: BorderRadius.circular(8),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity, // 가로 크기 전체로 지정
               height: double.infinity, // 세로 크기 전체로 지정
               child: Image.network(
@@ -68,26 +69,24 @@ class _ArchivedItemState extends State<ArchivedItem> {
             ),
             Positioned.fill(
               child: Container(
-                color: Color.fromRGBO(0, 0, 0, 0.2), // 검은색(0, 0, 0)에 투명도 50% 적용
+                color: const Color.fromRGBO(0, 0, 0, 0.2), // 검은색(0, 0, 0)에 투명도 50% 적용
               ),
             ),
             Positioned(
                 top: 8,
                 right: 8,
                 child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isLiked = !isLiked;
-                    });
-                    userProvider.updateArchivedList(widget.archived);
-                  },
-                  child: SizedBox(
-                      width: 24.w,
-                      height: 24.w,
-                      child: Icon(Icons.favorite, color: UiConfig.primaryColor)
-                  )
-                )
-            ),
+                    onTap: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                      userProvider.updateArchivedList(widget.archived);
+                    },
+                    child: SizedBox(
+                        width: 24.w,
+                        height: 24.w,
+                        child: const Icon(Icons.favorite,
+                            color: UiConfig.primaryColor)))),
             Positioned(
               left: 16.w,
               bottom: 16.w,
@@ -114,7 +113,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Text(
@@ -130,6 +129,6 @@ class _ArchivedItemState extends State<ArchivedItem> {
           ],
         ),
       ),
-    ) : SizedBox();
+    );
   }
 }

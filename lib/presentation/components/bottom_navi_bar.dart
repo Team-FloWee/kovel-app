@@ -7,9 +7,9 @@ class BottomNaviBar extends StatefulWidget {
   final int selectedIndex;
 
   const BottomNaviBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
-  }) : super(key: key);
+  });
 
   @override
   _BottomNaviBarState createState() => _BottomNaviBarState();
@@ -41,6 +41,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
           }
         },
         items: [
+
           BottomNavigationBarItem(
             icon: const Icon(Icons.home),
             label: '홈'.tr(),
@@ -49,6 +50,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             icon: widget.selectedIndex == 1
                 ? const Icon(Icons.favorite)
                 : const Icon(Icons.favorite_border),
+
             label: '보관함'.tr(),
           ),
           BottomNavigationBarItem(

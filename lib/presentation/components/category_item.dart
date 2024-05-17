@@ -7,7 +7,7 @@ class CategoryItem extends StatelessWidget {
   final bool isSelected;
   final void Function(Category selectedCategory)? onSelect;
 
-  CategoryItem({
+  const CategoryItem({super.key,
     required this.category,
     required this.isSelected,
     required this.onSelect,

@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return ChangeNotifierProvider(
-          create: (_) => UserProvider(),
+          create: (_) => UserProvider(
+              likeTourUseCase: getIt(), unLikeTourUseCase: getIt()),
           child: MaterialApp.router(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

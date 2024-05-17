@@ -41,21 +41,21 @@ class RelatedCourseItem extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(info.name, style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(info.overview, style: UiConfig.smallStyle, maxLines: 4, overflow: TextOverflow.ellipsis)
                 ],
               ),
             )
           ],
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }

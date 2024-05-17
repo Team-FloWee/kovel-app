@@ -103,13 +103,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 56.h,
                           child: ElevatedButton(
                               style: ButtonStyle(
+
                                   backgroundColor:
                                       const MaterialStatePropertyAll(
                                           UiConfig.primaryColor),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(8)))),
+                                              BorderRadius.circular(8)
+                                  )
+                                )
+                              ),
                               onPressed: () {
                                 viewModel.clickSignUpButton(
                                     name: _textEditingController.text);

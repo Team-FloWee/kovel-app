@@ -25,7 +25,7 @@ class CourseRecommendation extends StatelessWidget {
             ),
             imageSize: 145,
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Expanded(
@@ -35,7 +35,7 @@ class CourseRecommendation extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    color: Color(0xFF00D1FF),
+                    color: const Color(0xFF00D1FF),
                     child: Padding(
                       padding: const EdgeInsets.only(
                           bottom: 5, top: 3, left: 10, right: 10),
@@ -48,7 +48,7 @@ class CourseRecommendation extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Text(
@@ -58,7 +58,7 @@ class CourseRecommendation extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Text(
