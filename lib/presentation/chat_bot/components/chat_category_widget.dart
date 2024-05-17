@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'chat_category_item.dart';
 
 class ChatCategoryWidget extends StatefulWidget {
@@ -27,14 +28,13 @@ class _ChatCategoryListState extends State<ChatCategoryWidget> {
           children: List.generate(
             widget.categoryData.length,
                 (index) {
-              String categoryText = widget.categoryData[index];
               return ChatCategoryItem(
-                text: categoryText,
+                text: widget.categoryData[index],
                 isSelected: _selectedIndex == index,
                 onSelect: () {
                   setState(() {
                     _selectedIndex = index;
-                    widget.onSelect?.call(categoryText);
+                    widget.onSelect?.call(widget.categoryData[_selectedIndex]);
                   });
                 },
               );

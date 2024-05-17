@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/chat.dart';
 
 class UserChatWidget extends StatelessWidget {
-  final String text;
-  const UserChatWidget({super.key, required this.text});
+  final Chat chat;
+  const UserChatWidget({super.key, required this.chat});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class UserChatWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8)
           ),
           child: Text(
-              text,
+              chat.text,
               style: UiConfig.h4Style.copyWith(color: UiConfig.black.shade100)
           ),
         ),
