@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
 import 'package:kovel_app/core/enum/chat_type.dart';
-import 'package:kovel_app/core/utils/html_util.dart';
 import 'package:kovel_app/core/utils/markdown_util.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
