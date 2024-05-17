@@ -1,12 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
-
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/tour.dart';
-
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
@@ -69,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return DropdownMenuItem<String>(
                                     value: e,
                                     child: Text(
-                                      e,
+                                      e.tr(),
                                       style: UiConfig.smallStyle.copyWith(
                                           fontWeight: UiConfig.semiBoldFont),
                                     ),
@@ -88,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            '주소 새로고침',
+                            '주소 새로고침'.tr(),
                             style: UiConfig.smallStyle.copyWith(
                                 fontWeight: UiConfig.semiBoldFont,
                                 color: UiConfig.black.shade800),
@@ -107,17 +106,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   TextFormField(
                     onFieldSubmitted: (value) {},
                     onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                    decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(
+                    decoration: InputDecoration(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xffD7D7D7),
                           width: 1,
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 8),
-                      hintText: "원하는 정보를 검색하세요",
-                      prefixIcon: Padding(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                      hintText: '원하는 정보를 검색하세요'.tr(),
+                      prefixIcon: const Padding(
                         padding: EdgeInsets.only(left: 14.0),
                         //TODO: hintText 오른족으로 조금 옮기는 방법?
                         child: Icon(Icons.search),
@@ -127,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      Text('내주변 관광정보 추천',
+                      Text('내주변 관광정보 추천'.tr(),
                           style: UiConfig.h3Style.copyWith(
                               color: UiConfig.black,
                               fontWeight: UiConfig.semiBoldFont)),
@@ -205,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                 ),
                                           Text(
-                                            '${viewModel.distanceList[index][e.id] ?? '가까이 있음'}',
+                                            '${viewModel.distanceList[index][e.id] ?? '가까이 있음'.tr()}',
                                             style: UiConfig.smallStyle,
                                           ),
                                         ],
@@ -224,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Image.asset('assets/images/search_icon.png'),
                             ),
                             Text(
-                              '현재 위치에는 관광정보가 없습니다.',
+                              '현재 위치에는 관광정보가 없습니다.'.tr(),
                               style: UiConfig.smallStyle.copyWith(
                                   color: UiConfig.black.shade700,
                                   fontWeight: UiConfig.semiBoldFont),
@@ -237,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                   Row(children: [
                     Text(
-                      '🧐 어디로 여행갈까?',
+                      '🧐 어디로 여행갈까?'.tr(),
                       style: UiConfig.h3Style.copyWith(
                           color: UiConfig.black,
                           fontWeight: UiConfig.semiBoldFont),
@@ -245,32 +244,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   ]),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   Container(
-                      child: GridView.count(
-                    physics: const NeverScrollableScrollPhysics(),
-                    childAspectRatio: 2 / 1,
-                    shrinkWrap: true,
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 10,
-                    children: List.generate(
+                    child: GridView.count(
+                      physics: const NeverScrollableScrollPhysics(),
+                      childAspectRatio: 2 / 1,
+                      shrinkWrap: true,
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 10,
+                      children: List.generate(
                         AreaTypeList.typeList.length,
                         (index) => LocationSelector(
-                              category: AreaTypeList.typeList[index],
-                              onSelect: (Category selectedCategory) {
-                                context.pushNamed('locationList',
-                                    queryParameters: {
-                                      'areaCode': selectedCategory.id.toString()
-                                    });
+                          category: AreaTypeList.typeList[index],
+                          onSelect: (Category selectedCategory) {
+                            context.pushNamed(
+                              'locationList',
+                              queryParameters: {
+                                'areaCode': selectedCategory.id.toString()
                               },
-                            )),
-                  )),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                  Row(children: [
-                    Text('🔥 가장 인기 있는 명소 Top 10',
-                        style: UiConfig.h3Style.copyWith(
-                            color: UiConfig.black,
-                            fontWeight: UiConfig.semiBoldFont)),
-                  ]),
+                  Row(
+                    children: [
+                      Text('🔥 가장 인기 있는 명소 Top 10'.tr(),
+                          style: UiConfig.h3Style.copyWith(
+                              color: UiConfig.black,
+                              fontWeight: UiConfig.semiBoldFont)),
+                    ],
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                 ],
               ),
@@ -305,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(children: [
-                Text('🎉 진행중인 축제 모음',
+                Text('🎉 진행중인 축제 모음'.tr(),
                     style: UiConfig.h3Style.copyWith(
                         color: UiConfig.black,
                         fontWeight: UiConfig.semiBoldFont)),

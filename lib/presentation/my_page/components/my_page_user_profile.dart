@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
@@ -49,7 +50,7 @@ class MyPageUserProfile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '안녕하세요, $userName님!',
+                    '안녕하세요,'.tr() + userName + '님!'.tr(),
                     style: UiConfig.h4Style
                         .copyWith(fontWeight: UiConfig.semiBoldFont),
                   ),

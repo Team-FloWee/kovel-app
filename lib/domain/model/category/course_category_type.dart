@@ -1,3 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:kovel_app/domain/model/category/category_type.dart';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -15,13 +21,13 @@ class CourseCategoryType extends CategoryType{
 
   @override
   String get name => switch (courseCategoryId)  {
-    'C0112' => '가족코스',
-    'C0113' => '나홀로코스',
-    'C0114' => '힐링코스',
-    'C0115' => '도보코스',
-    'C0116' => '캠핑코스',
-    'C0117' => '맛코스',
-    _ => '전체'
+    'C0112' => '가족코스'.tr(),
+    'C0113' => '나홀로코스'.tr(),
+    'C0114' => '힐링코스'.tr(),
+    'C0115' => '도보코스'.tr(),
+    'C0116' => '캠핑코스'.tr(),
+    'C0117' => '맛코스'.tr(),
+    _ => '전체'.tr()
   };
 }
 
