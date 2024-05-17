@@ -14,23 +14,41 @@ class AiDataSourceImpl implements AiDataSource {
     return response;
   }
 
-  final ChatSession _chat = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.get('GEMINI_API_KEY')).startChat(
-    history: [
-      Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
-      Content.functionResponse('아직 계획중이에요', {'chatType': 'button', 'chatCase': 'recommendPlan'}),
-      Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
-    ]
-  );
-
   @override
   Future<GenerateContentResponse> chatToAi({required String query}) async {
+    final ChatSession chat = _model.startChat(
+        history: [
+          Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
+          Content.functionResponse('아직 계획중이에요', {'chatType': 'button', 'chatCase': 'recommendPlan'}),
+          Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
+        ],
+        safetySettings: [
+          SafetySetting(
+              HarmCategory.dangerousContent,
+              HarmBlockThreshold.none
+          )
+        ]
+    );
     final content = Content.text(query);
-    final response = await _chat.sendMessage(content);
+    final response = await chat.sendMessage(content);
     return response;
   }
 
   @override
   ChatSession getChatSession() {
-    return _chat;
+    final ChatSession chat = _model.startChat(
+        history: [
+          Content.model([TextPart('코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
+          Content.functionResponse('아직 계획중이에요', {'chatType': 'button', 'chatCase': 'recommendPlan'}),
+          Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
+        ],
+        safetySettings: [
+          SafetySetting(
+              HarmCategory.dangerousContent,
+              HarmBlockThreshold.none
+          )
+        ]
+    );
+    return chat;
   }
 }
