@@ -62,6 +62,7 @@ class _ChatInputState extends State<ChatInput> {
                       ),
                   ),
                   onSubmitted: (value) {
+                    if (_textController.text.isEmpty) return;
                     viewModel.sendChat(request: value);
                     _textController.text = '';
                   },
