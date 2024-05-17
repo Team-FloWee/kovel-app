@@ -23,6 +23,8 @@ class ChatBotViewModel with ChangeNotifier {
   List<Chat> get chatList => _chatList;
   bool _canInput = false;
   bool get canInput => _canInput;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   void fetchChatList() {
     _chatList = [];
@@ -64,8 +66,11 @@ class ChatBotViewModel with ChangeNotifier {
     }
     _chatList.add(Chat(text: request, role: 'user', chatType: ChatType.text, chatCase: ChatCase.text));
     _canInput = false;
+    _isLoading = true;
     notifyListeners();
     final response = await _sendChatToAiUseCase.execute(request: query);
+    _isLoading = false;
+    notifyListeners();
     final finalResponseText = MarkdownUtil().removeMarkdownTags(response.text ?? '');
     _chatList.add(Chat(text: finalResponseText, role: 'model', chatType: ChatType.text, chatCase: ChatCase.text));
     _chatList.add(Chat(text: '다시하기', role: 'function', chatType: ChatType.button, chatCase: ChatCase.restart));

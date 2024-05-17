@@ -7,6 +7,7 @@ import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/chat_bot/components/model_button_chat_widget.dart';
 import 'package:kovel_app/presentation/chat_bot/components/chat_input.dart';
 import 'package:kovel_app/presentation/chat_bot/components/model_chat_widget.dart';
+import 'package:kovel_app/presentation/chat_bot/components/model_loading_widget.dart';
 import 'package:kovel_app/presentation/chat_bot/components/user_chat_widget.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                         return _buildChatWidget(chat: viewModel.chatList[index]);
                       }
                     ),
+                    viewModel.isLoading == true
+                        ? ModelLoadingWidget()
+                        : SizedBox(),
                     SizedBox(height: 100)
                   ],
                 ),
