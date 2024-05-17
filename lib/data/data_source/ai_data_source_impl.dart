@@ -25,8 +25,8 @@ class AiDataSourceImpl implements AiDataSource {
   @override
   Future<GenerateContentResponse> chatToAi({required String query}) async {
     final content = Content.text(query);
-    final test = await _chat.sendMessage(content);
-    return test;
+    final response = await _chat.sendMessage(content);
+    return response;
   }
 
   @override
