@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
-
-import 'package:kovel_app/config/ui_config.dart';
-
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -20,7 +18,10 @@ import 'package:provider/provider.dart';
 class LocationListScreen extends StatefulWidget {
   final String areaCode;
 
-  const LocationListScreen({super.key, required this.areaCode});
+  const LocationListScreen({
+    super.key,
+    required this.areaCode,
+  });
 
   @override
   State<LocationListScreen> createState() => _LocationListScreenState();
@@ -30,12 +31,12 @@ class _LocationListScreenState extends State<LocationListScreen> {
   @override
   void initState() {
     super.initState();
+
     Future.microtask(() {
-      context.read<LocationListViewModel>().getData(widget.areaCode);
-      //Todo UserViewModel 안쓰면 지우고 작동확인 크..
+      final userProvider = context.read<UserProvider>();
+      context.read<LocationListViewModel>().getData(widget.areaCode,
+          LanguageUtil().getLanguage(userProvider.user.language));
     }); //세트
-    Future.microtask(() =>
-        context.read<LocationListViewModel>().getData(widget.areaCode)); //세트
     Future.microtask(() => _courseDataScrollController.addListener(() {
           _onCourseDataScroll();
         }));
@@ -67,23 +68,25 @@ class _LocationListScreenState extends State<LocationListScreen> {
   }
 
   void _onCommonDataScroll() {
+    final userProvider = context.read<UserProvider>();
     if (_commonDataScrollController.position.pixels ==
             _commonDataScrollController.position.maxScrollExtent &&
         !context.read<LocationListViewModel>().isCommonDataLoading) {
-      context
-          .read<LocationListViewModel>()
-          .fetchMoreCommonData(widget.areaCode);
+      context.read<LocationListViewModel>().fetchMoreCommonData(widget.areaCode,
+          LanguageUtil().getLanguage(userProvider.user.language));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>(); //세트
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: CommonAppBar(
         title: '뷰모델 전체',
         controller: _commonDataScrollController,
       ),
+
       body: SafeArea(
         child: viewModel.isLoading == true
             ? const Center(child: CircularProgressIndicator())
@@ -114,9 +117,13 @@ class _LocationListScreenState extends State<LocationListScreen> {
                             viewModel.selectCourseCategory(category.id);
                             context
                                 .read<LocationListViewModel>()
-                                .getCourseData(widget.areaCode, category.id);
-                          }),
-                    ),
+                                .getCourseData(
+                                            widget.areaCode,
+                                            category.id,
+                                            LanguageUtil().getLanguage(
+                                                userProvider.user.language));
+                                  }),
+                            ),
                     const SizedBox(
                       height: 16,
                     ),
@@ -133,7 +140,8 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: FavoriteImage(
                                   archived:
-                                      ArchivedUtil.getArchived(tourDetail: e),
+                                      ArchivedUtil.
+                                  Archived(tourDetail: e),
                                   imageSize: 100,
                                 ),
                               ),
@@ -195,7 +203,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LocationListViewModel>();
-
+    final userProvider = context.read<UserProvider>();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -214,7 +222,9 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                 onSelect: (Category category) {
                   viewModel.selectCategory(int.parse(category.id));
                   context.read<LocationListViewModel>().getCommonData(
-                      widget.areaCode, int.parse(category.id ?? '0'));
+                      widget.areaCode,
+                      int.parse(category.id ?? '0'),
+                      LanguageUtil().getLanguage(userProvider.user.language));
                 },
               ),
               const SizedBox(height: 16),

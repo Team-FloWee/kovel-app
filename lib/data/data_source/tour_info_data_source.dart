@@ -5,7 +5,11 @@ import 'package:kovel_app/data/dto/tour_dto.dart';
 
 abstract interface class TourInfoDataSource {
   Future<List<TourDto>> getAreaBasedList(
-      {int pageNo = 1, int? contentTypeId, String areaCode = '', String cat2 = ''});
+      {int pageNo = 1,
+      int? contentTypeId,
+      String areaCode = '',
+      String cat2 = '',
+      String lang = 'KorService1'});
   Future<List<TourDto>> getLocationBasedList(
       {required String mapX,
       required String mapY,
@@ -13,8 +17,12 @@ abstract interface class TourInfoDataSource {
       int pageNo = 1});
   Future<List<TourDto>> getSearchKeyword(
       {required String keyword, int pageNo = 1});
-  Future<List<TourDto>> getSearchFestival(
-      {required String eventStartDate, required String eventEndDate, int pageNo = 1});
+  Future<List<TourDto>> getSearchFestival({
+    required String eventStartDate,
+    required String eventEndDate,
+    int pageNo = 1,
+    String lang = 'KorService1',
+  });
   Future<List<TourDto>> getSearchStay({int? pageNo = 1});
 
   Future<List<TourDetailDto>> getDetailCommon(

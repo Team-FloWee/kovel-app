@@ -2,11 +2,9 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
-import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 
-import '../../domain/model/archived.dart';
 import '../../domain/model/tour.dart';
 import '../../domain/use_case/get_area_data_use_case.dart';
 
@@ -67,32 +65,37 @@ class LocationListViewModel with ChangeNotifier {
 
   //서울 areacode에 있는 contentTypeId :25(여행정보)의 contentId를 받아와야 함
   //추천코스 [전체]
-  Future<void> getData(String areaCode) async {
+  Future<void> getData(String areaCode, String lang) async {
     _isLoading = true;
     notifyListeners();
+    if (lang == 'KorService1') {
+      _areaBasedDataList = await _getAreaDataUseCase.execute(
+          areaCode: areaCode, cat2: '', contentTypeId: 25, lang: lang);
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: 25);
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList
-          .add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
+      await Future.wait(_areaBasedDataList.map((element) async {
+        _courseDetailList
+            .add(await _getCommonDataUseCase.execute(id: element.id));
+      }));
+    }
 
     notifyListeners();
 
-    await getCommonData(areaCode, contentTypeId);
+    await getCommonData(areaCode, contentTypeId, lang);
     notifyListeners();
 
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> getCourseData(String areaCode, String cat2) async {
+  Future<void> getCourseData(String areaCode, String cat2, String lang) async {
     notifyListeners();
-
+    if (lang == 'EngService1') return;
     _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: cat2, contentTypeId: 25);
+      areaCode: areaCode,
+      cat2: cat2,
+      contentTypeId: 25,
+    );
 
     _courseDetailList = [];
     await Future.wait(_areaBasedDataList.map((element) async {
@@ -103,12 +106,13 @@ class LocationListViewModel with ChangeNotifier {
   }
 
   //테마별 여행 [전체]
-  Future<void> getCommonData(String areaCode, int contentTypeId) async {
+  Future<void> getCommonData(
+      String areaCode, int contentTypeId, String lang) async {
     //_isLoading = true;
     notifyListeners();
 
     _areaBasedDataList = await _getAreaDataUseCase.execute(
-        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
+        areaCode: areaCode, cat2: '', contentTypeId: contentTypeId, lang: lang);
 
     _tourDetailList = [];
 
@@ -122,7 +126,7 @@ class LocationListViewModel with ChangeNotifier {
   }
 
   // 테마별 장소 페이지네이션
-  void fetchMoreCommonData(String areaCode) async {
+  void fetchMoreCommonData(String areaCode, String lang) async {
     _isCommonDataLoading = true;
     notifyListeners();
 
@@ -131,6 +135,7 @@ class LocationListViewModel with ChangeNotifier {
         areaCode: areaCode,
         cat2: '',
         contentTypeId: _selectedCategory ?? 0,
+        lang: lang,
         pageNo: ++_commonPageNo)));
 
     await Future.wait(_areaBasedDataList.map((element) async {

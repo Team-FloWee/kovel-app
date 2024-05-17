@@ -26,7 +26,8 @@ class _ArchivedItemState extends State<ArchivedItem> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
+    Future.microtask(() =>
+        isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
   }
 
   @override
@@ -37,7 +38,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    return isLiked ? InkWell(
+    return InkWell(
       onTap: () {
         context.pushNamed('detail', queryParameters: {
           'id': widget.archived.id.toString(),
@@ -75,19 +76,17 @@ class _ArchivedItemState extends State<ArchivedItem> {
                 top: 8,
                 right: 8,
                 child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isLiked = !isLiked;
-                    });
-                    userProvider.updateArchivedList(widget.archived);
-                  },
-                  child: SizedBox(
-                      width: 24.w,
-                      height: 24.w,
-                      child: Icon(Icons.favorite, color: UiConfig.primaryColor)
-                  )
-                )
-            ),
+                    onTap: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                      userProvider.updateArchivedList(widget.archived);
+                    },
+                    child: SizedBox(
+                        width: 24.w,
+                        height: 24.w,
+                        child: Icon(Icons.favorite,
+                            color: UiConfig.primaryColor)))),
             Positioned(
               left: 16.w,
               bottom: 16.w,
@@ -130,6 +129,6 @@ class _ArchivedItemState extends State<ArchivedItem> {
           ],
         ),
       ),
-    ) : SizedBox();
+    );
   }
 }
