@@ -5,13 +5,18 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
+import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 import '../../core/auth/user_provider.dart';
 
 class MyPageViewModel with ChangeNotifier {
   late User _user;
-  String userId = UserProvider().getUserId();
+  User get user => _user;
+  String userId =
+      UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt())
+          .getUserId();
   final userRef = FirebaseFirestore.instance
       .collection('user')
       .withConverter<User>(
@@ -19,10 +24,15 @@ class MyPageViewModel with ChangeNotifier {
           toFirestore: (snapshot, _) => snapshot.toJson());
   final _picker = ImagePicker();
 
-  User get user => _user;
-
   void getProfile() async {
     _user = await userRef.doc(userId).get().then((value) => value.data()!);
+    notifyListeners();
+  }
+
+  void updateLanguage(String lang) async {
+    LanguageUtil().getLanguage(lang);
+    await userRef.doc(user.userId).update({'language': lang});
+    getProfile();
     notifyListeners();
   }
 

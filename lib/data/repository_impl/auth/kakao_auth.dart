@@ -29,6 +29,7 @@ class KakaoAuth implements SocialAuth {
           name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
           email: kakaoUser.kakaoAccount?.email ?? '',
           imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          language: 'ko',
           archivedList: [],
         );
         return user;
@@ -57,6 +58,7 @@ class KakaoAuth implements SocialAuth {
             name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
             email: kakaoUser.kakaoAccount?.email ?? '',
             imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+            language: 'ko',
             archivedList: [],
           );
           return user;
@@ -87,6 +89,7 @@ class KakaoAuth implements SocialAuth {
           name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
           email: kakaoUser.kakaoAccount?.email ?? '',
           imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          language: 'ko',
           archivedList: [],
         );
         return user;
