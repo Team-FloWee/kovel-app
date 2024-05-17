@@ -17,17 +17,18 @@ class DetailText extends StatelessWidget {
     required this.address,
   });
 
+  Future<void> _launchUrl(Uri uri) async {
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+      //Todo 에러처리
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Uri telUri = Uri.parse('tel:+82 ${tel}');
     final Uri addressUri = Uri.parse(
         'https://m.map.kakao.com/actions/searchView?q=${address}#!/LQMLML,QNSMURM/map/place');
-    Future<void> _launchUrl(Uri uri) async {
-      if (!await launchUrl(uri)) {
-        throw Exception('Could not launch $uri');
-      }
-    }
-
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +49,7 @@ class DetailText extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
@@ -57,7 +58,7 @@ class DetailText extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           tel != ''
@@ -72,7 +73,7 @@ class DetailText extends StatelessWidget {
                         child: Icon(Icons.phone,
                             size: 18, color: UiConfig.black.shade800),
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Expanded(
                         child: InkWell(
                           onTap: () {
@@ -91,7 +92,7 @@ class DetailText extends StatelessWidget {
                     ],
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
           address != ''
               ? Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
@@ -104,7 +105,7 @@ class DetailText extends StatelessWidget {
                         child: Icon(Icons.location_on_rounded,
                             size: 18, color: UiConfig.black.shade800),
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Expanded(
                         child: InkWell(
                           onTap: () {
@@ -123,7 +124,7 @@ class DetailText extends StatelessWidget {
                     ],
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );
