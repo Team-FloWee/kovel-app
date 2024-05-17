@@ -25,7 +25,7 @@ import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
-import 'package:kovel_app/domain/use_case/get_location_based_data_use_case%20copy.dart';
+import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
