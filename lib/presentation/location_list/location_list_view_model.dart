@@ -12,6 +12,7 @@ class LocationListViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetAreaDataUseCase _getAreaDataUseCase;
   final UserRepository _userRepository;
+
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
@@ -54,6 +55,14 @@ class LocationListViewModel with ChangeNotifier {
 
   bool get isCommonDataLoading => _isCommonDataLoading;
 
+  int? _selectedCategory;
+
+  int? get selectedCategory => _selectedCategory;
+
+  String? _selectedCourseCategory;
+
+  String? get selectedCourseCategory => _selectedCourseCategory;
+
   //서울 areacode에 있는 contentTypeId :25(여행정보)의 contentId를 받아와야 함
   //추천코스 [전체]
   Future<void> getData(String areaCode, String lang) async {
@@ -63,6 +72,7 @@ class LocationListViewModel with ChangeNotifier {
       _areaBasedDataList = await _getAreaDataUseCase.execute(
           areaCode: areaCode, cat2: '', contentTypeId: 25, lang: lang);
 
+
       await Future.wait(_areaBasedDataList.map((element) async {
         _courseDetailList
             .add(await _getCommonDataUseCase.execute(id: element.id));
@@ -70,8 +80,10 @@ class LocationListViewModel with ChangeNotifier {
     }
 
     notifyListeners();
+
     await getCommonData(areaCode, contentTypeId, lang);
     notifyListeners();
+
     _isLoading = false;
     notifyListeners();
   }
@@ -81,7 +93,7 @@ class LocationListViewModel with ChangeNotifier {
     if (lang == 'EngService1') return;
     _areaBasedDataList = await _getAreaDataUseCase.execute(
       areaCode: areaCode,
-      cat2: '',
+      cat2: cat2,
       contentTypeId: 25,
     );
 
@@ -122,7 +134,7 @@ class LocationListViewModel with ChangeNotifier {
     _areaBasedDataList.addAll((await _getAreaDataUseCase.execute(
         areaCode: areaCode,
         cat2: '',
-        contentTypeId: 0,
+        contentTypeId: _selectedCategory ?? 0,
         lang: lang,
         pageNo: ++_commonPageNo)));
 
@@ -143,7 +155,7 @@ class LocationListViewModel with ChangeNotifier {
     _areaBasedDataList = [];
     _areaBasedDataList.addAll((await _getAreaDataUseCase.execute(
         areaCode: areaCode,
-        cat2: '',
+        cat2: _selectedCourseCategory ?? '',
         contentTypeId: 25,
         pageNo: ++_coursePageNo)));
 
@@ -154,6 +166,27 @@ class LocationListViewModel with ChangeNotifier {
     notifyListeners();
 
     _isCourseDataLoading = false;
+    notifyListeners();
+  }
+
+  void selectCategory(int category) {
+    _selectedCategory = category;
+
+    // 카테고리를 선택하면 변수를 초기화
+    _commonPageNo = 1;
+    _tourDetailList = [];
+
+    notifyListeners();
+  }
+
+  // 코스 카테고리 선택 시
+  void selectCourseCategory(String courseCategory) {
+    _selectedCourseCategory = courseCategory;
+
+    // 카테고리를 선택하면 변수를 초기화
+    _coursePageNo = 1;
+    _courseDetailList = [];
+
     notifyListeners();
   }
 }
