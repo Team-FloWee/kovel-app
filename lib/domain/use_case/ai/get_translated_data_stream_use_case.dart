@@ -8,20 +8,14 @@ import 'package:kovel_app/domain/repository/ai_repository.dart';
 class GetTranslatedDataStreamUseCase {
   final AiRepository _aiRepository;
 
-  GetTranslatedDataStreamUseCase({required AiRepository aiRepository})
-      : _aiRepository = aiRepository;
+  GetTranslatedDataStreamUseCase({required AiRepository aiRepository}) : _aiRepository = aiRepository;
 
-  Stream<GenerateContentResponse> execute(
-      {required String request, required String language}) {
-    final response = _aiRepository.getTranslatedDataStream(
-        request: request, language: language);
-    switch (response) {
-      case Success<Stream<GenerateContentResponse>, NetworkError>():
-        return response.data;
-      case Error<Stream<GenerateContentResponse>, NetworkError>():
-        {
-          return response.error.message as Stream<GenerateContentResponse>;
-        }
+  Result<Stream<GenerateContentResponse>, NetworkError> execute({required String request, required String language}) {
+    try {
+      final response = _aiRepository.getTranslatedDataStream(request: request, language: language);
+      return Result.success(response);
+    } catch (e) {
+      return const Result.error(NetworkError.unknown);
     }
   }
 }
