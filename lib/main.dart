@@ -33,16 +33,15 @@ void main() async {
   runApp(
     EasyLocalization(
       // 지원하는 로케일 리스트 ('영어', '미국'), ('한국어', '한국')
-      supportedLocales: [Locale('en', 'US'), Locale('ko', 'KR')],
+      supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
       // 번역 파일이 위치한 경로
       path: 'assets/translations',
       // 기본적으로 사용할 로케일 지정
       // TODO: 유저 언어 설정에 따라 언어를
-      fallbackLocale: Locale('ko', 'KR'),
+      fallbackLocale: const Locale('ko', 'KR'),
       child: const MyApp(),
     ),
   );
-
 }
 
 class MyApp extends StatelessWidget {
