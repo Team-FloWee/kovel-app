@@ -61,6 +61,7 @@ dependencies:
   google_generative_ai: ^0.3.3
   easy_debounce: ^2.0.3
   fluttertoast: ^8.2.5
+  url_launcher: ^6.2.6
 
 
 dev_dependencies:
