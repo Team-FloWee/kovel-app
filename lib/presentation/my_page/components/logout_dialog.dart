@@ -12,6 +12,7 @@ class LogoutDialog extends StatelessWidget {
     return AlertDialog(
       alignment: Alignment.center,
       backgroundColor: UiConfig.black.shade100,
+      surfaceTintColor: UiConfig.black.shade100,
       icon: const Icon(Icons.error, color: UiConfig.primaryColor),
       title: Text(
         '로그아웃',

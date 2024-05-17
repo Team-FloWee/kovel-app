@@ -12,6 +12,8 @@ import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/detail/detail_screen.dart';
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/home/home_screen.dart';
+import 'package:kovel_app/presentation/home/home_search_screen.dart';
+import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_screen.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
@@ -34,15 +36,11 @@ final goRouter = GoRouter(
         return CustomTransitionPage(
             child: ChangeNotifierProvider(
               create: (context) => getIt<HomeViewModel>(),
-              child: HomeScreen(),
+              child: const HomeScreen(),
             ),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
               return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -51,7 +49,7 @@ final goRouter = GoRouter(
     GoRoute(
         path: '/splash',
         builder: (context, state) {
-          return SplashScreen();
+          return const SplashScreen();
         }),
     GoRoute(
       path: '/login',
@@ -68,15 +66,11 @@ final goRouter = GoRouter(
         return CustomTransitionPage(
             child: ChangeNotifierProvider(
               create: (context) => MyPageViewModel(),
-              child: MyPageScreen(),
+              child: const MyPageScreen(),
             ),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
               return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -95,14 +89,10 @@ final goRouter = GoRouter(
       path: '/archived',
       pageBuilder: (context, state) {
         return CustomTransitionPage(
-            child: ArchivedScreen(),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            child: const ArchivedScreen(),
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
               return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -113,14 +103,12 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId =
-            int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child:
-              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
@@ -128,11 +116,11 @@ final goRouter = GoRouter(
       path: '/locationList',
       name: 'locationList',
       builder: (context, state) {
-        //final areaCode = state.uri.queryParameters['areaCode']!;
+        final areaCode = state.uri.queryParameters['areaCode']!;
         return ChangeNotifierProvider(
           create: (context) => getIt<LocationListViewModel>(),
           child: LocationListScreen(
-            areaCode: '1',
+            areaCode: areaCode,
           ),
         );
       },
@@ -167,13 +155,20 @@ final goRouter = GoRouter(
       name: 'chatBot',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          create: (_) => ChatBotViewModel(
-              sendChatToAiUseCase: SendChatToAiUseCase(aiRepository: getIt()),
-              getChatSessionUseCase: GetChatSessionUseCase(aiRepository: getIt()),
-          ),
+          create: (_) => getIt<ChatBotViewModel>(),
           child: ChatBotScreen(),
         );
       }
-    )
+    ),
+    GoRoute(
+      path: '/search',
+      name: 'search',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => getIt<HomeSearchViewModel>(),
+          child: const HomeSearchScreen(),
+        ); // HomeSearchScreen을 반환합니다.
+      },
+    ),
   ],
 );

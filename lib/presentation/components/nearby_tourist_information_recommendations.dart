@@ -7,13 +7,11 @@ class NearbyTouristInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          url,
-          fit: BoxFit.cover,
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.network(
+        url,
+        fit: BoxFit.cover,
       ),
     );
   }

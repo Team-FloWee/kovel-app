@@ -34,14 +34,14 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             GestureDetector(
               onTap: () {
                 viewModel.updatePhoto();
               },
-              child: Container(
+              child: SizedBox(
                 width: 72.0,
                 height: 72.0,
                 child: ClipRRect(
@@ -68,7 +68,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                 viewModel.updateName(_controller.text);
                 context.pop();
               },
-              child: Text('수정완료'),
+              child: const Text('수정완료'),
             ),
           ],
         ),

@@ -33,7 +33,7 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       width: 1.sw,
       height: _isMore ? 0.95.sh : 0.6.sh,
       child: Stack(
@@ -44,7 +44,7 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
               onTap: () {
                 context.pop();
               },
-                child: Icon(Icons.close),
+                child: const Icon(Icons.close),
             )
           ),
           Column(
@@ -52,13 +52,13 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
               Text('Translate',
                   style: UiConfig.h4Style.copyWith(
                       fontWeight: UiConfig.semiBoldFont)),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           color: UiConfig.black.shade100,
                           borderRadius: BorderRadius.circular(16)
@@ -75,10 +75,10 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                                   child: ShaderMask(
                                     shaderCallback: (bounds) {
                                       return LinearGradient(
-                                          begin: Alignment(0.5, 0.5),
-                                          end: Alignment(1.0, 0.5),
+                                          begin: const Alignment(0.5, 0.5),
+                                          end: const Alignment(1.0, 0.5),
                                           colors: [UiConfig.black.shade900, Colors.transparent],
-                                          stops: [0.0, 1.0]
+                                          stops: const [0.0, 1.0]
                                       ).createShader(bounds);
                                     },
                                     child: Text(
@@ -105,10 +105,10 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                                 )
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Divider(thickness: 1, height: 1, color: UiConfig.black.shade500),
                             DropdownButton<String>(
-                                underline: SizedBox(),
+                                underline: const SizedBox(),
                                 style: UiConfig.smallStyle.copyWith(
                                     fontWeight: UiConfig.semiBoldFont,
                                 ),
@@ -133,7 +133,7 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       Ink(
                         decoration: BoxDecoration(
                           color: UiConfig.black.shade100,
@@ -145,15 +145,15 @@ class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
                             Clipboard.setData(ClipboardData(text: aiProvider.translatedData));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16)
                             ),
                             child: Row(
                               children: [
                                 Text('Copy Translation', style: UiConfig.bodyStyle),
-                                Spacer(),
-                                Icon(Icons.copy),
+                                const Spacer(),
+                                const Icon(Icons.copy),
                               ],
                             )
                           ),
@@ -178,7 +178,7 @@ Widget _buildTranslatedSection({
     children: [
       Opacity(
         opacity: translatedData == '' ? 1 : 0,
-        child: Align(
+        child: const Align(
             alignment: Alignment.center,
             child: CircularProgressIndicator()
         ),

@@ -24,6 +24,7 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
   List<Archived> get archivedList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $UserCopyWith<$Res> {
       String name,
       String email,
       String imageUrl,
+      String language,
       List<Archived> archivedList});
 }
 
@@ -61,6 +63,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = null,
     Object? imageUrl = null,
+    Object? language = null,
     Object? archivedList = null,
   }) {
     return _then(_value.copyWith(
@@ -79,6 +82,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
               as String,
       archivedList: null == archivedList
           ? _value.archivedList
@@ -100,6 +107,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String name,
       String email,
       String imageUrl,
+      String language,
       List<Archived> archivedList});
 }
 
@@ -117,6 +125,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? name = null,
     Object? email = null,
     Object? imageUrl = null,
+    Object? language = null,
     Object? archivedList = null,
   }) {
     return _then(_$UserImpl(
@@ -136,6 +145,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       archivedList: null == archivedList
           ? _value.archivedList
           : archivedList // ignore: cast_nullable_to_non_nullable
@@ -152,6 +165,7 @@ class _$UserImpl implements _User {
       required this.name,
       required this.email,
       required this.imageUrl,
+      required this.language,
       required this.archivedList});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -166,11 +180,13 @@ class _$UserImpl implements _User {
   @override
   final String imageUrl;
   @override
+  final String language;
+  @override
   final List<Archived> archivedList;
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imageUrl: $imageUrl, archivedList: $archivedList)';
+    return 'User(userId: $userId, name: $name, email: $email, imageUrl: $imageUrl, language: $language, archivedList: $archivedList)';
   }
 
   @override
@@ -183,6 +199,8 @@ class _$UserImpl implements _User {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             const DeepCollectionEquality()
                 .equals(other.archivedList, archivedList));
   }
@@ -190,7 +208,7 @@ class _$UserImpl implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, name, email, imageUrl,
-      const DeepCollectionEquality().hash(archivedList));
+      language, const DeepCollectionEquality().hash(archivedList));
 
   @JsonKey(ignore: true)
   @override
@@ -212,6 +230,7 @@ abstract class _User implements User {
       required final String name,
       required final String email,
       required final String imageUrl,
+      required final String language,
       required final List<Archived> archivedList}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -224,6 +243,8 @@ abstract class _User implements User {
   String get email;
   @override
   String get imageUrl;
+  @override
+  String get language;
   @override
   List<Archived> get archivedList;
   @override

@@ -29,8 +29,8 @@ class _ContextMenuState extends State<ContextMenu> {
               Clipboard.setData(ClipboardData(text: widget.text));
               context.pop();
             },
-            child: Text('Copy'),
             trailingIcon: Icons.copy,
+            child: const Text('Copy'),
           ),
           CupertinoContextMenuAction(
               onPressed: () {
@@ -47,14 +47,14 @@ class _ContextMenuState extends State<ContextMenu> {
                   },
                 );
               },
-              child: Text('Translate'),
-              trailingIcon: Icons.translate)
+              trailingIcon: Icons.translate,
+              child: const Text('Translate'))
         ],
         enableHapticFeedback: true,
         builder: (context, animation) {
           EdgeInsetsGeometry padding;
           if (animation.value > 0.7) {
-            padding = EdgeInsets.all(16.0);
+            padding = const EdgeInsets.all(16.0);
           } else {
             padding = EdgeInsets.zero;
           }

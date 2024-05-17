@@ -26,10 +26,10 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('나의 보관함'),
+        title: const Text('나의 보관함'),
         actions: [
           IconButton(
-            icon: Icon(Icons.location_on_rounded),
+            icon: const Icon(Icons.location_on_rounded),
             onPressed: () {},
           ),
         ],
@@ -40,7 +40,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
           alignment: Alignment.center,
           child: GridView.builder(
             itemCount: userProvider.user.archivedList.length, // 아이템 개수
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
@@ -56,7 +56,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(selectedIndex: 1),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 1),
     );
   }
 }

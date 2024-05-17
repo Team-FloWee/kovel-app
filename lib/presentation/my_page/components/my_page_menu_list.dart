@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/presentation/my_page/components/language_edit_dialog.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_menu_bar_widget.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_switch_button.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
@@ -16,6 +17,12 @@ class MyPageMenuList extends StatefulWidget {
 }
 
 class _MyPageMenuListState extends State<MyPageMenuList> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MyPageViewModel>();
@@ -37,11 +44,20 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           menuBarName: 'FAQ',
           menuBarIcon: Icons.chat_bubble_outline_outlined,
         ),
-        const MyPageMenuBar(
+        MyPageMenuBar(
           menuBarName: '언어',
           menuBarIcon: Icons.language_outlined,
+          onTapMenuBar: () {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) =>
+                  LanguageEditDialog(updateLanguage: (String lang) {
+                viewModel.updateLanguage(lang);
+              }),
+            );
+          },
         ),
-        MyPageMenuBarWidget(
+        const MyPageMenuBarWidget(
           menuBarName: 'Dark Mode',
           menuBarWidget: MyPageSwitchButton(),
         ),

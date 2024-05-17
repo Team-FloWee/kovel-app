@@ -32,7 +32,7 @@ class ContentTitle extends StatelessWidget {
                   ),
                 ),
               )
-            : SizedBox(),
+            : const SizedBox(),
       ],
     );
   }

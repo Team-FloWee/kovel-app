@@ -39,7 +39,7 @@ class CommonText extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
@@ -48,7 +48,7 @@ class CommonText extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           IconTextRow(icon: Icons.phone, text: tel, maxline: 1),
