@@ -4,6 +4,7 @@ import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/core/utils/language_util.dart';
+import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/category/course_category_type.dart';
@@ -83,7 +84,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
     final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: CommonAppBar(
-        title: '뷰모델 전체',
+        title: AreaType(areaCode: widget.areaCode).name,
         controller: _commonDataScrollController,
       ),
       body: SafeArea(
