@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
-import 'package:kovel_app/domain/model/category/category.dart';
-import 'package:kovel_app/domain/model/category/content_type.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
-import 'package:kovel_app/presentation/chat_bot/components/chat_category_widget.dart';
 import 'package:provider/provider.dart';
 
 class ModelButtonChatWidget extends StatelessWidget {
@@ -55,7 +51,7 @@ class ModelButtonChatWidget extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 24,
                         ),
                         Icon(

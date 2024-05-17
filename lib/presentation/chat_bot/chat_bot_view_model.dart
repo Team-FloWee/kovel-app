@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
@@ -45,9 +43,8 @@ class ChatBotViewModel with ChangeNotifier {
               Chat(
                   text: part.name,
                   role: content.role ?? 'function',
-                  chatType: ChatType.fromString(part.response!['chatType'].toString() ?? ''),
-                  chatCase: ChatCase.fromString(part.response!['chatCase'].toString() ?? ''
-                  )
+                  chatType: ChatType.fromString(part.response!['chatType'].toString()),
+                  chatCase: ChatCase.fromString(part.response!['chatCase'].toString())
               )
           );
         }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
@@ -35,7 +34,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<ChatBotViewModel>();
     return Scaffold(
-      appBar: CommonAppBar(title: 'AI 챗봇'),
+      appBar: const CommonAppBar(title: 'AI 챗봇'),
       body: SafeArea(
         child: Container(
           constraints: BoxConstraints(
@@ -48,9 +47,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: viewModel.chatList.length,
                       itemBuilder: (context, index) {
@@ -58,13 +57,13 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       }
                     ),
                     viewModel.isLoading == true
-                        ? ModelLoadingWidget()
-                        : SizedBox(),
-                    SizedBox(height: 100)
+                        ? const ModelLoadingWidget()
+                        : const SizedBox(),
+                    const SizedBox(height: 100)
                   ],
                 ),
               ),
-              Positioned(
+              const Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,

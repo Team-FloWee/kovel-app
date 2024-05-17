@@ -7,7 +7,8 @@ class ChatCategoryItem extends StatelessWidget {
   final bool isSelected;
   final void Function()? onSelect;
 
-  ChatCategoryItem({
+  const ChatCategoryItem({
+    super.key,
     required this.text,
     required this.isSelected,
     required this.onSelect,

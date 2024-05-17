@@ -29,7 +29,7 @@ class _ChatInputState extends State<ChatInput> {
     final viewModel = context.watch<ChatBotViewModel>();
     return Container(
       color: UiConfig.black.shade500,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           Expanded(
@@ -70,7 +70,7 @@ class _ChatInputState extends State<ChatInput> {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           InkWell(
             borderRadius: BorderRadius.circular(8),
             onTap: () {
