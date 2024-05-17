@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kovel_app/core/service/ai_provider.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
@@ -25,14 +26,22 @@ import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_location_based_data_use_case%20copy.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
+
+import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
+import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
+import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
+import 'package:kovel_app/presentation/home/home_search_view_model.dart';
+import 'package:kovel_app/presentation/home/home_view_model.dart';
+import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
+
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
+
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
-import 'package:kovel_app/presentation/home/home_view_model.dart';
-import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
@@ -90,13 +99,13 @@ void diSetup() {
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
       loginUseCase: LoginUseCase(userRepository: getIt()),
       logoutUseCase: LogoutUseCase(userRepository: getIt()),
-      checkUserDuplicatedUseCase:
-          CheckUserDuplicatedUseCase(userRepository: getIt()),
+      checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
       createUserUseCase: CreateUserUseCase(userRepository: getIt())));
 
-  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
-      updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
+  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
-      getSearchFestivalUseCase:
-          GetSearchFestivalUseCase(tourInfoRepository: getIt())));
+      getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt()),
+      getSearchKeywordUseCase: GetSearchKeywordUseCase(tourInfoRepository: getIt()),
+      getLocationBasedDataUseCase: GetLocationBasedDataUseCase(tourInfoRepository: getIt())));
+  getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(GetSearchKeywordUseCase(tourInfoRepository: getIt())));
 }
