@@ -57,7 +57,7 @@ class HomeSearchScreen extends StatelessWidget {
                           onTap: () {
                             // viewModel.onRefresh();
                             // setState(() {});
-                            context.push('/homeSearchScreen');
+                            context.push('/search');
                           },
                           child: const Icon(
                             Icons.cancel_rounded,

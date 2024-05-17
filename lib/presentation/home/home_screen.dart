@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     TextFormField(
                       onTap: () {
                         FocusScope.of(context).requestFocus(FocusNode()); // 현재 필드의 포커스를 해제합니다.
-                        context.pushNamed('homeSearchScreen');
+                        context.pushNamed('search');
                       },
                       onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       decoration: const InputDecoration(
