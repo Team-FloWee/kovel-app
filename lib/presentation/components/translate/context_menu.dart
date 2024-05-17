@@ -20,6 +20,7 @@ class ContextMenu extends StatefulWidget {
 }
 
 class _ContextMenuState extends State<ContextMenu> {
+  final scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return CupertinoContextMenu.builder(
@@ -29,8 +30,8 @@ class _ContextMenuState extends State<ContextMenu> {
               Clipboard.setData(ClipboardData(text: widget.text));
               context.pop();
             },
-            child: Text('Copy'),
             trailingIcon: Icons.copy,
+            child: const Text('Copy'),
           ),
           CupertinoContextMenuAction(
               onPressed: () {
@@ -42,28 +43,26 @@ class _ContextMenuState extends State<ContextMenu> {
                   context: context,
                   builder: (BuildContext context) {
                     return ChangeNotifierProvider(
-                      create: (_) => AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())),
-                      child: TranslateBottomSheet(text: widget.text));
+                        create: (_) => AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())),
+                        child: TranslateBottomSheet(
+                          text: widget.text,
+                          scrollController: scrollController,
+                        ));
                   },
                 );
               },
-              child: Text('Translate'),
-              trailingIcon: Icons.translate)
+              trailingIcon: Icons.translate,
+              child: const Text('Translate'))
         ],
         enableHapticFeedback: true,
         builder: (context, animation) {
           EdgeInsetsGeometry padding;
           if (animation.value > 0.7) {
-            padding = EdgeInsets.all(16.0);
+            padding = const EdgeInsets.all(16.0);
           } else {
             padding = EdgeInsets.zero;
           }
-          return Container(
-              padding: padding,
-              width: MediaQuery.of(context).size.width,
-              child: Material(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Padding(padding: padding, child: widget.child)));
+          return Container(padding: padding, width: MediaQuery.of(context).size.width, child: Material(borderRadius: BorderRadius.circular(16), child: Padding(padding: padding, child: widget.child)));
         });
   }
 }
