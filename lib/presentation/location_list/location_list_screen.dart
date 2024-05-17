@@ -86,7 +86,6 @@ class _LocationListScreenState extends State<LocationListScreen> {
         title: '뷰모델 전체',
         controller: _commonDataScrollController,
       ),
-
       body: SafeArea(
         child: viewModel.isLoading == true
             ? const Center(child: CircularProgressIndicator())
@@ -115,15 +114,13 @@ class _LocationListScreenState extends State<LocationListScreen> {
                           categoryData: CourseCategoryTypeList.typeList,
                           onSelect: (Category category) {
                             viewModel.selectCourseCategory(category.id);
-                            context
-                                .read<LocationListViewModel>()
-                                .getCourseData(
-                                            widget.areaCode,
-                                            category.id,
-                                            LanguageUtil().getLanguage(
-                                                userProvider.user.language));
-                                  }),
-                            ),
+                            context.read<LocationListViewModel>().getCourseData(
+                                widget.areaCode,
+                                category.id,
+                                LanguageUtil()
+                                    .getLanguage(userProvider.user.language));
+                          }),
+                    ),
                     const SizedBox(
                       height: 16,
                     ),
@@ -140,8 +137,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: FavoriteImage(
                                   archived:
-                                      ArchivedUtil.
-                                  Archived(tourDetail: e),
+                                      ArchivedUtil.getArchived(tourDetail: e),
                                   imageSize: 100,
                                 ),
                               ),
