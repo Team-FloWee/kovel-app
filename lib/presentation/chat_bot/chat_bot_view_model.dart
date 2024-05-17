@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
 import 'package:kovel_app/core/enum/chat_type.dart';
+import 'package:kovel_app/core/utils/html_util.dart';
+import 'package:kovel_app/core/utils/markdown_util.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
@@ -61,7 +63,8 @@ class ChatBotViewModel with ChangeNotifier {
     _chatList.add(Chat(text: request, role: 'user', chatType: ChatType.text, chatCase: ChatCase.text));
     notifyListeners();
     final response = await _sendChatToAiUseCase.execute(request: query);
-    _chatList.add(Chat(text: response.text ?? '', role: 'model', chatType: ChatType.text, chatCase: ChatCase.text));
+    final finalResponseText = MarkdownUtil().removeMarkdownTags(response.text ?? '');
+    _chatList.add(Chat(text: finalResponseText, role: 'model', chatType: ChatType.text, chatCase: ChatCase.text));
     notifyListeners();
   }
 
