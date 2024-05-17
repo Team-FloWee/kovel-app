@@ -32,6 +32,8 @@ class ModelButtonChatWidget extends StatelessWidget {
                     viewModel.recommendPlan();
                   case ChatCase.archiveBasedCourse:
                     viewModel.recommendArchiveBasedCourse();
+                  case ChatCase.restart:
+                    viewModel.restart();
                   case ChatCase.text:
                     // TODO: Handle this case.
                 }

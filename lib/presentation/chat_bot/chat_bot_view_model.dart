@@ -19,8 +19,6 @@ class ChatBotViewModel with ChangeNotifier {
   }) : _sendChatToAiUseCase = sendChatToAiUseCase,
         _getChatSessionUseCase = getChatSessionUseCase;
 
-  StreamSubscription? _subscription;
-
   List<Chat> _chatList = [];
   List<Chat> get chatList => _chatList;
   bool _canInput = false;
@@ -70,6 +68,7 @@ class ChatBotViewModel with ChangeNotifier {
     final response = await _sendChatToAiUseCase.execute(request: query);
     final finalResponseText = MarkdownUtil().removeMarkdownTags(response.text ?? '');
     _chatList.add(Chat(text: finalResponseText, role: 'model', chatType: ChatType.text, chatCase: ChatCase.text));
+    _chatList.add(Chat(text: '다시하기', role: 'function', chatType: ChatType.button, chatCase: ChatCase.restart));
     notifyListeners();
   }
 
@@ -101,5 +100,28 @@ class ChatBotViewModel with ChangeNotifier {
         )
     );
     notifyListeners();
+  }
+
+  void restart() {
+    _chatList.addAll([
+      Chat(
+          text: '코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?',
+          role: 'model',
+          chatType: ChatType.text,
+          chatCase: ChatCase.text
+      ),
+      Chat(
+          text: '아직 계획중이에요',
+          role: 'function',
+          chatType: ChatType.button,
+          chatCase: ChatCase.recommendPlan
+      ),
+      Chat(
+          text: '나의 좋아요 정보를 기반으로 추천받을래요',
+          role: 'function',
+          chatType: ChatType.button,
+          chatCase: ChatCase.archiveBasedCourse
+      ),
+    ]);
   }
 }
