@@ -28,13 +28,18 @@ import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case%20copy.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
+
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
-
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
+
+import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
+import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
@@ -53,15 +58,25 @@ void diSetup() {
   getIt.registerSingleton<LikedTourDataSource>(LikedTourDataSourceImpl());
 
   // Repository
-  getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
-  getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
-  getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
-  getIt.registerSingleton<LikedTourRepository>(LikedTourRepositoryImpl(likedTourDataSource: getIt()));
+  getIt.registerSingleton<TourInfoRepository>(
+      TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
+  getIt.registerSingleton<UserRepository>(
+      UserRepositoryImpl(userDataSource: getIt()));
+  getIt
+      .registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
+  getIt.registerSingleton<LikedTourRepository>(
+      LikedTourRepositoryImpl(likedTourDataSource: getIt()));
 
   // Provider
-  getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: GetTranslatedDataStreamUseCase(aiRepository: getIt())));
-  getIt.registerSingleton<UserProvider>(UserProvider());
-
+  getIt.registerSingleton<AiProvider>(AiProvider(
+      getTranslatedDataStreamUseCase:
+          GetTranslatedDataStreamUseCase(aiRepository: getIt())));
+  getIt.registerFactory<LikeTourUseCase>(
+      () => LikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerFactory<UnLikeTourUseCase>(
+      () => UnLikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerSingleton<UserProvider>(
+      UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt()));
   // registerFactory
 
   // ViewModel & UseCase
