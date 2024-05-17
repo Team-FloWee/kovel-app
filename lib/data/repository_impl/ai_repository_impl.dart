@@ -18,4 +18,5 @@ class AiRepositoryImpl implements AiRepository {
 
     return response;
   }
+
 }
