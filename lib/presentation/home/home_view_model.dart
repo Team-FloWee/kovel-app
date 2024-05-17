@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
@@ -16,6 +15,8 @@ import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart'
 
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
+
+import '../../core/auth/user_provider.dart';
 
 class HomeViewModel with ChangeNotifier {
   final GetSearchFestivalUseCase _getSearchFestivalUseCase;
@@ -37,7 +38,7 @@ class HomeViewModel with ChangeNotifier {
 
   // User Profile
 
-  // String userId = UserProvider().getUserId();
+  String userId = UserProvider().getUserId();
   final userRef = FirebaseFirestore.instance.collection('user').withConverter<User>(fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!), toFirestore: (snapshot, _) => snapshot.toJson());
 
   Position? currentPosition;
