@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kovel_app/core/service/ai_provider.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
@@ -38,8 +37,6 @@ import 'package:kovel_app/presentation/location_list/location_list_view_model.da
 
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
-import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
-import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
