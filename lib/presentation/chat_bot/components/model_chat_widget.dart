@@ -37,7 +37,7 @@ class ModelChatWidget extends StatelessWidget {
               final List<String> archivedNames = userProvider.user.archivedList.map((e) => e.title).toList();
               viewModel.sendChat(header: '${archivedNames.toString()} 포함해서',  request: value);
             },
-            categoryData: ['당일', '1박 2일', '2박 3일', '3박 4일',' 4박 5일', '5박 6일', '1주일']
+            categoryData: ['당일', '1박 2일', '2박 3일', '3박 4일','4박 5일', '5박 6일', '1주일']
         ) : SizedBox()
       ],
     );
