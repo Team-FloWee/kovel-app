@@ -13,8 +13,8 @@ class RelatedCourseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ContentTitle(title: '🏃🏼‍♀️ 이 여행과 관련된 코스'),
-        SizedBox(height: 16),
+        const ContentTitle(title: '🏃🏼‍♀️ 이 여행과 관련된 코스'),
+        const SizedBox(height: 16),
         Column(
           children: courseInfoData.mapIndexed(
                   (index, element) => RelatedCourseItem(info: element))

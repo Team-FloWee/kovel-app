@@ -50,7 +50,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
         borderRadius: BorderRadius.circular(8),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity, // 가로 크기 전체로 지정
               height: double.infinity, // 세로 크기 전체로 지정
               child: Image.network(
@@ -69,7 +69,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
             ),
             Positioned.fill(
               child: Container(
-                color: Color.fromRGBO(0, 0, 0, 0.2), // 검은색(0, 0, 0)에 투명도 50% 적용
+                color: const Color.fromRGBO(0, 0, 0, 0.2), // 검은색(0, 0, 0)에 투명도 50% 적용
               ),
             ),
             Positioned(
@@ -85,7 +85,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
                     child: SizedBox(
                         width: 24.w,
                         height: 24.w,
-                        child: Icon(Icons.favorite,
+                        child: const Icon(Icons.favorite,
                             color: UiConfig.primaryColor)))),
             Positioned(
               left: 16.w,
@@ -113,7 +113,7 @@ class _ArchivedItemState extends State<ArchivedItem> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Text(

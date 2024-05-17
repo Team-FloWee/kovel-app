@@ -78,8 +78,8 @@ class _FavoriteImageState extends State<FavoriteImage> {
                   width: 24.w,
                   height: 24.w,
                   child: isLiked
-                      ? Icon(Icons.favorite, color: UiConfig.primaryColor)
-                      : Icon(Icons.favorite_border, color: Colors.white)),
+                      ? const Icon(Icons.favorite, color: UiConfig.primaryColor)
+                      : const Icon(Icons.favorite_border, color: Colors.white)),
             )),
         Positioned(
           left: 16.w,

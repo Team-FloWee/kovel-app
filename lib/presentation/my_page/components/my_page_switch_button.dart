@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import '../../../config/ui_config.dart';
 
 class MyPageSwitchButton extends StatefulWidget {
@@ -17,7 +16,7 @@ class _MyPageSwitchButtonState extends State<MyPageSwitchButton> {
     return Transform.scale(
       scale: 0.8,
       child: Transform.translate(
-        offset: Offset(10, 0),
+        offset: const Offset(10, 0),
         child: CupertinoSwitch(
           value: switchValue,
           activeColor: UiConfig.primaryColor,

@@ -42,7 +42,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
               ),
               const SizedBox(height: 16.0),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: MyPageUserProfile(
                   userName: viewModel.user.name,
                   userEmail: viewModel.user.email,
@@ -62,7 +62,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(selectedIndex: 2),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 2),
     );
   }
 }

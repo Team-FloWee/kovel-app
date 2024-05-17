@@ -6,9 +6,9 @@ class BottomNaviBar extends StatefulWidget {
   final int selectedIndex;
 
   const BottomNaviBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
-  }) : super(key: key);
+  });
 
   @override
   _BottomNaviBarState createState() => _BottomNaviBarState();
@@ -40,7 +40,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
           }
         },
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
             ),
@@ -48,11 +48,11 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
           ),
           BottomNavigationBarItem(
             icon: widget.selectedIndex == 1
-                ? Icon(Icons.favorite)
-                : Icon(Icons.favorite_border),
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_border),
             label: '보관함',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.account_circle,
             ),

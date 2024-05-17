@@ -17,7 +17,7 @@ class DetailScreen extends StatefulWidget {
   final int contentTypeId;
   final String title;
 
-  DetailScreen(
+  const DetailScreen(
       {super.key,
       required this.id,
       required this.contentTypeId,
@@ -42,7 +42,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<DetailViewModel>();
     if (viewModel.isLoading) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
@@ -86,7 +86,7 @@ class _DetailScreenState extends State<DetailScreen> {
               getCachedNetworkImage(
                   imagePath: viewModel.tourDetailData.imagePath),
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     Row(
@@ -114,7 +114,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     widget.contentTypeId == 25
                         ? Text(viewModel.tourDetailData.overview,
                             style: UiConfig.bodyStyle)
-                        : SizedBox(),
+                        : const SizedBox(),
                     Padding(
                       padding: const EdgeInsets.only(top: 18, bottom: 16),
                       child: Divider(
@@ -123,7 +123,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: UiConfig.black.shade500),
                     ),
                     widget.contentTypeId != 32
-                        ? SizedBox()
+                        ? const SizedBox()
                         : Column(
                             children: [
                               ContextMenu(
@@ -148,7 +148,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             id: widget.id,
                             contentTypeId: widget.contentTypeId,
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                   ],
                 ),
               ),
@@ -204,7 +204,7 @@ class _InfoSectionState extends State<InfoSection> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           left: 16, top: 16, right: 16, bottom: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),

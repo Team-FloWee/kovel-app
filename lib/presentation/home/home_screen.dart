@@ -173,45 +173,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 16),
                     viewModel.locationBasedList.isNotEmpty
-                        ? Container(
-                            child: GridView.count(
-                                physics: const NeverScrollableScrollPhysics(),
-                                childAspectRatio: 3 / 1,
-                                shrinkWrap: true,
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
-                                children: viewModel.locationBasedList
-                                    .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
-                                    .map(
-                                      (index, e) => MapEntry(
-                                        index,
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            e.title.length > 10
-                                                ? Expanded(
-                                                    child: Text(
-                                                    '${e.title.substring(0, 10)}...',
-                                                    style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
-                                                  ))
-                                                : Expanded(
-                                                    child: Text(
-                                                      e.title,
-                                                      style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
-                                                    ),
-                                                  ),
-                                            Text(
-                                              '${viewModel.distanceList[index][e.id] ?? '가까이 있음'}',
-                                              style: UiConfig.smallStyle,
-                                            ),
-                                          ],
+                        ? GridView.count(
+                            physics: const NeverScrollableScrollPhysics(),
+                            childAspectRatio: 3 / 1,
+                            shrinkWrap: true,
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            children: viewModel.locationBasedList
+                                .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
+                                .map(
+                                  (index, e) => MapEntry(
+                                    index,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        e.title.length > 10
+                                            ? Expanded(
+                                                child: Text(
+                                                '${e.title.substring(0, 10)}...',
+                                                style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                              ))
+                                            : Expanded(
+                                                child: Text(
+                                                  e.title,
+                                                  style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
+                                                ),
+                                              ),
+                                        Text(
+                                          '${viewModel.distanceList[index][e.id] ?? '가까이 있음'}',
+                                          style: UiConfig.smallStyle,
                                         ),
-                                      ),
-                                    )
-                                    .values // MapEntry의 값들만 추출
-                                    .toList()),
-                          )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                .values // MapEntry의 값들만 추출
+                                .toList())
                         : Column(
                             children: [
                               SizedBox(
@@ -234,23 +232,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ]),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    Container(
-                        child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      childAspectRatio: 2 / 1,
-                      shrinkWrap: true,
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 10,
-                      children: List.generate(
-                          AreaTypeList.typeList.length,
-                          (index) => LocationSelector(
-                                category: AreaTypeList.typeList[index],
-                                onSelect: (Category selectedCategory) {
-                                  context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id.toString()});
-                                },
-                              )),
-                    )),
+                    GridView.count(
+                                          physics: const NeverScrollableScrollPhysics(),
+                                          childAspectRatio: 2 / 1,
+                                          shrinkWrap: true,
+                                          crossAxisCount: 4,
+                                          crossAxisSpacing: 16,
+                                          mainAxisSpacing: 10,
+                                          children: List.generate(
+                      AreaTypeList.typeList.length,
+                      (index) => LocationSelector(
+                            category: AreaTypeList.typeList[index],
+                            onSelect: (Category selectedCategory) {
+                              context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id.toString()});
+                            },
+                          )),
+                                        ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                     Row(children: [
                       Text('🔥 가장 인기 있는 명소 Top 10', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
