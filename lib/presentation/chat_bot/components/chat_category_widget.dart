@@ -32,6 +32,7 @@ class _ChatCategoryListState extends State<ChatCategoryWidget> {
                 text: widget.categoryData[index],
                 isSelected: _selectedIndex == index,
                 onSelect: () {
+                  if (_selectedIndex != -1) return;
                   setState(() {
                     _selectedIndex = index;
                     widget.onSelect?.call(widget.categoryData[_selectedIndex]);

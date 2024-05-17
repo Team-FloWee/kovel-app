@@ -12,7 +12,7 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -46,7 +46,8 @@ class _ChatInputState extends State<ChatInput> {
                   onTapOutside: (event) => FocusScope.of(context).unfocus(),
                   style: UiConfig.h4Style,
                   decoration: InputDecoration(
-                    isDense: true,
+                      isDense: true,
+                      enabled: viewModel.canInput,
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: UiConfig.black.shade100),
                           borderRadius: BorderRadius.circular(8)
@@ -54,7 +55,11 @@ class _ChatInputState extends State<ChatInput> {
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: UiConfig.black.shade100),
                           borderRadius: BorderRadius.circular(8)
-                      )
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: UiConfig.black.shade100),
+                          borderRadius: BorderRadius.circular(8)
+                      ),
                   ),
                   onSubmitted: (value) {
                     viewModel.sendChat(request: value);
@@ -68,6 +73,8 @@ class _ChatInputState extends State<ChatInput> {
           InkWell(
             borderRadius: BorderRadius.circular(8),
             onTap: () {
+              if (!viewModel.canInput) return;
+              if (_textController.text.isEmpty) return;
               viewModel.sendChat(request: _textController.text);
               _textController.text = '';
             },
@@ -77,10 +84,13 @@ class _ChatInputState extends State<ChatInput> {
               width: 56.w,
               height: 56.w,
               decoration: BoxDecoration(
-                color: UiConfig.primaryColor,
+                color: viewModel.canInput ? UiConfig.primaryColor : UiConfig.black.shade600,
                 borderRadius: BorderRadius.circular(8)
               ),
-              child: Icon(Icons.send, color: UiConfig.black.shade100)
+              child: Icon(
+                  Icons.send,
+                  color: viewModel.canInput ? UiConfig.black.shade100 : UiConfig.black.shade700
+              )
               ),
           ),
         ],

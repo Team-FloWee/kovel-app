@@ -23,6 +23,8 @@ class ChatBotViewModel with ChangeNotifier {
 
   List<Chat> _chatList = [];
   List<Chat> get chatList => _chatList;
+  bool _canInput = false;
+  bool get canInput => _canInput;
 
   void fetchChatList() {
     _chatList = [];
@@ -63,6 +65,7 @@ class ChatBotViewModel with ChangeNotifier {
       query = '$header$request 대한민국 여행 코스 짜줘';
     }
     _chatList.add(Chat(text: request, role: 'user', chatType: ChatType.text, chatCase: ChatCase.text));
+    _canInput = false;
     notifyListeners();
     final response = await _sendChatToAiUseCase.execute(request: query);
     final finalResponseText = MarkdownUtil().removeMarkdownTags(response.text ?? '');
@@ -84,6 +87,8 @@ class ChatBotViewModel with ChangeNotifier {
           chatCase: ChatCase.recommendPlan
         )
     );
+    _canInput = true;
+    notifyListeners();
   }
 
   void recommendArchiveBasedCourse() {
@@ -95,5 +100,6 @@ class ChatBotViewModel with ChangeNotifier {
             chatCase: ChatCase.archiveBasedCourse
         )
     );
+    notifyListeners();
   }
 }
