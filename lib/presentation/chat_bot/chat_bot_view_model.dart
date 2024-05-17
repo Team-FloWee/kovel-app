@@ -107,7 +107,7 @@ class ChatBotViewModel with ChangeNotifier {
   void restart() {
     _chatList.addAll([
       Chat(
-          text: '코블 AI 챗봇에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?',
+          text: '코블 AI 톡톡에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?',
           role: 'model',
           chatType: ChatType.text,
           chatCase: ChatCase.text

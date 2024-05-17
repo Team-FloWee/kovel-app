@@ -34,7 +34,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<ChatBotViewModel>();
     return Scaffold(
-      appBar: const CommonAppBar(title: 'AI 챗봇'),
+      appBar: const CommonAppBar(title: 'AI 톡톡'),
       body: SafeArea(
         child: Container(
           constraints: BoxConstraints(
