@@ -37,4 +37,14 @@ class LikedTourDataSourceImpl implements LikedTourDataSource {
 
     await _tourRef.doc('$id').set(tour);
   }
+
+  @override
+  Future<List<int>> getPopularTourIdList({required int count}) async {
+    final data = await _tourRef.orderBy('likeCount', descending: true).limit(count).get();
+    final List<int> result = [];
+    for (QueryDocumentSnapshot doc in data.docs) {
+      result.add((doc.data() as Map)['id']);
+    }
+    return result;
+  }
 }

@@ -10,6 +10,7 @@ import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
+import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
@@ -321,26 +322,33 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: SizedBox(
-                  height: 300,
-                  child: GridView.count(
+                  height: 348,
+                  child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                    ),
+                    itemCount: viewModel.popularTourList.length,
                     padding: const EdgeInsets.all(8.0),
                     scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 10,
-                    children: const [
-                      Top10PopularLandmarks(text: 'data1'),
-                      Top10PopularLandmarks(text: 'data2'),
-                      Top10PopularLandmarks(text: 'data3'),
-                      Top10PopularLandmarks(text: 'data4'),
-                      Top10PopularLandmarks(text: 'data5'),
-                      Top10PopularLandmarks(text: 'data6'),
-                      Top10PopularLandmarks(text: 'data7'),
-                      Top10PopularLandmarks(text: 'data8'),
-                      Top10PopularLandmarks(text: 'data9'),
-                      Top10PopularLandmarks(text: 'data10'),
-                    ],
+                    shrinkWrap: false,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => context.pushNamed('detail',
+                            queryParameters: {
+                              'id': viewModel.popularTourList[index].contentId.toString(),
+                              'contentTypeId': viewModel.popularTourList[index].contentType.contentTypeId.toString(),
+                              'title': viewModel.popularTourList[index].contentType.name
+                            }),
+                        child: FavoriteImage(
+                          archived: ArchivedUtil.getArchived(tourDetail: viewModel.popularTourList[index]),
+                          imageSize: 160,
+                          area: AreaType(areaCode: viewModel.popularTourList[index].areaCode).name,
+                          title: viewModel.popularTourList[index].title,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
