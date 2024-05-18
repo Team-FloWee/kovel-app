@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeSearchViewModel with ChangeNotifier {
   final GetSearchKeywordUseCase _getSearchKeywordUseCase;
 
-  HomeSearchViewModel(GetSearchKeywordUseCase getSearchKeywordUseCase) : _getSearchKeywordUseCase = getSearchKeywordUseCase;
+  HomeSearchViewModel({required GetSearchKeywordUseCase getSearchKeywordUseCase}) : _getSearchKeywordUseCase = getSearchKeywordUseCase;
 
   bool isLoading = false;
   List<Tour> searchDataList = [];
