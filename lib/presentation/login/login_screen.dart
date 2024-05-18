@@ -70,7 +70,6 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               Card(
                 margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                 shape: RoundedRectangleBorder(
