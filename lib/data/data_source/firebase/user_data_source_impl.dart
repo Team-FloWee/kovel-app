@@ -1,30 +1,30 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 class UserDataSourceImpl implements UserDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  final String? _userId = auth.FirebaseAuth.instance.currentUser?.uid;
+  //Todo uid 가져와도될지 세훈님 문의
   final _userRef = FirebaseFirestore.instance
       .collection('user')
       .withConverter<User>(
           fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
           toFirestore: (snapshot, _) => snapshot.toJson());
-
+  final _picker = ImagePicker();
   @override
   Future<void> createUser({required User user}) async {
     await _userRef.doc(user.userId).set(user);
   }
 
   @override
-  Future<void> updateUser({required User user}) async {
-    await _userRef.doc(user.userId).update({
-      'email': user.email,
-      'imageUrl': user.imageUrl,
-      'name': user.name,
-      'archivedList': user.archivedList,
-    });
+  Future<void> updateUserName({required String name}) async {
+    await _userRef.doc(_userId).update({'name': name});
   }
 
   @override
@@ -36,8 +36,8 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<User> getUser({required String id}) async {
-    final user = await _userRef.doc(id).get().then((s) => s.data()!);
+  Future<User> getUser() async {
+    final user = await _userRef.doc(_userId).get().then((s) => s.data()!);
     return user;
   }
 
@@ -55,5 +55,27 @@ class UserDataSourceImpl implements UserDataSource {
         .then((value) => true)
         .onError((error, stackTrace) => false);
     return result;
+  }
+
+  @override
+  Future<void> updateLanguage(String lang) async {
+    await _userRef.doc(_userId).update({'language': lang});
+  }
+
+  @override
+  Future<void> updatePhoto() async {
+    XFile? xFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (xFile != null) {
+      //이미지 업로드
+      final storageRef = FirebaseStorage.instance.ref();
+      final imageRef = storageRef.child('user/${_userId}/profile/profile.png');
+
+      //이미지 다운로드
+      await imageRef.putFile(File(xFile.path));
+      final downloadUrl = await imageRef.getDownloadURL();
+
+      //업데이트 (이후 currentUser로 바꾸기)
+      await _userRef.doc(_userId).update({'imageUrl': downloadUrl});
+    }
   }
 }
