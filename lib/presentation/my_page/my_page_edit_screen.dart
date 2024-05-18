@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -17,15 +18,13 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
-    _controller.text = context.read<MyPageViewModel>().user?.name ?? '';
+    // Future.microtask(() => context.read<MyPageViewModel>().getProfile());
+    _controller.text = context.read<UserProvider>().user.name;
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _controller.dispose();
     super.dispose();
   }
@@ -33,6 +32,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MyPageViewModel>();
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
