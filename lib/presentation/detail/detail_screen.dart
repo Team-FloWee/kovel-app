@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
@@ -67,7 +68,7 @@ class _DetailScreenState extends State<DetailScreen> {
       );
     } else {
       // 이 화면이 나오면 위의 조건이 이상한 것
-      const Text('예외 상황 페이지 확인이 필요');
+      Text('예외 상황 페이지 확인이 필요'.tr());
     }
 
     return Scaffold(

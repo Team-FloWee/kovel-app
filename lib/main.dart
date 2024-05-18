@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -25,8 +26,22 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // Easy Localization 초기화
+  await EasyLocalization.ensureInitialized();
+
   diSetup();
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      // 지원하는 로케일 리스트 ('영어', '미국'), ('한국어', '한국')
+      supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
+      // 번역 파일이 위치한 경로
+      path: 'assets/translations',
+      // 기본적으로 사용할 로케일 지정
+      // TODO: 유저 언어 설정에 따라 언어를
+      fallbackLocale: const Locale('ko', 'KR'),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -44,6 +59,9 @@ class MyApp extends StatelessWidget {
           create: (_) => UserProvider(
               likeTourUseCase: getIt(), unLikeTourUseCase: getIt()),
           child: MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             debugShowCheckedModeBanner: false,
             routerConfig: goRouter,
             title: 'Flutter Demo',

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
@@ -30,61 +31,63 @@ class _CourseListScreenState extends State<CourseListScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<CourseListViewModel>();
-    return viewModel.isLoading == true
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
-        : Scaffold(
-            appBar: const CommonAppBar(
-              title: '여행코스',
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        '추천코스',
-                        style: UiConfig.h3Style.copyWith(
-                          fontWeight: UiConfig.semiBoldFont,
-                          color: UiConfig.black.shade900,
+    return Scaffold(
+      appBar: CommonAppBar(
+        title: '여행코스'.tr(),
+      ),
+      body: viewModel.isLoading == true
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          '추천코스'.tr(),
+                          style: UiConfig.h3Style.copyWith(
+                            fontWeight: UiConfig.semiBoldFont,
+                            color: UiConfig.black.shade900,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CategoryList(
-                        categoryData: CourseCategoryTypeList.typeList,
-                        onSelect: (Category category) {
-                          // 카테고리 가져오기
-                          context
-                              .read<CourseListViewModel>()
-                              .getCourseData(widget.areaCode, category.id);
-                        }),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Column(
-                      children: viewModel.courseDetailList
-                          .map((e) => Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: CourseRecommendation(
-                                  tourDetail: e,
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      CategoryList(
+                          categoryData: CourseCategoryTypeList.typeList,
+                          onSelect: (Category category) {
+                            // 카테고리 가져오기
+                            context
+                                .read<CourseListViewModel>()
+                                .getCourseData(widget.areaCode, category.id);
+                          }),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Column(
+                        children: viewModel.courseDetailList
+                            .map((e) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: CourseRecommendation(
+                                    tourDetail: e,
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          );
+    );
   }
 }

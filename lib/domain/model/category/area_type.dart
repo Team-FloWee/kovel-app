@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -6,30 +7,32 @@ part 'area_type.g.dart';
 @JsonSerializable(explicitToJson: true)
 class AreaType extends Category {
   final String areaCode;
+
   AreaType({required this.areaCode}) : super(id: areaCode);
 
-  factory AreaType.fromJson(Map<String, dynamic> json) => _$AreaTypeFromJson(json);
+  factory AreaType.fromJson(Map<String, dynamic> json) =>
+      _$AreaTypeFromJson(json);
 
   Map<String, dynamic> toJson() => _$AreaTypeToJson(this);
 
   @override
   String get name => switch (areaCode) {
-        '99' => 'AI추천',
-        '1' => '서울',
-        '2' => '인천',
-        '3' => '대전',
-        '4' => '대구',
-        '5' => '광주',
-        '6' => '부산',
-        '7' => '울산',
-        '8' => '세종',
-        '9' => '경기도',
-        '32' => '강원도',
-        '33' || '34' => '충청도',
-        '35' || '36' => '경상도',
-        '37' || '38' => '전라도',
-        '39' => '제주도',
-        _ => '전체'
+        '99' => 'AI추천'.tr(),
+        '1' => '서울'.tr(),
+        '2' => '인천'.tr(),
+        '3' => '대전'.tr(),
+        '4' => '대구'.tr(),
+        '5' => '광주'.tr(),
+        '6' => '부산'.tr(),
+        '7' => '울산'.tr(),
+        '8' => '세종'.tr(),
+        '9' => '경기도'.tr(),
+        '32' => '강원도'.tr(),
+        '33' || '34' => '충청도'.tr(),
+        '35' || '36' => '경상도'.tr(),
+        '37' || '38' => '전라도'.tr(),
+        '39' => '제주도'.tr(),
+        _ => '전체'.tr()
       };
 }
 
