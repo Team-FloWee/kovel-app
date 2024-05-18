@@ -65,7 +65,7 @@ class CourseRecommendation extends StatelessWidget {
                   tourDetail.overview,
                   style: UiConfig.bodyStyle
                       .copyWith(fontWeight: UiConfig.regularFont),
-                  maxLines: 3,
+                  maxLines: (tourDetail.title.length > 17) ? 2 : 3,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
