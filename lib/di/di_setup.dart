@@ -17,8 +17,8 @@ import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart'
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
-import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
+import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
@@ -29,20 +29,18 @@ import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
-
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
+import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
+import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
-
-import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
-import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
-
-import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
+import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
 import '../core/auth/user_provider.dart';
@@ -82,10 +80,9 @@ void diSetup() {
       GetTranslatedDataStreamUseCase(aiRepository: getIt()));
   getIt.registerSingleton<GetAreaDataUseCase>(
       GetAreaDataUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<LoginUseCase>(
-      LoginUseCase(userRepository: getIt()));
-  getIt.registerSingleton<LogoutUseCase>(
-      LogoutUseCase(userRepository: getIt()));
+  getIt.registerSingleton<LoginUseCase>(LoginUseCase(userRepository: getIt()));
+  getIt
+      .registerSingleton<LogoutUseCase>(LogoutUseCase(userRepository: getIt()));
   getIt.registerSingleton<CheckUserDuplicatedUseCase>(
       CheckUserDuplicatedUseCase(userRepository: getIt()));
   getIt.registerSingleton<CreateUserUseCase>(
@@ -102,7 +99,7 @@ void diSetup() {
       SendChatToAiUseCase(aiRepository: getIt()));
   getIt.registerSingleton<GetChatSessionUseCase>(
       GetChatSessionUseCase(aiRepository: getIt()));
-  
+
   // Provider
   getIt.registerSingleton<AiProvider>(
       AiProvider(getTranslatedDataStreamUseCase: getIt()));
@@ -114,38 +111,32 @@ void diSetup() {
   getIt.registerFactory<DetailViewModel>(() => DetailViewModel(
       getCommonDataUseCase: getIt(),
       getDetailDataUseCase: getIt(),
-      getInfoDataUseCase: getIt()
-  ));
+      getInfoDataUseCase: getIt()));
   getIt.registerFactory<LocationListViewModel>(() => LocationListViewModel(
-      getCommonDataUseCase: getIt(),
-      getAreaDataUseCase: getIt(),
-      userRepository: getIt(),
-  ));
+        getCommonDataUseCase: getIt(),
+        getAreaDataUseCase: getIt(),
+        userRepository: getIt(),
+      ));
   getIt.registerFactory<CourseListViewModel>(() => CourseListViewModel(
-      getCommonDataUseCase: getIt(),
-      getAreaDataUseCase: getIt(),
-  ));
+        getCommonDataUseCase: getIt(),
+        getAreaDataUseCase: getIt(),
+      ));
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
       loginUseCase: getIt(),
       logoutUseCase: getIt(),
       checkUserDuplicatedUseCase: getIt(),
-      createUserUseCase: getIt()
-  ));
-  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
-      updateUserNameUseCase: getIt()
-  ));
-
+      createUserUseCase: getIt()));
+  getIt.registerFactory<SignUpViewModel>(
+      () => SignUpViewModel(updateUserNameUseCase: getIt()));
+  getIt.registerFactory<MyPageViewModel>(
+      () => MyPageViewModel(userRepository: getIt()));
   getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(
-      sendChatToAiUseCase: getIt(),
-      getChatSessionUseCase: getIt()
-  ));
+      sendChatToAiUseCase: getIt(), getChatSessionUseCase: getIt()));
 
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
       getSearchFestivalUseCase: getIt(),
       getSearchKeywordUseCase: getIt(),
-      getLocationBasedDataUseCase: getIt()
-  ));
-  getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(
-      getSearchKeywordUseCase: getIt()
-  ));
+      getLocationBasedDataUseCase: getIt()));
+  getIt.registerFactory<HomeSearchViewModel>(
+      () => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
 }
