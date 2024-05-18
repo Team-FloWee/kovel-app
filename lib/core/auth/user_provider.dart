@@ -22,7 +22,8 @@ class UserProvider with ChangeNotifier {
   })  : _likeTourUseCase = likeTourUseCase,
         _unLikeTourUseCase = unLikeTourUseCase;
 
-  late User user;
+  late User _user;
+  User get user => _user;
 
   final currentUser = auth.FirebaseAuth.instance.currentUser;
   final _userRef = FirebaseFirestore.instance
@@ -46,14 +47,13 @@ class UserProvider with ChangeNotifier {
   Future<User> getUser() async {
     try {
       final data = await _userRef
-          .doc(auth.FirebaseAuth.instance.currentUser!.uid)
+          .doc(auth.FirebaseAuth.instance.currentUser?.uid)
           .get()
           .then((s) => s.data()!);
 
-      user = data;
-      print(data);
+      _user = data;
     } catch (error) {
-      user = const User(
+      _user = const User(
         userId: '',
         name: '',
         email: '',

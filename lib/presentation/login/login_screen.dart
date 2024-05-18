@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                     if (viewModel.isNewUser) {
                       context.go('/signUp', extra: viewModel.user);
                     } else {
-                      context.go('/locationList');
+                      context.go('/');
                     }
                   },
                   // TODO: 유저 language에 따라 다른 asset 이미지 보여지게 수정
