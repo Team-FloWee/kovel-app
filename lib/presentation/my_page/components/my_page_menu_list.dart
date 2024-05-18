@@ -52,8 +52,13 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) =>
-                  LanguageEditDialog(updateLanguage: (String lang) {
-                viewModel.updateLanguage(lang);
+                  LanguageEditDialog(updateLanguage: (String lang) async {
+                    if (lang == 'en') {
+                      await context.setLocale(const Locale('en', 'US'));
+                    } else {
+                      await context.setLocale(const Locale('ko', 'KR'));
+                    }
+                    viewModel.updateLanguage(lang);
               }),
             );
           },
