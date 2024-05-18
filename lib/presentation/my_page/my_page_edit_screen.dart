@@ -19,7 +19,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   void initState() {
     super.initState();
-    // Future.microtask(() => context.read<MyPageViewModel>().getProfile());
+    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
     _controller.text = context.read<UserProvider>().user.name;
   }
 
@@ -32,7 +32,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MyPageViewModel>();
-    final userProvider = context.watch<UserProvider>();
+    final userProvider = context.watch<UserProvider>().user;
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -42,7 +42,9 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  viewModel.updatePhoto();
+                  setState(() {
+                    viewModel.updatePhoto2();
+                  });
                 },
                 child: SizedBox(
                   width: 72.0,
@@ -53,11 +55,11 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                       aspectRatio: 1 / 1,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: viewModel.user.imageUrl,
+                        imageUrl: userProvider.imageUrl,
                         placeholder: (context, url) =>
                             const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            Image.asset('assets/images/blank_profile_image.png'),
+                        errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/blank_profile_image.png'),
                       ),
                     ),
                   ),
