@@ -11,10 +11,8 @@ import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
-import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
-import 'package:kovel_app/presentation/home/components/top_10_popular_landmarks.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -53,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      appBar: const CommonAppBar(title: ''),
+      appBar: AppBar(toolbarHeight: 16),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
