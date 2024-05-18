@@ -57,7 +57,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
             );
           },
         ),
-        MyPageMenuBarWidget(
+        const MyPageMenuBarWidget(
           menuBarName: 'Dark Mode',
           menuBarWidget: MyPageSwitchButton(),
         ),

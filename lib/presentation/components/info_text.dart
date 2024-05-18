@@ -23,7 +23,7 @@ class InfoText extends StatelessWidget {
                   .copyWith(fontWeight: UiConfig.semiBoldFont),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Expanded(

@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<SignUpViewModel>();
     return Scaffold(
-      appBar: CommonAppBar(title: ''),
+      appBar: const CommonAppBar(title: ''),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -69,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onTapOutside: (event) => FocusScope.of(context).unfocus(),
                               style: UiConfig.bodyStyle,
                               decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(16),
+                                  contentPadding: const EdgeInsets.all(16),
                                   hintText: '빨간망토',
                                   hintStyle: UiConfig.bodyStyle.copyWith(color: UiConfig.black.shade700),
                                   focusedBorder: OutlineInputBorder(
@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 56.h,
                           child: ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStatePropertyAll(UiConfig.primaryColor),
+                                backgroundColor: const MaterialStatePropertyAll(UiConfig.primaryColor),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)
