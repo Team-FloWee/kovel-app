@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
@@ -37,7 +38,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
     )
         : Scaffold(
       appBar: const CommonAppBar(
-        title: '여행코스',
+        title: '여행코스'.tr(),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -51,7 +52,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Text(
-                  '추천코스',
+                  '추천코스'.tr(),
                   style: UiConfig.h3Style.copyWith(
                     fontWeight: UiConfig.semiBoldFont,
                     color: UiConfig.black.shade900,

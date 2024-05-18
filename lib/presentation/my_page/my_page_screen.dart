@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
@@ -33,16 +34,16 @@ class _MyPageScreenState extends State<MyPageScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: ContentTitle(
-                  title: '내 프로필',
+                  title: '내 프로필'.tr(),
                   // withMore: true,
                 ),
               ),
               const SizedBox(height: 16.0),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: MyPageUserProfile(
                   userName: viewModel.user.name,
                   userEmail: viewModel.user.email,
@@ -62,7 +63,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(selectedIndex: 2),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 2),
     );
   }
 }

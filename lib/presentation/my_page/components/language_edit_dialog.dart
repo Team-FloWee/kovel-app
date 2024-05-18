@@ -41,7 +41,6 @@ class _LanguageEditDialogState extends State<LanguageEditDialog> {
                 selectedLanguage = 'ko';
               });
             },
-            child: Text('Korean'),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
@@ -64,6 +63,7 @@ class _LanguageEditDialogState extends State<LanguageEditDialog> {
                 },
               ),
             ),
+            child: const Text('Korean'),
           ),
           TextButton(
             onPressed: () {
@@ -71,7 +71,6 @@ class _LanguageEditDialogState extends State<LanguageEditDialog> {
                 selectedLanguage = 'en';
               });
             },
-            child: Text('English'),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
@@ -94,6 +93,7 @@ class _LanguageEditDialogState extends State<LanguageEditDialog> {
                 },
               ),
             ),
+            child: const Text('English'),
           )
         ],
       ),
@@ -128,8 +128,8 @@ class _LanguageEditDialogState extends State<LanguageEditDialog> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                       content: selectedLanguage == 'ko'
-                          ? Text('언어가 한국어로 변경되었습니다.')
-                          : Text('Language changed to English.')),
+                          ? const Text('언어가 한국어로 변경되었습니다.')
+                          : const Text('Language changed to English.')),
                 );
                 widget.updateLanguage(selectedLanguage);
                 context.go('/splash');

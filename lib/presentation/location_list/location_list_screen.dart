@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/core/utils/language_util.dart';
@@ -37,7 +39,7 @@ class _LocationListScreenState extends State<LocationListScreen> {
       final userProvider = context.read<UserProvider>();
       context.read<LocationListViewModel>().getData(widget.areaCode,
           LanguageUtil().getLanguage(userProvider.user.language));
-    }); //세트
+    });
     Future.microtask(() => _courseDataScrollController.addListener(() {
           _onCourseDataScroll();
         }));
@@ -98,38 +100,33 @@ class _LocationListScreenState extends State<LocationListScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                       child: ContentTitle(
-                        title: '추천 코스',
+                        title: '추천 코스'.tr(),
                         withMore: true,
                         onTapMore: () {
-                          context.pushNamed('courseList',
-                              queryParameters: {'areaCode': widget.areaCode});
+                          context.pushNamed(
+                            'courseList',
+                            queryParameters: {'areaCode': widget.areaCode},
+                          );
                         },
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const SizedBox(height: 16),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: CategoryList(
-                          categoryData: CourseCategoryTypeList.typeList,
-                          onSelect: (Category category) {
-                            viewModel.selectCourseCategory(category.id);
-                            context.read<LocationListViewModel>().getCourseData(
-                                widget.areaCode,
-                                category.id,
-                                LanguageUtil()
-                                    .getLanguage(userProvider.user.language));
-                          }),
+                        categoryData: CourseCategoryTypeList.typeList,
+                        onSelect: (Category category) {
+                          context
+                              .read<LocationListViewModel>()
+                              .getCourseData(widget.areaCode, category.id);
+                        },
+                      ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const SizedBox(height: 16),
                     SingleChildScrollView(
                       controller: _courseDataScrollController,
                       scrollDirection: Axis.horizontal,
-                      child: Container(
-                        height: 100,
+                      child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: Row(
                           children: [
@@ -167,8 +164,9 @@ class _LocationListScreenState extends State<LocationListScreen> {
                       child: viewModel.isCommonDataLoading == true
                           ? const Center(
                               child: CircularProgressIndicator(
-                              color: UiConfig.primaryColor,
-                            ))
+                                color: UiConfig.primaryColor,
+                              ),
+                            )
                           : const SizedBox(),
                     ),
                   ],
@@ -204,10 +202,10 @@ class _LocationCommonDataState extends State<LocationCommonData> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 16.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
             child: ContentTitle(
-              title: '테마별 장소',
+              title: '테마별 장소'.tr(),
             ),
           ),
           Column(
@@ -219,9 +217,10 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                 onSelect: (Category category) {
                   viewModel.selectCategory(int.parse(category.id));
                   context.read<LocationListViewModel>().getCommonData(
-                      widget.areaCode,
-                      int.parse(category.id ?? '0'),
-                      LanguageUtil().getLanguage(userProvider.user.language));
+                        widget.areaCode,
+                        int.parse(category.id ?? '0'),
+                        LanguageUtil().getLanguage(userProvider.user.language),
+                      );
                 },
               ),
               const SizedBox(height: 16),
@@ -229,38 +228,43 @@ class _LocationCommonDataState extends State<LocationCommonData> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: viewModel.tourDetailList
-                      .map((e) => Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: InkWell(
-                              onTap: () {
-                                context.pushNamed('detail', queryParameters: {
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: InkWell(
+                            onTap: () {
+                              context.pushNamed(
+                                'detail',
+                                queryParameters: {
                                   'id': e.contentId.toString(),
                                   'contentTypeId': e.contentType.id,
                                   'title': e.title
-                                });
-                              },
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  viewModel.isLoading
-                                      ? const Center(
-                                          child: CircularProgressIndicator())
-                                      : FavoriteImage(
-                                          archived: ArchivedUtil.getArchived(
-                                              tourDetail: e),
-                                          imageSize: 145,
-                                        ),
-                                  const SizedBox(width: 8),
-                                  CommonText(
-                                    badgeTitle: e.contentType.name,
-                                    title: e.title,
-                                    tel: e.tel,
-                                    address: e.address1,
-                                  ),
-                                ],
-                              ),
+                                },
+                              );
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                viewModel.isLoading
+                                    ? const Center(
+                                        child: CircularProgressIndicator())
+                                    : FavoriteImage(
+                                        archived: ArchivedUtil.getArchived(
+                                            tourDetail: e),
+                                        imageSize: 145,
+                                      ),
+                                const SizedBox(width: 8),
+                                CommonText(
+                                  badgeTitle: e.contentType.name,
+                                  title: e.title,
+                                  tel: e.tel,
+                                  address: e.address1,
+                                ),
+                              ],
                             ),
-                          ))
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               ),

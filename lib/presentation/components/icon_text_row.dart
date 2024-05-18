@@ -22,7 +22,7 @@ class IconTextRow extends StatelessWidget {
             padding: const EdgeInsets.only(top: 1.5),
             child: Icon(icon, size: 18, color: UiConfig.black.shade800),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Expanded(
             child: maxline == 0
                 ? Text(
@@ -42,6 +42,6 @@ class IconTextRow extends StatelessWidget {
           ),
         ],
       ),
-    ) : SizedBox();
+    ) : const SizedBox();
   }
 }

@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     Future.microtask(() => context.read<UserProvider>().getUser());
     _controller =
-        AnimationController(duration: Duration(seconds: 2), vsync: this);
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(

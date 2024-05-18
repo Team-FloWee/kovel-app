@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/archived/components/archived_item.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../../config/ui_config.dart';
 import '../../domain/model/archived.dart';
 
 class ArchivedScreen extends StatefulWidget {
@@ -26,37 +28,46 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('나의 보관함'),
+        title: Text(
+          '나의 보관함'.tr(),
+          style: UiConfig.h3Style.copyWith(
+            fontWeight: UiConfig.semiBoldFont,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.location_on_rounded),
+            icon: const Icon(Icons.location_on_rounded),
             onPressed: () {},
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 24.0, left: 16, right: 16),
-        child: Align(
-          alignment: Alignment.center,
-          child: GridView.builder(
-            itemCount: userProvider.user.archivedList.length, // 아이템 개수
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              childAspectRatio: 1,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 24.0, left: 16, right: 16),
+          child: Align(
+            alignment: Alignment.center,
+            child: GridView.builder(
+              itemCount: userProvider.user.archivedList.length, // 아이템 개수
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                childAspectRatio: 1,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                // index에 해당하는 archived를 가져옴
+                Archived archived = userProvider.user.archivedList[index];
+                return ArchivedItem(
+                  archived: archived,
+                );
+              },
+
             ),
-            itemBuilder: (BuildContext context, int index) {
-              // index에 해당하는 archived를 가져옴
-              Archived archived = userProvider.user.archivedList[index];
-              return ArchivedItem(
-                archived: archived,
-              );
-            },
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(selectedIndex: 1),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 1),
     );
   }
 }

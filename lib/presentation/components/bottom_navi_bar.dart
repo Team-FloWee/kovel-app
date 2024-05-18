@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
@@ -6,9 +7,9 @@ class BottomNaviBar extends StatefulWidget {
   final int selectedIndex;
 
   const BottomNaviBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
-  }) : super(key: key);
+  });
 
   @override
   _BottomNaviBarState createState() => _BottomNaviBarState();
@@ -40,23 +41,23 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
           }
         },
         items: [
+
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: '홈',
+            icon: const Icon(Icons.home),
+            label: '홈'.tr(),
           ),
           BottomNavigationBarItem(
             icon: widget.selectedIndex == 1
-                ? Icon(Icons.favorite)
-                : Icon(Icons.favorite_border),
-            label: '보관함',
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_border),
+
+            label: '보관함'.tr(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.account_circle,
             ),
-            label: '마이페이지',
+            label: '마이페이지'.tr(),
           ),
         ],
       ),
