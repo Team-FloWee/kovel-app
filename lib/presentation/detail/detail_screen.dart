@@ -1,8 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
-import 'package:kovel_app/presentation/components/common_text.dart';
+import 'package:kovel_app/presentation/components/detail_text.dart';
 import 'package:kovel_app/presentation/components/favorite_icon.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
 import 'package:kovel_app/presentation/components/translate/context_menu.dart';
@@ -67,7 +68,7 @@ class _DetailScreenState extends State<DetailScreen> {
       );
     } else {
       // 이 화면이 나오면 위의 조건이 이상한 것
-      const Text('예외 상황 페이지 확인이 필요');
+      Text('예외 상황 페이지 확인이 필요'.tr());
     }
 
     return Scaffold(
@@ -93,7 +94,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CommonText(
+                        DetailText(
                           badgeTitle: viewModel.tourDetailData.contentType
                                       .contentTypeId ==
                                   25
