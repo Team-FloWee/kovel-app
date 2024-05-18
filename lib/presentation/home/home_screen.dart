@@ -395,6 +395,29 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: FloatingActionButton.extended(
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          backgroundColor: UiConfig.secondaryColor,
+          icon: SizedBox(
+              width: 24,
+              height: 24,
+              child: Icon(Icons.smart_toy_outlined, color: UiConfig.black.shade800,)
+          ),
+          label: Text(
+              'AI 톡톡',
+              style: UiConfig.h4Style.copyWith(
+                  fontWeight: UiConfig.semiBoldFont,
+                  color: UiConfig.black.shade800
+              )
+          ),
+          onPressed: () {
+            context.push('/chatBot');
+          },
+        ),
+      ),
       bottomNavigationBar: const BottomNaviBar(selectedIndex: 0),
     );
   }

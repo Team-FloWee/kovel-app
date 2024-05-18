@@ -16,6 +16,8 @@ import 'package:kovel_app/domain/repository/ai_repository.dart';
 import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
+import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
+import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
@@ -30,6 +32,7 @@ import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
+import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
@@ -100,6 +103,12 @@ void diSetup() {
       createUserUseCase: CreateUserUseCase(userRepository: getIt())));
 
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
+  
+  getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(
+      sendChatToAiUseCase: SendChatToAiUseCase(aiRepository: getIt()),
+      getChatSessionUseCase: GetChatSessionUseCase(aiRepository: getIt())
+  ));
+  
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
       getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt()),
       getSearchKeywordUseCase: GetSearchKeywordUseCase(tourInfoRepository: getIt()),
