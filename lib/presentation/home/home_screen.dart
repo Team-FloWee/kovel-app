@@ -61,16 +61,19 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: MyPageUserProfile(
-                  userName: userProvider.user.name,
-                  userEmail: userProvider.user.email,
-                  userProfilePath: userProvider.user.imageUrl,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            '안녕하세요, ${userProvider.user.name}님!',
+                            style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

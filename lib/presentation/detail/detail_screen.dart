@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
-import 'package:kovel_app/presentation/components/common_text.dart';
+import 'package:kovel_app/presentation/components/detail_text.dart';
 import 'package:kovel_app/presentation/components/favorite_icon.dart';
 import 'package:kovel_app/presentation/components/info_text.dart';
 import 'package:kovel_app/presentation/components/translate/context_menu.dart';
@@ -94,7 +94,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CommonText(
+                        DetailText(
                           badgeTitle: viewModel.tourDetailData.contentType
                                       .contentTypeId ==
                                   25
