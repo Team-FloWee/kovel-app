@@ -118,7 +118,12 @@ class _LocationListScreenState extends State<LocationListScreen> {
                         onSelect: (Category category) {
                           context
                               .read<LocationListViewModel>()
-                              .getCourseData(widget.areaCode, category.id);
+                              .getCourseData(
+                              widget.areaCode,
+                              category.id,
+                              userProvider.user.language
+                          );
+
                         },
                       ),
                     ),
