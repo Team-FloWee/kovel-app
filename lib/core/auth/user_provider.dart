@@ -62,6 +62,7 @@ class UserProvider with ChangeNotifier {
         archivedList: [],
       );
     }
+    notifyListeners();
     return user;
   }
 

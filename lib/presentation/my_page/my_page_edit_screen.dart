@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -15,15 +16,13 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
-    _controller.text = context.read<MyPageViewModel>().user?.name ?? '';
+    // Future.microtask(() => context.read<MyPageViewModel>().getProfile());
+    _controller.text = context.read<UserProvider>().user.name;
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _controller.dispose();
     super.dispose();
   }
@@ -31,6 +30,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MyPageViewModel>();
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Container(
@@ -40,6 +40,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
             GestureDetector(
               onTap: () {
                 viewModel.updatePhoto();
+                userProvider.getUser();
               },
               child: SizedBox(
                 width: 72.0,
@@ -50,7 +51,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                     aspectRatio: 1 / 1,
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: viewModel.user.imageUrl,
+                      imageUrl: userProvider.user.imageUrl,
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
@@ -67,6 +68,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
               onPressed: () {
                 viewModel.updateName(_controller.text);
                 context.pop();
+                userProvider.getUser();
               },
               child: const Text('수정완료'),
             ),

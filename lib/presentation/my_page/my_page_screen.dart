@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<MyPageViewModel>();
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: const CommonAppBar(title: ''),
@@ -44,9 +44,9 @@ class _MyPageScreenState extends State<MyPageScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: MyPageUserProfile(
-                  userName: viewModel.user.name,
-                  userEmail: viewModel.user.email,
-                  userProfilePath: viewModel.user.imageUrl,
+                  userName: userProvider.user.name,
+                  userEmail: userProvider.user.email,
+                  userProfilePath: userProvider.user.imageUrl,
                 ),
               ),
               Padding(
