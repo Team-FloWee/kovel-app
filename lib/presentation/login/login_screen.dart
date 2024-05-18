@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                   if (viewModel.isNewUser) {
                     context.go('/signUp', extra: viewModel.user);
                   } else {
-                    context.go('/locationList');
+                    context.go('/');
                   }
                 },
                 child: Image.asset(
