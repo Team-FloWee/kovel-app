@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:input_history_text_field/input_history_text_field.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
@@ -8,8 +7,31 @@ import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:provider/provider.dart';
 
-class HomeSearchScreen extends StatelessWidget {
+class HomeSearchScreen extends StatefulWidget {
   const HomeSearchScreen({super.key});
+
+  @override
+  State<HomeSearchScreen> createState() => _HomeSearchScreenState();
+}
+
+class _HomeSearchScreenState extends State<HomeSearchScreen> {
+  FocusNode searchFocusNode = FocusNode();
+  bool isFocused = false;
+  @override
+  void initState() {
+    super.initState();
+    searchFocusNode.addListener(() {
+      setState(() {
+        isFocused = searchFocusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    searchFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +47,14 @@ class HomeSearchScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: InputHistoryTextField(
-                    textEditingController: textController,
-                    historyKey: '03',
-                    listStyle: ListStyle.Badge,
-                    showHistoryIcon: false,
-                    lockItems: const ['강원', '충청', '전라', '경상'],
-                    backgroundColor: UiConfig.primaryColor,
-                    textColor: UiConfig.black.shade100,
-                    deleteIconColor: UiConfig.black.shade100,
-                    onSubmitted: (value) {
+                  child: TextFormField(
+                    controller: textController,
+                    focusNode: searchFocusNode,
+                    onTap: viewModel.onLoadSearchHistory,
+                    onFieldSubmitted: (value) {
                       viewModel.onSearch(value);
+                      // searchFocusNode.requestFocus();
                     },
-                    limit: 10,
-                    showDeleteIcon: true,
                     decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
@@ -53,18 +69,58 @@ class HomeSearchScreen extends StatelessWidget {
                           padding: EdgeInsets.only(left: 14.0),
                           child: Icon(Icons.search),
                         ),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            // viewModel.onRefresh();
-                            // setState(() {});
-                            context.push('/search');
-                          },
-                          child: const Icon(
-                            Icons.cancel_rounded,
-                          ),
-                        )),
+                        suffixIcon: isFocused
+                            ? GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    textController.clear();
+                                  });
+                                },
+                                child: const Icon(
+                                  Icons.cancel_rounded,
+                                ),
+                              )
+                            : null),
                   ),
                 ),
+                if (isFocused) ...[
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: viewModel.searchHistoryList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        minVerticalPadding: 0,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
+                        title: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    textController.text = viewModel.searchHistoryList[index];
+                                  },
+                                  child: Text(
+                                    viewModel.searchHistoryList[index],
+                                    style: UiConfig.bodyStyle,
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      viewModel.onRemoveSearchHistory(index);
+                                    },
+                                    icon: const Icon(
+                                      Icons.close,
+                                      size: 20,
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
                 SingleChildScrollView(
                   child: Column(
                     children: [

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
@@ -40,23 +41,23 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
           }
         },
         items: [
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: '홈',
+
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: '홈'.tr(),
           ),
           BottomNavigationBarItem(
             icon: widget.selectedIndex == 1
                 ? const Icon(Icons.favorite)
                 : const Icon(Icons.favorite_border),
-            label: '보관함',
+
+            label: '보관함'.tr(),
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(
+          BottomNavigationBarItem(
+            icon: const Icon(
               Icons.account_circle,
             ),
-            label: '마이페이지',
+            label: '마이페이지'.tr(),
           ),
         ],
       ),
