@@ -15,7 +15,6 @@ import 'package:kovel_app/presentation/home/components/location_selector.dart';
 import 'package:kovel_app/presentation/home/components/ongoing_festivals.dart';
 import 'package:kovel_app/presentation/home/components/top_10_popular_landmarks.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
-import 'package:kovel_app/presentation/my_page/components/my_page_user_profile.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -69,8 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
-                            '안녕하세요, ${userProvider.user.name}님!',
-                            style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                            '${'안녕하세요,'.tr()}${userProvider.user.name}${'님!'.tr()}',
+                            style: UiConfig.h4Style
+                                .copyWith(fontWeight: UiConfig.semiBoldFont),
                           ),
                         ),
                       ],
@@ -405,15 +405,14 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: SizedBox(
               width: 24,
               height: 24,
-              child: Icon(Icons.smart_toy_outlined, color: UiConfig.black.shade800,)
-          ),
-          label: Text(
-              'AI 톡톡',
+              child: Icon(
+                Icons.smart_toy_outlined,
+                color: UiConfig.black.shade800,
+              )),
+          label: Text('AI 톡톡',
               style: UiConfig.h4Style.copyWith(
                   fontWeight: UiConfig.semiBoldFont,
-                  color: UiConfig.black.shade800
-              )
-          ),
+                  color: UiConfig.black.shade800)),
           onPressed: () {
             context.push('/chatBot');
           },
