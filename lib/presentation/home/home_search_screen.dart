@@ -51,7 +51,6 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                     controller: textController,
                     focusNode: searchFocusNode,
                     onTap: viewModel.onLoadSearchHistory,
-                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
                     onFieldSubmitted: (value) {
                       viewModel.onSearch(value);
                       // searchFocusNode.requestFocus();
