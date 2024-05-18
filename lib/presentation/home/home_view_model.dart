@@ -9,12 +9,14 @@ import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
+import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
+import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
 
 import '../../core/auth/user_provider.dart';
 
@@ -22,14 +24,17 @@ class HomeViewModel with ChangeNotifier {
   final GetSearchFestivalUseCase _getSearchFestivalUseCase;
   final GetSearchKeywordUseCase _getSearchKeywordUseCase;
   final GetLocationBasedDataUseCase _getLocationBasedDataUseCase;
+  final GetTopTenPopularTourListUseCase _getTopTenPopularTourListUseCase;
 
   HomeViewModel({
     required GetSearchFestivalUseCase getSearchFestivalUseCase,
     required GetSearchKeywordUseCase getSearchKeywordUseCase,
     required GetLocationBasedDataUseCase getLocationBasedDataUseCase,
+    required GetTopTenPopularTourListUseCase getTopTenPopularTourListUseCase,
   })  : _getSearchFestivalUseCase = getSearchFestivalUseCase,
         _getSearchKeywordUseCase = getSearchKeywordUseCase,
-        _getLocationBasedDataUseCase = getLocationBasedDataUseCase;
+        _getLocationBasedDataUseCase = getLocationBasedDataUseCase,
+        _getTopTenPopularTourListUseCase = getTopTenPopularTourListUseCase;
   bool isLoading = false;
   double? _longitude;
   double? _latitude;
@@ -48,9 +53,13 @@ class HomeViewModel with ChangeNotifier {
   // 내 주변 관광정보
   List<Tour> locationBasedList = []; // TODO: 초기값 firebase연결 후에 이전 받아온 관광정보
 
+  List<TourDetail> _popularTourList = [];
+  List<TourDetail> get popularTourList => _popularTourList;
+
   void onFetch(String lang) {
     isLoading = true;
     notifyListeners();
+    fetchPopularTourList();
     fetchOnGoingFestival(lang);
     refreshPosition('1000');
     notifyListeners();
@@ -199,6 +208,11 @@ class HomeViewModel with ChangeNotifier {
         eventEndDate: DateFormat('yyyyMMdd').format(today),
         lang: lang);
     isLoading = false;
+    notifyListeners();
+  }
+
+  void fetchPopularTourList() async {
+    _popularTourList = await _getTopTenPopularTourListUseCase.execute();
     notifyListeners();
   }
 }

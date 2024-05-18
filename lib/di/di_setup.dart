@@ -29,6 +29,7 @@ import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart'
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
+import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
@@ -103,6 +104,7 @@ void diSetup() {
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
       getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt()),
       getSearchKeywordUseCase: GetSearchKeywordUseCase(tourInfoRepository: getIt()),
-      getLocationBasedDataUseCase: GetLocationBasedDataUseCase(tourInfoRepository: getIt())));
+      getLocationBasedDataUseCase: GetLocationBasedDataUseCase(tourInfoRepository: getIt()),
+      getTopTenPopularTourListUseCase: GetTopTenPopularTourListUseCase(tourInfoRepository: getIt(), likedTourRepository: getIt())));
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(GetSearchKeywordUseCase(tourInfoRepository: getIt())));
 }
