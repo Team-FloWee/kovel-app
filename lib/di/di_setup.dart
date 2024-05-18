@@ -98,9 +98,9 @@ void diSetup() {
       GetSearchKeywordUseCase(tourInfoRepository: getIt()));
   getIt.registerSingleton<GetLocationBasedDataUseCase>(
       GetLocationBasedDataUseCase(tourInfoRepository: getIt()));
-  getIt.registerFactory<ChatBotViewModel>(
+  getIt.registerSingleton<SendChatToAiUseCase>(
       SendChatToAiUseCase(aiRepository: getIt()));
-  getIt.registerFactory<ChatBotViewModel>(
+  getIt.registerSingleton<GetChatSessionUseCase>(
       GetChatSessionUseCase(aiRepository: getIt()));
   
   // Provider
@@ -134,9 +134,10 @@ void diSetup() {
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
       updateUserNameUseCase: getIt()
   ));
+
   getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(
-      sendChatToAiUseCase: getIt()),
-      getChatSessionUseCase: getIt())
+      sendChatToAiUseCase: getIt(),
+      getChatSessionUseCase: getIt()
   ));
 
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
