@@ -58,16 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: MyPageUserProfile(
-                  userName: userProvider.user.name,
-                  userEmail: userProvider.user.email,
-                  userProfilePath: userProvider.user.imageUrl,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            '안녕하세요, ${userProvider.user.name}님!',
+                            style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -233,21 +236,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     GridView.count(
-                                          physics: const NeverScrollableScrollPhysics(),
-                                          childAspectRatio: 2 / 1,
-                                          shrinkWrap: true,
-                                          crossAxisCount: 4,
-                                          crossAxisSpacing: 16,
-                                          mainAxisSpacing: 10,
-                                          children: List.generate(
-                      AreaTypeList.typeList.length,
-                      (index) => LocationSelector(
-                            category: AreaTypeList.typeList[index],
-                            onSelect: (Category selectedCategory) {
-                              context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id.toString()});
-                            },
-                          )),
-                                        ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      childAspectRatio: 2 / 1,
+                      shrinkWrap: true,
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 10,
+                      children: List.generate(
+                          AreaTypeList.typeList.length,
+                          (index) => LocationSelector(
+                                category: AreaTypeList.typeList[index],
+                                onSelect: (Category selectedCategory) {
+                                  context.pushNamed('locationList', queryParameters: {'areaCode': selectedCategory.id.toString()});
+                                },
+                              )),
+                    ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                     Row(children: [
                       Text('🔥 가장 인기 있는 명소 Top 10', style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
