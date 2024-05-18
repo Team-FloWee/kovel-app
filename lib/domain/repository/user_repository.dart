@@ -5,9 +5,11 @@ abstract interface class UserRepository {
   Future<User?> login({required LoginPlatform platform});
   Future<bool> logout({required LoginPlatform platform});
 
-  Future<User> getUser({required String id});
-  Future<bool> updateUser({required User user});
+  Future<User> getUser();
+  Future<bool> updateUserName({required String name});
+  Future<void> updatePhoto();
   Future<void> signOut();
+  Future<void> updateLanguage(String lang);
   Future<bool> existUser({required String id});
   Future<bool> createUser({required User user});
   Future<void> saveArchivedList({required User user, required String data});

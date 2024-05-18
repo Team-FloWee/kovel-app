@@ -43,10 +43,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> updateUser({required User user}) async {
+  Future<bool> updateUserName({required String name}) async {
     bool result = false;
     try {
-      await _userDataSource.updateUser(user: user);
+      await _userDataSource.updateUserName(name: name);
       result = true;
     } catch (error) {
       result = false;
@@ -55,10 +55,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> getUser({required String id}) async {
+  Future<User> getUser() async {
     User user;
     try {
-      user = await _userDataSource.getUser(id: id);
+      user = await _userDataSource.getUser();
     } catch (error) {
       user = const User(
         userId: '',
@@ -104,5 +104,15 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> saveArchivedList(
       {required User user, required String data}) async {
     await _userDataSource.updateArchivedList(user: user, data: data);
+  }
+
+  @override
+  Future<void> updateLanguage(String lang) async {
+    await _userDataSource.updateLanguage(lang);
+  }
+
+  @override
+  Future<void> updatePhoto() async {
+    await _userDataSource.updatePhoto();
   }
 }
