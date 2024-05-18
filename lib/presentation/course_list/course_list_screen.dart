@@ -37,7 +37,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
       child: CircularProgressIndicator(),
     )
         : Scaffold(
-      appBar: const CommonAppBar(
+      appBar: CommonAppBar(
         title: '여행코스'.tr(),
       ),
       body: SingleChildScrollView(
