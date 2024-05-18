@@ -22,8 +22,7 @@ class GoogleAuth implements SocialAuth {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt())
-        .getUser();
+
     // Once signed in, return the UserCredential
     try {
       final userCredential =

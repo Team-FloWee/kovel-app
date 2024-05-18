@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/presentation/my_page/components/language_edit_dialog.dart';
@@ -29,40 +30,45 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
     return Column(
       children: [
         MyPageMenuBar(
-          menuBarName: '계정 설정',
+          menuBarName: '계정 설정'.tr(),
           menuBarIcon: Icons.account_circle_outlined,
           onTapMenuBar: () async {
             await context.push('/mypageedit');
             viewModel.getProfile();
           },
         ),
-        const MyPageMenuBar(
-          menuBarName: '공지사항',
+        MyPageMenuBar(
+          menuBarName: '공지사항'.tr(),
           menuBarIcon: Icons.notifications_outlined,
         ),
-        const MyPageMenuBar(
-          menuBarName: 'FAQ',
+        MyPageMenuBar(
+          menuBarName: 'FAQ'.tr(),
           menuBarIcon: Icons.chat_bubble_outline_outlined,
         ),
         MyPageMenuBar(
-          menuBarName: '언어',
+          menuBarName: '언어'.tr(),
           menuBarIcon: Icons.language_outlined,
           onTapMenuBar: () {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) =>
-                  LanguageEditDialog(updateLanguage: (String lang) {
-                viewModel.updateLanguage(lang);
+                  LanguageEditDialog(updateLanguage: (String lang) async {
+                    if (lang == 'en') {
+                      await context.setLocale(const Locale('en', 'US'));
+                    } else {
+                      await context.setLocale(const Locale('ko', 'KR'));
+                    }
+                    viewModel.updateLanguage(lang);
               }),
             );
           },
         ),
-        const MyPageMenuBarWidget(
-          menuBarName: 'Dark Mode',
-          menuBarWidget: MyPageSwitchButton(),
+        MyPageMenuBarWidget(
+          menuBarName: '다크 모드'.tr(),
+          menuBarWidget: const MyPageSwitchButton(),
         ),
         MyPageMenuBar(
-          menuBarName: '로그아웃',
+          menuBarName: '로그아웃'.tr(),
           menuBarIcon: Icons.logout_outlined,
           onTapMenuBar: () {
             showDialog<String>(

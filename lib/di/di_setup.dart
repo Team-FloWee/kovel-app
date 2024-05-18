@@ -16,6 +16,8 @@ import 'package:kovel_app/domain/repository/ai_repository.dart';
 import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
+import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
+import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
@@ -31,6 +33,7 @@ import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
+import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
@@ -65,46 +68,86 @@ void diSetup() {
   getIt.registerSingleton<LikedTourRepository>(
       LikedTourRepositoryImpl(likedTourDataSource: getIt()));
 
+  // UseCase
+  getIt.registerSingleton<LikeTourUseCase>(
+      LikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerSingleton<UnLikeTourUseCase>(
+      UnLikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerSingleton<GetCommonDataUseCase>(
+      GetCommonDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetDetailDataUseCase>(
+      GetDetailDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetInfoDataUseCase>(
+      GetInfoDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetTranslatedDataStreamUseCase>(
+      GetTranslatedDataStreamUseCase(aiRepository: getIt()));
+  getIt.registerSingleton<GetAreaDataUseCase>(
+      GetAreaDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<LoginUseCase>(
+      LoginUseCase(userRepository: getIt()));
+  getIt.registerSingleton<LogoutUseCase>(
+      LogoutUseCase(userRepository: getIt()));
+  getIt.registerSingleton<CheckUserDuplicatedUseCase>(
+      CheckUserDuplicatedUseCase(userRepository: getIt()));
+  getIt.registerSingleton<CreateUserUseCase>(
+      CreateUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<UpdateUserNameUseCase>(
+      UpdateUserNameUseCase(userRepository: getIt()));
+  getIt.registerSingleton<GetSearchFestivalUseCase>(
+      GetSearchFestivalUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetSearchKeywordUseCase>(
+      GetSearchKeywordUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetLocationBasedDataUseCase>(
+      GetLocationBasedDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<SendChatToAiUseCase>(
+      SendChatToAiUseCase(aiRepository: getIt()));
+  getIt.registerSingleton<GetChatSessionUseCase>(
+      GetChatSessionUseCase(aiRepository: getIt()));
+  getIt.registerSingleton<GetTopTenPopularTourListUseCase>(
+      GetTopTenPopularTourListUseCase(tourInfoRepository: getIt(), likedTourRepository: getIt()));
+    
   // Provider
-  getIt.registerSingleton<AiProvider>(AiProvider(
-      getTranslatedDataStreamUseCase:
-          GetTranslatedDataStreamUseCase(aiRepository: getIt())));
-  getIt.registerFactory<LikeTourUseCase>(
-      () => LikeTourUseCase(likedTourRepository: getIt()));
-  getIt.registerFactory<UnLikeTourUseCase>(
-      () => UnLikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerSingleton<AiProvider>(
+      AiProvider(getTranslatedDataStreamUseCase: getIt()));
   getIt.registerSingleton<UserProvider>(
       UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt()));
+
   // registerFactory
-
-  // ViewModel & UseCase
+  // ViewModel
   getIt.registerFactory<DetailViewModel>(() => DetailViewModel(
-      getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
-      getDetailDataUseCase: GetDetailDataUseCase(tourInfoRepository: getIt()),
-      getInfoDataUseCase: GetInfoDataUseCase(tourInfoRepository: getIt())));
-
+      getCommonDataUseCase: getIt(),
+      getDetailDataUseCase: getIt(),
+      getInfoDataUseCase: getIt()
+  ));
   getIt.registerFactory<LocationListViewModel>(() => LocationListViewModel(
-        getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
-        getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
-        userRepository: UserRepositoryImpl(userDataSource: getIt()),
-      ));
-
+      getCommonDataUseCase: getIt(),
+      getAreaDataUseCase: getIt(),
+      userRepository: getIt(),
+  ));
   getIt.registerFactory<CourseListViewModel>(() => CourseListViewModel(
-        getCommonDataUseCase: GetCommonDataUseCase(tourInfoRepository: getIt()),
-        getAreaDataUseCase: GetAreaDataUseCase(tourInfoRepository: getIt()),
-      ));
-
+      getCommonDataUseCase: getIt(),
+      getAreaDataUseCase: getIt(),
+  ));
   getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
-      loginUseCase: LoginUseCase(userRepository: getIt()),
-      logoutUseCase: LogoutUseCase(userRepository: getIt()),
-      checkUserDuplicatedUseCase: CheckUserDuplicatedUseCase(userRepository: getIt()),
-      createUserUseCase: CreateUserUseCase(userRepository: getIt())));
-
-  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: UpdateUserNameUseCase(userRepository: getIt())));
+      loginUseCase: getIt(),
+      logoutUseCase: getIt(),
+      checkUserDuplicatedUseCase: getIt(),
+      createUserUseCase: getIt()
+  ));
+  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
+      updateUserNameUseCase: getIt()
+  ));
+  getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(
+      sendChatToAiUseCase: getIt(),
+      getChatSessionUseCase: getIt()
+  ));
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
-      getSearchFestivalUseCase: GetSearchFestivalUseCase(tourInfoRepository: getIt()),
-      getSearchKeywordUseCase: GetSearchKeywordUseCase(tourInfoRepository: getIt()),
-      getLocationBasedDataUseCase: GetLocationBasedDataUseCase(tourInfoRepository: getIt()),
-      getTopTenPopularTourListUseCase: GetTopTenPopularTourListUseCase(tourInfoRepository: getIt(), likedTourRepository: getIt())));
-  getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(GetSearchKeywordUseCase(tourInfoRepository: getIt())));
+      getSearchFestivalUseCase: getIt(),
+      getSearchKeywordUseCase: getIt(),
+      getLocationBasedDataUseCase: getIt(),
+      getTopTenPopularTourListUseCase: getIt(),
+  ));
+  getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(
+      getSearchKeywordUseCase: getIt()
+  ));
 }

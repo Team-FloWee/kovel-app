@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:kovel_app/domain/model/category/category.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -14,14 +15,14 @@ class ContentType extends Category {
 
   @override
   String get name => switch (contentTypeId)  {
-    12 => '관광지',
-    14 => '문화시설',
-    15 => '축제공연행사',
-    25 => '여행코스',
-    28 => '레포츠',
-    32 => '숙박',
-    38 => '쇼핑',
-    39 => '음식점',
+    12 => '관광지'.tr(),
+    14 => '문화시설'.tr(),
+    15 => '축제공연행사'.tr(),
+    25 => '여행코스'.tr(),
+    28 => '레포츠'.tr(),
+    32 => '숙박'.tr(),
+    38 => '쇼핑'.tr(),
+    39 => '음식점'.tr(),
     75 => 'Leports',
     76 => 'Tourist',
     77 => 'Traffic',
@@ -30,7 +31,7 @@ class ContentType extends Category {
     80 => 'Lodgment',
     82 => 'Restaurant',
     85 => 'Festival',
-    _ => '전체'
+    _ => '전체'.tr()
   };
 }
 
