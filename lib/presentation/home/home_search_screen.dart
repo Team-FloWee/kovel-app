@@ -56,7 +56,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                       viewModel.onSearch(value);
                       // searchFocusNode.requestFocus();
                     },
-                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                    // onTapOutside: (event) => FocusScope.of(context).unfocus(),
                     decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
@@ -102,30 +102,30 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                         contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
                         title: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    textController.text = viewModel.searchHistoryList[index];
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8),
-                                    child: Text(
-                                      viewModel.searchHistoryList[index],
-                                      style: UiConfig.bodyStyle,
+                            GestureDetector(
+                              onTap: () => textController.text = viewModel.searchHistoryList[index],
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8),
+                                      child: Text(
+                                        viewModel.searchHistoryList[index],
+                                        style: UiConfig.bodyStyle,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                IconButton(
-                                    onPressed: () {
-                                      viewModel.onRemoveSearchHistory(index);
-                                    },
-                                    icon: const Icon(
-                                      Icons.close,
-                                      size: 20,
-                                    ))
-                              ],
+                                  IconButton(
+                                      onPressed: () {
+                                        viewModel.onRemoveSearchHistory(index);
+                                      },
+                                      icon: const Icon(
+                                        Icons.close,
+                                        size: 20,
+                                      ))
+                                ],
+                              ),
                             ),
                           ],
                         ),
