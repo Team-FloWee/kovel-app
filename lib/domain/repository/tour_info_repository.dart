@@ -1,3 +1,5 @@
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
@@ -6,7 +8,7 @@ import '../model/tour.dart';
 
 abstract interface class TourInfoRepository {
   // 지역 기반 관광 정보 조회 (area based list)
-  Future<List<Tour>> getAreaBasedList(
+  Future<Result<List<Tour>,NetworkError>> getAreaBasedList(
       {int pageNo = 1,
       int? contentTypeId,
       String areaCode = '',

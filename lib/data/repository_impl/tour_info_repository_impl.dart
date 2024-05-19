@@ -1,3 +1,5 @@
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
 import 'package:kovel_app/data/dto/tour_detail_dto.dart';
 import 'package:kovel_app/data/mapper/tour_detail_mapper.dart';
 import 'package:kovel_app/data/mapper/tour_mapper.dart';
@@ -23,17 +25,35 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
 
   // 지역 기반 관광 정보 조회 (area based list)
   @override
-  Future<List<Tour>> getAreaBasedList(
+  Future<Result<List<Tour>, NetworkError>> getAreaBasedList(
       {int pageNo = 1,
       int? contentTypeId,
       String areaCode = '',
       String cat2 = ''}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getAreaBasedList(
+    final tourDto = await _tourInfoDataSource.getAreaBasedList(
         contentTypeId: contentTypeId,
         areaCode: areaCode,
         cat2: cat2,
         pageNo: pageNo);
-    return tourDto.map((e) => e.toTour()).toList();
+
+    switch (tourDto) {
+      case Success<List<TourDto>, NetworkError>():
+        return Result.success(tourDto.data.map((e) => e.toTour()).toList());
+
+      case Error<List<TourDto>, NetworkError>():
+        switch (tourDto.error) {
+          case NetworkError.unauthorized:
+            return Result.error(NetworkError.unauthorized);
+          case NetworkError.notFound:
+            return Result.error(NetworkError.notFound);
+          case NetworkError.serverError:
+            return Result.error(NetworkError.serverError);
+          case NetworkError.requestTimeout:
+            return Result.error(NetworkError.requestTimeout);
+          case NetworkError.unknown:
+            return Result.error(NetworkError.unknown);
+        }
+    }
   }
 
   // 키워드 검색 조회 (search keyword)
@@ -78,7 +98,8 @@ class TourInfoRepositoryImpl implements TourInfoRepository {
   // 숙박 정보 조회 (search stay)
   @override
   Future<List<Tour>> getSearchStay({int pageNo = 1}) async {
-    final List<TourDto> tourDto = await _tourInfoDataSource.getSearchStay(pageNo: pageNo);
+    final List<TourDto> tourDto =
+        await _tourInfoDataSource.getSearchStay(pageNo: pageNo);
     return tourDto.map((e) => e.toTour()).toList();
   }
 

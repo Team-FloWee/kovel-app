@@ -1,10 +1,12 @@
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
 import 'package:kovel_app/data/dto/content_detail_dto.dart';
 import 'package:kovel_app/data/dto/content_detail_info_dto.dart';
 import 'package:kovel_app/data/dto/tour_detail_dto.dart';
 import 'package:kovel_app/data/dto/tour_dto.dart';
 
 abstract interface class TourInfoDataSource {
-  Future<List<TourDto>> getAreaBasedList(
+  Future<Result<List<TourDto>,NetworkError>>  getAreaBasedList(
       {int pageNo = 1, int? contentTypeId, String areaCode = '', String cat2 = ''});
   Future<List<TourDto>> getLocationBasedList(
       {required String mapX,

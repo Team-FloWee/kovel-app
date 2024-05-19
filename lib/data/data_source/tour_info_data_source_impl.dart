@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/dto/content_detail_dto.dart';
 import 'package:kovel_app/data/dto/content_detail_info_dto.dart';
@@ -15,6 +19,7 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
   // TODO: [language] firebase user language 정보를 담아야 한다 ?
   // TODO: 유저가 선택한 언어 == ko ?? language = KorService1 : language = EngService1
   final String language = 'KorService1';
+
   // final String language = 'EngService1';
 
   // final String language = 'JpnService1';
@@ -23,29 +28,51 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
 
   // 지역기반 관광정보조회(areaBasedList1)
   @override
-  Future<List<TourDto>> getAreaBasedList(
+  Future<Result<List<TourDto>, NetworkError>> getAreaBasedList(
       {int pageNo = 1,
       int? contentTypeId,
       String areaCode = '',
       String cat2 = ''}) async {
     // TODO: parameter는 unnamed or named?
-    const String apiName = 'areaBasedList1';
-    final Response response;
 
-    if (contentTypeId == null || contentTypeId == 0) {
-      response = await _dio.get(
-          '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
-      // 'https://apis.data.go.kr/B551011/EngService1/areaBasedList1?pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=1&serviceKey=8wUgZbYoVdhgj4cmbqiQAA0aAkX3mOtCRKfFGwLzfV%2FPSH68pPr1uxU0jrKUqKuVDMYqzlOv1%2BAD7U9W6CZ90A%3D%3D');
-    } else {
-      response = await _dio.get(
-          '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&contentTypeId=$contentTypeId&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
-      // 'https://apis.data.go.kr/B551011/EngService1/areaBasedList1?pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=1&serviceKey=8wUgZbYoVdhgj4cmbqiQAA0aAkX3mOtCRKfFGwLzfV%2FPSH68pPr1uxU0jrKUqKuVDMYqzlOv1%2BAD7U9W6CZ90A%3D%3D');
+    try {
+      const String apiName = 'areaBasedList1';
+      final Response response;
+
+      if (contentTypeId == null || contentTypeId == 0) {
+        response = await _dio.get(
+            '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+        // 'https://apis.data.go.kr/B551011/EngService1/areaBasedList1?pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=1&serviceKey=8wUgZbYoVdhgj4cmbqiQAA0aAkX3mOtCRKfFGwLzfV%2FPSH68pPr1uxU0jrKUqKuVDMYqzlOv1%2BAD7U9W6CZ90A%3D%3D');
+      } else {
+        response = await _dio.get(
+            '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&contentTypeId=$contentTypeId&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
+        // 'https://apis.data.go.kr/B551011/EngService1/areaBasedList1?pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=1&serviceKey=8wUgZbYoVdhgj4cmbqiQAA0aAkX3mOtCRKfFGwLzfV%2FPSH68pPr1uxU0jrKUqKuVDMYqzlOv1%2BAD7U9W6CZ90A%3D%3D');
+      }
+      switch (response.statusCode) {
+        case 200:
+          final List tourInfoList;
+          if (response.data['response']['body']['items'] != '') {
+            tourInfoList = response.data['response']['body']['items']['item'];
+          } else {
+            return Result.error(NetworkError.unknown);
+          }
+          return Result.success(
+              tourInfoList.map((e) => TourDto.fromJson(e)).toList());
+        case 401:
+          return Result.error(NetworkError.unauthorized);
+        case 404:
+          return Result.error(NetworkError.notFound);
+        case 500:
+          return Result.error(NetworkError.serverError);
+        default:
+          return Result.error(NetworkError.unknown);
+      }
+
+    } on TimeoutException {
+      return const Result.error(NetworkError.requestTimeout);
+    } catch (e) {
+      return const Result.error(NetworkError.unknown);
     }
-
-    final List tourInfoList = response.data['response']['body']['items'] != ''
-        ? response.data['response']['body']['items']['item']
-        : (throw Exception('데이터가 없습니다'));
-    return tourInfoList.map((e) => TourDto.fromJson(e)).toList();
   }
 
   // 위치기반 관광정보조회
