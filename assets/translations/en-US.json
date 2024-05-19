@@ -6,7 +6,7 @@
   "가까이 있음": "Nearby",
   "현재 위치에는 관광정보가 없습니다.": "There is no tourist information at your current location.",
   "\uD83E\uDDD0 어디로 여행갈까?": "\uD83E\uDDD0 Where to travel?",
-  "AI추천": "AI",
+  "내주변": "Near",
   "서울": "Seoul",
   "인천": "Incheon",
   "대전": "Daejeon",
@@ -21,7 +21,7 @@
   "경상도": "Gyeongsang",
   "전라도": "Jeolla",
   "제주도": "Jeju",
-  "전체": "ALL",
+  "전국": "All",
   "\uD83D\uDD25 가장 인기 있는 명소 Top 10": "\uD83D\uDD25 Top 10 Popular Attractions",
   "\uD83C\uDF89 진행중인 축제 모음": "\uD83C\uDF89 Ongoing Festivals",
   "테마별 장소": "Themed Locations",
@@ -70,5 +70,9 @@
   "힐링코스": "Healing Course",
   "도보코스": "Walking Course",
   "캠핑코스": "Camping Course",
-  "맛코스": "Food Course"
+  "맛코스": "Food Course",
+  "AI 톡톡": "AI TalkTalk",
+  "코블 AI 톡톡에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?": "Welcome to Kovel AI TalkTalk\nWhat information are you looking for?",
+  "아직 계획중이에요": "I'm still planning my trip",
+  "나의 좋아요 정보를 기반으로 추천받을래요": "I would like to receive recommendations based on my likes"
 }

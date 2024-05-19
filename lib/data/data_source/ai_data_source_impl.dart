@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
@@ -18,9 +19,9 @@ class AiDataSourceImpl implements AiDataSource {
   Future<GenerateContentResponse> chatToAi({required String query}) async {
     final ChatSession chat = _model.startChat(
         history: [
-          Content.model([TextPart('코블 AI 톡톡에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
-          Content.functionResponse('아직 계획중이에요', {'chatType': 'button', 'chatCase': 'recommendPlan'}),
-          Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
+          Content.model([TextPart('코블 AI 톡톡에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?'.tr())]),
+          Content.functionResponse('아직 계획중이에요'.tr(), {'chatType': 'button', 'chatCase': 'recommendPlan'}),
+          Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요'.tr(), {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
         ],
         safetySettings: [
           SafetySetting(
@@ -38,9 +39,9 @@ class AiDataSourceImpl implements AiDataSource {
   ChatSession getChatSession() {
     final ChatSession chat = _model.startChat(
         history: [
-          Content.model([TextPart('코블 AI 톡톡에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?')]),
-          Content.functionResponse('아직 계획중이에요', {'chatType': 'button', 'chatCase': 'recommendPlan'}),
-          Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요', {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
+          Content.model([TextPart('코블 AI 톡톡에 오신걸 환영합니다.\n어떤 정보를 찾으시나요?'.tr())]),
+          Content.functionResponse('아직 계획중이에요'.tr(), {'chatType': 'button', 'chatCase': 'recommendPlan'}),
+          Content.functionResponse('나의 좋아요 정보를 기반으로 추천받을래요'.tr(), {'chatType': 'button', 'chatCase': 'archiveBasedCourse'})
         ],
         safetySettings: [
           SafetySetting(
