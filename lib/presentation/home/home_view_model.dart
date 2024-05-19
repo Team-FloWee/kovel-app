@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
-import 'package:kovel_app/domain/use_case/get_area_data_use_case%20copy.dart';
+import 'package:kovel_app/domain/use_case/get_address_info_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
@@ -29,8 +29,8 @@ class HomeViewModel with ChangeNotifier {
         _getTopTenPopularTourListUseCase = getTopTenPopularTourListUseCase,
         _getAddressInfoUseCase = getAddressInfoUseCase;
   bool isLoading = false;
-  double? _longitude;
-  double? _latitude;
+  double? longitude;
+  double? latitude;
   double distance = 0;
   String selectedLocation = '현재 위치'.tr();
 
@@ -83,18 +83,18 @@ class HomeViewModel with ChangeNotifier {
     }
 
     final Position currentPosition = await Geolocator.getCurrentPosition();
-    _longitude = currentPosition.longitude;
-    _latitude = currentPosition.latitude;
-    if (_longitude != null && _longitude! < 0) {
-      _longitude = currentPosition.longitude * -1;
+    longitude = currentPosition.longitude;
+    latitude = currentPosition.latitude;
+    if (longitude != null && longitude! < 0) {
+      longitude = currentPosition.longitude * -1;
     }
     /* 위도 경도 가져오기 끝 */
 
     // 위도,경도로 주소 가져오기
-    fetchAddressData(longitude: _longitude!.toString(), latitude: _latitude!.toString());
+    fetchAddressData(longitude: longitude!.toString(), latitude: latitude!.toString());
 
     // 내 주변 관광정보 추천
-    fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
+    fetchLocationBasedList(longitude: longitude!.toString(), latitude: latitude!.toString(), radius: radius);
     notifyListeners();
   }
 

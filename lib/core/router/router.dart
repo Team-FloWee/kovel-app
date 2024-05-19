@@ -173,10 +173,16 @@ final goRouter = GoRouter(
       path: '/nearby',
       name: 'nearby',
       builder: (context, state) {
+        final mapX = state.uri.queryParameters['mapX'] ?? '';
+        final mapY = state.uri.queryParameters['mapY'] ?? '';
+        final radius = state.uri.queryParameters['radius'] ?? '';
+
         return ChangeNotifierProvider(
           create: (context) => getIt<NearbyListViewModel>(),
           child: NearbyListScreen(
-            locationBasedList: state.extra as List<Tour>,
+            mapX: mapX,
+            mapY: mapY,
+            radius: radius,
           ),
         ); // HomeSearchScreen을 반환합니다.
       },

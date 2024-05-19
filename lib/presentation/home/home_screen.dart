@@ -263,7 +263,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           category: AreaTypeList.typeList[index],
                           onSelect: (Category selectedCategory) {
                             if (selectedCategory.id == '99' && viewModel.locationBasedList.isNotEmpty) {
-                              context.push('/nearby', extra: viewModel.locationBasedList);
+                              context.pushNamed('nearby', queryParameters: {
+                                'mapX': viewModel.longitude.toString(),
+                                'mapY': viewModel.latitude.toString(),
+                                'radius': _selectedRadius,
+                              });
                             } else if (selectedCategory.id == '99' && viewModel.locationBasedList.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                 content: Text('내 주변 관광정보가 없습니다.'),
