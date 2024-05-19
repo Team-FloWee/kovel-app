@@ -31,6 +31,7 @@ import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart'
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
+import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
@@ -102,7 +103,9 @@ void diSetup() {
       SendChatToAiUseCase(aiRepository: getIt()));
   getIt.registerSingleton<GetChatSessionUseCase>(
       GetChatSessionUseCase(aiRepository: getIt()));
-  
+  getIt.registerSingleton<GetTopTenPopularTourListUseCase>(
+      GetTopTenPopularTourListUseCase(tourInfoRepository: getIt(), likedTourRepository: getIt()));
+    
   // Provider
   getIt.registerSingleton<AiProvider>(
       AiProvider(getTranslatedDataStreamUseCase: getIt()));
@@ -134,16 +137,15 @@ void diSetup() {
   getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(
       updateUserNameUseCase: getIt()
   ));
-
   getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(
       sendChatToAiUseCase: getIt(),
       getChatSessionUseCase: getIt()
   ));
-
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
       getSearchFestivalUseCase: getIt(),
       getSearchKeywordUseCase: getIt(),
-      getLocationBasedDataUseCase: getIt()
+      getLocationBasedDataUseCase: getIt(),
+      getTopTenPopularTourListUseCase: getIt(),
   ));
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(
       getSearchKeywordUseCase: getIt()

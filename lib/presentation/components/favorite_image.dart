@@ -29,9 +29,6 @@ class _FavoriteImageState extends State<FavoriteImage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
-    // Future.microtask(() =>
-    //     isLiked = context.read<UserViewModel>().isArchived(widget.archived.id));
   }
 
   @override
@@ -41,7 +38,8 @@ class _FavoriteImageState extends State<FavoriteImage> {
 
   @override
   Widget build(BuildContext context) {
-    final userViewModel = context.watch<UserProvider>();
+    final userProvider = context.watch<UserProvider>();
+    isLiked = userProvider.isArchived(widget.archived.id);
     return Stack(
       children: [
         ClipRRect(
@@ -72,7 +70,7 @@ class _FavoriteImageState extends State<FavoriteImage> {
                 setState(() {
                   isLiked = !isLiked;
                 });
-                userViewModel.updateArchivedList(widget.archived);
+                userProvider.updateArchivedList(widget.archived);
               },
               child: SizedBox(
                   width: 24.w,
@@ -81,20 +79,32 @@ class _FavoriteImageState extends State<FavoriteImage> {
                       ? const Icon(Icons.favorite, color: UiConfig.primaryColor)
                       : const Icon(Icons.favorite_border, color: Colors.white)),
             )),
+        widget.area != '' && widget.title != '' ?
         Positioned(
-          left: 16.w,
-          bottom: 16.w,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.area,
-                  style: UiConfig.smallStyle
-                      .copyWith(color: UiConfig.black.shade100)),
-              Text(widget.title,
-                  style: UiConfig.h4Style.copyWith(
-                      fontWeight: UiConfig.semiBoldFont,
-                      color: UiConfig.black.shade100))
-            ],
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 50,
+              color: UiConfig.black.shade900.withOpacity(0.5),
+            ))
+            : const SizedBox(),
+        Positioned(
+          left: 16,
+          bottom: 8,
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.area,
+                    style: UiConfig.smallStyle
+                        .copyWith(color: UiConfig.black.shade100)),
+                Text(widget.title,
+                    style: UiConfig.bodyStyle.copyWith(
+                        fontWeight: UiConfig.semiBoldFont,
+                        color: UiConfig.black.shade100))
+              ],
+            ),
           ),
         )
       ],
