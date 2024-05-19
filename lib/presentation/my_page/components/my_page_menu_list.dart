@@ -39,6 +39,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
             userProvider.fetchUser();
           },
         ),
+        /*
         MyPageMenuBar(
           menuBarName: '공지사항'.tr(),
           menuBarIcon: Icons.notifications_outlined,
@@ -47,6 +48,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           menuBarName: 'FAQ'.tr(),
           menuBarIcon: Icons.chat_bubble_outline_outlined,
         ),
+         */
         MyPageMenuBar(
           menuBarName: '언어'.tr(),
           menuBarIcon: Icons.language_outlined,
@@ -66,10 +68,12 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
             );
           },
         ),
+        /*
         MyPageMenuBarWidget(
           menuBarName: '다크 모드'.tr(),
           menuBarWidget: const MyPageSwitchButton(),
         ),
+         */
         MyPageMenuBar(
           menuBarName: '로그아웃'.tr(),
           menuBarIcon: Icons.logout_outlined,
