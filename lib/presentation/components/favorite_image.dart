@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/domain/model/archived.dart';
+import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteImage extends StatefulWidget {
@@ -42,25 +43,9 @@ class _FavoriteImageState extends State<FavoriteImage> {
     isLiked = userProvider.isArchived(widget.archived.id);
     return Stack(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.network(
-            widget.archived.imagePath,
-            width: widget.imageSize,
-            height: widget.imageSize,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/images/blank_image.png',
-                  width: widget.imageSize,
-                  height: widget.imageSize,
-                  fit: BoxFit.cover,
-                ),
-              );
-            },
-          ),
+        CachedNetworkImageComponent(
+          imagePath: widget.archived.imagePath,
+          imageSize: widget.imageSize,
         ),
         Positioned(
             top: 8,

@@ -40,6 +40,7 @@ class CachedNetworkImageComponent extends StatelessWidget {
               width: imageSize,
               height: imageSize,
               child: const Center(child: SpinKitFadingCircle(
+                size: 25,
                 color: UiConfig.primaryColor,
               )),
             );

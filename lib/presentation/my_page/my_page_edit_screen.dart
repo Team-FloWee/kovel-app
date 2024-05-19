@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +57,10 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                         fit: BoxFit.cover,
                         imageUrl: viewModel.user.imageUrl,
                         placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator()),
+                            const Center(child: SpinKitFadingCircle(
+                              size: 25,
+                              color: UiConfig.primaryColor,
+                            )),
                         errorWidget: (context, url, error) =>
                             Image.asset('assets/images/blank_profile_image.png'),
                       ),
