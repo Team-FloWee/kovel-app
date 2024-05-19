@@ -1,21 +1,14 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
-import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
-import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
-import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
-import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/get_area_data_use_case%20copy.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
-
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
 
@@ -42,12 +35,16 @@ class HomeViewModel with ChangeNotifier {
 
   // User Profile
 
-  final userRef = FirebaseFirestore.instance.collection('user').withConverter<User>(fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!), toFirestore: (snapshot, _) => snapshot.toJson());
+  final userRef = FirebaseFirestore.instance
+      .collection('user')
+      .withConverter<User>(
+          fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
+          toFirestore: (snapshot, _) => snapshot.toJson());
 
   Position? currentPosition;
   List<Tour> onGoingTourList = [];
   List<String> locationList = ['현재 위치'.tr()]; // TODO:초기값은 firebase연결 후에 이전 연결주소
-  List<Map<String, double>> distanceList = [];
+  List<String> distanceList = [];
 
   // 내 주변 관광정보
   List<Tour> locationBasedList = [];
@@ -99,21 +96,30 @@ class HomeViewModel with ChangeNotifier {
     /* 위도 경도 가져오기 끝 */
 
     // 위도,경도로 주소 가져오기
-    fetchAddressData(longitude: _longitude!.toString(), latitude: _latitude!.toString());
+    fetchAddressData(
+        longitude: _longitude!.toString(), latitude: _latitude!.toString());
 
     // 내 주변 관광정보 추천
-    fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
+    fetchLocationBasedList(
+        longitude: _longitude!.toString(),
+        latitude: _latitude!.toString(),
+        radius: radius);
     notifyListeners();
   }
 
   // 위도,경도로 주소 가져오기
-  void fetchAddressData({required String longitude, required String latitude}) async {
+  void fetchAddressData(
+      {required String longitude, required String latitude}) async {
     // 주소 받아옴
-    final dataList = await _getAddressInfoUseCase.execute(longitude: longitude, latitude: latitude);
+    final dataList = await _getAddressInfoUseCase.execute(
+        longitude: longitude, latitude: latitude);
     // 구/신주소 중 데이터가 있는 것을 locationList에 넣음
-    if (dataList.first.roadAddress.addressName != '' && dataList.first.oldAddress.addressName != '' && !locationList.contains(dataList.first.oldAddress.addressName)) {
+    if (dataList.first.roadAddress.addressName != '' &&
+        dataList.first.oldAddress.addressName != '' &&
+        !locationList.contains(dataList.first.oldAddress.addressName)) {
       locationList.insert(0, dataList.first.roadAddress.addressName);
-    } else if (dataList.first.oldAddress.addressName != '' && !locationList.contains(dataList.first.oldAddress.addressName)) {
+    } else if (dataList.first.oldAddress.addressName != '' &&
+        !locationList.contains(dataList.first.oldAddress.addressName)) {
       locationList.insert(0, dataList.first.oldAddress.addressName);
     }
     // 위치 목록이 2이상 되면(주소 받아오면) 초기값 삭제
@@ -130,13 +136,20 @@ class HomeViewModel with ChangeNotifier {
   }
 
   // 내 주변 관광정보
-  void fetchLocationBasedList({required String latitude, required String longitude, required String radius}) async {
-    locationBasedList = await _getLocationBasedDataUseCase.execute(mapX: longitude, mapY: latitude, radius: radius);
+  void fetchLocationBasedList(
+      {required String latitude,
+      required String longitude,
+      required String radius}) async {
+    locationBasedList = await _getLocationBasedDataUseCase.execute(
+        mapX: longitude, mapY: latitude, radius: radius);
     // 내 주변 관광정보까지 거리 구하기
     for (int i = 0; i < locationBasedList.length; i++) {
       String result = '';
-      double distance =
-          getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx));
+      double distance = getDistanceToLocation(
+          lat1: double.parse(longitude),
+          lon1: double.parse(latitude),
+          lat2: double.parse(locationBasedList[i].mapy),
+          lon2: double.parse(locationBasedList[i].mapx));
 
       if (distance / 10 < 1000) {
         print('1000보다 작음');
@@ -152,14 +165,22 @@ class HomeViewModel with ChangeNotifier {
   // 스크린에 영향없음 -> private으로 선언
   // 내 위치부터 관광지까지 거리 구하기
 
-  double getDistanceToLocation({required double lat1, required double lon1, required double lat2, required double lon2}) {
+  double getDistanceToLocation(
+      {required double lat1,
+      required double lon1,
+      required double lat2,
+      required double lon2}) {
     // 지구 반지름 (km 단위)
     const double earthRadius = 6371.0;
     // 두 지점의 위도와 경도 차이를 라디안으로 변환
     double deltaLat = _toRadians(lat2 - lat1);
     double deltaLon = _toRadians(lon2 - lon1);
     // Haversine 공식
-    double squareRoot = sin(deltaLat / 2) * sin(deltaLat / 2) + cos(_toRadians(lat1)) * cos(_toRadians(lat2)) * sin(deltaLon / 2) * sin(deltaLon / 2);
+    double squareRoot = sin(deltaLat / 2) * sin(deltaLat / 2) +
+        cos(_toRadians(lat1)) *
+            cos(_toRadians(lat2)) *
+            sin(deltaLon / 2) *
+            sin(deltaLon / 2);
     double distance = 2 * atan2(sqrt(squareRoot), sqrt(1 - squareRoot));
     // 최종 거리 계산
     double result = earthRadius * distance;
@@ -176,7 +197,10 @@ class HomeViewModel with ChangeNotifier {
     isLoading = true;
     final today = DateTime.now();
     notifyListeners();
-    onGoingTourList = await _getSearchFestivalUseCase.execute(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today), lang: lang);
+    onGoingTourList = await _getSearchFestivalUseCase.execute(
+        eventStartDate: '20240101',
+        eventEndDate: DateFormat('yyyyMMdd').format(today),
+        lang: lang);
     isLoading = false;
     notifyListeners();
   }
