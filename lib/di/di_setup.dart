@@ -121,5 +121,5 @@ void diSetup() {
         getAddressInfoUseCase: getIt(),
       ));
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
-  getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel());
+  getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
 }

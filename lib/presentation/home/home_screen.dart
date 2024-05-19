@@ -189,15 +189,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 10),
                     viewModel.locationBasedList.isNotEmpty
                         ? GridView.count(
                             physics: const NeverScrollableScrollPhysics(),
-                            childAspectRatio: 3 / 1,
+                            childAspectRatio: 5.5 / 1,
                             shrinkWrap: true,
                             crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 2,
                             children: viewModel.locationBasedList
                                 .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
                                 .map(
@@ -219,10 +219,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
                                                 ),
                                               ),
-                                        Text(
-                                          viewModel.distanceList[index] ?? '가까이 있음'.tr(),
-                                          style: UiConfig.smallStyle,
-                                        ),
+                                        Text(viewModel.distanceList[index] ?? '가까이 있음'.tr(),
+                                            style: UiConfig.extraSmallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade700)),
                                       ],
                                     ),
                                   ),

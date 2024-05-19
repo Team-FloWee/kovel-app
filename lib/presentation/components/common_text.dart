@@ -58,7 +58,7 @@ class CommonText extends StatelessWidget {
           ),
           distance != null
               ? IconTextRow(
-                  icon: Icons.emoji_transportation,
+                  icon: Icons.drive_eta, // TODO: 위아래 간격
                   text: distance!,
                   maxline: 1,
                 )
