@@ -115,8 +115,11 @@ class _DetailScreenState extends State<DetailScreen> {
                       ],
                     ),
                     widget.contentTypeId == 25
-                        ? Text(viewModel.tourDetailData.overview,
-                            style: UiConfig.bodyStyle)
+                        ? ContextMenu(
+                      text:viewModel.tourDetailData.overview,
+                          child: Text(viewModel.tourDetailData.overview,
+                              style: UiConfig.bodyStyle),
+                        )
                         : const SizedBox(),
                     Padding(
                       padding: const EdgeInsets.only(top: 18, bottom: 16),
