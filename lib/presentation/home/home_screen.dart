@@ -30,9 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Future.microtask(() {
-      context
-          .read<HomeViewModel>()
-          .getProfile(context.read<UserProvider>().user);
+      context.read<HomeViewModel>().getProfile(context.read<UserProvider>().user);
       final viewModel = context.read<HomeViewModel>();
       final userProvider = context.read<UserProvider>();
       viewModel.onFetch(LanguageUtil().getLanguage(userProvider.user.language));
@@ -93,8 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       value: e,
                                       child: Text(
                                         e,
-                                        style: UiConfig.smallStyle.copyWith(
-                                            fontWeight: UiConfig.semiBoldFont),
+                                        style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
                                       ),
                                     );
                                   },
@@ -116,9 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Text(
                               '주소 새로고침'.tr(),
-                              style: UiConfig.smallStyle.copyWith(
-                                  fontWeight: UiConfig.semiBoldFont,
-                                  color: UiConfig.black.shade800),
+                              style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade800),
                             ),
                             CustomIconButton(
                               icon: Icons.refresh_rounded,
@@ -133,8 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       onTap: () {
-                        FocusScope.of(context)
-                            .requestFocus(FocusNode()); // 현재 필드의 포커스를 해제합니다.
+                        FocusScope.of(context).requestFocus(FocusNode()); // 현재 필드의 포커스를 해제합니다.
                         context.pushNamed('search');
                       },
                       onTapOutside: (event) => FocusScope.of(context).unfocus(),
@@ -159,9 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           '내주변 관광정보 추천'.tr(),
-                          style: UiConfig.h3Style.copyWith(
-                              color: UiConfig.black,
-                              fontWeight: UiConfig.semiBoldFont),
+                          style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont),
                         ),
                         const Spacer(),
                         DecoratedBox(
@@ -182,10 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       value: e,
                                       child: Text(
                                         e,
-                                        style: UiConfig.smallStyle.copyWith(
-                                            fontWeight: UiConfig.semiBoldFont,
-                                            fontSize: 15.sp,
-                                            color: UiConfig.black.shade100),
+                                        style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, fontSize: 15.sp, color: UiConfig.black.shade100),
                                       ),
                                     );
                                   },
@@ -219,30 +208,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   (index, e) => MapEntry(
                                     index,
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         e.title.length > 10
                                             ? Expanded(
                                                 child: Text(
                                                   '${e.title.substring(0, 10)}...',
-                                                  style: UiConfig.bodyStyle
-                                                      .copyWith(
-                                                          fontWeight: UiConfig
-                                                              .semiBoldFont),
+                                                  style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
                                                 ),
                                               )
                                             : Expanded(
                                                 child: Text(
                                                   e.title,
-                                                  style: UiConfig.bodyStyle
-                                                      .copyWith(
-                                                          fontWeight: UiConfig
-                                                              .semiBoldFont),
+                                                  style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
                                                 ),
                                               ),
                                         Text(
-                                          '${viewModel.distanceList[index][e.id] ?? '가까이 있음'.tr()}',
+                                          viewModel.distanceList[index] ?? '가까이 있음'.tr(),
                                           style: UiConfig.smallStyle,
                                         ),
                                       ],
@@ -255,31 +237,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         : Column(
                             children: [
                               SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
+                                height: MediaQuery.of(context).size.height * 0.1,
                                 width: MediaQuery.of(context).size.width * 0.8,
-                                child: Image.asset(
-                                    'assets/images/search_icon.png'),
+                                child: Image.asset('assets/images/search_icon.png'),
                               ),
                               Text(
                                 '현재 위치에는 관광정보가 없습니다.'.tr(),
-                                style: UiConfig.smallStyle.copyWith(
-                                    color: UiConfig.black.shade700,
-                                    fontWeight: UiConfig.semiBoldFont),
+                                style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade700, fontWeight: UiConfig.semiBoldFont),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.02),
+                              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                             ],
                           ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.025),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                     Row(children: [
                       Text(
                         '🧐 어디로 여행갈까?'.tr(),
-                        style: UiConfig.h3Style.copyWith(
-                            color: UiConfig.black,
-                            fontWeight: UiConfig.semiBoldFont),
+                        style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont),
                       ),
                     ]),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -297,9 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onSelect: (Category selectedCategory) {
                             context.pushNamed(
                               'locationList',
-                              queryParameters: {
-                                'areaCode': selectedCategory.id.toString()
-                              },
+                              queryParameters: {'areaCode': selectedCategory.id.toString()},
                             );
                           },
                         ),
@@ -308,14 +279,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                     Row(
                       children: [
-                        Text('🔥 가장 인기 있는 명소 Top 10'.tr(),
-                            style: UiConfig.h3Style.copyWith(
-                                color: UiConfig.black,
-                                fontWeight: UiConfig.semiBoldFont)),
+                        Text('🔥 가장 인기 있는 명소 Top 10'.tr(), style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
                       ],
                     ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.015),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                   ],
                 ),
               ),
@@ -335,12 +302,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: false,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () => context.pushNamed('detail',
-                            queryParameters: {
-                              'id': viewModel.popularTourList[index].contentId.toString(),
-                              'contentTypeId': viewModel.popularTourList[index].contentType.contentTypeId.toString(),
-                              'title': viewModel.popularTourList[index].contentType.name
-                            }),
+                        onTap: () => context.pushNamed('detail', queryParameters: {
+                          'id': viewModel.popularTourList[index].contentId.toString(),
+                          'contentTypeId': viewModel.popularTourList[index].contentType.contentTypeId.toString(),
+                          'title': viewModel.popularTourList[index].contentType.name
+                        }),
                         child: FavoriteImage(
                           archived: ArchivedUtil.getArchived(tourDetail: viewModel.popularTourList[index]),
                           imageSize: 160,
@@ -357,10 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   children: [
-                    Text('🎉 진행중인 축제 모음'.tr(),
-                        style: UiConfig.h3Style.copyWith(
-                            color: UiConfig.black,
-                            fontWeight: UiConfig.semiBoldFont)),
+                    Text('🎉 진행중인 축제 모음'.tr(), style: UiConfig.h3Style.copyWith(color: UiConfig.black, fontWeight: UiConfig.semiBoldFont)),
                   ],
                 ),
               ),
@@ -378,20 +341,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: List.generate(
                       viewModel.onGoingTourList.length,
                       (index) => OngoingFestivals(
-                        archived: ArchivedUtil.getArchived(
-                            tour: viewModel.onGoingTourList[index]),
+                        archived: ArchivedUtil.getArchived(tour: viewModel.onGoingTourList[index]),
                         tourData: viewModel.onGoingTourList[index],
                         onSelect: (Tour selectedTour) {
                           selectedTour.contentType.contentTypeId;
                           context.pushNamed(
                             'detail',
-                            queryParameters: {
-                              'id': selectedTour.id.toString(),
-                              'contentTypeId': selectedTour
-                                  .contentType.contentTypeId
-                                  .toString(),
-                              'title': selectedTour.contentType.name
-                            },
+                            queryParameters: {'id': selectedTour.id.toString(), 'contentTypeId': selectedTour.contentType.contentTypeId.toString(), 'title': selectedTour.contentType.name},
                           );
                         },
                       ),
@@ -413,15 +369,11 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: SizedBox(
               width: 24,
               height: 24,
-              child: Icon(Icons.smart_toy_outlined, color: UiConfig.black.shade800,)
-          ),
-          label: Text(
-              'AI 톡톡',
-              style: UiConfig.h4Style.copyWith(
-                  fontWeight: UiConfig.semiBoldFont,
-                  color: UiConfig.black.shade800
-              )
-          ),
+              child: Icon(
+                Icons.smart_toy_outlined,
+                color: UiConfig.black.shade800,
+              )),
+          label: Text('AI 톡톡', style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade800)),
           onPressed: () {
             context.push('/chatBot');
           },
