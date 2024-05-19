@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<UserProvider>().getUser());
+    Future.microtask(() => context.read<UserProvider>().fetchUser());
     _controller =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
 

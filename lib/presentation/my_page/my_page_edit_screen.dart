@@ -42,7 +42,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
               GestureDetector(
                 onTap: () async {
                   await viewModel.updatePhoto(userId: userProvider.user.userId);
-                  userProvider.getUser();
+                  userProvider.fetchUser();
                 },
                 child: SizedBox(
                   width: 72.0,
@@ -72,7 +72,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                     userId: userProvider.user.userId,
                     name: _controller.text,
                   );
-                  userProvider.getUser();
+                  userProvider.fetchUser();
                   context.pop();
                 },
                 child: Text('수정완료'.tr()),

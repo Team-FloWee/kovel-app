@@ -34,11 +34,10 @@ class UserProvider with ChangeNotifier {
     return user.archivedList.any((element) => element.id == id);
   }
 
-  Future<User> getUser() async {
+  Future<void> fetchUser() async {
     _user = await _getUserUseCase.execute(
         userId: auth.FirebaseAuth.instance.currentUser!.uid);
     notifyListeners();
-    return user;
   }
 
   Future<void> updateArchived(

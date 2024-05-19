@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     Future.microtask(() {
       final userProvider = context.read<UserProvider>();
-      userProvider.getUser();
+      userProvider.fetchUser();
       context.read<HomeViewModel>().getProfile(userProvider.user);
       final viewModel = context.read<HomeViewModel>();
 
