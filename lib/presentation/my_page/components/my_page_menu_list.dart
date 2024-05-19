@@ -75,6 +75,19 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
         ),
          */
         MyPageMenuBar(
+          menuBarName: '이용약관'.tr(),
+          menuBarIcon: Icons.abc,
+        ),
+        MyPageMenuBar(
+          menuBarName: '개인정보처리방침'.tr(),
+          menuBarIcon: Icons.abc,
+        ),
+        MyPageMenuBar(
+          menuBarName: '라이선스'.tr(),
+          menuBarIcon: Icons.abc,
+          onTapMenuBar: () => context.push('/license')
+        ),
+        MyPageMenuBar(
           menuBarName: '로그아웃'.tr(),
           menuBarIcon: Icons.logout_outlined,
           onTapMenuBar: () {
