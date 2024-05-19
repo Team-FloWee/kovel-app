@@ -67,9 +67,12 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                 controller: _controller,
               ),
               TextButton(
-                onPressed: () {
-                  viewModel.updateName(
-                      userId: userProvider.user.userId, name: _controller.text);
+                onPressed: () async {
+                  await viewModel.updateName(
+                    userId: userProvider.user.userId,
+                    name: _controller.text,
+                  );
+                  userProvider.getUser();
                   context.pop();
                 },
                 child: Text('수정완료'.tr()),
