@@ -43,44 +43,8 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> updateUserName({required String name}) async {
-    bool result = false;
-    try {
-      await _userDataSource.updateUserName(name: name);
-      result = true;
-    } catch (error) {
-      result = false;
-    }
-    return result;
-  }
-
-  @override
-  Future<User> getUser() async {
-    User user;
-    try {
-      user = await _userDataSource.getUser();
-    } catch (error) {
-      user = const User(
-        userId: '',
-        name: '',
-        email: '',
-        imageUrl: '',
-        language: 'ko',
-        archivedList: [],
-      );
-    }
-    return user;
-  }
-
-  @override
   Future<void> signOut() async {
     await _userDataSource.signOut();
-  }
-
-  @override
-  Future<bool> existUser({required String id}) async {
-    final result = await _userDataSource.existUser(id: id);
-    return result;
   }
 
   @override
@@ -95,24 +59,56 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> deleteArchivedList(
-      {required User user, required String data}) async {
-    await _userDataSource.updateArchivedList(user: user, data: data);
+  Future<bool> existUser({required String userId}) async {
+    final result = await _userDataSource.existUser(userId: userId);
+    return result;
   }
 
   @override
-  Future<void> saveArchivedList(
-      {required User user, required String data}) async {
-    await _userDataSource.updateArchivedList(user: user, data: data);
+  Future<User> getUser({required String userId}) async {
+    User user;
+    try {
+      user = await _userDataSource.getUser(userId: userId);
+    } catch (error) {
+      user = const User(
+        userId: '',
+        name: '',
+        email: '',
+        imageUrl: '',
+        language: 'ko',
+        archivedList: [],
+      );
+    }
+    return user;
   }
 
   @override
-  Future<void> updateLanguage(String lang) async {
-    await _userDataSource.updateLanguage(lang);
+  Future<bool> updateUserName(
+      {required String userId, required String name}) async {
+    bool result = false;
+    try {
+      await _userDataSource.updateUserName(userId: userId, name: name);
+      result = true;
+    } catch (error) {
+      result = false;
+    }
+    return result;
   }
 
   @override
-  Future<void> updatePhoto() async {
-    await _userDataSource.updatePhoto();
+  Future<void> updatePhoto({required String userId}) async {
+    await _userDataSource.updatePhoto(userId: userId);
+  }
+
+  @override
+  Future<void> updateLanguage(
+      {required String lang, required String userId}) async {
+    await _userDataSource.updateLanguage(lang: lang, userId: userId);
+  }
+
+  @override
+  Future<void> updateArchivedList(
+      {required String userId, required String data}) async {
+    await _userDataSource.updateArchivedList(userId: userId, data: data);
   }
 }

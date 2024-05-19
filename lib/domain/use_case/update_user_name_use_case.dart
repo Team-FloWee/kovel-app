@@ -6,8 +6,9 @@ class UpdateUserNameUseCase {
   UpdateUserNameUseCase({required UserRepository userRepository})
       : _userRepository = userRepository;
 
-  Future<bool> execute({required String name}) async {
-    final result = await _userRepository.updateUserName(name: name);
+  Future<bool> execute({required String userId, required String name}) async {
+    final result =
+        await _userRepository.updateUserName(userId: userId, name: name);
     return result;
   }
 }
