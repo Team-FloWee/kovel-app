@@ -68,8 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
                             '${'안녕하세요,'.tr()}${userProvider.user.name}${'님!'.tr()}',
-                            style: UiConfig.h4Style
-                                .copyWith(fontWeight: UiConfig.semiBoldFont),
+                            style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
                           ),
                         ),
                       ],
@@ -193,15 +192,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 10),
                     viewModel.locationBasedList.isNotEmpty
                         ? GridView.count(
                             physics: const NeverScrollableScrollPhysics(),
-                            childAspectRatio: 3 / 1,
+                            childAspectRatio: 5.5 / 1,
                             shrinkWrap: true,
                             crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 2,
                             children: viewModel.locationBasedList
                                 .asMap() // locationBasedList를 Map으로 변환하여 인덱스와 요소에 접근
                                 .map(
@@ -223,10 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
                                                 ),
                                               ),
-                                        Text(
-                                          viewModel.distanceList[index] ?? '가까이 있음'.tr(),
-                                          style: UiConfig.smallStyle,
-                                        ),
+                                        Text(viewModel.distanceList[index] ?? '가까이 있음'.tr(),
+                                            style: UiConfig.extraSmallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade700)),
                                       ],
                                     ),
                                   ),
@@ -381,11 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.smart_toy_outlined,
                 color: UiConfig.black.shade800,
               )),
-          label: Text('AI 톡톡',
-              style: UiConfig.h4Style.copyWith(
-                  fontWeight: UiConfig.semiBoldFont,
-                  color: UiConfig.black.shade800)),
-
+          label: Text('AI 톡톡', style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade800)),
           onPressed: () {
             context.push('/chatBot');
           },

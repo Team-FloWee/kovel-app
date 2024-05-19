@@ -23,8 +23,7 @@ class NearbyListScreen extends StatefulWidget {
 class _NearbyListScreenState extends State<NearbyListScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-
+    super.initState();
     Future.microtask(() {
       final userProvider = context.read<UserProvider>();
       context.read<NearbyListViewModel>().onFetch(widget._locationBasedList, LanguageUtil().getLanguage(userProvider.user.language));
@@ -46,6 +45,8 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(widget._locationBasedList.length.toString()),
+                    Text(widget._locationBasedList.first.mapx.toString()),
+                    Text(widget._locationBasedList.first.mapy.toString()),
                     const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),

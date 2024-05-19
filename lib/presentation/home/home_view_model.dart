@@ -130,6 +130,7 @@ class HomeViewModel with ChangeNotifier {
   // 내 주변 관광정보
   void fetchLocationBasedList({required String latitude, required String longitude, required String radius}) async {
     locationBasedList = await _getLocationBasedDataUseCase.execute(mapX: longitude, mapY: latitude, radius: radius);
+    locationBasedList = locationBasedList.take(6).toList();
     // 내 주변 관광정보까지 거리 구하기
     for (int i = 0; i < locationBasedList.length; i++) {
       String result = '';
@@ -137,10 +138,9 @@ class HomeViewModel with ChangeNotifier {
           getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx));
 
       if (distance / 10 < 1000) {
-        print('1000보다 작음');
-        result = '${(distance / 10).toStringAsFixed(2)}m';
+        result = '약 ${(distance / 10).toStringAsFixed(0)}m';
       } else {
-        result = '${(distance).toStringAsFixed(2)}Km';
+        result = '약 ${(distance).toStringAsFixed(0)}Km';
       }
       distanceList.add(result);
     }
