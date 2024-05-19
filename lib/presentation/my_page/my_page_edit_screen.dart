@@ -32,7 +32,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MyPageViewModel>();
-    final userProvider = context.watch<UserProvider>().user;
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -41,10 +41,9 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {
-                  setState(() {
-                    viewModel.updatePhoto2();
-                  });
+                onTap: () async {
+                  await viewModel.updatePhoto();
+                  userProvider.getUser();
                 },
                 child: SizedBox(
                   width: 72.0,
@@ -55,7 +54,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                       aspectRatio: 1 / 1,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: userProvider.imageUrl,
+                        imageUrl: userProvider.user.imageUrl,
                         placeholder: (context, url) =>
                             const Center(child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) => Image.asset(
