@@ -31,7 +31,7 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
     isLiked = userProvider.isArchived(widget.archived.id);
 
     return Padding(
-      padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 8.0, bottom: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
       child: Stack(
         children: [
           Positioned(
@@ -41,13 +41,12 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(widget.tourData.imagePath),
                   ),
                 ),
-
                 height: 350, // 내용의 높이
                 width: 350,
               ),
@@ -63,33 +62,44 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
                     isLiked = !isLiked;
                   });
                 },
-                child: isLiked ? const Icon(Icons.favorite, color: UiConfig.primaryColor) : const Icon(Icons.favorite_border, color: Colors.white),
+                child: isLiked
+                    ? const Icon(Icons.favorite, color: UiConfig.primaryColor)
+                    : const Icon(Icons.favorite_border, color: Colors.white),
               )),
           Positioned(
-            bottom: MediaQuery.of(context).size.height * 0,
-            left: MediaQuery.of(context).size.width * 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
                 color: UiConfig.black.shade900.withOpacity(0.5),
               ),
               height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width * 1,
             ),
           ),
           Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.035,
-              left: MediaQuery.of(context).size.width * 0.04,
-              child: Text(
-                AreaType(areaCode: widget.tourData.areaCode).name,
-                style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade100),
-              )),
+            bottom: MediaQuery.of(context).size.height * 0.035,
+            left: MediaQuery.of(context).size.width * 0.04,
+            child: Text(
+              AreaType(areaCode: widget.tourData.areaCode).name,
+              style: UiConfig.smallStyle.copyWith(
+                color: UiConfig.black.shade100,
+              ),
+            ),
+          ),
           Positioned(
             bottom: MediaQuery.of(context).size.height * 0.006,
             left: MediaQuery.of(context).size.width * 0.04,
             child: Text(
               widget.tourData.title,
-              style: UiConfig.bodyStyle.copyWith(color: UiConfig.black.shade100, fontWeight: UiConfig.semiBoldFont),
+              style: UiConfig.bodyStyle.copyWith(
+                color: UiConfig.black.shade100,
+                fontWeight: UiConfig.semiBoldFont,
+              ),
             ),
           ),
         ],

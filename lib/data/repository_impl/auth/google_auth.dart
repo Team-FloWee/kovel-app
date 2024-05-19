@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/auth/social_auth.dart';
-
-import '../../../core/auth/user_provider.dart';
 
 class GoogleAuth implements SocialAuth {
   @override
@@ -38,7 +35,6 @@ class GoogleAuth implements SocialAuth {
       );
       return user;
     } catch (error) {
-      print(error);
       return null;
     }
   }
