@@ -5,7 +5,6 @@ import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 
 class SignUpViewModel with ChangeNotifier {
   final UpdateUserNameUseCase _updateUserNameUseCase;
-  final UserRepository _userRepository;
 
   Future<void> clickSignUpButton(
       {required User user,
@@ -17,6 +16,5 @@ class SignUpViewModel with ChangeNotifier {
   SignUpViewModel({
     required UpdateUserNameUseCase updateUserNameUseCase,
     required UserRepository userRepository,
-  })  : _updateUserNameUseCase = updateUserNameUseCase,
-        _userRepository = userRepository;
+  }) : _updateUserNameUseCase = updateUserNameUseCase;
 }
