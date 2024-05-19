@@ -417,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.smart_toy_outlined,
                 color: UiConfig.black.shade800,
               )),
-          label: Text('AI 톡톡',
+          label: Text('AI 톡톡'.tr(),
               style: UiConfig.h4Style.copyWith(
                   fontWeight: UiConfig.semiBoldFont,
                   color: UiConfig.black.shade800)),
