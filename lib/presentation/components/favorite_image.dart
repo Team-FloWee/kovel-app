@@ -64,18 +64,25 @@ class _FavoriteImageState extends State<FavoriteImage> {
                       ? const Icon(Icons.favorite, color: UiConfig.primaryColor)
                       : const Icon(Icons.favorite_border, color: Colors.white)),
             )),
-        widget.area != '' && widget.title != '' ?
-        Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 50,
-              color: UiConfig.black.shade900.withOpacity(0.5),
-            ))
+        widget.area != '' && widget.title != ''
+            ? Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: UiConfig.black.shade900.withOpacity(0.5),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
+                  ),
+                  height: 50,
+                ),
+              )
             : const SizedBox(),
         Positioned(
-          left: 16,
+          left: 8,
           bottom: 8,
           child: Container(
             child: Column(
