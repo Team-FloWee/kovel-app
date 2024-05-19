@@ -126,8 +126,8 @@ void diSetup() {
       logoutUseCase: getIt(),
       checkUserDuplicatedUseCase: getIt(),
       createUserUseCase: getIt()));
-  getIt.registerFactory<SignUpViewModel>(
-      () => SignUpViewModel(updateUserNameUseCase: getIt()));
+  getIt.registerFactory<SignUpViewModel>(() =>
+      SignUpViewModel(userRepository: getIt(), updateUserNameUseCase: getIt()));
   getIt.registerFactory<MyPageViewModel>(
       () => MyPageViewModel(userRepository: getIt()));
   getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(

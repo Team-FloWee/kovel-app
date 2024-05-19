@@ -19,7 +19,6 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
     _controller.text = context.read<UserProvider>().user.name;
   }
 
@@ -42,7 +41,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
             children: [
               GestureDetector(
                 onTap: () async {
-                  await viewModel.updatePhoto();
+                  await viewModel.updatePhoto(userId: userProvider.user.userId);
                   userProvider.getUser();
                 },
                 child: SizedBox(
@@ -69,7 +68,8 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  viewModel.updateName(_controller.text);
+                  viewModel.updateName(
+                      userId: userProvider.user.userId, name: _controller.text);
                   context.pop();
                 },
                 child: Text('수정완료'.tr()),
