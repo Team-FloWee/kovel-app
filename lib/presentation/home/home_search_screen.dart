@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
@@ -64,7 +65,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                         ),
                         contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                        hintText: "원하는 정보를 검색하세요",
+                        hintText: "원하는 정보를 검색하세요".tr(),
                         prefixIcon: const Padding(
                           padding: EdgeInsets.only(left: 14.0),
                           child: Icon(Icons.search),
