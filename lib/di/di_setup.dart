@@ -103,8 +103,10 @@ void diSetup() {
   // Provider
   getIt.registerSingleton<AiProvider>(
       AiProvider(getTranslatedDataStreamUseCase: getIt()));
-  getIt.registerSingleton<UserProvider>(
-      UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt()));
+  getIt.registerSingleton<UserProvider>(UserProvider(
+      userRepository: getIt(),
+      likeTourUseCase: getIt(),
+      unLikeTourUseCase: getIt()));
 
   // registerFactory
   // ViewModel

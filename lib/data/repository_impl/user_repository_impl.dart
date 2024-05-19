@@ -3,6 +3,7 @@ import 'package:kovel_app/core/enum/login_platform.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
 import 'package:kovel_app/data/repository_impl/auth/google_auth.dart';
 import 'package:kovel_app/data/repository_impl/auth/kakao_auth.dart';
+import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 
@@ -108,7 +109,8 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<void> updateArchivedList(
-      {required String userId, required String data}) async {
-    await _userDataSource.updateArchivedList(userId: userId, data: data);
+      {required String userId, required List<Archived> archivedList}) async {
+    await _userDataSource.updateArchivedList(
+        userId: userId, archivedList: archivedList);
   }
 }

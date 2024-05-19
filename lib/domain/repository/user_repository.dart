@@ -1,4 +1,5 @@
 import 'package:kovel_app/core/enum/login_platform.dart';
+import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 abstract interface class UserRepository {
@@ -13,5 +14,5 @@ abstract interface class UserRepository {
   Future<void> updatePhoto({required String userId});
   Future<void> updateLanguage({required String lang, required String userId});
   Future<void> updateArchivedList(
-      {required String userId, required String data});
+      {required String userId, required List<Archived> archivedList});
 }

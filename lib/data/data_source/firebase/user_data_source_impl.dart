@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
+import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 class UserDataSourceImpl implements UserDataSource {
@@ -56,9 +57,9 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<void> updateArchivedList(
-      {required String userId, required String data}) async {
+      {required String userId, required List<Archived> archivedList}) async {
     await _userRef.doc(userId).update({
-      'stringList': data,
+      'archivedList': archivedList.map((e) => e.toJson()),
     });
   }
 
