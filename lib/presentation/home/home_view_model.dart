@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
@@ -28,6 +27,7 @@ class HomeViewModel with ChangeNotifier {
         _getLocationBasedDataUseCase = getLocationBasedDataUseCase,
         _getTopTenPopularTourListUseCase = getTopTenPopularTourListUseCase,
         _getAddressInfoUseCase = getAddressInfoUseCase;
+
   bool isLoading = false;
   double? longitude;
   double? latitude;
@@ -40,7 +40,7 @@ class HomeViewModel with ChangeNotifier {
 
   Position? currentPosition;
   List<Tour> onGoingTourList = [];
-  List<String> locationList = ['현재 위치'.tr()]; // TODO:초기값은 firebase연결 후에 이전 연결주소
+  List<String> locationList = ['현재 위치'.tr()];
   List<String> distanceList = [];
 
   // 내 주변 관광정보
@@ -122,7 +122,6 @@ class HomeViewModel with ChangeNotifier {
   }
 
   // 내 주변 관광정보
-
   void fetchLocationBasedList({
     required String latitude,
     required String longitude,
@@ -132,18 +131,20 @@ class HomeViewModel with ChangeNotifier {
     locationBasedList = locationBasedList.take(6).toList();
 
     // 내 주변 관광정보까지 거리 구하기
+    List<double> distances = [];
     for (int i = 0; i < locationBasedList.length; i++) {
       String result = '';
       double distance =
-          getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx));
+          getDistanceToLocation(lat1: double.parse(latitude), lon1: double.parse(longitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx));
 
       if (distance / 10 < 1000) {
-        result = '약 ${(distance / 10).toStringAsFixed(0)}m';
+        result = '약 ${(distance * 100).toStringAsFixed(0)}m';
       } else {
         result = '약 ${(distance).toStringAsFixed(0)}Km';
       }
       distanceList.add(result);
     }
+
     notifyListeners();
   }
 
