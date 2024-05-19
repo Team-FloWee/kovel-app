@@ -5,7 +5,7 @@ class LikeTourUseCase {
 
   LikeTourUseCase({required LikedTourRepository likedTourRepository}) : _likedTourRepository = likedTourRepository;
 
-  Future<void> execute({required int id}) async {
-    await _likedTourRepository.likeTour(id: id);
+  Future<void> execute({required int id, required String lang}) async {
+    await _likedTourRepository.likeTour(id: id, lang: lang);
   }
 }

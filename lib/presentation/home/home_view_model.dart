@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
@@ -54,8 +56,8 @@ class HomeViewModel with ChangeNotifier {
   void onFetch(String lang) {
     isLoading = true;
     notifyListeners();
-    fetchPopularTourList();
-    fetchOnGoingFestival(lang);
+    fetchPopularTourList(lang: lang);
+    fetchOnGoingFestival(LanguageUtil().getLanguage(lang));
     refreshPosition('1000');
     notifyListeners();
     isLoading = false;
@@ -205,8 +207,8 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchPopularTourList() async {
-    _popularTourList = await _getTopTenPopularTourListUseCase.execute();
+  void fetchPopularTourList({required String lang}) async {
+    _popularTourList = await _getTopTenPopularTourListUseCase.execute(lang: lang);
     notifyListeners();
   }
 }
