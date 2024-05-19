@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
+import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/detail_text.dart';
 import 'package:kovel_app/presentation/components/favorite_icon.dart';
@@ -10,8 +11,6 @@ import 'package:kovel_app/presentation/components/translate/context_menu.dart';
 import 'package:kovel_app/presentation/detail/components/course/related_course_list.dart';
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:provider/provider.dart';
-
-import '../../core/method/get_cached_network_image.dart';
 
 class DetailScreen extends StatefulWidget {
   final int id;
@@ -84,8 +83,9 @@ class _DetailScreenState extends State<DetailScreen> {
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
-              getCachedNetworkImage(
-                  imagePath: viewModel.tourDetailData.imagePath),
+              CachedNetworkImageComponent(
+                  imagePath: viewModel.tourDetailData.imagePath
+              ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(

@@ -36,22 +36,30 @@ class ContentType extends Category {
 }
 
 class ContentTypeList {
-  static final typeList = [
-    ContentType(contentTypeId: 0),
-    ContentType(contentTypeId: 12),
-    ContentType(contentTypeId: 14),
-    ContentType(contentTypeId: 15),
-    // ContentType(contentTypeId: 25),
-    ContentType(contentTypeId: 28),
-    ContentType(contentTypeId: 32),
-    ContentType(contentTypeId: 38),
-    ContentType(contentTypeId: 39),
-    ContentType(contentTypeId: 75),
-    ContentType(contentTypeId: 76),
-    ContentType(contentTypeId: 77),
-    ContentType(contentTypeId: 78),
-    ContentType(contentTypeId: 79),
-    ContentType(contentTypeId: 80),
-    ContentType(contentTypeId: 82),
-  ];
+  static List<ContentType> getTypeList(String language) {
+    if (language == 'ko') {
+      return [
+        ContentType(contentTypeId: 0),
+        ContentType(contentTypeId: 12),
+        ContentType(contentTypeId: 14),
+        ContentType(contentTypeId: 15),
+        // ContentType(contentTypeId: 25),
+        ContentType(contentTypeId: 28),
+        ContentType(contentTypeId: 32),
+        ContentType(contentTypeId: 38),
+        ContentType(contentTypeId: 39),
+      ];
+    } else {
+      return [
+        ContentType(contentTypeId: 0),
+        ContentType(contentTypeId: 75),
+        ContentType(contentTypeId: 76),
+        ContentType(contentTypeId: 77),
+        ContentType(contentTypeId: 78),
+        ContentType(contentTypeId: 79),
+        ContentType(contentTypeId: 80),
+        ContentType(contentTypeId: 82),
+      ];
+    }
+  }
 }

@@ -7,7 +7,7 @@ import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/presentation/components/category_list.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
-import 'package:kovel_app/presentation/course_list/course_reccommendation_list.dart';
+import 'package:kovel_app/presentation/course_list/course_reccommendation.dart';
 import 'package:provider/provider.dart';
 
 class CourseListScreen extends StatefulWidget {

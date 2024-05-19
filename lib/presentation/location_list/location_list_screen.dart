@@ -97,72 +97,76 @@ class _LocationListScreenState extends State<LocationListScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: ContentTitle(
-                        title: '추천 코스'.tr(),
-                        withMore: true,
-                        onTapMore: () {
-                          context.pushNamed(
-                            'courseList',
-                            queryParameters: {'areaCode': widget.areaCode},
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: CategoryList(
-                        categoryData: CourseCategoryTypeList.typeList,
-                        onSelect: (Category category) {
-                          context
-                              .read<LocationListViewModel>()
-                              .getCourseData(
-                              widget.areaCode,
-                              category.id,
-                              userProvider.user.language
-                          );
-
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    SingleChildScrollView(
-                      controller: _courseDataScrollController,
-                      scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Row(
-                          children: [
-                            ...viewModel.courseDetailList.map(
-                              (e) => Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: FavoriteImage(
-                                  archived:
-                                      ArchivedUtil.getArchived(tourDetail: e),
-                                  imageSize: 100,
-                                ),
-                              ),
-                            ),
-                            viewModel.isCourseDataLoading == true
-                                ? const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 24.0),
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        color: UiConfig.primaryColor,
-                                      ),
-                                    ),
-                                  )
-                                : const SizedBox(),
-                          ],
+                    userProvider.user.language == 'ko' ? Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                          child: ContentTitle(
+                            title: '추천 코스'.tr(),
+                            withMore: true,
+                            onTapMore: () {
+                              context.pushNamed(
+                                'courseList',
+                                queryParameters: {'areaCode': widget.areaCode},
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
+                        const SizedBox(height: 16),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: CategoryList(
+                            categoryData: CourseCategoryTypeList.typeList,
+                            onSelect: (Category category) {
+                              context
+                                  .read<LocationListViewModel>()
+                                  .getCourseData(
+                                  widget.areaCode,
+                                  category.id,
+                                  userProvider.user.language
+                              );
+
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        SingleChildScrollView(
+                          controller: _courseDataScrollController,
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Row(
+                              children: [
+                                ...viewModel.courseDetailList.map(
+                                      (e) => Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: FavoriteImage(
+                                      archived:
+                                      ArchivedUtil.getArchived(tourDetail: e),
+                                      imageSize: 100,
+                                    ),
+                                  ),
+                                ),
+                                viewModel.isCourseDataLoading == true
+                                    ? const Padding(
+                                  padding:
+                                  EdgeInsets.symmetric(horizontal: 24.0),
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: UiConfig.primaryColor,
+                                    ),
+                                  ),
+                                )
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                      ],
+                    ) : const SizedBox(),
                     LocationCommonData(areaCode: widget.areaCode),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 40.0),
@@ -218,7 +222,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
             children: [
               const SizedBox(height: 16),
               CategoryList(
-                categoryData: ContentTypeList.typeList,
+                categoryData: ContentTypeList.getTypeList(userProvider.user.language),
                 onSelect: (Category category) {
                   viewModel.selectCategory(int.parse(category.id));
                   context.read<LocationListViewModel>().getCommonData(
