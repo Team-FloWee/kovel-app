@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
@@ -39,9 +40,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
     final viewModel = context.watch<HomeSearchViewModel>();
     final textController = TextEditingController();
     return Scaffold(
-        appBar: AppBar(
-          leading: InkWell(onTap: () => context.go('/'), child: const Icon(Icons.arrow_back_ios)),
-        ),
+        appBar: const CommonAppBar(title: ''),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
