@@ -64,6 +64,13 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                         ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xffD7D7D7),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(50))
+                        ),
                         contentPadding: const EdgeInsets.symmetric(vertical: 8),
                         hintText: "원하는 정보를 검색하세요".tr(),
                         prefixIcon: const Padding(
