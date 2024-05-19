@@ -26,7 +26,7 @@ class AreaType extends Category {
         '6' => '부산'.tr(),
         '7' => '울산'.tr(),
         '8' => '세종'.tr(),
-        '9' => '경기도'.tr(),
+        '31' => '경기도'.tr(),
         '32' => '강원도'.tr(),
         '33' || '34' => '충청도'.tr(),
         '35' || '36' => '경상도'.tr(),
@@ -48,7 +48,7 @@ class AreaTypeList {
     AreaType(areaCode: '6'),
     AreaType(areaCode: '7'),
     AreaType(areaCode: '8'),
-    AreaType(areaCode: '9'),
+    AreaType(areaCode: '31'),
     AreaType(areaCode: '32'),
     AreaType(areaCode: '33'), // + 34
     AreaType(areaCode: '35'), // + 36
