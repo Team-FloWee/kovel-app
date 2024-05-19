@@ -1,6 +1,8 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:kovel_app/core/enum/networkError.dart';
+import 'package:kovel_app/core/result/result.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
@@ -14,6 +16,7 @@ class LocationListViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetAreaDataUseCase _getAreaDataUseCase;
   final UserRepository _userRepository;
+
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
@@ -25,10 +28,6 @@ class LocationListViewModel with ChangeNotifier {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
-
-  List<Tour> _areaBasedDataList = [];
-
-  List<Tour> get areaBasedDataList => _areaBasedDataList;
 
   List<TourDetail> _courseDetailList = [];
 
@@ -62,31 +61,70 @@ class LocationListViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(
+    final _areaBasedDataList = await _getAreaDataUseCase.execute(
         areaCode: areaCode, cat2: '', contentTypeId: 25);
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
+    switch (_areaBasedDataList) {
+      case Success<List<Tour>, NetworkError>():
+        await Future.wait(_areaBasedDataList.data.map((element) async {
+          _courseDetailList
+              .add(await _getCommonDataUseCase.execute(id: element.id));
+        }));
 
-    notifyListeners();
-    await getCommonData(areaCode, contentTypeId);
-    notifyListeners();
-    _isLoading = false;
-    notifyListeners();
+        notifyListeners();
+        await getCommonData(areaCode, contentTypeId);
+        notifyListeners();
+        _isLoading = false;
+        notifyListeners();
+      case Error<List<Tour>, NetworkError>():
+        {
+          switch (_areaBasedDataList.error) {
+            case NetworkError.requestTimeout:
+            //  TODO:
+            case NetworkError.unknown:
+            //    TODO
+            case NetworkError.unauthorized:
+            //TODO
+            case NetworkError.notFound:
+            //TODO
+            case NetworkError.serverError:
+            //TODO
+          }
+        }
+        ;
+    }
   }
 
   Future<void> getCourseData(String areaCode, String cat2) async {
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(
+    final _areaBasedDataList = await _getAreaDataUseCase.execute(
         areaCode: areaCode, cat2: '', contentTypeId: 25);
 
-    _courseDetailList = [];
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
-    notifyListeners();
+    switch (_areaBasedDataList) {
+      case Success<List<Tour>, NetworkError>():
+        _courseDetailList = [];
+        await Future.wait(_areaBasedDataList.data.map((element) async {
+          _courseDetailList
+              .add(await _getCommonDataUseCase.execute(id: element.id));
+        }));
+        notifyListeners();
+      case Error<List<Tour>, NetworkError>():
+        {
+          switch (_areaBasedDataList.error) {
+            case NetworkError.requestTimeout:
+            //  TODO:
+            case NetworkError.unknown:
+            //    TODO
+            case NetworkError.unauthorized:
+            //TODO
+            case NetworkError.notFound:
+            //TODO
+            case NetworkError.serverError:
+            //TODO
+          }
+        }
+    }
   }
 
   //테마별 여행 [전체]
@@ -94,18 +132,38 @@ class LocationListViewModel with ChangeNotifier {
     //_isLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = await _getAreaDataUseCase.execute(
+    final _areaBasedDataList = await _getAreaDataUseCase.execute(
         areaCode: areaCode, cat2: '', contentTypeId: contentTypeId);
 
-    _tourDetailList = [];
+    switch (_areaBasedDataList) {
+      case Success<List<Tour>, NetworkError>():
+        _tourDetailList = [];
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
-    notifyListeners();
+        await Future.wait(_areaBasedDataList.data.map((element) async {
+          _tourDetailList
+              .add(await _getCommonDataUseCase.execute(id: element.id));
+        }));
+        notifyListeners();
 
-    //_isLoading = false;
-    notifyListeners();
+      case Error<List<Tour>, NetworkError>():
+        {
+          switch (_areaBasedDataList.error) {
+            case NetworkError.requestTimeout:
+            //  TODO:
+            case NetworkError.unknown:
+            //    TODO
+            case NetworkError.unauthorized:
+            //TODO
+            case NetworkError.notFound:
+            //TODO
+            case NetworkError.serverError:
+            //TODO
+          }
+        }
+
+        //_isLoading = false;
+        notifyListeners();
+    }
   }
 
   // 테마별 장소 페이지네이션
@@ -113,20 +171,38 @@ class LocationListViewModel with ChangeNotifier {
     _isCommonDataLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = [];
-    _areaBasedDataList.addAll((await _getAreaDataUseCase.execute(
+    final _areaBasedDataList = (await _getAreaDataUseCase.execute(
         areaCode: areaCode,
         cat2: '',
         contentTypeId: 0,
-        pageNo: ++_commonPageNo)));
+        pageNo: ++_commonPageNo));
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _tourDetailList.add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
-    notifyListeners();
+    switch (_areaBasedDataList) {
+      case Success<List<Tour>, NetworkError>():
+        await Future.wait(_areaBasedDataList.data.map((element) async {
+          _tourDetailList
+              .add(await _getCommonDataUseCase.execute(id: element.id));
+        }));
+        notifyListeners();
 
-    _isCommonDataLoading = false;
-    notifyListeners();
+        _isCommonDataLoading = false;
+        notifyListeners();
+      case Error<List<Tour>, NetworkError>():
+        {
+          switch (_areaBasedDataList.error) {
+            case NetworkError.requestTimeout:
+            //  TODO:
+            case NetworkError.unknown:
+            //    TODO
+            case NetworkError.unauthorized:
+            //TODO
+            case NetworkError.notFound:
+            //TODO
+            case NetworkError.serverError:
+            //TODO
+          }
+        }
+    }
   }
 
   // 추천코스 페이지네이션
@@ -134,20 +210,36 @@ class LocationListViewModel with ChangeNotifier {
     _isCourseDataLoading = true;
     notifyListeners();
 
-    _areaBasedDataList = [];
-    _areaBasedDataList.addAll((await _getAreaDataUseCase.execute(
+    final _areaBasedDataList = ((await _getAreaDataUseCase.execute(
         areaCode: areaCode,
         cat2: '',
         contentTypeId: 25,
         pageNo: ++_coursePageNo)));
+    switch (_areaBasedDataList) {
+      case Success<List<Tour>, NetworkError>():
+        await Future.wait(_areaBasedDataList.data.map((element) async {
+          _courseDetailList
+              .add(await _getCommonDataUseCase.execute(id: element.id));
+        }));
+        notifyListeners();
 
-    await Future.wait(_areaBasedDataList.map((element) async {
-      _courseDetailList
-          .add(await _getCommonDataUseCase.execute(id: element.id));
-    }));
-    notifyListeners();
-
-    _isCourseDataLoading = false;
-    notifyListeners();
+        _isCourseDataLoading = false;
+        notifyListeners();
+      case Error<List<Tour>, NetworkError>():
+        {
+          switch (_areaBasedDataList.error) {
+            case NetworkError.requestTimeout:
+            //  TODO:
+            case NetworkError.unknown:
+            //    TODO
+            case NetworkError.unauthorized:
+            //TODO
+            case NetworkError.notFound:
+            //TODO
+            case NetworkError.serverError:
+            //TODO
+          }
+        }
+    }
   }
 }
