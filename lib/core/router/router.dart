@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
@@ -22,6 +23,8 @@ import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/my_page/my_page_edit_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
+import 'package:kovel_app/presentation/nearby_list/nearby_list_screen.dart';
+import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:kovel_app/presentation/splash/splash_screen.dart';
@@ -148,18 +151,16 @@ final goRouter = GoRouter(
               user: state.extra as User,
             ),
           );
-        }
-    ),
+        }),
     GoRoute(
-      path: '/chatBot',
-      name: 'chatBot',
-      builder: (context, state) {
-        return ChangeNotifierProvider(
-          create: (_) => getIt<ChatBotViewModel>(),
-          child: ChatBotScreen(),
-        );
-      }
-    ),
+        path: '/chatBot',
+        name: 'chatBot',
+        builder: (context, state) {
+          return ChangeNotifierProvider(
+            create: (_) => getIt<ChatBotViewModel>(),
+            child: const ChatBotScreen(),
+          );
+        }),
     GoRoute(
       path: '/search',
       name: 'search',
@@ -167,6 +168,18 @@ final goRouter = GoRouter(
         return ChangeNotifierProvider(
           create: (context) => getIt<HomeSearchViewModel>(),
           child: const HomeSearchScreen(),
+        ); // HomeSearchScreen을 반환합니다.
+      },
+    ),
+    GoRoute(
+      path: '/nearby',
+      name: 'nearby',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => getIt<NearbyListViewModel>(),
+          child: NearbyListScreen(
+            locationBasedList: state.extra as List<Tour>,
+          ),
         ); // HomeSearchScreen을 반환합니다.
       },
     ),
