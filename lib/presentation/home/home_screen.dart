@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context.read<HomeViewModel>().getProfile(context.read<UserProvider>().user);
       final viewModel = context.read<HomeViewModel>();
       final userProvider = context.read<UserProvider>();
-      viewModel.onFetch(LanguageUtil().getLanguage(userProvider.user.language));
+      viewModel.onFetch(userProvider.user.language);
     });
     super.initState();
   }
