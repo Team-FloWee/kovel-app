@@ -1,4 +1,4 @@
-import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
+import 'package:kovel_app/domain/repository/liked_tour_repository.dart';
 
 class UnLikeTourUseCase {
   final LikedTourRepository _likedTourRepository;

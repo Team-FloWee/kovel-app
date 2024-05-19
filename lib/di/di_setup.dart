@@ -9,16 +9,16 @@ import 'package:kovel_app/data/data_source/firebase/user_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
-import 'package:kovel_app/data/repository_impl/firebase/liked_tour_repository_impl.dart';
+import 'package:kovel_app/data/repository_impl/liked_tour_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/user_repository_impl.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
-import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
+import 'package:kovel_app/domain/repository/liked_tour_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
-import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
+import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
@@ -29,20 +29,17 @@ import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
-
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
+import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
+import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/home/home_search_view_model.dart';
 import 'package:kovel_app/presentation/home/home_view_model.dart';
 import 'package:kovel_app/presentation/location_list/location_list_view_model.dart';
-
-import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
-import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
-
-import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
