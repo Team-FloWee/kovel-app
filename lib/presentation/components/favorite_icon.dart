@@ -22,9 +22,8 @@ class _FavoriteIconState extends State<FavoriteIcon> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
-    // Future.microtask(() =>
-    //     isLiked = context.read<UserViewModel>().isArchived(widget.archived.id));
+    Future.microtask(() =>
+        isLiked = context.read<UserProvider>().isArchived(widget.archived.id));
   }
 
   @override
@@ -50,7 +49,7 @@ class _FavoriteIconState extends State<FavoriteIcon> {
           height: 24.w,
           child: isLiked
               ? const Icon(Icons.favorite, color: UiConfig.primaryColor)
-              : const Icon(Icons.favorite_border, color: Colors.white),
+              : const Icon(Icons.favorite_border, color: UiConfig.primaryColor),
         ),
       ),
     );
