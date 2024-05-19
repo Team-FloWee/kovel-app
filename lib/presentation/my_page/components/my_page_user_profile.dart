@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kovel_app/config/ui_config.dart';
 
 class MyPageUserProfile extends StatelessWidget {
@@ -36,7 +37,10 @@ class MyPageUserProfile extends StatelessWidget {
                     imageUrl: userProfilePath,
                     // imageUrl: 'https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833552.jpg?w=1060&t=st=1714144594~exp=1714145194~hmac=af74a04de4f0eba5788d15dc2579b9a75a9ced94d03fba12091bfbf47c3d9b60',
                     placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
+                        const Center(child: SpinKitFadingCircle(
+                          size: 25,
+                          color: UiConfig.primaryColor,
+                        )),
                     errorWidget: (context, url, error) =>
                         Image.asset('assets/images/blank_profile_image.png'),
                   ),

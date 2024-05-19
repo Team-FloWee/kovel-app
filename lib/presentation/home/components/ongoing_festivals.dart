@@ -4,6 +4,7 @@ import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/category/area_type.dart';
 import 'package:kovel_app/domain/model/tour.dart';
+import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
 import 'package:provider/provider.dart';
 
 class OngoingFestivals extends StatefulWidget {
@@ -39,17 +40,10 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
               onTap: () {
                 widget.onSelect.call(widget.tourData);
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(widget.tourData.imagePath),
-                  ),
-                ),
-                height: 350, // 내용의 높이
-                width: 350,
-              ),
+              child: CachedNetworkImageComponent(
+                imagePath: widget.tourData.imagePath,
+                imageSize: 350,
+              )
             ),
           ),
           Positioned(

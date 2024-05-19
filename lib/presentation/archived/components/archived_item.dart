@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
+import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/model/archived.dart';
@@ -53,19 +54,9 @@ class _ArchivedItemState extends State<ArchivedItem> {
             SizedBox(
               width: double.infinity, // 가로 크기 전체로 지정
               height: double.infinity, // 세로 크기 전체로 지정
-              child: Image.network(
-                widget.archived.imagePath,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assets/images/blank_image.png',
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                },
-              ),
+              child: CachedNetworkImageComponent(
+                imagePath: widget.archived.imagePath,
+              )
             ),
             Positioned.fill(
               child: Container(
