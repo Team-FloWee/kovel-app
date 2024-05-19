@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FirestoreService {
+class FirestoreDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> likeTour(int id) async {
