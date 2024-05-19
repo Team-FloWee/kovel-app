@@ -9,10 +9,6 @@ class MyPageViewModel with ChangeNotifier {
     required UserRepository userRepository,
   }) : _userRepository = userRepository;
 
-  Future<void> getProfile({required String userId}) async {
-    await _userRepository.getUser(userId: userId);
-  }
-
   Future<void> updateLanguage(
       {required String lang, required String userId}) async {
     lang = LanguageUtil().getLanguage(lang);
