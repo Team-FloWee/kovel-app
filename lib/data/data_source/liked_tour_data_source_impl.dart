@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kovel_app/data/data_source/firebase/liked_tour_data_source.dart';
+import 'package:kovel_app/data/data_source/liked_tour_data_source.dart';
 
 class LikedTourDataSourceImpl implements LikedTourDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

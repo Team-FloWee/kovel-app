@@ -2,12 +2,11 @@ import 'package:get_it/get_it.dart';
 import 'package:kovel_app/core/service/ai_provider.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
 import 'package:kovel_app/data/data_source/ai_data_source_impl.dart';
-import 'package:kovel_app/data/data_source/firebase/liked_tour_data_source.dart';
-import 'package:kovel_app/data/data_source/firebase/liked_tour_data_source_impl.dart';
-import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
-import 'package:kovel_app/data/data_source/firebase/user_data_source_impl.dart';
+import 'package:kovel_app/data/data_source/liked_tour_data_source.dart';
+import 'package:kovel_app/data/data_source/liked_tour_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
+import 'package:kovel_app/data/data_source/user_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/liked_tour_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
@@ -44,6 +43,7 @@ import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
 import '../core/auth/user_provider.dart';
+import '../data/data_source/user_data_source.dart';
 
 final getIt = GetIt.instance;
 
