@@ -28,18 +28,32 @@ class CachedNetworkImageComponent extends StatelessWidget {
             Image.asset('assets/images/blank_image.png'),
       );
     } else {
-      return CachedNetworkImage(
-        width: imageSize,
-        height: imageSize,
-        fit: BoxFit.cover,
-        imageUrl: imagePath,
-        progressIndicatorBuilder: (context, url, progress) {
-          return const Center(child: SpinKitFadingCircle(
-            color: UiConfig.primaryColor,
-          ));
-        },
-        errorWidget: (context, url, error) =>
-            Image.asset('assets/images/blank_image.png'),
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: CachedNetworkImage(
+          width: imageSize,
+          height: imageSize,
+          fit: BoxFit.cover,
+          imageUrl: imagePath,
+          progressIndicatorBuilder: (context, url, progress) {
+            return SizedBox(
+              width: imageSize,
+              height: imageSize,
+              child: const Center(child: SpinKitFadingCircle(
+                color: UiConfig.primaryColor,
+              )),
+            );
+          },
+          errorWidget: (context, url, error) =>
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  'assets/images/blank_image.png',
+                  width: imageSize,
+                  height: imageSize,
+                ),
+              ),
+        ),
       );
     }
   }
