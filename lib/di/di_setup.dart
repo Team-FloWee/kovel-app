@@ -49,6 +49,7 @@ import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
+import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
 import '../core/auth/user_provider.dart';
@@ -118,4 +119,5 @@ void diSetup() {
         getAddressInfoUseCase: getIt(),
       ));
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
+  getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel());
 }

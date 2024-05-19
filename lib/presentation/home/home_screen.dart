@@ -265,10 +265,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         (index) => LocationSelector(
                           category: AreaTypeList.typeList[index],
                           onSelect: (Category selectedCategory) {
-                            context.pushNamed(
-                              'locationList',
-                              queryParameters: {'areaCode': selectedCategory.id.toString()},
-                            );
+                            if (selectedCategory.id == '99' && viewModel.locationBasedList.isNotEmpty) {
+                              context.push('/nearby', extra: viewModel.locationBasedList);
+                            } else if (selectedCategory.id == '99' && viewModel.locationBasedList.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Text('내 주변 관광정보가 없습니다.'),
+                              ));
+                            } else {
+                              context.pushNamed(
+                                'locationList',
+                                queryParameters: {'areaCode': selectedCategory.id.toString()},
+                              );
+                            }
                           },
                         ),
                       ),
