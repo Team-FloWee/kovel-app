@@ -12,9 +12,9 @@ class GetTopTenPopularTourListUseCase {
   }) : _likedTourRepository = likedTourRepository,
         _tourInfoRepository = tourInfoRepository;
 
-  Future<List<TourDetail>> execute() async {
+  Future<List<TourDetail>> execute({required String lang}) async {
     final List<TourDetail> result = [];
-    final List<int> idList = await _likedTourRepository.getPopularTourIdList(count: 10);
+    final List<int> idList = await _likedTourRepository.getPopularTourIdList(lang: lang, count: 10);
     for (int id in idList) {
       result.add((await _tourInfoRepository.getDetailCommon(id: id)).first);
     }

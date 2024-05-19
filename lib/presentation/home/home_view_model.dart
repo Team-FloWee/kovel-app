@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
@@ -58,8 +59,8 @@ class HomeViewModel with ChangeNotifier {
   void onFetch(String lang) {
     isLoading = true;
     notifyListeners();
-    fetchPopularTourList();
-    fetchOnGoingFestival(lang);
+    fetchPopularTourList(lang: lang);
+    fetchOnGoingFestival(LanguageUtil().getLanguage(lang));
     refreshPosition('1000');
     notifyListeners();
     isLoading = false;
@@ -180,8 +181,8 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchPopularTourList() async {
-    _popularTourList = await _getTopTenPopularTourListUseCase.execute();
+  void fetchPopularTourList({required String lang}) async {
+    _popularTourList = await _getTopTenPopularTourListUseCase.execute(lang: lang);
     notifyListeners();
   }
 }

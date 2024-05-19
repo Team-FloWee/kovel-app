@@ -8,8 +8,8 @@ class LikedTourRepositoryImpl implements LikedTourRepository{
   LikedTourRepositoryImpl({required LikedTourDataSource likedTourDataSource}) : _likedTourDataSource = likedTourDataSource;
 
   @override
-  Future<void> createLikedTour({required int id}) async {
-    await _likedTourDataSource.createLikedTour(id: id);
+  Future<void> createLikedTour({required int id, required String lang}) async {
+    await _likedTourDataSource.createLikedTour(id: id, lang: lang);
   }
 
   @override
@@ -18,8 +18,8 @@ class LikedTourRepositoryImpl implements LikedTourRepository{
   }
 
   @override
-  Future<void> likeTour({required int id}) async {
-    await _likedTourDataSource.likeTour(id: id);
+  Future<void> likeTour({required int id, required String lang}) async {
+    await _likedTourDataSource.likeTour(id: id, lang: lang);
   }
 
   @override
@@ -28,7 +28,7 @@ class LikedTourRepositoryImpl implements LikedTourRepository{
   }
 
   @override
-  Future<List<int>> getPopularTourIdList({required int count}) async {
-    return await _likedTourDataSource.getPopularTourIdList(count: count);
+  Future<List<int>> getPopularTourIdList({required String lang, required int count}) async {
+    return await _likedTourDataSource.getPopularTourIdList(lang: lang, count: count);
   }
 }
