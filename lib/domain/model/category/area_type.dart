@@ -17,7 +17,7 @@ class AreaType extends Category {
 
   @override
   String get name => switch (areaCode) {
-        '99' => 'AI추천'.tr(),
+        '99' => '내주변'.tr(),
         '1' => '서울'.tr(),
         '2' => '인천'.tr(),
         '3' => '대전'.tr(),
@@ -32,7 +32,7 @@ class AreaType extends Category {
         '35' || '36' => '경상도'.tr(),
         '37' || '38' => '전라도'.tr(),
         '39' => '제주도'.tr(),
-        _ => '전체'.tr()
+        _ => '전국'.tr()
       };
 }
 
