@@ -56,6 +56,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                       viewModel.onSearch(value);
                       // searchFocusNode.requestFocus();
                     },
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
                     decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
