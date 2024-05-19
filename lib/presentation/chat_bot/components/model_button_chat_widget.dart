@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
@@ -48,7 +49,7 @@ class ModelButtonChatWidget extends StatelessWidget {
                           chat.text,
                           style: UiConfig.h4Style
                               .copyWith(color: UiConfig.black.shade900),
-                          maxLines: 1,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(

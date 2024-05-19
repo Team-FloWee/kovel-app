@@ -1,5 +1,5 @@
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
-import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
+import 'package:kovel_app/domain/repository/liked_tour_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 
 class GetTopTenPopularTourListUseCase {

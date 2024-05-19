@@ -361,10 +361,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.only(bottom: 16),
         child: FloatingActionButton.extended(
-          elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          elevation: 2,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           backgroundColor: UiConfig.secondaryColor,
           icon: SizedBox(
               width: 24,
@@ -373,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.smart_toy_outlined,
                 color: UiConfig.black.shade800,
               )),
-          label: Text('AI 톡톡',
+          label: Text('AI 톡톡'.tr(),
               style: UiConfig.h4Style.copyWith(
                   fontWeight: UiConfig.semiBoldFont,
                   color: UiConfig.black.shade800)),

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:kovel_app/core/enum/login_platform.dart';
-import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
 import 'package:kovel_app/data/repository_impl/auth/google_auth.dart';
 import 'package:kovel_app/data/repository_impl/auth/kakao_auth.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
+
+import '../data_source/user_data_source.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource _userDataSource;

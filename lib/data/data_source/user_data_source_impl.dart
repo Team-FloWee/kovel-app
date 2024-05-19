@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:kovel_app/data/data_source/firebase/user_data_source.dart';
+import 'package:kovel_app/data/data_source/user_data_source.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 class UserDataSourceImpl implements UserDataSource {

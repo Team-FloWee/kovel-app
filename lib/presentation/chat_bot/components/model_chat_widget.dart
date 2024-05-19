@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
@@ -36,7 +37,7 @@ class ModelChatWidget extends StatelessWidget {
               final List<String> archivedNames = userProvider.user.archivedList.map((e) => e.title).toList();
               viewModel.sendChat(header: '${archivedNames.toString()} 포함해서',  request: value);
             },
-            categoryData: const ['당일', '1박 2일', '2박 3일', '3박 4일','4박 5일', '5박 6일', '1주일']
+            categoryData: ['당일'.tr(), '1박 2일'.tr(), '2박 3일'.tr(), '3박 4일'.tr(),'4박 5일'.tr(), '5박 6일'.tr(), '일주일'.tr()]
         ) : const SizedBox()
       ],
     );

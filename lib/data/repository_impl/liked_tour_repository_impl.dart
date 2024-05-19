@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kovel_app/data/data_source/firebase/liked_tour_data_source.dart';
-import 'package:kovel_app/domain/repository/firebase/liked_tour_repository.dart';
+import 'package:kovel_app/data/data_source/liked_tour_data_source.dart';
+import 'package:kovel_app/domain/repository/liked_tour_repository.dart';
 
 class LikedTourRepositoryImpl implements LikedTourRepository{
   final LikedTourDataSource _likedTourDataSource;

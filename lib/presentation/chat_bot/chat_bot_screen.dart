@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
@@ -34,7 +35,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<ChatBotViewModel>();
     return Scaffold(
-      appBar: const CommonAppBar(title: 'AI 톡톡'),
+      appBar: CommonAppBar(title: 'AI 톡톡'.tr(),),
       body: SafeArea(
         child: Container(
           constraints: BoxConstraints(

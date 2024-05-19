@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,7 @@ class HomeViewModel with ChangeNotifier {
   double? _longitude;
   double? _latitude;
   double distance = 0;
-  String selectedLocation = '현재 위치';
+  String selectedLocation = '현재 위치'.tr();
 
   // User Profile
 
@@ -45,8 +46,9 @@ class HomeViewModel with ChangeNotifier {
 
   Position? currentPosition;
   List<Tour> onGoingTourList = [];
-  List<String> locationList = ['현재 위치'];
-  List<String> distanceList = [];
+  List<String> locationList = ['현재 위치'.tr()]; // TODO:초기값은 firebase연결 후에 이전 연결주소
+  List<Map<String, double>> distanceList = [];
+
   // 내 주변 관광정보
   List<Tour> locationBasedList = [];
   List<TourDetail> _popularTourList = [];
@@ -115,8 +117,8 @@ class HomeViewModel with ChangeNotifier {
       locationList.insert(0, dataList.first.oldAddress.addressName);
     }
     // 위치 목록이 2이상 되면(주소 받아오면) 초기값 삭제
-    if (locationList.contains('현재 위치')) {
-      locationList.removeWhere((element) => element == '현재 위치');
+    if (locationList.contains('현재 위치'.tr())) {
+      locationList.removeWhere((element) => element == '현재 위치'.tr());
       selectedLocation = locationList.first;
     }
     if (locationList.contains(locationList.first) && locationList.length > 1) {
