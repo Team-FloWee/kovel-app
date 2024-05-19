@@ -1,26 +1,29 @@
-import 'dart:convert';
 import 'dart:core';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/user.dart';
-import 'package:kovel_app/domain/repository/user_repository.dart';
+import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/updat_archived_use_case.dart';
 
 import '../../domain/model/archived.dart';
 
 class UserProvider with ChangeNotifier {
-  final UserRepository _userRepository;
+  final GetUserUseCase _getUserUseCase;
+  final UpdateArchivedUseCase _updateArchivedUseCase;
   final LikeTourUseCase _likeTourUseCase;
   final UnLikeTourUseCase _unLikeTourUseCase;
 
   UserProvider({
-    required UserRepository userRepository,
+    required GetUserUseCase getUserUseCase,
+    required UpdateArchivedUseCase updateArchivedUseCase,
     required LikeTourUseCase likeTourUseCase,
     required UnLikeTourUseCase unLikeTourUseCase,
-  })  : _userRepository = userRepository,
+  })  : _getUserUseCase = getUserUseCase,
+        _updateArchivedUseCase = updateArchivedUseCase,
         _likeTourUseCase = likeTourUseCase,
         _unLikeTourUseCase = unLikeTourUseCase;
 
@@ -32,32 +35,15 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<User> getUser() async {
-    try {
-      _user = await _userRepository.getUser(
-          userId: auth.FirebaseAuth.instance.currentUser!.uid);
-    } catch (error) {
-      _user = const User(
-        userId: '',
-        name: '',
-        email: '',
-        imageUrl: '',
-        language: 'ko',
-        archivedList: [],
-      );
-    }
+    _user = await _getUserUseCase.execute(
+        userId: auth.FirebaseAuth.instance.currentUser!.uid);
     notifyListeners();
     return user;
   }
 
-  List<Archived> getArchived() {
-    return (jsonDecode(user.archivedList.toString()) as List<dynamic>)
-        .map((e) => Archived.fromJson(e))
-        .toList();
-  }
-
   Future<void> updateArchived(
       {required String userId, required List<Archived> archivedList}) async {
-    await _userRepository.updateArchivedList(
+    await _updateArchivedUseCase.execute(
         userId: userId, archivedList: archivedList);
   }
 

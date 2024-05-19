@@ -21,6 +21,7 @@ import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case
 import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
+import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/logout_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
@@ -32,6 +33,7 @@ import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/updat_archived_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
@@ -66,6 +68,10 @@ void diSetup() {
       LikedTourRepositoryImpl(likedTourDataSource: getIt()));
 
   // UseCase
+  getIt.registerSingleton<GetUserUseCase>(
+      GetUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<UpdateArchivedUseCase>(
+      UpdateArchivedUseCase(userRepository: getIt()));
   getIt.registerSingleton<LikeTourUseCase>(
       LikeTourUseCase(likedTourRepository: getIt()));
   getIt.registerSingleton<UnLikeTourUseCase>(
@@ -104,7 +110,8 @@ void diSetup() {
   getIt.registerSingleton<AiProvider>(
       AiProvider(getTranslatedDataStreamUseCase: getIt()));
   getIt.registerSingleton<UserProvider>(UserProvider(
-      userRepository: getIt(),
+      getUserUseCase: getIt(),
+      updateArchivedUseCase: getIt(),
       likeTourUseCase: getIt(),
       unLikeTourUseCase: getIt()));
 
