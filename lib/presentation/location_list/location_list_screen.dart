@@ -218,7 +218,7 @@ class _LocationCommonDataState extends State<LocationCommonData> {
             children: [
               const SizedBox(height: 16),
               CategoryList(
-                categoryData: ContentTypeList.typeList,
+                categoryData: ContentTypeList.getTypeList(userProvider.user.language),
                 onSelect: (Category category) {
                   viewModel.selectCategory(int.parse(category.id));
                   context.read<LocationListViewModel>().getCommonData(
