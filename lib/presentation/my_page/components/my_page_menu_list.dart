@@ -83,7 +83,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           menuBarIcon: Icons.text_snippet,
         ),
         MyPageMenuBar(
-          menuBarName: '라이선스'.tr(),
+          menuBarName: '라이센스'.tr(),
           menuBarIcon: Icons.info,
           onTapMenuBar: () => context.push('/license')
         ),
