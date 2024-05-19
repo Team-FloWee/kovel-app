@@ -12,8 +12,6 @@ import 'package:kovel_app/presentation/detail/components/course/related_course_l
 import 'package:kovel_app/presentation/detail/detail_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/method/get_cached_network_image.dart';
-
 class DetailScreen extends StatefulWidget {
   final int id;
   final int contentTypeId;
