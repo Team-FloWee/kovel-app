@@ -57,10 +57,10 @@ class ChatBotViewModel with ChangeNotifier {
   void sendChat({String header = '', required String request}) async {
     String query = request;
     if (_chatList.last.chatCase == ChatCase.recommendPlan && _chatList.last.chatType == ChatType.text) {
-      query = '$request 관련된 대한민국에서 갈만한 구체적인 장소 5곳 정도만 부탁해';
+      query = request + '관련된 대한민국에서 갈만한 구체적인 장소 5곳 정도만 부탁해'.tr();
     }
     if (_chatList.last.chatCase == ChatCase.archiveBasedCourse && _chatList.last.chatType == ChatType.text) {
-      query = '$header$request 대한민국 여행 코스 짜줘';
+      query = header + request + '대한민국 여행 코스 짜줘'.tr();
     }
     _chatList.add(Chat(text: request, role: 'user', chatType: ChatType.text, chatCase: ChatCase.text));
     _canInput = false;
@@ -71,7 +71,7 @@ class ChatBotViewModel with ChangeNotifier {
     notifyListeners();
     final finalResponseText = MarkdownUtil().removeMarkdownTags(response.text ?? '');
     _chatList.add(Chat(text: finalResponseText, role: 'model', chatType: ChatType.text, chatCase: ChatCase.text));
-    _chatList.add(Chat(text: '다시하기', role: 'function', chatType: ChatType.button, chatCase: ChatCase.restart));
+    _chatList.add(Chat(text: '다시하기'.tr(), role: 'function', chatType: ChatType.button, chatCase: ChatCase.restart));
     notifyListeners();
   }
 
