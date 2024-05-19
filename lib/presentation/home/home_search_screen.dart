@@ -109,9 +109,12 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                                   onTap: () {
                                     textController.text = viewModel.searchHistoryList[index];
                                   },
-                                  child: Text(
-                                    viewModel.searchHistoryList[index],
-                                    style: UiConfig.bodyStyle,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8),
+                                    child: Text(
+                                      viewModel.searchHistoryList[index],
+                                      style: UiConfig.bodyStyle,
+                                    ),
                                   ),
                                 ),
                                 IconButton(
