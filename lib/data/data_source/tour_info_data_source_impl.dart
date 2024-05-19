@@ -35,8 +35,6 @@ class TourInfoDataSourceImpl implements TourInfoDataSource {
     const String apiName = 'areaBasedList1';
     final Response response;
     language = lang;
-    print(
-        '주소$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
     if (contentTypeId == null || contentTypeId == 0) {
       response = await _dio.get(
           '$baseUrl/$language/$apiName?pageNo=$pageNo&MobileOS=$_mobileOs&MobileApp=MobileApp&_type=json&arrange=Q&areaCode=$areaCode&cat2=$cat2&serviceKey=$key');
