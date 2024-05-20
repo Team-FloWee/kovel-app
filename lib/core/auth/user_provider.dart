@@ -6,6 +6,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 
@@ -13,13 +14,15 @@ import '../../domain/model/archived.dart';
 
 class UserProvider with ChangeNotifier {
   // TODO : UseCase 생성자로 받기
+  final GetUserUseCase _getUserUseCase;
   final LikeTourUseCase _likeTourUseCase;
   final UnLikeTourUseCase _unLikeTourUseCase;
-
   UserProvider({
+    required GetUserUseCase getUserUseCase,
     required LikeTourUseCase likeTourUseCase,
     required UnLikeTourUseCase unLikeTourUseCase,
-  })  : _likeTourUseCase = likeTourUseCase,
+  })  : _getUserUseCase = getUserUseCase,
+        _likeTourUseCase = likeTourUseCase,
         _unLikeTourUseCase = unLikeTourUseCase;
 
   late User _user;
@@ -44,26 +47,10 @@ class UserProvider with ChangeNotifier {
     return user.archivedList.any((element) => element.id == id);
   }
 
-  Future<User> getUser() async {
-    try {
-      final data = await _userRef
-          .doc(auth.FirebaseAuth.instance.currentUser?.uid)
-          .get()
-          .then((s) => s.data()!);
-
-      _user = data;
-    } catch (error) {
-      _user = const User(
-        userId: '',
-        name: '',
-        email: '',
-        imageUrl: '',
-        language: 'ko',
-        archivedList: [],
-      );
-    }
+  Future<void> fetchUser() async {
+    _user = await _getUserUseCase.execute(
+        userId: auth.FirebaseAuth.instance.currentUser!.uid);
     notifyListeners();
-    return user;
   }
 
   List<Archived> getArchived() {
@@ -79,7 +66,8 @@ class UserProvider with ChangeNotifier {
   }
 
   void updateArchivedList(Archived clickedArchived) async {
-    EasyDebounce.debounce('like_debounce', const Duration(milliseconds: 500), () {
+    EasyDebounce.debounce('like_debounce', const Duration(milliseconds: 500),
+        () {
       if (isArchived(clickedArchived.id) == false) {
         _likeTourUseCase.execute(lang: _user.language, id: clickedArchived.id);
         user.archivedList.add(clickedArchived);

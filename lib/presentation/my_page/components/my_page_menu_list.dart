@@ -22,7 +22,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<UserProvider>().getUser());
+    Future.microtask(() => context.read<UserProvider>().fetchUser());
   }
 
   @override
@@ -36,7 +36,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           menuBarIcon: Icons.account_circle_outlined,
           onTapMenuBar: () async {
             await context.push('/mypageedit');
-            userProvider.getUser();
+            userProvider.fetchUser();
           },
         ),
         MyPageMenuBar(
