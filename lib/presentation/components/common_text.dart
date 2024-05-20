@@ -8,6 +8,7 @@ class CommonText extends StatelessWidget {
   final String title;
   final String tel;
   final String address;
+  final String? distance;
 
   const CommonText({
     super.key,
@@ -15,6 +16,7 @@ class CommonText extends StatelessWidget {
     required this.title,
     required this.tel,
     required this.address,
+    this.distance,
   });
 
   @override
@@ -28,13 +30,10 @@ class CommonText extends StatelessWidget {
             child: Container(
               color: UiConfig.primaryColor,
               child: Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 5, top: 3, left: 10, right: 10),
+                padding: const EdgeInsets.only(bottom: 5, top: 3, left: 10, right: 10),
                 child: Text(
                   badgeTitle,
-                  style: UiConfig.smallStyle.copyWith(
-                      fontWeight: UiConfig.semiBoldFont,
-                      color: UiConfig.black.shade100),
+                  style: UiConfig.smallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade100),
                 ),
               ),
             ),
@@ -57,6 +56,13 @@ class CommonText extends StatelessWidget {
             text: address,
             maxline: 1,
           ),
+          distance != null
+              ? IconTextRow(
+                  icon: Icons.drive_eta, // TODO: 위아래 간격
+                  text: distance!,
+                  maxline: 1,
+                )
+              : const SizedBox(),
         ],
       ),
     );

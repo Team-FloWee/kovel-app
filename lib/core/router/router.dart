@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
+import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_screen.dart';
@@ -20,6 +21,8 @@ import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/my_page/my_page_edit_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
+import 'package:kovel_app/presentation/nearby_list/nearby_list_screen.dart';
+import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:kovel_app/presentation/splash/splash_screen.dart';
@@ -36,13 +39,9 @@ final goRouter = GoRouter(
               create: (context) => getIt<HomeViewModel>(),
               child: const HomeScreen(),
             ),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
               return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -70,13 +69,9 @@ final goRouter = GoRouter(
               create: (context) => getIt<MyPageViewModel>(),
               child: const MyPageScreen(),
             ),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
               return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -96,13 +91,9 @@ final goRouter = GoRouter(
       pageBuilder: (context, state) {
         return CustomTransitionPage(
             child: const ArchivedScreen(),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
               return FadeTransition(
-                opacity:
-                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -113,14 +104,12 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId =
-            int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child:
-              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
@@ -167,7 +156,7 @@ final goRouter = GoRouter(
         builder: (context, state) {
           return ChangeNotifierProvider(
             create: (_) => getIt<ChatBotViewModel>(),
-            child: ChatBotScreen(),
+            child: const ChatBotScreen(),
           );
         }),
     GoRoute(
@@ -180,6 +169,23 @@ final goRouter = GoRouter(
         ); // HomeSearchScreen을 반환합니다.
       },
     ),
+    GoRoute(
+      path: '/nearby',
+      name: 'nearby',
+      builder: (context, state) {
+        final mapX = state.uri.queryParameters['mapX'] ?? '';
+        final mapY = state.uri.queryParameters['mapY'] ?? '';
+        final radius = state.uri.queryParameters['radius'] ?? '';
+
+        return ChangeNotifierProvider(
+          create: (context) => getIt<NearbyListViewModel>(),
+          child: NearbyListScreen(
+            mapX: mapX,
+            mapY: mapY,
+            radius: radius,
+          ),
+        ); // HomeSearchScreen을 반환합니다.
+      },
     GoRoute(
       path: '/license',
       name: 'license',
