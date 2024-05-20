@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
                   Positioned(
                       bottom: MediaQuery.of(context).size.height * 0.09,
                       left: MediaQuery.of(context).size.width * 0.4,
-                      child: Image.asset('assets/images/app_icon.png')),
+                      child: Image.asset('assets/images/kovel_icon.png')),
                   Positioned(
                     bottom: MediaQuery.of(context).size.height * 0.02,
                     left: MediaQuery.of(context).size.width * 0.4,
