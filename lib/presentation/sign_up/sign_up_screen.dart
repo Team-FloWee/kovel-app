@@ -112,10 +112,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8)))),
-                              onPressed: () {
-                                viewModel.clickSignUpButton(
+                              onPressed: () async {
+                                await viewModel.clickSignUpButton(
                                     userId: userProvider.user.userId,
                                     name: _textEditingController.text);
+                                userProvider.fetchUser();
                                 context.go('/');
                               },
                               child: Text(
