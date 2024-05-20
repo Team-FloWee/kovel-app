@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 
 class MyPageViewModel with ChangeNotifier {
@@ -11,7 +10,6 @@ class MyPageViewModel with ChangeNotifier {
 
   Future<void> updateLanguage(
       {required String lang, required String userId}) async {
-    lang = LanguageUtil().getLanguage(lang);
     await _userRepository.updateLanguage(lang: lang, userId: userId);
     notifyListeners();
   }

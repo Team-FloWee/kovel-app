@@ -61,8 +61,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
                   await context.setLocale(const Locale('ko', 'KR'));
                 }
                 viewModel.updateLanguage(
-                    lang: userProvider.user.language,
-                    userId: userProvider.user.userId);
+                    lang: lang, userId: userProvider.user.userId);
               }),
             );
           },
