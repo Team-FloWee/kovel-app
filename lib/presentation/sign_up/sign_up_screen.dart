@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
@@ -35,6 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<SignUpViewModel>();
+    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: const CommonAppBar(title: ''),
       body: SafeArea(
@@ -103,19 +105,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 56.h,
                           child: ElevatedButton(
                               style: ButtonStyle(
-
                                   backgroundColor:
                                       const MaterialStatePropertyAll(
                                           UiConfig.primaryColor),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(8)
-                                  )
-                                )
-                              ),
+                                              BorderRadius.circular(8)))),
                               onPressed: () {
                                 viewModel.clickSignUpButton(
+                                    userId: userProvider.user.userId,
                                     name: _textEditingController.text);
                                 context.go('/');
                               },

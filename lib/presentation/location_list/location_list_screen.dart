@@ -140,10 +140,16 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                 ...viewModel.courseDetailList.map(
                                       (e) => Padding(
                                     padding: const EdgeInsets.only(right: 8.0),
-                                    child: FavoriteImage(
-                                      archived:
-                                      ArchivedUtil.getArchived(tourDetail: e),
-                                      imageSize: 100,
+                                    child: InkWell(
+                                      onTap: (){context.pushNamed('detail',queryParameters: {'id':e.contentId.toString(),'contentTypeId':e.contentType.id,'title':e.title},);},
+                                      child: FavoriteImage(
+
+                                        archived:
+                                        ArchivedUtil.getArchived(tourDetail: e),
+                                        imageSize: 120,
+                                        area: AreaType(areaCode: e.areaCode).name,
+                                        title: e.title,
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -23,11 +23,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       scrolledUnderElevation: 0,
       backgroundColor: UiConfig.black.shade100,
-      leading: isCanPop ? InkWell(onTap: () {
-          context.pop();
-          userProvider.getUser();
-      },
-      child: const Icon(Icons.arrow_back_ios)) : const SizedBox(),
+      leading: isCanPop
+          ? InkWell(
+              onTap: () {
+                context.pop();
+                userProvider.fetchUser();
+              },
+              child: const Icon(Icons.arrow_back_ios))
+          : const SizedBox(),
       centerTitle: true,
       title: GestureDetector(
         onDoubleTap: () {
