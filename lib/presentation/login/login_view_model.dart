@@ -38,7 +38,7 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
     try {
       _user = await _loginUseCase.execute(platform: platform);
-      final result = await _checkUserDuplicatedUseCase.execute(id: _user!.userId);
+      final result = await _checkUserDuplicatedUseCase.execute(userId: _user!.userId);
       if (result == true) {
         _isNewUser = false;
       } else {
