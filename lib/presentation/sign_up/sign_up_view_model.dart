@@ -14,6 +14,7 @@ class SignUpViewModel with ChangeNotifier {
     final userId =
         UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt())
             .getUserId();
-    final result = await _updateUserNameUseCase.execute(id: userId, name: name);
+    final result =
+        await _updateUserNameUseCase.execute(userId: userId, name: name);
   }
 }
