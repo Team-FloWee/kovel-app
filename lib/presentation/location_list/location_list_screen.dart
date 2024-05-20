@@ -144,6 +144,8 @@ class _LocationListScreenState extends State<LocationListScreen> {
                                       archived:
                                       ArchivedUtil.getArchived(tourDetail: e),
                                       imageSize: 100,
+                                      area: AreaType(areaCode: e.areaCode).name,
+                                      title: e.title,
                                     ),
                                   ),
                                 ),
