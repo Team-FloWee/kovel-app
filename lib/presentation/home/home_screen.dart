@@ -296,7 +296,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: SizedBox(
                   height: 348,
-                  child: GridView.builder(
+                  child: viewModel.popularLoading ? const Center(
+                    child: CircularProgressIndicator(),
+                  ) : GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 8,
@@ -338,7 +340,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: SizedBox(
                   height: 230,
-                  child: GridView.count(
+                  child: viewModel.festivalLoading ? const Center(
+                    child: CircularProgressIndicator(),
+                  ) : GridView.count(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     crossAxisCount: 1,

@@ -29,6 +29,10 @@ class HomeViewModel with ChangeNotifier {
         _getTopTenPopularTourListUseCase = getTopTenPopularTourListUseCase,
         _getAddressInfoUseCase = getAddressInfoUseCase;
 
+  bool _popularLoading = false;
+  bool _festivalLoading = false;
+  bool get popularLoading => _popularLoading;
+  bool get festivalLoading => _festivalLoading;
   bool isLoading = false;
   double? longitude;
   double? latitude;
@@ -175,16 +179,19 @@ class HomeViewModel with ChangeNotifier {
 
   // 진행중인 축제 모음
   void fetchOnGoingFestival(String lang) async {
-    isLoading = true;
+    _festivalLoading = true;
     final today = DateTime.now();
     notifyListeners();
     onGoingTourList = await _getSearchFestivalUseCase.execute(eventStartDate: '20240101', eventEndDate: DateFormat('yyyyMMdd').format(today), lang: lang);
-    isLoading = false;
+    _festivalLoading = false;
     notifyListeners();
   }
 
   void fetchPopularTourList({required String lang}) async {
+    _popularLoading = true;
+    notifyListeners();
     _popularTourList = await _getTopTenPopularTourListUseCase.execute(lang: lang);
+    _popularLoading = false;
     notifyListeners();
   }
 }
