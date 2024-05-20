@@ -37,10 +37,10 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
     Future.microtask(() {
       //final userProvider = context.read<UserProvider>();
       context.read<NearbyListViewModel>().onFetch(longitude: widget.mapX, latitude: widget.mapY, radius: widget.radius);
+      return _nearbyScrollController.addListener(() {
+        _onNearbyDataScroll();
+      });
     });
-    Future.microtask(() => _nearbyScrollController.addListener(() {
-          _onNearbyDataScroll();
-        }));
   }
 
   final ScrollController _nearbyScrollController = ScrollController();
