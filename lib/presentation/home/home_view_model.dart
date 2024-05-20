@@ -138,7 +138,6 @@ class HomeViewModel with ChangeNotifier {
     locationBasedList = locationBasedList.take(6).toList();
 
     // 내 주변 관광정보까지 거리 구하기
-    List<double> distances = [];
     for (int i = 0; i < locationBasedList.length; i++) {
       String result = '';
       double distance =

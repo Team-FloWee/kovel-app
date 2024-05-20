@@ -9,10 +9,10 @@ import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/logout_use_case.dart';
 
 class LoginViewModel with ChangeNotifier {
-  LoginUseCase _loginUseCase;
-  LogoutUseCase _logoutUseCase;
-  CheckUserDuplicatedUseCase _checkUserDuplicatedUseCase;
-  CreateUserUseCase _createUserUseCase;
+  final LoginUseCase _loginUseCase;
+  final LogoutUseCase _logoutUseCase;
+  final CheckUserDuplicatedUseCase _checkUserDuplicatedUseCase;
+  final CreateUserUseCase _createUserUseCase;
 
   LoginViewModel(
       {required LoginUseCase loginUseCase,

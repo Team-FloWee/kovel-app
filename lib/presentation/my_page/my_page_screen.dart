@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
-import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/ui_config.dart';

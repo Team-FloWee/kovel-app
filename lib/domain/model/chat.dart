@@ -1,4 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
 import 'package:kovel_app/core/enum/chat_type.dart';
 

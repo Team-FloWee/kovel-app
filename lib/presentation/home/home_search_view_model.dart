@@ -69,7 +69,6 @@ class HomeSearchViewModel with ChangeNotifier {
     print(queryMore);
     searchHistoryList.add(queryMore);
     notifyListeners();
-    // _searchDataList = [];
     _searchDataList.addAll(await _getSearchKeywordUseCase.execute(
       query: queryMore,
       pageNo: ++_searchPageNo,
