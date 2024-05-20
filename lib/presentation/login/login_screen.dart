@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           await viewModel.login(platform: LoginPlatform.kakao);
-                          await userProvider.getUser();
+                          await userProvider.fetchUser();
                           if (viewModel.user == null) return;
                           if (viewModel.isNewUser) {
                             context.go('/signUp', extra: viewModel.user);
@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           await viewModel.login(platform: LoginPlatform.google);
-                          await userProvider.getUser();
+                          await userProvider.fetchUser();
                           if (viewModel.user == null) return;
                           if (viewModel.isNewUser) {
                             context.go('/signUp', extra: viewModel.user);
