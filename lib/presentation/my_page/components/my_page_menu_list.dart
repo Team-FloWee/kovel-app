@@ -7,6 +7,7 @@ import 'package:kovel_app/presentation/my_page/components/my_page_menu_bar_widge
 import 'package:kovel_app/presentation/my_page/components/my_page_switch_button.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'logout_dialog.dart';
 import 'my_page_menu_bar.dart';
@@ -77,10 +78,24 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
         MyPageMenuBar(
           menuBarName: '이용약관'.tr(),
           menuBarIcon: Icons.help_outline,
+          onTapMenuBar: () {
+            if (userProvider.user.language == 'en') {
+              _launchUrl(Uri.parse('https://rigorous-tango-e92.notion.site/Terms-Conditions-6d1bc326516a426981b235a9b896bd77?pvs=4'));
+            } else {
+              _launchUrl(Uri.parse('https://rigorous-tango-e92.notion.site/d8ea4024033b4e9cb5b76a5a302619f7?pvs=4'));
+            }
+          },
         ),
         MyPageMenuBar(
           menuBarName: '개인정보처리방침'.tr(),
           menuBarIcon: Icons.text_snippet,
+          onTapMenuBar: () {
+            if (userProvider.user.language == 'en') {
+              _launchUrl(Uri.parse('https://rigorous-tango-e92.notion.site/Privacy-Policy-dad474931f2d438099f7d4f6c12e9f63?pvs=4'));
+            } else {
+              _launchUrl(Uri.parse('https://rigorous-tango-e92.notion.site/e3f09af7507c4284b0c9716ba9854112?pvs=4'));
+            }
+          },
         ),
         MyPageMenuBar(
           menuBarName: '라이센스'.tr(),
@@ -102,5 +117,11 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
         ),
       ],
     );
+  }
+  
+  Future<void> _launchUrl(Uri uri) async {
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $uri');
+    }
   }
 }
