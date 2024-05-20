@@ -44,7 +44,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  viewModel.updatePhoto();
+                  viewModel.updatePhoto(userId: userProvider.user.userId);
                 },
                 child: SizedBox(
                   width: 72.0,
@@ -55,14 +55,14 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                       aspectRatio: 1 / 1,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: viewModel.user.imageUrl,
-                        placeholder: (context, url) =>
-                            const Center(child: SpinKitFadingCircle(
-                              size: 25,
-                              color: UiConfig.primaryColor,
-                            )),
-                        errorWidget: (context, url, error) =>
-                            Image.asset('assets/images/blank_profile_image.png'),
+                        imageUrl: userProvider.user.imageUrl,
+                        placeholder: (context, url) => const Center(
+                            child: SpinKitFadingCircle(
+                          size: 25,
+                          color: UiConfig.primaryColor,
+                        )),
+                        errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/blank_profile_image.png'),
                       ),
                     ),
                   ),
@@ -73,7 +73,8 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  viewModel.updateName(_controller.text);
+                  viewModel.updateName(
+                      userId: userProvider.user.userId, name: _controller.text);
                   context.pop();
                 },
                 child: Text('수정완료'.tr()),
