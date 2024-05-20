@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:core';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
@@ -9,39 +7,27 @@ import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/update_archived_use_case.dart';
 
 import '../../domain/model/archived.dart';
 
 class UserProvider with ChangeNotifier {
-  // TODO : UseCase 생성자로 받기
   final GetUserUseCase _getUserUseCase;
+  final UpdateArchivedUseCase _updateArchivedUseCase;
   final LikeTourUseCase _likeTourUseCase;
   final UnLikeTourUseCase _unLikeTourUseCase;
   UserProvider({
     required GetUserUseCase getUserUseCase,
+    required UpdateArchivedUseCase updateArchivedUseCase,
     required LikeTourUseCase likeTourUseCase,
     required UnLikeTourUseCase unLikeTourUseCase,
   })  : _getUserUseCase = getUserUseCase,
+        _updateArchivedUseCase = updateArchivedUseCase,
         _likeTourUseCase = likeTourUseCase,
         _unLikeTourUseCase = unLikeTourUseCase;
 
   late User _user;
   User get user => _user;
-
-  final currentUser = auth.FirebaseAuth.instance.currentUser;
-  final _userRef = FirebaseFirestore.instance
-      .collection('user')
-      .withConverter<User>(
-          fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
-          toFirestore: (snapshot, _) => snapshot.toJson());
-
-  String getUserId() {
-    if (currentUser != null) {
-      return currentUser!.uid;
-    } else {
-      return '';
-    }
-  }
 
   bool isArchived(int id) {
     return user.archivedList.any((element) => element.id == id);
@@ -53,16 +39,10 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Archived> getArchived() {
-    return (jsonDecode(user.archivedList.toString()) as List<dynamic>)
-        .map((e) => Archived.fromJson(e))
-        .toList();
-  }
-
-  Future<void> updateArchived(List<Archived> archivedList) async {
-    await _userRef
-        .doc(user.userId)
-        .update({'archivedList': archivedList.map((e) => e.toJson())});
+  Future<void> updateArchived(
+      {required String userId, required List<Archived> archivedList}) async {
+    await _updateArchivedUseCase.execute(
+        userId: userId, archivedList: archivedList);
   }
 
   void updateArchivedList(Archived clickedArchived) async {
@@ -71,13 +51,13 @@ class UserProvider with ChangeNotifier {
       if (isArchived(clickedArchived.id) == false) {
         _likeTourUseCase.execute(lang: _user.language, id: clickedArchived.id);
         user.archivedList.add(clickedArchived);
-        updateArchived(user.archivedList);
+        updateArchived(userId: user.userId, archivedList: user.archivedList);
         notifyListeners();
       } else {
         _unLikeTourUseCase.execute(id: clickedArchived.id);
         user.archivedList
             .removeWhere((archived) => archived.id == clickedArchived.id);
-        updateArchived(user.archivedList);
+        updateArchived(userId: user.userId, archivedList: user.archivedList);
         notifyListeners();
       }
       notifyListeners();

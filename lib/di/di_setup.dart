@@ -75,6 +75,8 @@ void diSetup() {
       AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
 
   // UseCase
+  getIt.registerSingleton<UpdateUserNameUseCase>(
+      UpdateUserNameUseCase(userRepository: getIt()));
   getIt.registerSingleton<LikeTourUseCase>(
       LikeTourUseCase(likedTourRepository: getIt()));
   getIt.registerSingleton<UnLikeTourUseCase>(
@@ -117,8 +119,11 @@ void diSetup() {
   // Provider
   getIt.registerSingleton<AiProvider>(
       AiProvider(getTranslatedDataStreamUseCase: getIt()));
-  getIt.registerSingleton<UserProvider>(
-      UserProvider(likeTourUseCase: getIt(), unLikeTourUseCase: getIt()));
+  getIt.registerSingleton<UserProvider>(UserProvider(
+      getUserUseCase: getIt(),
+      updateArchivedUseCase: getIt(),
+      likeTourUseCase: getIt(),
+      unLikeTourUseCase: getIt()));
 
   // registerFactory
   // ViewModel
