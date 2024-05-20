@@ -44,12 +44,6 @@ class NearbyListViewModel with ChangeNotifier {
       }
       distanceList.add(result);
     }
-    // 거리에 따라 locationBasedList 정렬
-    List<double> distances = [];
-    List<int> sortedIndices = List<int>.generate(locationBasedList.length, (i) => i);
-    sortedIndices.sort((a, b) => distances[a].compareTo(distances[b]));
-    locationBasedList = [for (int index in sortedIndices) locationBasedList[index]];
-    distanceList = [for (int index in sortedIndices) distanceList[index]];
     notifyListeners();
   }
 
