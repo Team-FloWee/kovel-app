@@ -22,23 +22,23 @@ extension ToUnifiedDetail on ContentDetailDto {
           ''),
       useFee: usefee ?? usetimefestival ?? '',
       useTime: HtmlUtil().removeHtmlTags(usetime ?? ''),
-      restDay: restdateculture ??
+      restDay: HtmlUtil().removeHtmlTags(restdateculture ??
           restdateleports ??
           restdatefood ??
           restdateshopping ??
           restdate ??
-          '',
+          ''),
       parking: parking ?? parkingleports ?? parkingfood ?? parking ?? '',
-      spendTime: spendtime ?? '',
+      spendTime: HtmlUtil().removeHtmlTags(spendtime ?? ''),
       petAllowed: chkpetculture ?? '',
       startDate: eventstartdate ?? '',
       endDate: eventenddate ?? '',
       playTime: playtime ?? '',
-      sponsor: sponsor1 ?? '',
-      sponsorTel: sponsor1tel ?? '',
-      homePage: eventhomepage ?? '',
+      sponsor: HtmlUtil().removeHtmlTags(sponsor1 ?? ''),
+      sponsorTel: HtmlUtil().removeHtmlTags(sponsor1tel ?? ''),
+      homePage: HtmlUtil().removeHtmlTags(eventhomepage ?? ''),
       ageLimit: agelimit ?? expagerangeleports ?? '',
-      placeInfo: placeinfo ?? '',
+      placeInfo: HtmlUtil().removeHtmlTags(placeinfo ?? ''),
       reservationUrl: HtmlUtil().removeHtmlTags(reservationurl ?? ''),
       roomCount: roomcount ?? '',
       isGoodStay: goodstay == "1" ? true : false,
@@ -60,14 +60,14 @@ extension ToUnifiedDetail on ContentDetailDto {
       park: parkinglodging ?? '',
       subFacility: subfacility ?? '',
       foodPlace: foodplace ?? '',
-      firstMenu: firstmenu ?? '',
-      treatMenu: treatmenu ?? '',
+      firstMenu: HtmlUtil().removeHtmlTags(firstmenu ?? ''),
+      treatMenu: HtmlUtil().removeHtmlTags(treatmenu ?? ''),
       openTime: opentimefood ?? opentime ?? '',
-      saleItem: saleitem ?? '',
-      saleItemCost: saleitemcost ?? '',
+      saleItem: HtmlUtil().removeHtmlTags(saleitem ?? ''),
+      saleItemCost: HtmlUtil().removeHtmlTags(saleitemcost ?? ''),
       scale: scaleshopping ?? '',
       creditCard: chkcreditcardshopping ?? '',
-      expGuide: expguide ?? '',
+      expGuide: HtmlUtil().removeHtmlTags(expguide ?? ''),
     );
   }
 }
