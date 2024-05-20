@@ -37,14 +37,13 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
         children: [
           Positioned(
             child: GestureDetector(
-              onTap: () {
-                widget.onSelect.call(widget.tourData);
-              },
-              child: CachedNetworkImageComponent(
-                imagePath: widget.tourData.imagePath,
-                imageSize: 350,
-              )
-            ),
+                onTap: () {
+                  widget.onSelect.call(widget.tourData);
+                },
+                child: CachedNetworkImageComponent(
+                  imagePath: widget.tourData.imagePath,
+                  imageSize: 350,
+                )),
           ),
           Positioned(
               top: MediaQuery.of(context).size.height * 0.007,
@@ -67,8 +66,8 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
                 ),
                 color: UiConfig.black.shade900.withOpacity(0.5),
               ),
@@ -76,26 +75,29 @@ class _OngoingFestivalsState extends State<OngoingFestivals> {
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.035,
-            left: MediaQuery.of(context).size.width * 0.04,
-            child: Text(
-              AreaType(areaCode: widget.tourData.areaCode).name,
-              style: UiConfig.smallStyle.copyWith(
-                color: UiConfig.black.shade100,
-              ),
+            left: 8,
+            bottom: 8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  overflow: TextOverflow.clip,
+                  AreaType(areaCode: widget.tourData.areaCode).name,
+                  style: UiConfig.smallStyle.copyWith(
+                    color: UiConfig.black.shade100,
+                  ),
+                ),
+                Text(
+                  overflow: TextOverflow.clip,
+                  widget.tourData.title,
+                  style: UiConfig.bodyStyle.copyWith(
+                    color: UiConfig.black.shade100,
+                    fontWeight: UiConfig.semiBoldFont,
+                  ),
+                ),
+              ],
             ),
-          ),
-          Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.006,
-            left: MediaQuery.of(context).size.width * 0.04,
-            child: Text(
-              widget.tourData.title,
-              style: UiConfig.bodyStyle.copyWith(
-                color: UiConfig.black.shade100,
-                fontWeight: UiConfig.semiBoldFont,
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );
