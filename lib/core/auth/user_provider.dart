@@ -46,7 +46,7 @@ class UserProvider with ChangeNotifier {
   }
 
   void updateArchivedList(Archived clickedArchived) async {
-    EasyDebounce.debounce('like_debounce', const Duration(milliseconds: 500),
+    EasyDebounce.debounce('like_debounce', const Duration(milliseconds: 200),
         () {
       if (isArchived(clickedArchived.id) == false) {
         _likeTourUseCase.execute(lang: _user.language, id: clickedArchived.id);
