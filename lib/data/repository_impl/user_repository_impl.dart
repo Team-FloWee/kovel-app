@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:kovel_app/core/enum/login_platform.dart';
+import 'package:kovel_app/data/data_source/user_data_source.dart';
 import 'package:kovel_app/data/repository_impl/auth/google_auth.dart';
 import 'package:kovel_app/data/repository_impl/auth/kakao_auth.dart';
+import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
-
-import '../data_source/user_data_source.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource _userDataSource;
@@ -25,6 +25,7 @@ class UserRepositoryImpl implements UserRepository {
       }
       return result;
     } catch (e) {
+      print(e);
       return null;
     }
   }
@@ -43,22 +44,32 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> updateUser({required User user}) async {
-    bool result = false;
+  Future<void> signOut() async {
+    await _userDataSource.signOut();
+  }
+
+  @override
+  Future<bool> createUser({required User user}) async {
     try {
-      await _userDataSource.updateUser(user: user);
-      result = true;
-    } catch (error) {
-      result = false;
+      await _userDataSource.createUser(user: user);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
+  }
+
+  @override
+  Future<bool> existUser({required String userId}) async {
+    final result = await _userDataSource.existUser(userId: userId);
     return result;
   }
 
   @override
-  Future<User> getUser({required String id}) async {
+  Future<User> getUser({required String userId}) async {
     User user;
     try {
-      user = await _userDataSource.getUser(id: id);
+      user = await _userDataSource.getUser(userId: userId);
     } catch (error) {
       user = const User(
         userId: '',
@@ -73,35 +84,33 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> signOut() async {
-    await _userDataSource.signOut();
-  }
-
-  @override
-  Future<bool> existUser({required String id}) async {
-    final result = await _userDataSource.existUser(id: id);
+  Future<bool> updateUserName(
+      {required String userId, required String name}) async {
+    bool result = false;
+    try {
+      await _userDataSource.updateUserName(userId: userId, name: name);
+      result = true;
+    } catch (error) {
+      result = false;
+    }
     return result;
   }
 
   @override
-  Future<bool> createUser({required User user}) async {
-    try {
-      await _userDataSource.createUser(user: user);
-      return true;
-    } catch (e) {
-      return false;
-    }
+  Future<void> updatePhoto({required String userId}) async {
+    await _userDataSource.updatePhoto(userId: userId);
   }
 
   @override
-  Future<void> deleteArchivedList(
-      {required User user, required String data}) async {
-    await _userDataSource.updateArchivedList(user: user, data: data);
+  Future<void> updateLanguage(
+      {required String lang, required String userId}) async {
+    await _userDataSource.updateLanguage(lang: lang, userId: userId);
   }
 
   @override
-  Future<void> saveArchivedList(
-      {required User user, required String data}) async {
-    await _userDataSource.updateArchivedList(user: user, data: data);
+  Future<void> updateArchivedList(
+      {required String userId, required List<Archived> archivedList}) async {
+    await _userDataSource.updateArchivedList(
+        userId: userId, archivedList: archivedList);
   }
 }

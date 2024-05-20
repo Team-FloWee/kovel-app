@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/my_page/components/language_edit_dialog.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_menu_bar_widget.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_switch_button.dart';
@@ -21,12 +22,13 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<MyPageViewModel>().getProfile());
+    Future.microtask(() => context.read<UserProvider>().fetchUser());
   }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MyPageViewModel>();
+    final userProvider = context.watch<UserProvider>();
     return Column(
       children: [
         MyPageMenuBar(
@@ -34,7 +36,7 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
           menuBarIcon: Icons.account_circle_outlined,
           onTapMenuBar: () async {
             await context.push('/mypageedit');
-            viewModel.getProfile();
+            userProvider.fetchUser();
           },
         ),
         MyPageMenuBar(
@@ -53,12 +55,13 @@ class _MyPageMenuListState extends State<MyPageMenuList> {
               context: context,
               builder: (BuildContext context) =>
                   LanguageEditDialog(updateLanguage: (String lang) async {
-                    if (lang == 'en') {
-                      await context.setLocale(const Locale('en', 'US'));
-                    } else {
-                      await context.setLocale(const Locale('ko', 'KR'));
-                    }
-                    viewModel.updateLanguage(lang);
+                if (lang == 'en') {
+                  await context.setLocale(const Locale('en', 'US'));
+                } else {
+                  await context.setLocale(const Locale('ko', 'KR'));
+                }
+                viewModel.updateLanguage(
+                    lang: lang, userId: userProvider.user.userId);
               }),
             );
           },

@@ -27,7 +27,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? InkWell(
               onTap: () {
                 context.pop();
-                userProvider.getUser();
+                userProvider.fetchUser();
               },
               child: const Icon(Icons.arrow_back_ios))
           : const SizedBox(),

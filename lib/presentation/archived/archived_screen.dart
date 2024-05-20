@@ -19,7 +19,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<UserProvider>().getUser());
+    Future.microtask(() => context.read<UserProvider>().fetchUser());
   }
 
   @override
@@ -62,7 +62,6 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
                   archived: archived,
                 );
               },
-
             ),
           ),
         ),
