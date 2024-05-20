@@ -27,12 +27,23 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
         isFocused = searchFocusNode.hasFocus;
       });
     });
+    Future.microtask(() => _searchDataScrollController.addListener(() {
+          _onCourseDataScroll();
+        }));
   }
 
+  final ScrollController _searchDataScrollController = ScrollController();
   @override
   void dispose() {
-    searchFocusNode.dispose();
     super.dispose();
+    searchFocusNode.dispose();
+    _searchDataScrollController.dispose();
+  }
+
+  void _onCourseDataScroll() {
+    if (_searchDataScrollController.position.pixels == _searchDataScrollController.position.maxScrollExtent && !context.read<HomeSearchViewModel>().isSearchDataLoading) {
+      context.read<HomeSearchViewModel>().onSearchMoreData();
+    }
   }
 
   @override
@@ -40,13 +51,17 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
     final viewModel = context.watch<HomeSearchViewModel>();
     final textController = TextEditingController();
     return Scaffold(
-        appBar: const CommonAppBar(title: ''),
+        appBar: CommonAppBar(
+          title: '홈 검색',
+          controller: _searchDataScrollController,
+        ),
         body: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: SafeArea(
             child: SingleChildScrollView(
+              controller: _searchDataScrollController,
               child: Stack(
                 children: [
                   Column(
@@ -58,10 +73,8 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                           focusNode: searchFocusNode,
                           onTap: viewModel.onLoadSearchHistory,
                           onFieldSubmitted: (value) {
-                            viewModel.onSearch(value);
-                            // searchFocusNode.requestFocus();
-                          },
-                          // onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                            viewModel.onSearch(value);                            
+                          },                          
                           decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(

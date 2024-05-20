@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
+import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
 
 class RelatedCourseItem extends StatelessWidget {
   final UnifiedInfo info;
@@ -12,34 +13,9 @@ class RelatedCourseItem extends StatelessWidget {
       children: [
         Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: info.imagePath == ''? Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: UiConfig.black.shade500,
-                ),
-              ) : Image.network(
-                info.imagePath, width: 100, height: 100, fit: BoxFit.fill,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) {
-                    return child;
-                  }
-                  return Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: UiConfig.black.shade500,
-                    ),
-                  );
-                },
-                errorBuilder: (context, error, stacktrace) {
-                  return Image.asset('assets/images/blank_image.png', width: 100, height: 100);
-                },
-              ),
+            CachedNetworkImageComponent(
+              imagePath: info.imagePath,
+              imageSize: 100,
             ),
             const SizedBox(width: 8),
             Expanded(

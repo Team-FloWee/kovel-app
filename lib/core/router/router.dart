@@ -186,6 +186,10 @@ final goRouter = GoRouter(
           ),
         ); // HomeSearchScreen을 반환합니다.
       },
+    GoRoute(
+      path: '/license',
+      name: 'license',
+      builder: (context, state) => const LicensePage()
     ),
   ],
 );
