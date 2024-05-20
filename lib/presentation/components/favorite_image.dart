@@ -52,9 +52,6 @@ class _FavoriteImageState extends State<FavoriteImage> {
             right: 8,
             child: InkWell(
               onTap: () {
-                setState(() {
-                  isLiked = !isLiked;
-                });
                 userProvider.updateArchivedList(widget.archived);
               },
               child: SizedBox(
