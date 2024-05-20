@@ -27,12 +27,23 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
         isFocused = searchFocusNode.hasFocus;
       });
     });
+    Future.microtask(() => _searchDataScrollController.addListener(() {
+          _onCourseDataScroll();
+        }));
   }
 
+  final ScrollController _searchDataScrollController = ScrollController();
   @override
   void dispose() {
-    searchFocusNode.dispose();
     super.dispose();
+    searchFocusNode.dispose();
+    _searchDataScrollController.dispose();
+  }
+
+  void _onCourseDataScroll() {
+    if (_searchDataScrollController.position.pixels == _searchDataScrollController.position.maxScrollExtent && !context.read<HomeSearchViewModel>().isSearchDataLoading) {
+      context.read<HomeSearchViewModel>().onSearchMoreData();
+    }
   }
 
   @override
@@ -40,13 +51,17 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
     final viewModel = context.watch<HomeSearchViewModel>();
     final textController = TextEditingController();
     return Scaffold(
-        appBar: const CommonAppBar(title: ''),
+        appBar: CommonAppBar(
+          title: '홈 검색',
+          controller: _searchDataScrollController,
+        ),
         body: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: SafeArea(
             child: SingleChildScrollView(
+              controller: _searchDataScrollController,
               child: Column(
                 children: [
                   Padding(
@@ -57,7 +72,6 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                       onTap: viewModel.onLoadSearchHistory,
                       onFieldSubmitted: (value) {
                         viewModel.onSearch(value);
-                        // searchFocusNode.requestFocus();
                       },
                       // onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       decoration: InputDecoration(
@@ -69,12 +83,11 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(50)),
                           ),
                           focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xffD7D7D7),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(50))
-                          ),
+                              borderSide: BorderSide(
+                                color: Color(0xffD7D7D7),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(50))),
                           contentPadding: const EdgeInsets.symmetric(vertical: 8),
                           hintText: "원하는 정보를 검색하세요".tr(),
                           prefixIcon: const Padding(
@@ -179,6 +192,16 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
                             const SizedBox(height: 40),
                           ],
                         ),
+                        viewModel.isMoreDataLoading != true
+                            ? const SizedBox()
+                            : const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    color: UiConfig.primaryColor,
+                                  ),
+                                ),
+                              )
                       ],
                     ),
                   )
