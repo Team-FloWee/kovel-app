@@ -178,7 +178,6 @@ final goRouter = GoRouter(
         final mapX = state.uri.queryParameters['mapX'] ?? '';
         final mapY = state.uri.queryParameters['mapY'] ?? '';
         final radius = state.uri.queryParameters['radius'] ?? '';
-
         return ChangeNotifierProvider(
           create: (context) => getIt<NearbyListViewModel>(),
           child: NearbyListScreen(

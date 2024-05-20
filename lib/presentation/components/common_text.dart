@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/components/icon_text_row.dart';
-
 import '../../config/ui_config.dart';
 
 class CommonText extends StatelessWidget {
@@ -58,7 +57,7 @@ class CommonText extends StatelessWidget {
           ),
           distance != null
               ? IconTextRow(
-                  icon: Icons.drive_eta, // TODO: 위아래 간격
+                  icon: Icons.emoji_transportation,
                   text: distance!,
                   maxline: 1,
                 )

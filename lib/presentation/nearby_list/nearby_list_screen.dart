@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/core/utils/language_util.dart';
@@ -58,6 +56,7 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<NearbyListViewModel>();
@@ -71,6 +70,7 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -84,6 +84,7 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
                                     context.pushNamed(
                                       'detail',
                                       queryParameters: {'id': e.id.toString(), 'contentTypeId': e.contentType.id.toString(), 'title': e.title.toString()},
+
                                     );
                                   },
                                   child: Row(
