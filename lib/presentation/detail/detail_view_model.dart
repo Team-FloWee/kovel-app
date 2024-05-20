@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kovel_app/core/method/get_detail_icon.dart';
+import 'package:kovel_app/core/utils/detail_icon_util.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_detail.dart';
 import 'package:kovel_app/domain/model/detail/unified_info.dart';
@@ -107,7 +107,7 @@ class DetailViewModel with ChangeNotifier {
           key != 'firstMenu') {
         _widgets.add(
           IconTextRow(
-            icon: getDetailIcon(key.toString()),
+            icon: DetailIconUtil().getIconData(key.toString()),
             text: value.toString(),
           ),
         );
