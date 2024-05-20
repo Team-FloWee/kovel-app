@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/core/service/ai_provider.dart';
+import 'package:kovel_app/core/provider/ai_provider.dart';
 import 'package:kovel_app/di/di_setup.dart';
 import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case.dart';
 import 'package:kovel_app/presentation/components/translate/translate_bottom_sheet.dart';

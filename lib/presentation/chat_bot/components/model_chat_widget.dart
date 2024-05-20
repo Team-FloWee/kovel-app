@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/core/enum/chat_case.dart';
 import 'package:kovel_app/domain/model/chat.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';

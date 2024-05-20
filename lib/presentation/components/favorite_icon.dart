@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/domain/model/archived.dart';
 import 'package:provider/provider.dart';
 

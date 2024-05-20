@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
-import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/core/utils/language_util.dart';
 import 'package:kovel_app/domain/model/category/area_type.dart';

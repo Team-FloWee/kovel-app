@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/core/service/ai_provider.dart';
+import 'package:kovel_app/core/provider/ai_provider.dart';
 import 'package:provider/provider.dart';
 
 class TranslateBottomSheet extends StatefulWidget {

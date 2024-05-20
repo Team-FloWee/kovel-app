@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:kovel_app/core/service/ai_provider.dart';
+import 'package:kovel_app/core/provider/ai_provider.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source.dart';
 import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/ai_data_source.dart';
@@ -49,7 +49,7 @@ import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
-import '../core/auth/user_provider.dart';
+import '../core/provider/user_provider.dart';
 import '../data/data_source/user_data_source.dart';
 import '../domain/use_case/update_archived_use_case.dart';
 

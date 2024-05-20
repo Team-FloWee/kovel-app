@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/presentation/my_page/components/language_edit_dialog.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_menu_bar_widget.dart';
 import 'package:kovel_app/presentation/my_page/components/my_page_switch_button.dart';

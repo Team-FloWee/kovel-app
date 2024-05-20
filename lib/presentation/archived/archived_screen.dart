@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:kovel_app/core/auth/user_provider.dart';
+import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/presentation/archived/components/archived_item.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:provider/provider.dart';
