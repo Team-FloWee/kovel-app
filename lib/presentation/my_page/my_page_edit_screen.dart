@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +19,6 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
   @override
   void initState() {
     super.initState();
-    // Future.microtask(() => context.read<MyPageViewModel>().getProfile());
     _controller.text = context.read<UserProvider>().user.name;
   }
 
@@ -43,8 +40,9 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {
-                  viewModel.updatePhoto(userId: userProvider.user.userId);
+                onTap: () async {
+                  await viewModel.updatePhoto(userId: userProvider.user.userId);
+                  userProvider.getUser();
                 },
                 child: SizedBox(
                   width: 72.0,
@@ -56,11 +54,8 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
                         imageUrl: userProvider.user.imageUrl,
-                        placeholder: (context, url) => const Center(
-                            child: SpinKitFadingCircle(
-                          size: 25,
-                          color: UiConfig.primaryColor,
-                        )),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) => Image.asset(
                             'assets/images/blank_profile_image.png'),
                       ),
@@ -72,9 +67,12 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                 controller: _controller,
               ),
               TextButton(
-                onPressed: () {
-                  viewModel.updateName(
-                      userId: userProvider.user.userId, name: _controller.text);
+                onPressed: () async {
+                  await viewModel.updateName(
+                    userId: userProvider.user.userId,
+                    name: _controller.text,
+                  );
+                  userProvider.getUser();
                   context.pop();
                 },
                 child: Text('수정완료'.tr()),
