@@ -36,13 +36,15 @@ class LoginViewModel with ChangeNotifier {
   Future<void> login({required LoginPlatform platform}) async {
     _isLoading = true;
     notifyListeners();
-    _user = await _loginUseCase.execute(platform: platform);
-    final result = await _checkUserDuplicatedUseCase.execute(id: _user!.userId);
-    if (result == true) {
-      _isNewUser = false;
-    } else {
-      await _createUserUseCase.execute(user: _user!);
-    }
+    try {
+      _user = await _loginUseCase.execute(platform: platform);
+      final result = await _checkUserDuplicatedUseCase.execute(id: _user!.userId);
+      if (result == true) {
+        _isNewUser = false;
+      } else {
+        await _createUserUseCase.execute(user: _user!);
+      }
+    } catch (e){};
     _isLoading = false;
     notifyListeners();
   }
