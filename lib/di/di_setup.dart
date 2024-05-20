@@ -27,7 +27,7 @@ import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.da
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/logout_use_case.dart';
-import 'package:kovel_app/domain/use_case/get_area_data_use_case%20copy.dart';
+import 'package:kovel_app/domain/use_case/get_address_info_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
@@ -119,5 +119,5 @@ void diSetup() {
         getAddressInfoUseCase: getIt(),
       ));
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
-  getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel());
+  getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
 }

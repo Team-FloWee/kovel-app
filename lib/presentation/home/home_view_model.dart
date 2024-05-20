@@ -5,14 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:kovel_app/data/data_source/address_info_data_source_impl.dart';
-import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
-import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
-import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
 import 'package:kovel_app/domain/model/tour.dart';
 import 'package:kovel_app/domain/model/user.dart';
-import 'package:kovel_app/domain/use_case/get_area_data_use_case%20copy.dart';
+import 'package:kovel_app/domain/use_case/get_address_info_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
 
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
@@ -34,8 +30,8 @@ class HomeViewModel with ChangeNotifier {
         _getTopTenPopularTourListUseCase = getTopTenPopularTourListUseCase,
         _getAddressInfoUseCase = getAddressInfoUseCase;
   bool isLoading = false;
-  double? _longitude;
-  double? _latitude;
+  double? longitude;
+  double? latitude;
   double distance = 0;
   String selectedLocation = '현재 위치';
 
@@ -89,18 +85,18 @@ class HomeViewModel with ChangeNotifier {
     }
 
     final Position currentPosition = await Geolocator.getCurrentPosition();
-    _longitude = currentPosition.longitude;
-    _latitude = currentPosition.latitude;
-    if (_longitude != null && _longitude! < 0) {
-      _longitude = currentPosition.longitude * -1;
+    longitude = currentPosition.longitude;
+    latitude = currentPosition.latitude;
+    if (longitude != null && longitude! < 0) {
+      longitude = currentPosition.longitude * -1;
     }
     /* 위도 경도 가져오기 끝 */
 
     // 위도,경도로 주소 가져오기
-    fetchAddressData(longitude: _longitude!.toString(), latitude: _latitude!.toString());
+    fetchAddressData(longitude: longitude!.toString(), latitude: latitude!.toString());
 
     // 내 주변 관광정보 추천
-    fetchLocationBasedList(longitude: _longitude!.toString(), latitude: _latitude!.toString(), radius: radius);
+    fetchLocationBasedList(longitude: longitude!.toString(), latitude: latitude!.toString(), radius: radius);
     notifyListeners();
   }
 
@@ -130,6 +126,7 @@ class HomeViewModel with ChangeNotifier {
   // 내 주변 관광정보
   void fetchLocationBasedList({required String latitude, required String longitude, required String radius}) async {
     locationBasedList = await _getLocationBasedDataUseCase.execute(mapX: longitude, mapY: latitude, radius: radius);
+    locationBasedList = locationBasedList.take(6).toList();
     // 내 주변 관광정보까지 거리 구하기
     for (int i = 0; i < locationBasedList.length; i++) {
       String result = '';
@@ -137,10 +134,9 @@ class HomeViewModel with ChangeNotifier {
           getDistanceToLocation(lat1: double.parse(longitude), lon1: double.parse(latitude), lat2: double.parse(locationBasedList[i].mapy), lon2: double.parse(locationBasedList[i].mapx));
 
       if (distance / 10 < 1000) {
-        print('1000보다 작음');
-        result = '${(distance / 10).toStringAsFixed(2)}m';
+        result = '약 ${(distance / 10).toStringAsFixed(0)}m';
       } else {
-        result = '${(distance).toStringAsFixed(2)}Km';
+        result = '약 ${(distance).toStringAsFixed(0)}Km';
       }
       distanceList.add(result);
     }

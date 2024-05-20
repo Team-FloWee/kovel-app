@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kovel_app/presentation/components/icon_text_row.dart';
-
 import '../../config/ui_config.dart';
 
 class CommonText extends StatelessWidget {

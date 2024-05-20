@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/utils/archived_util.dart';
 import 'package:kovel_app/core/utils/language_util.dart';
@@ -10,11 +11,18 @@ import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/components/content_title.dart';
 import 'package:kovel_app/presentation/components/favorite_image.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
-import 'package:provider/provider.dart';
 
 class NearbyListScreen extends StatefulWidget {
-  final List<Tour> _locationBasedList;
-  const NearbyListScreen({super.key, required List<Tour> locationBasedList}) : _locationBasedList = locationBasedList;
+  String mapX;
+  String mapY;
+  String radius;
+
+  NearbyListScreen({
+    super.key,
+    required this.mapX,
+    required this.mapY,
+    required this.radius,
+  });
 
   @override
   State<NearbyListScreen> createState() => _NearbyListScreenState();
@@ -23,15 +31,31 @@ class NearbyListScreen extends StatefulWidget {
 class _NearbyListScreenState extends State<NearbyListScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-
+    super.initState();
     Future.microtask(() {
-      final userProvider = context.read<UserProvider>();
-      context.read<NearbyListViewModel>().onFetch(widget._locationBasedList, LanguageUtil().getLanguage(userProvider.user.language));
+      //final userProvider = context.read<UserProvider>();
+      context.read<NearbyListViewModel>().onFetch(longitude: widget.mapX, latitude: widget.mapY, radius: widget.radius);
+      return _nearbyScrollController.addListener(() {
+        _onNearbyDataScroll();
+      });
     });
   }
 
-  final ScrollController _commonDataScrollController = ScrollController();
+  final ScrollController _nearbyScrollController = ScrollController();
+
+  void _onNearbyDataScroll() {
+    //final userProvider = context.read<UserProvider>();
+    if (_nearbyScrollController.position.pixels == _nearbyScrollController.position.maxScrollExtent && !context.read<NearbyListViewModel>().isNearbyDataLoading) {
+      context.read<NearbyListViewModel>().fetchMoreNearbyData(longitude: widget.mapX, latitude: widget.mapY, radius: widget.radius);
+    }
+  }
+
+  @override
+  void dispose() {
+    _nearbyScrollController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +66,16 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
         child: viewModel.isLoading == true
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
+                controller: _nearbyScrollController,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget._locationBasedList.length.toString()),
+
                     const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
-                        children: widget._locationBasedList
+                        children: viewModel.locationBasedList
                             .map(
                               (e) => Padding(
                                 padding: const EdgeInsets.only(bottom: 16.0),
@@ -58,13 +83,14 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
                                   onTap: () {
                                     context.pushNamed(
                                       'detail',
-                                      queryParameters: {'id': e.id, 'contentTypeId': e.contentType.id, 'title': e.title},
+                                      queryParameters: {'id': e.id.toString(), 'contentTypeId': e.contentType.id.toString(), 'title': e.title.toString()},
+
                                     );
                                   },
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      viewModel.isLoading
+                                      viewModel.isNearbyDataLoading
                                           ? const Center(child: CircularProgressIndicator())
                                           : FavoriteImage(
                                               archived: ArchivedUtil.getArchived(tour: e),
@@ -86,6 +112,7 @@ class _NearbyListScreenState extends State<NearbyListScreen> {
                             .toList(),
                       ),
                     ),
+                    viewModel.isNearbyDataLoading != true ? const SizedBox() : const Center(child: CircularProgressIndicator()),
                     const SizedBox(height: 40),
                   ],
                 ),
