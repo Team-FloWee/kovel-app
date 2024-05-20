@@ -24,6 +24,7 @@ import 'package:kovel_app/domain/use_case/ai/get_translated_data_stream_use_case
 import 'package:kovel_app/domain/use_case/ai/send_chat_to_ai_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/check_user_duplicated_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/create_user_use_case.dart';
+import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/login_use_case.dart';
 import 'package:kovel_app/domain/use_case/auth/logout_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_area_data_use_case%20copy.dart';
@@ -50,6 +51,7 @@ import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 
 import '../core/auth/user_provider.dart';
 import '../data/data_source/user_data_source.dart';
+import '../domain/use_case/update_archived_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -75,6 +77,10 @@ void diSetup() {
       AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
 
   // UseCase
+  getIt.registerSingleton<GetUserUseCase>(
+      GetUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<UpdateArchivedUseCase>(
+      UpdateArchivedUseCase(userRepository: getIt()));
   getIt.registerSingleton<UpdateUserNameUseCase>(
       UpdateUserNameUseCase(userRepository: getIt()));
   getIt.registerSingleton<LikeTourUseCase>(
@@ -98,8 +104,6 @@ void diSetup() {
       CheckUserDuplicatedUseCase(userRepository: getIt()));
   getIt.registerSingleton<CreateUserUseCase>(
       CreateUserUseCase(userRepository: getIt()));
-  getIt.registerSingleton<UpdateUserNameUseCase>(
-      UpdateUserNameUseCase(userRepository: getIt()));
   getIt.registerSingleton<GetSearchFestivalUseCase>(
       GetSearchFestivalUseCase(tourInfoRepository: getIt()));
   getIt.registerSingleton<GetSearchKeywordUseCase>(
