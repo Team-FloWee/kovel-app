@@ -26,9 +26,9 @@ class DetailText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Uri telUri = Uri.parse('tel:+82 ${tel}');
+    final Uri telUri = Uri.parse('tel:+82 $tel');
     final Uri addressUri = Uri.parse(
-        'https://m.map.kakao.com/actions/searchView?q=${address}#!/LQMLML,QNSMURM/map/place');
+        'https://m.map.kakao.com/actions/searchView?q=$address#!/LQMLML,QNSMURM/map/place');
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

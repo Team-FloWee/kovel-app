@@ -44,7 +44,9 @@ class LoginViewModel with ChangeNotifier {
       } else {
         await _createUserUseCase.execute(user: _user!);
       }
-    } catch (e){};
+    } catch (e) {
+      throw Exception(e);
+    }
     _isLoading = false;
     notifyListeners();
   }

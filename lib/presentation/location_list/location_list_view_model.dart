@@ -11,15 +11,13 @@ import '../../domain/use_case/get_area_data_use_case.dart';
 class LocationListViewModel with ChangeNotifier {
   final GetCommonDataUseCase _getCommonDataUseCase;
   final GetAreaDataUseCase _getAreaDataUseCase;
-  final UserRepository _userRepository;
 
   LocationListViewModel({
     required GetCommonDataUseCase getCommonDataUseCase,
     required GetAreaDataUseCase getAreaDataUseCase,
     required UserRepository userRepository,
   })  : _getCommonDataUseCase = getCommonDataUseCase,
-        _getAreaDataUseCase = getAreaDataUseCase,
-        _userRepository = userRepository;
+        _getAreaDataUseCase = getAreaDataUseCase;
 
   bool _isLoading = false;
 

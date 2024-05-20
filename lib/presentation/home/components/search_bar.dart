@@ -14,6 +14,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
 
   @override
   void initState() {
+    super.initState();
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         _overlayEntry = _createOverlayEntry();

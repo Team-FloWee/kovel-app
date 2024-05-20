@@ -104,6 +104,8 @@ class KakaoAuth implements SocialAuth {
     try {
       kakao.UserApi user = kakao.UserApi.instance;
       await user.logout();
-    } catch (error) {}
+    } catch (error) {
+      throw Exception(error);
+    }
   }
 }

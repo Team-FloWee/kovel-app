@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'chat_category_item.dart';
 
 class ChatCategoryWidget extends StatefulWidget {
@@ -12,7 +13,7 @@ class ChatCategoryWidget extends StatefulWidget {
   });
 
   @override
-  _ChatCategoryWidgetState createState() => _ChatCategoryWidgetState();
+  State<ChatCategoryWidget> createState() => _ChatCategoryWidgetState();
 }
 
 class _ChatCategoryWidgetState extends State<ChatCategoryWidget> {

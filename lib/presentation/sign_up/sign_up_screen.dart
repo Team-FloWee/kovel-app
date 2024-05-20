@@ -117,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     userId: userProvider.user.userId,
                                     name: _textEditingController.text);
                                 userProvider.fetchUser();
-                                context.go('/');
+                                if (context.mounted) context.go('/');
                               },
                               child: Text(
                                 '가입 완료'.tr(),

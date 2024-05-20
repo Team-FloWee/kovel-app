@@ -17,7 +17,7 @@ class TranslateBottomSheet extends StatefulWidget {
 
 class _TranslateBottomSheetState extends State<TranslateBottomSheet> {
   final ScrollController _translatedDataController = ScrollController();
-  List<String> _languageList = ['한국어', 'English', '日本語'];
+  final List<String> _languageList = ['한국어', 'English', '日本語'];
   String _selectedLanguage = 'English';
   bool _isMore = false;
 

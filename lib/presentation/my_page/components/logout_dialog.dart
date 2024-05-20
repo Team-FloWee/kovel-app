@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kovel_app/core/provider/user_provider.dart';
-import 'package:provider/provider.dart';
 
 import '../../../config/ui_config.dart';
 
@@ -11,7 +9,6 @@ class LogoutDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = context.watch<UserProvider>();
     return AlertDialog(
       alignment: Alignment.center,
       backgroundColor: UiConfig.black.shade100,
@@ -56,7 +53,7 @@ class LogoutDialog extends StatelessWidget {
               onTap: () async {
                 context.pop();
                 await logout();
-                context.go('/login');
+                if (context.mounted) context.go('/login');
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 4,

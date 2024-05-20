@@ -5,7 +5,6 @@ import 'package:kovel_app/domain/model/category/course_category_type.dart';
 import 'package:kovel_app/domain/model/category/dummy_category_type.dart';
 
 part 'tour_detail.freezed.dart';
-
 part 'tour_detail.g.dart';
 
 @freezed
@@ -37,11 +36,7 @@ class TourDetail with _$TourDetail {
 
 CategoryType _categoryTypeFromJson(Map<String, dynamic> json) {
   final courseCategoryId = json['courseCategoryId'] as String;
-  if (courseCategoryId != null) {
-    return CourseCategoryType(courseCategoryId: courseCategoryId);
-  } else {
-    return DummyCategoryType(id: json['id']);
-  }
+  return CourseCategoryType(courseCategoryId: courseCategoryId);
 }
 
 Map<String, dynamic> _categoryTypeToJson(CategoryType categoryType) {

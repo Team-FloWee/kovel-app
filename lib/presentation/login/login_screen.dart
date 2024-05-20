@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/core/enum/login_platform.dart';
+import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -68,9 +68,10 @@ class LoginScreen extends StatelessWidget {
                           await userProvider.fetchUser();
                           if (viewModel.user == null) return;
                           if (viewModel.isNewUser) {
-                            context.go('/signUp', extra: viewModel.user);
+                            if (context.mounted)
+                              context.go('/signUp', extra: viewModel.user);
                           } else {
-                            context.go('/');
+                            if (context.mounted) context.go('/');
                           }
                         },
                         // TODO: 유저 language에 따라 다른 asset 이미지 보여지게 수정
@@ -92,9 +93,10 @@ class LoginScreen extends StatelessWidget {
                           await userProvider.fetchUser();
                           if (viewModel.user == null) return;
                           if (viewModel.isNewUser) {
-                            context.go('/signUp', extra: viewModel.user);
+                            if (context.mounted)
+                              context.go('/signUp', extra: viewModel.user);
                           } else {
-                            context.go('/');
+                            if (context.mounted) context.go('/');
                           }
                         },
                         // TODO: 유저 language에 따라 다른 asset 이미지 보여지게 수정

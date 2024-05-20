@@ -73,7 +73,7 @@ class _MyPageEditScreenState extends State<MyPageEditScreen> {
                     name: _controller.text,
                   );
                   userProvider.fetchUser();
-                  context.pop();
+                  if (context.mounted) context.pop();
                 },
                 child: Text('수정완료'.tr()),
               ),

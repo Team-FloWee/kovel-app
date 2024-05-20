@@ -81,19 +81,17 @@ class _FavoriteImageState extends State<FavoriteImage> {
         Positioned(
           left: 8,
           bottom: 8,
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.area,
-                    style: UiConfig.smallStyle
-                        .copyWith(color: UiConfig.black.shade100)),
-                Text(widget.title,
-                    style: UiConfig.bodyStyle.copyWith(
-                        fontWeight: UiConfig.semiBoldFont,
-                        color: UiConfig.black.shade100))
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.area,
+                  style: UiConfig.smallStyle
+                      .copyWith(color: UiConfig.black.shade100)),
+              Text(widget.title,
+                  style: UiConfig.bodyStyle.copyWith(
+                      fontWeight: UiConfig.semiBoldFont,
+                      color: UiConfig.black.shade100))
+            ],
           ),
         )
       ],

@@ -25,7 +25,6 @@ class UserRepositoryImpl implements UserRepository {
       }
       return result;
     } catch (e) {
-      print(e);
       return null;
     }
   }
@@ -54,7 +53,6 @@ class UserRepositoryImpl implements UserRepository {
       await _userDataSource.createUser(user: user);
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }

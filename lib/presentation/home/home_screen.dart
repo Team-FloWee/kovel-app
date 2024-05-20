@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   style: UiConfig.bodyStyle.copyWith(fontWeight: UiConfig.semiBoldFont),
                                                 ),
                                               ),
-                                        Text(viewModel.distanceList[index] ?? '가까이 있음'.tr(),
+                                        Text(viewModel.distanceList[index],
                                             style: UiConfig.extraSmallStyle.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.black.shade700)),
                                       ],
                                     ),

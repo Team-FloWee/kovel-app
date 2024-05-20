@@ -70,7 +70,6 @@ class HomeSearchViewModel with ChangeNotifier {
 
   void onSearchMoreData() async {
     isMoreDataLoading = true;
-    print(queryMore);
     searchHistoryList.add(queryMore);
     notifyListeners();
     _searchDataList.addAll(await _getSearchKeywordUseCase.execute(
@@ -78,7 +77,6 @@ class HomeSearchViewModel with ChangeNotifier {
       pageNo: ++_searchPageNo,
     ));
 
-    final prefs = await SharedPreferences.getInstance();
     notifyListeners();
 
     isMoreDataLoading = false;

@@ -34,11 +34,7 @@ class Tour with _$Tour {
 
 CategoryType _categoryTypeFromJson(Map<String, dynamic> json) {
   final courseCategoryId = json['courseCategoryId'] as String;
-  if (courseCategoryId != null) {
-    return CourseCategoryType(courseCategoryId: courseCategoryId);
-  } else {
-    return DummyCategoryType(id: json['id']);
-  }
+  return CourseCategoryType(courseCategoryId: courseCategoryId);
 }
 
 Map<String, dynamic> _categoryTypeToJson(CategoryType categoryType) {
