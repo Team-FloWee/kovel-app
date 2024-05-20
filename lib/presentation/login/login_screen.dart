@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/core/auth/user_provider.dart';
 import 'package:kovel_app/core/enum/login_platform.dart';
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LoginViewModel>();
+    final userProvider = context.watch<UserProvider>();
 
     return Scaffold(
       body: SafeArea(
@@ -63,6 +65,7 @@ class LoginScreen extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           await viewModel.login(platform: LoginPlatform.kakao);
+                          await userProvider.getUser();
                           if (viewModel.user == null) return;
                           if (viewModel.isNewUser) {
                             context.go('/signUp', extra: viewModel.user);
@@ -86,6 +89,7 @@ class LoginScreen extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           await viewModel.login(platform: LoginPlatform.google);
+                          await userProvider.getUser();
                           if (viewModel.user == null) return;
                           if (viewModel.isNewUser) {
                             context.go('/signUp', extra: viewModel.user);
