@@ -36,6 +36,7 @@ class HomeSearchViewModel with ChangeNotifier {
     queryMore = query;
     _searchDataList = await _getSearchKeywordUseCase.execute(query: query);
     final prefs = await SharedPreferences.getInstance();
+
     notifyListeners();
     if (prefs.getStringList('search_history') != null) {
       if (!prefs.getStringList('search_history')!.contains(query)) {
@@ -48,6 +49,9 @@ class HomeSearchViewModel with ChangeNotifier {
         await prefs.remove('search_history');
         await prefs.setStringList('search_history', searchHistoryList);
       }
+    } else {
+      searchHistoryList.insert(0, query);
+      await prefs.setStringList('search_history', searchHistoryList);
     }
 
     isLoading = false;
