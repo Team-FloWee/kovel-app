@@ -25,6 +25,8 @@ mixin _$Post {
   String get userId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  String get createAt => throw _privateConstructorUsedError;
+  String get updateAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +43,9 @@ abstract class $PostCopyWith<$Res> {
       String postTypeId,
       String userId,
       String title,
-      String content});
+      String content,
+      String createAt,
+      String updateAt});
 }
 
 /// @nodoc
@@ -62,6 +66,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? userId = null,
     Object? title = null,
     Object? content = null,
+    Object? createAt = null,
+    Object? updateAt = null,
   }) {
     return _then(_value.copyWith(
       postId: null == postId
@@ -84,6 +90,14 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      createAt: null == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updateAt: null == updateAt
+          ? _value.updateAt
+          : updateAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -100,7 +114,9 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       String postTypeId,
       String userId,
       String title,
-      String content});
+      String content,
+      String createAt,
+      String updateAt});
 }
 
 /// @nodoc
@@ -118,6 +134,8 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? title = null,
     Object? content = null,
+    Object? createAt = null,
+    Object? updateAt = null,
   }) {
     return _then(_$PostImpl(
       postId: null == postId
@@ -140,6 +158,14 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      createAt: null == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updateAt: null == updateAt
+          ? _value.updateAt
+          : updateAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -152,7 +178,9 @@ class _$PostImpl implements _Post {
       required this.postTypeId,
       required this.userId,
       required this.title,
-      required this.content});
+      required this.content,
+      required this.createAt,
+      required this.updateAt});
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostImplFromJson(json);
@@ -167,10 +195,14 @@ class _$PostImpl implements _Post {
   final String title;
   @override
   final String content;
+  @override
+  final String createAt;
+  @override
+  final String updateAt;
 
   @override
   String toString() {
-    return 'Post(postId: $postId, postTypeId: $postTypeId, userId: $userId, title: $title, content: $content)';
+    return 'Post(postId: $postId, postTypeId: $postTypeId, userId: $userId, title: $title, content: $content, createAt: $createAt, updateAt: $updateAt)';
   }
 
   @override
@@ -183,13 +215,17 @@ class _$PostImpl implements _Post {
                 other.postTypeId == postTypeId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
+            (identical(other.updateAt, updateAt) ||
+                other.updateAt == updateAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, postId, postTypeId, userId, title, content);
+  int get hashCode => Object.hash(runtimeType, postId, postTypeId, userId,
+      title, content, createAt, updateAt);
 
   @JsonKey(ignore: true)
   @override
@@ -211,7 +247,9 @@ abstract class _Post implements Post {
       required final String postTypeId,
       required final String userId,
       required final String title,
-      required final String content}) = _$PostImpl;
+      required final String content,
+      required final String createAt,
+      required final String updateAt}) = _$PostImpl;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
@@ -225,6 +263,10 @@ abstract class _Post implements Post {
   String get title;
   @override
   String get content;
+  @override
+  String get createAt;
+  @override
+  String get updateAt;
   @override
   @JsonKey(ignore: true)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>

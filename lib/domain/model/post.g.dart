@@ -12,6 +12,8 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       userId: json['userId'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
+      createAt: json['createAt'] as String,
+      updateAt: json['updateAt'] as String,
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
@@ -21,4 +23,6 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'userId': instance.userId,
       'title': instance.title,
       'content': instance.content,
+      'createAt': instance.createAt,
+      'updateAt': instance.updateAt,
     };

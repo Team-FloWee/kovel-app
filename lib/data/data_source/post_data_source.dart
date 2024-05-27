@@ -5,12 +5,14 @@ abstract interface class PostDataSource {
     required String userId,
     required String title,
     required String content,
+    required String createAt
   });
   Future<List<Post>> getPostList();
   Future<void> updatePost({
     required String postId,
     required String title,
-    required String content
+    required String content,
+    required String updateAt
   });
   Future<void> deletePost({required String postId});
 }

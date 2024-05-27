@@ -12,6 +12,8 @@ class Post with _$Post {
     required String userId,
     required String title,
     required String content,
+    required String createAt,
+    required String updateAt
   }) = _Post;
 
   factory Post.fromJson(Map<String, Object?> json) => _$PostFromJson(json);
