@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
+import 'package:kovel_app/presentation/schedule/component/schedule_appbar.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_list.dart';
 
 class ScheduleScreen extends StatelessWidget {
@@ -57,31 +58,9 @@ class ScheduleScreen extends StatelessWidget {
                 ),
               ),
               Image.asset('assets/images/login_background.png'),
-              AppBar(
-                title: Row(
-                  children: [
-                    Text(
-                      'day1',
-                      style: UiConfig.h4Style.copyWith(fontWeight: UiConfig.semiBoldFont),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Text(
-                      '5.4/토',
-                      style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade700),
-                    ),
-                  ],
-                ),
-                actions: [
-                  Text(
-                    '편집',
-                    style: UiConfig.smallStyle.copyWith(color: UiConfig.black.shade700),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                ],
+              ScheduleAppbar(
+                days: 'day1',
+                dates: '5.4/토',
               ),
               ScheduleList(
                 index: '1',
@@ -94,6 +73,10 @@ class ScheduleScreen extends StatelessWidget {
               ScheduleList(
                 index: '3',
                 isSelected: false,
+              ),
+              ScheduleAppbar(
+                days: 'day2',
+                dates: '5.5/일',
               ),
               ScheduleList(
                 index: '1',
