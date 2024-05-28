@@ -18,6 +18,29 @@ class ScheduleScreen extends StatefulWidget {
 class _ScheduleScreenState extends State<ScheduleScreen> {
   Set<Marker> markers = {}; // 마커 변수
   late KakaoMapController _mapController;
+  List<CustomOverlay> customOverlays = [];
+  int index = 5;
+
+  @override
+  void initState() {
+    var content =
+        '<div style="position: relative;width:23px;height:23px;top:50px;left:50px;">'
+        '<div style="position: absolute;left: 0;top: 0;color: #fff;width: 23px;height: 23px;text-align: center;transform: translate(0%, 4px);z-index: 10;">${index}</div>'
+        '<div style="position: absolute;width:23px;height:23px;left:0px;bottom: 0px;border-radius: 50% 50% 50% 0;transform-origin: 50% 50%;transform: rotate(-45deg);background-color:#866eff;">'
+        '</div>'
+        '</div>';
+
+    final customOverlay = CustomOverlay(
+      customOverlayId: 'customOverlay',
+      latLng: LatLng(37.49887, 127.026581),
+      content: content,
+    );
+
+    customOverlays.add(customOverlay);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     AuthRepository.initialize(
@@ -74,21 +97,21 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   onMapCreated: ((controller) async {
                     _mapController = controller;
 
-                    markers.add(Marker(
-                      markerId: UniqueKey().toString(),
-                      latLng: await _mapController.getCenter(),
-                    ));
-
                     setState(() {});
                   }),
-                  //맵타입 컨트롤러
-                  // mapTypeControl: true,
-                  // mapTypeControlPosition: ControlPosition.topRight,
                   //줌 + - 컨트롤러
                   zoomControl: true,
                   zoomControlPosition: ControlPosition.right,
-                  markers: markers.toList(),
-                  center: LatLng(37.3608681, 126.9306506),
+                  //커스텀오버레이(마커처럼생긴것)
+                  customOverlays: customOverlays,
+                  //커스텀오버레이 클릭시 콜백함수
+                  onCustomOverlayTap: (String id, LatLng latLng) {
+                    debugPrint('***** [callback2] $id / $latLng');
+                  },
+                  //화면 가운데
+                  center: LatLng(37.49887, 127.026581),
+                  //zoom단계
+                  currentLevel: 4,
                 ),
               ),
               ScheduleAppbar(
