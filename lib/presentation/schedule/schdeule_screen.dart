@@ -1,19 +1,29 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_appbar.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_list.dart';
 
-class ScheduleScreen extends StatelessWidget {
+class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({super.key});
 
   @override
+  State<ScheduleScreen> createState() => _ScheduleScreenState();
+}
+
+class _ScheduleScreenState extends State<ScheduleScreen> {
+  Set<Marker> markers = {}; // 마커 변수
+  late KakaoMapController _mapController;
+  @override
   Widget build(BuildContext context) {
+    AuthRepository.initialize(
+      appKey: dotenv.get('KAKAO_JAVASCRIPT_APP_KEY'),
+    );
+
     return Scaffold(
       appBar: CommonAppBar(
         title: '나의 일정',
@@ -57,7 +67,30 @@ class ScheduleScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Image.asset('assets/images/login_background.png'),
+              SizedBox(
+                width: double.infinity,
+                height: 218,
+                child: KakaoMap(
+                  onMapCreated: ((controller) async {
+                    _mapController = controller;
+
+                    markers.add(Marker(
+                      markerId: UniqueKey().toString(),
+                      latLng: await _mapController.getCenter(),
+                    ));
+
+                    setState(() {});
+                  }),
+                  //맵타입 컨트롤러
+                  // mapTypeControl: true,
+                  // mapTypeControlPosition: ControlPosition.topRight,
+                  //줌 + - 컨트롤러
+                  zoomControl: true,
+                  zoomControlPosition: ControlPosition.right,
+                  markers: markers.toList(),
+                  center: LatLng(37.3608681, 126.9306506),
+                ),
+              ),
               ScheduleAppbar(
                 days: 'day1',
                 dates: '5.4/토',
@@ -97,7 +130,8 @@ class ScheduleScreen extends StatelessWidget {
                   height: 32.h,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: UiConfig.black.shade700, width: 1),
+                      side:
+                          BorderSide(color: UiConfig.black.shade700, width: 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
