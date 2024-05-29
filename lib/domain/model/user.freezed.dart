@@ -26,7 +26,7 @@ mixin _$User {
   String get imageUrl => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   List<Archived> get archivedList => throw _privateConstructorUsedError;
-  List<Schedule> get scheduleList => throw _privateConstructorUsedError;
+  List<Archived> get scheduleList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +45,7 @@ abstract class $UserCopyWith<$Res> {
       String imageUrl,
       String language,
       List<Archived> archivedList,
-      List<Schedule> scheduleList});
+      List<Archived> scheduleList});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       scheduleList: null == scheduleList
           ? _value.scheduleList
           : scheduleList // ignore: cast_nullable_to_non_nullable
-              as List<Schedule>,
+              as List<Archived>,
     ) as $Val);
   }
 }
@@ -116,7 +116,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String imageUrl,
       String language,
       List<Archived> archivedList,
-      List<Schedule> scheduleList});
+      List<Archived> scheduleList});
 }
 
 /// @nodoc
@@ -165,7 +165,7 @@ class __$$UserImplCopyWithImpl<$Res>
       scheduleList: null == scheduleList
           ? _value.scheduleList
           : scheduleList // ignore: cast_nullable_to_non_nullable
-              as List<Schedule>,
+              as List<Archived>,
     ));
   }
 }
@@ -198,7 +198,7 @@ class _$UserImpl implements _User {
   @override
   final List<Archived> archivedList;
   @override
-  final List<Schedule> scheduleList;
+  final List<Archived> scheduleList;
 
   @override
   String toString() {
@@ -257,7 +257,7 @@ abstract class _User implements User {
       required final String imageUrl,
       required final String language,
       required final List<Archived> archivedList,
-      required final List<Schedule> scheduleList}) = _$UserImpl;
+      required final List<Archived> scheduleList}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -274,7 +274,7 @@ abstract class _User implements User {
   @override
   List<Archived> get archivedList;
   @override
-  List<Schedule> get scheduleList;
+  List<Archived> get scheduleList;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

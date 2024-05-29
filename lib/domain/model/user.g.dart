@@ -16,7 +16,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
           .map((e) => Archived.fromJson(e as Map<String, dynamic>))
           .toList(),
       scheduleList: (json['scheduleList'] as List<dynamic>)
-          .map((e) => Schedule.fromJson(e as Map<String, dynamic>))
+          .map((e) => Archived.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
