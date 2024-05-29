@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/post.dart';
+import 'package:kovel_app/domain/model/user.dart';
+import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
 
-class PostWidget extends StatelessWidget {
-  const PostWidget({super.key});
+class PostWidget extends StatefulWidget {
+  final Post post;
+  final User user;
+  const PostWidget({super.key, required this.post, required this.user});
 
+  @override
+  State<PostWidget> createState() => _PostWidgetState();
+}
+
+class _PostWidgetState extends State<PostWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 1.sw,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Divider(color: UiConfig.black.shade500, height: 1),
           SizedBox(height: 16),
@@ -19,8 +34,8 @@ class PostWidget extends StatelessWidget {
               SizedBox(width: 16),
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  'assets/images/blank_image.png',
+                child: Image.network(
+                  widget.user.imageUrl,
                   width: 50,
                   height: 50,
                 ),
@@ -29,20 +44,31 @@ class PostWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('유저 이름', style: UiConfig.bodyStyle),
-                  Text('2024-05-29 14:50:21',
-                  style: UiConfig.smallStyle.copyWith(
-                      color: UiConfig.black.shade700)
+                  Text(widget.user.name, style: UiConfig.bodyStyle),
+                  Text(
+                      widget.post.createAt,
+                      style: UiConfig.smallStyle.copyWith(
+                          color: UiConfig.black.shade700
+                      )
                   )
                 ],
               ),
               SizedBox(width: 16),
             ],
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 8),
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Text('이것은 내용입니다. 길어질 수도 있을 것 같으니 나중에 더보기같은 기능을 추가해야 할 것 같습니다.'),
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.post.title, style: UiConfig.bodyStyle.copyWith(
+                    fontWeight: UiConfig.semiBoldFont)
+                ),
+                SizedBox(height: 4),
+                Text(widget.post.content, style: UiConfig.bodyStyle)
+              ],
+            ),
           ),
           SizedBox(height: 16),
         ],
