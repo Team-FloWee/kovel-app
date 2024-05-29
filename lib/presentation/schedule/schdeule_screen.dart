@@ -35,8 +35,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       latLng: LatLng(37.49887, 127.026581),
       content: content,
     );
+    final customOverlay2 = CustomOverlay(
+      customOverlayId: 'customOverlay',
+      latLng: LatLng(37.5, 127.3),
+      content: content,
+    );
 
     customOverlays.add(customOverlay);
+    customOverlays.add(customOverlay2);
 
     super.initState();
   }
@@ -111,7 +117,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   //화면 가운데
                   center: LatLng(37.49887, 127.026581),
                   //zoom단계
-                  currentLevel: 4,
+                  currentLevel: 10,
                 ),
               ),
               ScheduleAppbar(
