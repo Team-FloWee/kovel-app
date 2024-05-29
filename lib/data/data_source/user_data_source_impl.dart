@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kovel_app/data/data_source/user_data_source.dart';
 import 'package:kovel_app/domain/model/archived.dart';
+import 'package:kovel_app/domain/model/schedule.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 class UserDataSourceImpl implements UserDataSource {
@@ -78,5 +79,13 @@ class UserDataSourceImpl implements UserDataSource {
       //업데이트 (이후 currentUser로 바꾸기)
       await _userRef.doc(userId).update({'imageUrl': downloadUrl});
     }
+  }
+
+  @override
+  Future<void> updateSchedule(
+      {required String userId, required List<Schedule> scheduleList}) async {
+    await _userRef
+        .doc(userId)
+        .update({'scheduleList': scheduleList.map((e) => e.toJson())});
   }
 }

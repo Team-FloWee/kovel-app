@@ -1,4 +1,5 @@
 import 'package:kovel_app/domain/model/archived.dart';
+import 'package:kovel_app/domain/model/schedule.dart';
 import 'package:kovel_app/domain/model/user.dart';
 
 abstract interface class UserDataSource {
@@ -11,4 +12,6 @@ abstract interface class UserDataSource {
   Future<void> updateArchivedList(
       {required String userId, required List<Archived> archivedList});
   Future<void> updatePhoto({required String userId});
+  Future<void> updateSchedule(
+      {required String userId, required List<Schedule> scheduleList});
 }
