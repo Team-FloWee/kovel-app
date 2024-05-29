@@ -22,6 +22,8 @@ import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_screen.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
+import 'package:kovel_app/presentation/post/post_list_screen.dart';
+import 'package:kovel_app/presentation/post/post_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:kovel_app/presentation/splash/splash_screen.dart';
@@ -187,5 +189,23 @@ final goRouter = GoRouter(
       },
     ),
     GoRoute(path: '/license', name: 'license', builder: (context, state) => const LicensePage()),
+    GoRoute(
+      path: '/postList',
+      name: 'postList',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (_) => getIt<PostListViewModel>(),
+              child: PostListScreen(),
+            ),
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            }
+        );
+      }
+    )
   ],
 );

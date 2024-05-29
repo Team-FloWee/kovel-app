@@ -25,6 +25,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 BorderSide(color: UiConfig.black.shade200, width: 0.5)), // 라인효과
       ),
       child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: widget.selectedIndex,
         elevation: 0,
         onTap: (value) {
@@ -33,18 +34,24 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
               context.go('/');
               break;
             case 1:
-              context.go('/archived');
+              context.go('/postList');
               break;
             case 2:
+              context.go('/archived');
+              break;
+            case 3:
               context.go('/mypage');
               break;
           }
         },
         items: [
-
           BottomNavigationBarItem(
             icon: const Icon(Icons.home),
             label: '홈'.tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.post_add),
+            label: '게시판'
           ),
           BottomNavigationBarItem(
             icon: widget.selectedIndex == 1
