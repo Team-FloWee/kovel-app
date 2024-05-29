@@ -11,7 +11,9 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<void> createPost({required Post post}) async {
-    await _postRef.add(post);
+    await _postRef.add(post)
+        .then((value) => _postRef.doc(value.id)
+        .update({'postId': value.id}));
   }
 
   @override

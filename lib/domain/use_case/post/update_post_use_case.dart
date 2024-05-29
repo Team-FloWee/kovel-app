@@ -19,6 +19,7 @@ class UpdatePostUseCase {
     await _postRepository.updatePost(
         postId: postId,
         post: Post(
+            postId: postId,
             postTypeId: postTypeId,
             userId: userId,
             title: title,

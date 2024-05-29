@@ -16,6 +16,7 @@ class CreatePostUseCase {
   }) async {
     await _postRepository.createPost(
         post: Post(
+            postId: '',
             postTypeId: postTypeId,
             userId: userId,
             title: title,

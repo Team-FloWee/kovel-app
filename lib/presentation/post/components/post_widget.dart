@@ -5,6 +5,8 @@ import 'package:kovel_app/domain/model/post.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/presentation/components/cached_network_image_component.dart';
+import 'package:kovel_app/presentation/post/post_list_view_model.dart';
+import 'package:provider/provider.dart';
 
 class PostWidget extends StatefulWidget {
   final Post post;
@@ -22,6 +24,7 @@ class _PostWidgetState extends State<PostWidget> {
   }
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<PostListViewModel>();
     return Container(
       width: 1.sw,
       child: Column(
@@ -30,30 +33,51 @@ class _PostWidgetState extends State<PostWidget> {
           Divider(color: UiConfig.black.shade500, height: 1),
           SizedBox(height: 16),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.network(
-                  widget.user.imageUrl,
-                  width: 50,
-                  height: 50,
-                ),
-              ),
-              SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  Text(widget.user.name, style: UiConfig.bodyStyle),
-                  Text(
-                      widget.post.createAt,
-                      style: UiConfig.smallStyle.copyWith(
-                          color: UiConfig.black.shade700
+                  SizedBox(width: 16),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.network(
+                      widget.user.imageUrl,
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(widget.user.name, style: UiConfig.bodyStyle),
+                      Text(
+                          widget.post.createAt,
+                          style: UiConfig.smallStyle.copyWith(
+                              color: UiConfig.black.shade700
+                          )
                       )
-                  )
+                    ],
+                  ),
+                  SizedBox(width: 16),
                 ],
               ),
-              SizedBox(width: 16),
+              PopupMenuButton(
+                  color: UiConfig.black.shade100,
+                  surfaceTintColor: UiConfig.black.shade100,
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      child: Text('삭제하기', style: UiConfig.bodyStyle),
+                      onTap: () async {
+                        await viewModel.deletePost(postId: widget.post.postId);
+                        await viewModel.fetchPostList();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('게시글이 삭제되었습니다.'),
+                        ));
+                      },
+                    )
+                  ]
+              )
             ],
           ),
           SizedBox(height: 8),

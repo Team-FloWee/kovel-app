@@ -140,7 +140,8 @@ void diSetup() {
   getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
   getIt.registerFactory<PostListViewModel>(() => PostListViewModel(
       getPostListUseCase: getIt(),
-      getUserUseCase: getIt()
+      getUserUseCase: getIt(),
+      deletePostUseCase: getIt(),
   ));
   getIt.registerFactory<PostCreateViewModel>(() => PostCreateViewModel(createPostUseCase: getIt()));
 }
