@@ -7,10 +7,12 @@ import 'package:provider/provider.dart';
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final ScrollController? controller;
+  final Widget? action;
   const CommonAppBar({
     super.key,
     required this.title,
     this.controller,
+    this.action,
   });
 
   @override
@@ -50,6 +52,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
+      actions: [
+        action != null ? action! : SizedBox()
+      ],
     );
   }
 }
