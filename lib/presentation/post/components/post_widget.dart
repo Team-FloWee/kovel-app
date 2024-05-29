@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/domain/model/post.dart';
@@ -71,6 +72,12 @@ class _PostWidgetState extends State<PostWidget> {
                   itemBuilder: (context) => [
                     PopupMenuItem(
                       child: Text('수정하기', style: UiConfig.bodyStyle),
+                      onTap: () async {
+                        await context.pushNamed('postList/create',
+                          extra: widget.post
+                        );
+                        await viewModel.fetchPostList();
+                      },
                     ),
                     PopupMenuItem(
                       child: Text('삭제하기', style: UiConfig.bodyStyle),

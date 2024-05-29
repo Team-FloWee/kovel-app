@@ -3,18 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/provider/user_provider.dart';
+import 'package:kovel_app/domain/model/post.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/post/post_create_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PostCreateScreen extends StatefulWidget {
-  const PostCreateScreen({super.key});
+  final Post? originalPost;
+  const PostCreateScreen({super.key, this.originalPost});
 
   @override
   State<PostCreateScreen> createState() => _PostCreateScreenState();
 }
 
 class _PostCreateScreenState extends State<PostCreateScreen> {
+  bool _isCreateMode = true;
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
@@ -22,6 +25,11 @@ class _PostCreateScreenState extends State<PostCreateScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.originalPost != null) {
+      _isCreateMode = false;
+      _titleController.text = widget.originalPost?.title ?? '';
+      _contentController.text = widget.originalPost?.content ?? '';
+    }
   }
   @override
   void dispose() {
@@ -36,19 +44,32 @@ class _PostCreateScreenState extends State<PostCreateScreen> {
     final userProvider = context.watch<UserProvider>();
     return Scaffold(
       appBar: CommonAppBar(
-          title: '게시글 작성',
+          title: _isCreateMode ? '게시글 작성' : '게시글 수정',
           action: IconButton(
             onPressed: () async {
               if (_formKey.currentState?.validate() == false) return;
-              await viewModel.createPost(
-                  postTypeId: '1',
-                  userId: userProvider.user.userId,
+              if (_isCreateMode) {
+                await viewModel.createPost(
+                    postTypeId: '1',
+                    userId: userProvider.user.userId,
+                    title: _titleController.text,
+                    content: _contentController.text
+                );
+              } else {
+                await viewModel.updatePost(
+                  postId: widget.originalPost!.postId,
+                  postTypeId: widget.originalPost!.postTypeId,
+                  userId: widget.originalPost!.userId,
                   title: _titleController.text,
-                  content: _contentController.text
-              );
+                  content: _contentController.text,
+                  createAt: widget.originalPost!.createAt
+                );
+              }
               context.pop();
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text('게시글이 입력되었습니다.'),
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: _isCreateMode
+                    ? Text('게시글이 생성되었습니다.')
+                    : Text('게시글이 수정되었습니다.'),
               ));
             },
             icon: Icon(Icons.edit, color: UiConfig.black.shade900)

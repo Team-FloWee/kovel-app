@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
+import 'package:kovel_app/domain/model/post.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_screen.dart';
@@ -213,11 +214,13 @@ final goRouter = GoRouter(
       routes: [
         GoRoute(
             path: 'create',
-            name: 'create',
+            name: 'postList/create',
             builder: (context, state) {
               return ChangeNotifierProvider(
                   create: (_) => getIt<PostCreateViewModel>(),
-                  child: PostCreateScreen(),
+                  child: PostCreateScreen(
+                    originalPost: state.extra as Post?,
+                  ),
               );
             }
         )

@@ -50,7 +50,7 @@ class _PostListScreenState extends State<PostListScreen> {
       floatingActionButton: FloatingActionButton(
         elevation: 2,
         onPressed: () async {
-          await context.push('/postList/create');
+          await context.pushNamed('postList/create');
           viewModel.fetchPostList();
         },
         backgroundColor: UiConfig.primaryColor,

@@ -143,5 +143,7 @@ void diSetup() {
       getUserUseCase: getIt(),
       deletePostUseCase: getIt(),
   ));
-  getIt.registerFactory<PostCreateViewModel>(() => PostCreateViewModel(createPostUseCase: getIt()));
+  getIt.registerFactory<PostCreateViewModel>(() => PostCreateViewModel(
+      createPostUseCase: getIt(),
+      updatePostUseCase: getIt()));
 }
