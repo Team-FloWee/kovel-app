@@ -30,7 +30,7 @@ import 'package:kovel_app/presentation/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/schedule',
+  initialLocation: '/splash',
   routes: [
     GoRoute(
       path: '/',
@@ -40,9 +40,13 @@ final goRouter = GoRouter(
               create: (context) => getIt<HomeViewModel>(),
               child: const HomeScreen(),
             ),
-            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
               return FadeTransition(
-                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -70,9 +74,13 @@ final goRouter = GoRouter(
               create: (context) => getIt<MyPageViewModel>(),
               child: const MyPageScreen(),
             ),
-            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
               return FadeTransition(
-                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -92,9 +100,13 @@ final goRouter = GoRouter(
       pageBuilder: (context, state) {
         return CustomTransitionPage(
             child: const ArchivedScreen(),
-            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
               return FadeTransition(
-                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                opacity:
+                    CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             });
@@ -105,12 +117,14 @@ final goRouter = GoRouter(
       name: 'detail',
       builder: (context, state) {
         final id = int.parse(state.uri.queryParameters['id']!);
-        final contentTypeId = int.parse(state.uri.queryParameters['contentTypeId']!);
+        final contentTypeId =
+            int.parse(state.uri.queryParameters['contentTypeId']!);
         final title = state.uri.queryParameters['title']!;
 
         return ChangeNotifierProvider(
           create: (context) => getIt<DetailViewModel>(),
-          child: DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
+          child:
+              DetailScreen(id: id, contentTypeId: contentTypeId, title: title),
         );
       },
     ),
@@ -188,7 +202,10 @@ final goRouter = GoRouter(
         ); // HomeSearchScreen을 반환합니다.
       },
     ),
-    GoRoute(path: '/license', name: 'license', builder: (context, state) => const LicensePage()),
+    GoRoute(
+        path: '/license',
+        name: 'license',
+        builder: (context, state) => const LicensePage()),
     GoRoute(
       path: '/schedule',
       name: 'schedule',

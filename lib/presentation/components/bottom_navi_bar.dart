@@ -25,6 +25,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 BorderSide(color: UiConfig.black.shade200, width: 0.5)), // 라인효과
       ),
       child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: widget.selectedIndex,
         elevation: 0,
         onTap: (value) {
@@ -36,12 +37,14 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
               context.go('/archived');
               break;
             case 2:
+              context.go('/schedule');
+              break;
+            case 3:
               context.go('/mypage');
               break;
           }
         },
         items: [
-
           BottomNavigationBarItem(
             icon: const Icon(Icons.home),
             label: '홈'.tr(),
@@ -50,8 +53,13 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             icon: widget.selectedIndex == 1
                 ? const Icon(Icons.favorite)
                 : const Icon(Icons.favorite_border),
-
             label: '보관함'.tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.calendar_month,
+            ),
+            label: '일정',
           ),
           BottomNavigationBarItem(
             icon: const Icon(
