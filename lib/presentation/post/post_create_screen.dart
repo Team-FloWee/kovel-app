@@ -111,9 +111,6 @@ class _PostCreateScreenState extends State<PostCreateScreen> {
                       if (value == null || value.isEmpty) return '내용을 입력해주세요.';
                       return null;
                     },
-                    onChanged: (String value) {
-                      print(value);
-                    },
                   ),
                 ),
               ],
