@@ -18,7 +18,7 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<List<Post>> getPostList() async {
-    return await _postRef.get()
+    return await _postRef.orderBy('createAt', descending: true).get()
         .then((value) => value.docs.map((e) => e.data()).toList());
   }
 
