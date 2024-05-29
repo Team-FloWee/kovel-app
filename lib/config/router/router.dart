@@ -26,13 +26,15 @@ import 'package:kovel_app/presentation/post/post_create_screen.dart';
 import 'package:kovel_app/presentation/post/post_create_view_model.dart';
 import 'package:kovel_app/presentation/post/post_list_screen.dart';
 import 'package:kovel_app/presentation/post/post_list_view_model.dart';
+import 'package:kovel_app/presentation/schedule/schdeule_screen.dart';
+import 'package:kovel_app/presentation/schedule/schedule_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import 'package:kovel_app/presentation/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: '/schedule',
   routes: [
     GoRoute(
       path: '/',
@@ -220,6 +222,16 @@ final goRouter = GoRouter(
             }
         )
       ]
-    )
+    ),
+    GoRoute(
+      path: '/schedule',
+      name: 'schedule',
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (context) => ScheduleViewModel(),
+          child: const ScheduleScreen(),
+        ); // HomeSearchScreen을 반환합니다.
+      },
+    ),
   ],
 );
