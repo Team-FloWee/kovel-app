@@ -22,6 +22,8 @@ import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_screen.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
+import 'package:kovel_app/presentation/post/post_create_screen.dart';
+import 'package:kovel_app/presentation/post/post_create_view_model.dart';
 import 'package:kovel_app/presentation/post/post_list_screen.dart';
 import 'package:kovel_app/presentation/post/post_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
@@ -205,7 +207,19 @@ final goRouter = GoRouter(
               );
             }
         );
-      }
+      },
+      routes: [
+        GoRoute(
+            path: 'create',
+            name: 'create',
+            builder: (context, state) {
+              return ChangeNotifierProvider(
+                  create: (_) => getIt<PostCreateViewModel>(),
+                  child: PostCreateScreen(),
+              );
+            }
+        )
+      ]
     )
   ],
 );

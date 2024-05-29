@@ -53,7 +53,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        action != null ? action! : SizedBox()
+        action != null ?
+        Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: action!
+        ) : SizedBox()
       ],
     );
   }

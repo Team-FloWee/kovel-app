@@ -56,6 +56,7 @@ import 'package:kovel_app/presentation/location_list/location_list_view_model.da
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
+import 'package:kovel_app/presentation/post/post_create_view_model.dart';
 import 'package:kovel_app/presentation/post/post_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import '../core/provider/user_provider.dart';
@@ -141,4 +142,5 @@ void diSetup() {
       getPostListUseCase: getIt(),
       getUserUseCase: getIt()
   ));
+  getIt.registerFactory<PostCreateViewModel>(() => PostCreateViewModel(createPostUseCase: getIt()));
 }

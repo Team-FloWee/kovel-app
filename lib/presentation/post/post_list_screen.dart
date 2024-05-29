@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/post/components/post_widget.dart';
@@ -44,6 +46,15 @@ class _PostListScreenState extends State<PostListScreen> {
               }
             ),
           )
+      ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 2,
+        onPressed: () async {
+          await context.push('/postList/create');
+          viewModel.fetchPostList();
+        },
+        backgroundColor: UiConfig.primaryColor,
+        child: Icon(Icons.add, color: UiConfig.black.shade100)
       ),
       bottomNavigationBar: BottomNaviBar(selectedIndex: 1),
     );

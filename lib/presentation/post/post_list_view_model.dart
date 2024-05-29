@@ -26,4 +26,8 @@ class PostListViewModel with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void createPost() {
+
+  }
 }
