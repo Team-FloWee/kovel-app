@@ -77,12 +77,18 @@ void diSetup() {
   getIt.registerSingleton<AddressInfoDataSource>(AddressInfoDataSourceImpl());
   getIt.registerSingleton<PostDataSource>(PostDataSourceImpl());
 
-  getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
-  getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
-  getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
-  getIt.registerSingleton<LikedTourRepository>(LikedTourRepositoryImpl(likedTourDataSource: getIt()));
-  getIt.registerSingleton<AddressInfoRepository>(AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
-  getIt.registerSingleton<PostRepository>(PostRepositoryImpl(postDataSource: getIt()));
+  getIt.registerSingleton<TourInfoRepository>(
+      TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
+  getIt.registerSingleton<UserRepository>(
+      UserRepositoryImpl(userDataSource: getIt()));
+  getIt
+      .registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
+  getIt.registerSingleton<LikedTourRepository>(
+      LikedTourRepositoryImpl(likedTourDataSource: getIt()));
+  getIt.registerSingleton<AddressInfoRepository>(
+      AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
+  getIt.registerSingleton<PostRepository>(
+      PostRepositoryImpl(postDataSource: getIt()));
 
   // UseCase
   getIt.registerSingleton<GetUserUseCase>(
@@ -107,20 +113,37 @@ void diSetup() {
       GetAreaDataUseCase(tourInfoRepository: getIt()));
   getIt.registerSingleton<LoginUseCase>(LoginUseCase(userRepository: getIt()));
 
-  getIt.registerSingleton<LogoutUseCase>(LogoutUseCase(userRepository: getIt()));
-  getIt.registerSingleton<CheckUserDuplicatedUseCase>(CheckUserDuplicatedUseCase(userRepository: getIt()));
-  getIt.registerSingleton<CreateUserUseCase>(CreateUserUseCase(userRepository: getIt()));
-  getIt.registerSingleton<GetSearchFestivalUseCase>(GetSearchFestivalUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<GetSearchKeywordUseCase>(GetSearchKeywordUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<GetLocationBasedDataUseCase>(GetLocationBasedDataUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<SendChatToAiUseCase>(SendChatToAiUseCase(aiRepository: getIt()));
-  getIt.registerSingleton<GetChatSessionUseCase>(GetChatSessionUseCase(aiRepository: getIt()));
-  getIt.registerSingleton<GetTopTenPopularTourListUseCase>(GetTopTenPopularTourListUseCase(tourInfoRepository: getIt(), likedTourRepository: getIt()));
-  getIt.registerSingleton<GetAddressInfoUseCase>(GetAddressInfoUseCase(addressInfoRepository: getIt()));
-  getIt.registerSingleton<CreatePostUseCase>(CreatePostUseCase(postRepository: getIt()));
-  getIt.registerSingleton<GetPostListUseCase>(GetPostListUseCase(postRepository: getIt()));
-  getIt.registerSingleton<UpdatePostUseCase>(UpdatePostUseCase(postRepository: getIt()));
-  getIt.registerSingleton<DeletePostUseCase>(DeletePostUseCase(postRepository: getIt()));
+  getIt
+      .registerSingleton<LogoutUseCase>(LogoutUseCase(userRepository: getIt()));
+  getIt.registerSingleton<CheckUserDuplicatedUseCase>(
+      CheckUserDuplicatedUseCase(userRepository: getIt()));
+  getIt.registerSingleton<CreateUserUseCase>(
+      CreateUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<UpdateScheduleUseCase>(
+      UpdateScheduleUseCase(userRepository: getIt()));
+  getIt.registerSingleton<GetSearchFestivalUseCase>(
+      GetSearchFestivalUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetSearchKeywordUseCase>(
+      GetSearchKeywordUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetLocationBasedDataUseCase>(
+      GetLocationBasedDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<SendChatToAiUseCase>(
+      SendChatToAiUseCase(aiRepository: getIt()));
+  getIt.registerSingleton<GetChatSessionUseCase>(
+      GetChatSessionUseCase(aiRepository: getIt()));
+  getIt.registerSingleton<GetTopTenPopularTourListUseCase>(
+      GetTopTenPopularTourListUseCase(
+          tourInfoRepository: getIt(), likedTourRepository: getIt()));
+  getIt.registerSingleton<GetAddressInfoUseCase>(
+      GetAddressInfoUseCase(addressInfoRepository: getIt()));
+  getIt.registerSingleton<CreatePostUseCase>(
+      CreatePostUseCase(postRepository: getIt()));
+  getIt.registerSingleton<GetPostListUseCase>(
+      GetPostListUseCase(postRepository: getIt()));
+  getIt.registerSingleton<UpdatePostUseCase>(
+      UpdatePostUseCase(postRepository: getIt()));
+  getIt.registerSingleton<DeletePostUseCase>(
+      DeletePostUseCase(postRepository: getIt()));
 
   // Provider
   getIt.registerSingleton<AiProvider>(
@@ -166,14 +189,15 @@ void diSetup() {
         getAddressInfoUseCase: getIt(),
       ));
 
-  getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
-  getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
+  getIt.registerFactory<HomeSearchViewModel>(
+      () => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
+  getIt.registerFactory<NearbyListViewModel>(
+      () => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
   getIt.registerFactory<PostListViewModel>(() => PostListViewModel(
-      getPostListUseCase: getIt(),
-      getUserUseCase: getIt(),
-      deletePostUseCase: getIt(),
-  ));
+        getPostListUseCase: getIt(),
+        getUserUseCase: getIt(),
+        deletePostUseCase: getIt(),
+      ));
   getIt.registerFactory<PostCreateViewModel>(() => PostCreateViewModel(
-      createPostUseCase: getIt(),
-      updatePostUseCase: getIt()));
+      createPostUseCase: getIt(), updatePostUseCase: getIt()));
 }
