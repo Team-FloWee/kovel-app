@@ -6,17 +6,21 @@ import 'package:kovel_app/data/data_source/ai_data_source.dart';
 import 'package:kovel_app/data/data_source/ai_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/liked_tour_data_source.dart';
 import 'package:kovel_app/data/data_source/liked_tour_data_source_impl.dart';
+import 'package:kovel_app/data/data_source/post_data_source.dart';
+import 'package:kovel_app/data/data_source/post_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/user_data_source_impl.dart';
 import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/liked_tour_repository_impl.dart';
+import 'package:kovel_app/data/repository_impl/post_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/user_repository_impl.dart';
 import 'package:kovel_app/domain/repository/address_info_repository.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
 import 'package:kovel_app/domain/repository/liked_tour_repository.dart';
+import 'package:kovel_app/domain/repository/post_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
@@ -37,6 +41,10 @@ import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/post/create_post_use_case.dart';
+import 'package:kovel_app/domain/use_case/post/delete_post_use_case.dart';
+import 'package:kovel_app/domain/use_case/post/get_post_list_use_case.dart';
+import 'package:kovel_app/domain/use_case/post/update_post_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
@@ -48,6 +56,8 @@ import 'package:kovel_app/presentation/location_list/location_list_view_model.da
 import 'package:kovel_app/presentation/login/login_view_model.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
+import 'package:kovel_app/presentation/post/post_create_view_model.dart';
+import 'package:kovel_app/presentation/post/post_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
 import '../core/provider/user_provider.dart';
 import '../data/data_source/user_data_source.dart';
@@ -63,6 +73,7 @@ void diSetup() {
   getIt.registerSingleton<AiDataSource>(AiDataSourceImpl());
   getIt.registerSingleton<LikedTourDataSource>(LikedTourDataSourceImpl());
   getIt.registerSingleton<AddressInfoDataSource>(AddressInfoDataSourceImpl());
+  getIt.registerSingleton<PostDataSource>(PostDataSourceImpl());
 
   // Repository
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
@@ -70,6 +81,7 @@ void diSetup() {
   getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
   getIt.registerSingleton<LikedTourRepository>(LikedTourRepositoryImpl(likedTourDataSource: getIt()));
   getIt.registerSingleton<AddressInfoRepository>(AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
+  getIt.registerSingleton<PostRepository>(PostRepositoryImpl(postDataSource: getIt()));
 
   // UseCase
   getIt.registerSingleton<GetUserUseCase>(GetUserUseCase(userRepository: getIt()));
@@ -93,6 +105,10 @@ void diSetup() {
   getIt.registerSingleton<GetChatSessionUseCase>(GetChatSessionUseCase(aiRepository: getIt()));
   getIt.registerSingleton<GetTopTenPopularTourListUseCase>(GetTopTenPopularTourListUseCase(tourInfoRepository: getIt(), likedTourRepository: getIt()));
   getIt.registerSingleton<GetAddressInfoUseCase>(GetAddressInfoUseCase(addressInfoRepository: getIt()));
+  getIt.registerSingleton<CreatePostUseCase>(CreatePostUseCase(postRepository: getIt()));
+  getIt.registerSingleton<GetPostListUseCase>(GetPostListUseCase(postRepository: getIt()));
+  getIt.registerSingleton<UpdatePostUseCase>(UpdatePostUseCase(postRepository: getIt()));
+  getIt.registerSingleton<DeletePostUseCase>(DeletePostUseCase(postRepository: getIt()));
 
   // Provider
   getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: getIt()));
@@ -122,4 +138,12 @@ void diSetup() {
       ));
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
   getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
+  getIt.registerFactory<PostListViewModel>(() => PostListViewModel(
+      getPostListUseCase: getIt(),
+      getUserUseCase: getIt(),
+      deletePostUseCase: getIt(),
+  ));
+  getIt.registerFactory<PostCreateViewModel>(() => PostCreateViewModel(
+      createPostUseCase: getIt(),
+      updatePostUseCase: getIt()));
 }

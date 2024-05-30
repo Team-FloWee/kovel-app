@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kovel_app/di/di_setup.dart';
+import 'package:kovel_app/domain/model/post.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/presentation/archived/archived_screen.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_screen.dart';
@@ -22,6 +23,10 @@ import 'package:kovel_app/presentation/my_page/my_page_screen.dart';
 import 'package:kovel_app/presentation/my_page/my_page_view_model.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_screen.dart';
 import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
+import 'package:kovel_app/presentation/post/post_create_screen.dart';
+import 'package:kovel_app/presentation/post/post_create_view_model.dart';
+import 'package:kovel_app/presentation/post/post_list_screen.dart';
+import 'package:kovel_app/presentation/post/post_list_view_model.dart';
 import 'package:kovel_app/presentation/schedule/schdeule_screen.dart';
 import 'package:kovel_app/presentation/schedule/schedule_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_screen.dart';
@@ -189,6 +194,38 @@ final goRouter = GoRouter(
       },
     ),
     GoRoute(path: '/license', name: 'license', builder: (context, state) => const LicensePage()),
+    GoRoute(
+      path: '/postList',
+      name: 'postList',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+            child: ChangeNotifierProvider(
+              create: (_) => getIt<PostListViewModel>(),
+              child: PostListScreen(),
+            ),
+            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            }
+        );
+      },
+      routes: [
+        GoRoute(
+            path: 'create',
+            name: 'postList/create',
+            builder: (context, state) {
+              return ChangeNotifierProvider(
+                  create: (_) => getIt<PostCreateViewModel>(),
+                  child: PostCreateScreen(
+                    originalPost: state.extra as Post?,
+                  ),
+              );
+            }
+        )
+      ]
+    ),
     GoRoute(
       path: '/schedule',
       name: 'schedule',
