@@ -162,7 +162,6 @@ void diSetup() {
     updateArchivedUseCase: getIt(),
     likeTourUseCase: getIt(),
     unLikeTourUseCase: getIt(),
-    updateScheduleUseCase: getIt(),
   ));
 
   // registerFactory
