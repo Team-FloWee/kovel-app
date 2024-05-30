@@ -34,12 +34,15 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
               context.go('/');
               break;
             case 1:
-              context.go('/archived');
+              context.go('/postList');
               break;
             case 2:
               context.go('/schedule');
               break;
-            case 3:
+           case 3:
+              context.go('/archived');
+              break;
+            case 4:
               context.go('/mypage');
               break;
           }
@@ -50,16 +53,20 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             label: '홈'.tr(),
           ),
           BottomNavigationBarItem(
-            icon: widget.selectedIndex == 1
-                ? const Icon(Icons.favorite)
-                : const Icon(Icons.favorite_border),
-            label: '보관함'.tr(),
+            icon: const Icon(Icons.post_add),
+            label: '게시판'
           ),
-          BottomNavigationBarItem(
+                    BottomNavigationBarItem(
             icon: const Icon(
               Icons.calendar_month,
             ),
             label: '일정',
+          ),
+          BottomNavigationBarItem(
+            icon: widget.selectedIndex == 1
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_border),
+            label: '보관함'.tr(),
           ),
           BottomNavigationBarItem(
             icon: const Icon(
