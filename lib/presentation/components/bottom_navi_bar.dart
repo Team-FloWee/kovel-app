@@ -39,7 +39,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             case 2:
               context.go('/schedule');
               break;
-           case 3:
+            case 3:
               context.go('/archived');
               break;
             case 4:
@@ -53,10 +53,8 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             label: '홈'.tr(),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.post_add),
-            label: '게시판'
-          ),
-                    BottomNavigationBarItem(
+              icon: const Icon(Icons.post_add), label: '게시판'),
+          BottomNavigationBarItem(
             icon: const Icon(
               Icons.calendar_month,
             ),

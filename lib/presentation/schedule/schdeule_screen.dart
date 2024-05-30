@@ -163,7 +163,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNaviBar(selectedIndex: 0),
+      bottomNavigationBar: BottomNaviBar(selectedIndex: 2),
     );
   }
 }

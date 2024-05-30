@@ -66,7 +66,7 @@ class _ArchivedScreenState extends State<ArchivedScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNaviBar(selectedIndex: 2),
+      bottomNavigationBar: const BottomNaviBar(selectedIndex: 3),
     );
   }
 }
