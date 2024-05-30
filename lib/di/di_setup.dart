@@ -8,6 +8,8 @@ import 'package:kovel_app/data/data_source/liked_tour_data_source.dart';
 import 'package:kovel_app/data/data_source/liked_tour_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/post_data_source.dart';
 import 'package:kovel_app/data/data_source/post_data_source_impl.dart';
+import 'package:kovel_app/data/data_source/schedule_data_source.dart';
+import 'package:kovel_app/data/data_source/schedule_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source.dart';
 import 'package:kovel_app/data/data_source/tour_info_data_source_impl.dart';
 import 'package:kovel_app/data/data_source/user_data_source_impl.dart';
@@ -15,12 +17,14 @@ import 'package:kovel_app/data/repository_impl/address_info_repository_impl.dart
 import 'package:kovel_app/data/repository_impl/ai_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/liked_tour_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/post_repository_impl.dart';
+import 'package:kovel_app/data/repository_impl/schedule_list_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/tour_info_repository_impl.dart';
 import 'package:kovel_app/data/repository_impl/user_repository_impl.dart';
 import 'package:kovel_app/domain/repository/address_info_repository.dart';
 import 'package:kovel_app/domain/repository/ai_repository.dart';
 import 'package:kovel_app/domain/repository/liked_tour_repository.dart';
 import 'package:kovel_app/domain/repository/post_repository.dart';
+import 'package:kovel_app/domain/repository/schedule_list_repository.dart';
 import 'package:kovel_app/domain/repository/tour_info_repository.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 import 'package:kovel_app/domain/use_case/ai/get_chat_session_use_case.dart';
@@ -37,6 +41,7 @@ import 'package:kovel_app/domain/use_case/get_common_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_detail_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_info_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_location_based_data_use_case.dart';
+import 'package:kovel_app/domain/use_case/get_schedule_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_festival_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_search_keyword_usecase.dart';
 import 'package:kovel_app/domain/use_case/get_top_ten_popular_tour_list_use_case.dart';
@@ -76,6 +81,7 @@ void diSetup() {
   getIt.registerSingleton<LikedTourDataSource>(LikedTourDataSourceImpl());
   getIt.registerSingleton<AddressInfoDataSource>(AddressInfoDataSourceImpl());
   getIt.registerSingleton<PostDataSource>(PostDataSourceImpl());
+  getIt.registerSingleton<ScheduleDataSource>(ScheduleDataSourceImpl());
 
   getIt.registerSingleton<TourInfoRepository>(
       TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
@@ -89,7 +95,8 @@ void diSetup() {
       AddressInfoRepositoryImpl(addressInfoDataSource: getIt()));
   getIt.registerSingleton<PostRepository>(
       PostRepositoryImpl(postDataSource: getIt()));
-
+  getIt.registerSingleton<ScheduleListRepository>(
+      ScheduleListRepositoryImpl(scheduleDataSource: getIt()));
   // UseCase
   getIt.registerSingleton<GetUserUseCase>(
       GetUserUseCase(userRepository: getIt()));
@@ -119,8 +126,10 @@ void diSetup() {
       CheckUserDuplicatedUseCase(userRepository: getIt()));
   getIt.registerSingleton<CreateUserUseCase>(
       CreateUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<GetScheduleListUseCase>(
+      GetScheduleListUseCase(scheduleListRepository: getIt()));
   getIt.registerSingleton<UpdateScheduleUseCase>(
-      UpdateScheduleUseCase(userRepository: getIt()));
+      UpdateScheduleUseCase(scheduleListRepository: getIt()));
   getIt.registerSingleton<GetSearchFestivalUseCase>(
       GetSearchFestivalUseCase(tourInfoRepository: getIt()));
   getIt.registerSingleton<GetSearchKeywordUseCase>(
