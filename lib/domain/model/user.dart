@@ -13,6 +13,7 @@ class User with _$User {
     required String imageUrl,
     required String language,
     required List<Archived> archivedList,
+    required List<Archived> scheduleList,
     //Todo 보관함,배낭톡,일정
   }) = _User;
 

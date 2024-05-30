@@ -46,6 +46,7 @@ import 'package:kovel_app/domain/use_case/post/delete_post_use_case.dart';
 import 'package:kovel_app/domain/use_case/post/get_post_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/post/update_post_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
+import 'package:kovel_app/domain/use_case/update_schedule_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_user_name_use_case.dart';
 import 'package:kovel_app/presentation/chat_bot/chat_bot_view_model.dart';
 import 'package:kovel_app/presentation/course_list/course_list_view_model.dart';
@@ -59,6 +60,7 @@ import 'package:kovel_app/presentation/nearby_list/nearby_list_view_model.dart';
 import 'package:kovel_app/presentation/post/post_create_view_model.dart';
 import 'package:kovel_app/presentation/post/post_list_view_model.dart';
 import 'package:kovel_app/presentation/sign_up/sign_up_view_model.dart';
+
 import '../core/provider/user_provider.dart';
 import '../data/data_source/user_data_source.dart';
 import '../domain/use_case/update_archived_use_case.dart';
@@ -75,7 +77,6 @@ void diSetup() {
   getIt.registerSingleton<AddressInfoDataSource>(AddressInfoDataSourceImpl());
   getIt.registerSingleton<PostDataSource>(PostDataSourceImpl());
 
-  // Repository
   getIt.registerSingleton<TourInfoRepository>(TourInfoRepositoryImpl(tourInfoDataSource: getIt()));
   getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
   getIt.registerSingleton<AiRepository>(AiRepositoryImpl(aiDataSource: getIt()));
@@ -84,17 +85,28 @@ void diSetup() {
   getIt.registerSingleton<PostRepository>(PostRepositoryImpl(postDataSource: getIt()));
 
   // UseCase
-  getIt.registerSingleton<GetUserUseCase>(GetUserUseCase(userRepository: getIt()));
-  getIt.registerSingleton<UpdateArchivedUseCase>(UpdateArchivedUseCase(userRepository: getIt()));
-  getIt.registerSingleton<UpdateUserNameUseCase>(UpdateUserNameUseCase(userRepository: getIt()));
-  getIt.registerSingleton<LikeTourUseCase>(LikeTourUseCase(likedTourRepository: getIt()));
-  getIt.registerSingleton<UnLikeTourUseCase>(UnLikeTourUseCase(likedTourRepository: getIt()));
-  getIt.registerSingleton<GetCommonDataUseCase>(GetCommonDataUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<GetDetailDataUseCase>(GetDetailDataUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<GetInfoDataUseCase>(GetInfoDataUseCase(tourInfoRepository: getIt()));
-  getIt.registerSingleton<GetTranslatedDataStreamUseCase>(GetTranslatedDataStreamUseCase(aiRepository: getIt()));
-  getIt.registerSingleton<GetAreaDataUseCase>(GetAreaDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetUserUseCase>(
+      GetUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<UpdateArchivedUseCase>(
+      UpdateArchivedUseCase(userRepository: getIt()));
+  getIt.registerSingleton<UpdateUserNameUseCase>(
+      UpdateUserNameUseCase(userRepository: getIt()));
+  getIt.registerSingleton<LikeTourUseCase>(
+      LikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerSingleton<UnLikeTourUseCase>(
+      UnLikeTourUseCase(likedTourRepository: getIt()));
+  getIt.registerSingleton<GetCommonDataUseCase>(
+      GetCommonDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetDetailDataUseCase>(
+      GetDetailDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetInfoDataUseCase>(
+      GetInfoDataUseCase(tourInfoRepository: getIt()));
+  getIt.registerSingleton<GetTranslatedDataStreamUseCase>(
+      GetTranslatedDataStreamUseCase(aiRepository: getIt()));
+  getIt.registerSingleton<GetAreaDataUseCase>(
+      GetAreaDataUseCase(tourInfoRepository: getIt()));
   getIt.registerSingleton<LoginUseCase>(LoginUseCase(userRepository: getIt()));
+
   getIt.registerSingleton<LogoutUseCase>(LogoutUseCase(userRepository: getIt()));
   getIt.registerSingleton<CheckUserDuplicatedUseCase>(CheckUserDuplicatedUseCase(userRepository: getIt()));
   getIt.registerSingleton<CreateUserUseCase>(CreateUserUseCase(userRepository: getIt()));
@@ -111,13 +123,24 @@ void diSetup() {
   getIt.registerSingleton<DeletePostUseCase>(DeletePostUseCase(postRepository: getIt()));
 
   // Provider
-  getIt.registerSingleton<AiProvider>(AiProvider(getTranslatedDataStreamUseCase: getIt()));
-  getIt.registerSingleton<UserProvider>(UserProvider(getUserUseCase: getIt(), updateArchivedUseCase: getIt(), likeTourUseCase: getIt(), unLikeTourUseCase: getIt()));
+  getIt.registerSingleton<AiProvider>(
+      AiProvider(getTranslatedDataStreamUseCase: getIt()));
+  getIt.registerSingleton<UserProvider>(UserProvider(
+    getUserUseCase: getIt(),
+    updateArchivedUseCase: getIt(),
+    likeTourUseCase: getIt(),
+    unLikeTourUseCase: getIt(),
+    updateScheduleUseCase: getIt(),
+  ));
 
   // registerFactory
   // ViewModel
-  getIt.registerFactory<MyPageViewModel>(() => MyPageViewModel(userRepository: getIt()));
-  getIt.registerFactory<DetailViewModel>(() => DetailViewModel(getCommonDataUseCase: getIt(), getDetailDataUseCase: getIt(), getInfoDataUseCase: getIt()));
+  getIt.registerFactory<MyPageViewModel>(
+      () => MyPageViewModel(userRepository: getIt()));
+  getIt.registerFactory<DetailViewModel>(() => DetailViewModel(
+      getCommonDataUseCase: getIt(),
+      getDetailDataUseCase: getIt(),
+      getInfoDataUseCase: getIt()));
   getIt.registerFactory<LocationListViewModel>(() => LocationListViewModel(
         getCommonDataUseCase: getIt(),
         getAreaDataUseCase: getIt(),
@@ -127,15 +150,22 @@ void diSetup() {
         getCommonDataUseCase: getIt(),
         getAreaDataUseCase: getIt(),
       ));
-  getIt.registerFactory<LoginViewModel>(() => LoginViewModel(loginUseCase: getIt(), logoutUseCase: getIt(), checkUserDuplicatedUseCase: getIt(), createUserUseCase: getIt()));
-  getIt.registerFactory<SignUpViewModel>(() => SignUpViewModel(updateUserNameUseCase: getIt()));
-  getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(sendChatToAiUseCase: getIt(), getChatSessionUseCase: getIt()));
+  getIt.registerFactory<LoginViewModel>(() => LoginViewModel(
+      loginUseCase: getIt(),
+      logoutUseCase: getIt(),
+      checkUserDuplicatedUseCase: getIt(),
+      createUserUseCase: getIt()));
+  getIt.registerFactory<SignUpViewModel>(
+      () => SignUpViewModel(updateUserNameUseCase: getIt()));
+  getIt.registerFactory<ChatBotViewModel>(() => ChatBotViewModel(
+      sendChatToAiUseCase: getIt(), getChatSessionUseCase: getIt()));
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(
         getSearchFestivalUseCase: getIt(),
         getLocationBasedDataUseCase: getIt(),
         getTopTenPopularTourListUseCase: getIt(),
         getAddressInfoUseCase: getIt(),
       ));
+
   getIt.registerFactory<HomeSearchViewModel>(() => HomeSearchViewModel(getSearchKeywordUseCase: getIt()));
   getIt.registerFactory<NearbyListViewModel>(() => NearbyListViewModel(getLocationBasedDataUseCase: getIt()));
   getIt.registerFactory<PostListViewModel>(() => PostListViewModel(

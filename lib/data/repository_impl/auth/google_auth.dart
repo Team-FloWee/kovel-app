@@ -32,6 +32,7 @@ class GoogleAuth implements SocialAuth {
         imageUrl: userCredential.user!.photoURL ?? '',
         language: 'ko',
         archivedList: [],
+        scheduleList: [],
       );
       return user;
     } catch (error) {

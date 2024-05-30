@@ -1,18 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:kovel_app/config/ui_config.dart';
+import 'package:kovel_app/domain/model/archived.dart';
+import 'package:kovel_app/domain/model/category/content_type.dart';
 
 class ScheduleList extends StatelessWidget {
   final String index;
-
-  bool isSelected;
+  final Archived archived;
+  final bool isSelected;
 
   ScheduleList({
     Key? key,
     required this.index,
     required this.isSelected,
+    required this.archived,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,9 @@ class ScheduleList extends StatelessWidget {
         Container(
           height: 100.h,
           width: double.infinity,
-          color: isSelected ? UiConfig.primaryColorSurface : UiConfig.black.shade500,
+          color: isSelected
+              ? UiConfig.primaryColorSurface
+              : UiConfig.black.shade500,
           constraints: BoxConstraints(maxHeight: 80),
         ),
         Positioned(
@@ -42,7 +46,7 @@ class ScheduleList extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                '오리 주물럭집',
+                archived.title,
                 style: UiConfig.bodyStyle.copyWith(
                   fontWeight: UiConfig.semiBoldFont,
                 ),
@@ -50,7 +54,8 @@ class ScheduleList extends StatelessWidget {
               SizedBox(width: 8.w),
               Text('|'),
               SizedBox(width: 6.w),
-              Text('음식점', style: UiConfig.bodyStyle),
+              Text(ContentType(contentTypeId: archived.contentType).name,
+                  style: UiConfig.bodyStyle),
             ],
           ),
         ),
@@ -60,7 +65,9 @@ class ScheduleList extends StatelessWidget {
           child: Container(
             height: 24,
             width: 24,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: UiConfig.primaryColor),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: UiConfig.primaryColor),
             child: Center(
               child: Text(
                 index,

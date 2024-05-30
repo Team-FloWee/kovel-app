@@ -4,6 +4,7 @@ import 'package:kovel_app/data/data_source/user_data_source.dart';
 import 'package:kovel_app/data/repository_impl/auth/google_auth.dart';
 import 'package:kovel_app/data/repository_impl/auth/kakao_auth.dart';
 import 'package:kovel_app/domain/model/archived.dart';
+import 'package:kovel_app/domain/model/schedule.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/repository/user_repository.dart';
 
@@ -76,6 +77,7 @@ class UserRepositoryImpl implements UserRepository {
         imageUrl: '',
         language: 'ko',
         archivedList: [],
+        scheduleList: [],
       );
     }
     return user;
@@ -110,5 +112,12 @@ class UserRepositoryImpl implements UserRepository {
       {required String userId, required List<Archived> archivedList}) async {
     await _userDataSource.updateArchivedList(
         userId: userId, archivedList: archivedList);
+  }
+
+  @override
+  Future<void> updateSchedule(
+      {required String userId, required List<Schedule> scheduleList}) async {
+    await _userDataSource.updateSchedule(
+        userId: userId, scheduleList: scheduleList);
   }
 }

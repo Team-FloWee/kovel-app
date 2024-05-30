@@ -37,9 +37,12 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
               context.go('/postList');
               break;
             case 2:
+              context.go('/schedule');
+              break;
+           case 3:
               context.go('/archived');
               break;
-            case 3:
+            case 4:
               context.go('/mypage');
               break;
           }
@@ -53,11 +56,16 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
             icon: const Icon(Icons.post_add),
             label: '게시판'
           ),
+                    BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.calendar_month,
+            ),
+            label: '일정',
+          ),
           BottomNavigationBarItem(
             icon: widget.selectedIndex == 1
                 ? const Icon(Icons.favorite)
                 : const Icon(Icons.favorite_border),
-
             label: '보관함'.tr(),
           ),
           BottomNavigationBarItem(

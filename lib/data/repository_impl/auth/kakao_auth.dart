@@ -31,6 +31,7 @@ class KakaoAuth implements SocialAuth {
           imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           language: 'ko',
           archivedList: [],
+          scheduleList: [],
         );
         return user;
       } catch (error) {
@@ -60,6 +61,7 @@ class KakaoAuth implements SocialAuth {
             imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
             language: 'ko',
             archivedList: [],
+            scheduleList: [],
           );
           return user;
         } catch (error) {
@@ -91,6 +93,7 @@ class KakaoAuth implements SocialAuth {
           imageUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           language: 'ko',
           archivedList: [],
+          scheduleList: [],
         );
         return user;
       } catch (error) {
