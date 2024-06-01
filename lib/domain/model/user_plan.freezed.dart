@@ -21,7 +21,7 @@ UserPlan _$UserPlanFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserPlan {
   String get userId => throw _privateConstructorUsedError;
-  List<PlanDate> get planList => throw _privateConstructorUsedError;
+  List<ScheduleDate?> get dateList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $UserPlanCopyWith<$Res> {
   factory $UserPlanCopyWith(UserPlan value, $Res Function(UserPlan) then) =
       _$UserPlanCopyWithImpl<$Res, UserPlan>;
   @useResult
-  $Res call({String userId, List<PlanDate> planList});
+  $Res call({String userId, List<ScheduleDate?> dateList});
 }
 
 /// @nodoc
@@ -51,17 +51,17 @@ class _$UserPlanCopyWithImpl<$Res, $Val extends UserPlan>
   @override
   $Res call({
     Object? userId = null,
-    Object? planList = null,
+    Object? dateList = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      planList: null == planList
-          ? _value.planList
-          : planList // ignore: cast_nullable_to_non_nullable
-              as List<PlanDate>,
+      dateList: null == dateList
+          ? _value.dateList
+          : dateList // ignore: cast_nullable_to_non_nullable
+              as List<ScheduleDate?>,
     ) as $Val);
   }
 }
@@ -74,7 +74,7 @@ abstract class _$$UserPlanImplCopyWith<$Res>
       __$$UserPlanImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, List<PlanDate> planList});
+  $Res call({String userId, List<ScheduleDate?> dateList});
 }
 
 /// @nodoc
@@ -89,44 +89,45 @@ class __$$UserPlanImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? planList = null,
+    Object? dateList = null,
   }) {
     return _then(_$UserPlanImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      planList: null == planList
-          ? _value._planList
-          : planList // ignore: cast_nullable_to_non_nullable
-              as List<PlanDate>,
+      dateList: null == dateList
+          ? _value._dateList
+          : dateList // ignore: cast_nullable_to_non_nullable
+              as List<ScheduleDate?>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$UserPlanImpl implements _UserPlan {
   const _$UserPlanImpl(
-      {required this.userId, required final List<PlanDate> planList})
-      : _planList = planList;
+      {required this.userId, required final List<ScheduleDate?> dateList})
+      : _dateList = dateList;
 
   factory _$UserPlanImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserPlanImplFromJson(json);
 
   @override
   final String userId;
-  final List<PlanDate> _planList;
+  final List<ScheduleDate?> _dateList;
   @override
-  List<PlanDate> get planList {
-    if (_planList is EqualUnmodifiableListView) return _planList;
+  List<ScheduleDate?> get dateList {
+    if (_dateList is EqualUnmodifiableListView) return _dateList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_planList);
+    return EqualUnmodifiableListView(_dateList);
   }
 
   @override
   String toString() {
-    return 'UserPlan(userId: $userId, planList: $planList)';
+    return 'UserPlan(userId: $userId, dateList: $dateList)';
   }
 
   @override
@@ -135,13 +136,13 @@ class _$UserPlanImpl implements _UserPlan {
         (other.runtimeType == runtimeType &&
             other is _$UserPlanImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            const DeepCollectionEquality().equals(other._planList, _planList));
+            const DeepCollectionEquality().equals(other._dateList, _dateList));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, userId, const DeepCollectionEquality().hash(_planList));
+      runtimeType, userId, const DeepCollectionEquality().hash(_dateList));
 
   @JsonKey(ignore: true)
   @override
@@ -160,7 +161,7 @@ class _$UserPlanImpl implements _UserPlan {
 abstract class _UserPlan implements UserPlan {
   const factory _UserPlan(
       {required final String userId,
-      required final List<PlanDate> planList}) = _$UserPlanImpl;
+      required final List<ScheduleDate?> dateList}) = _$UserPlanImpl;
 
   factory _UserPlan.fromJson(Map<String, dynamic> json) =
       _$UserPlanImpl.fromJson;
@@ -168,7 +169,7 @@ abstract class _UserPlan implements UserPlan {
   @override
   String get userId;
   @override
-  List<PlanDate> get planList;
+  List<ScheduleDate?> get dateList;
   @override
   @JsonKey(ignore: true)
   _$$UserPlanImplCopyWith<_$UserPlanImpl> get copyWith =>

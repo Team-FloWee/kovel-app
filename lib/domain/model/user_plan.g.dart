@@ -9,13 +9,15 @@ part of 'user_plan.dart';
 _$UserPlanImpl _$$UserPlanImplFromJson(Map<String, dynamic> json) =>
     _$UserPlanImpl(
       userId: json['userId'] as String,
-      planList: (json['planList'] as List<dynamic>)
-          .map((e) => PlanDate.fromJson(e as Map<String, dynamic>))
+      dateList: (json['dateList'] as List<dynamic>)
+          .map((e) => e == null
+              ? null
+              : ScheduleDate.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$UserPlanImplToJson(_$UserPlanImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
-      'planList': instance.planList,
+      'dateList': instance.dateList.map((e) => e?.toJson()).toList(),
     };
