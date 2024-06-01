@@ -7,7 +7,8 @@ part 'schedule_date.g.dart';
 @freezed
 class ScheduleDate with _$ScheduleDate {
   const factory ScheduleDate({
-    required List<Schedule> scheduleList,
+    required int day,
+    required List<Schedule?> scheduleList,
   }) = _ScheduleDate;
 
   factory ScheduleDate.fromJson(Map<String, Object?> json) =>

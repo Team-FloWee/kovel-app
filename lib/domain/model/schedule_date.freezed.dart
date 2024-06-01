@@ -20,7 +20,8 @@ ScheduleDate _$ScheduleDateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScheduleDate {
-  List<Schedule> get scheduleList => throw _privateConstructorUsedError;
+  int get day => throw _privateConstructorUsedError;
+  List<Schedule?> get scheduleList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $ScheduleDateCopyWith<$Res> {
           ScheduleDate value, $Res Function(ScheduleDate) then) =
       _$ScheduleDateCopyWithImpl<$Res, ScheduleDate>;
   @useResult
-  $Res call({List<Schedule> scheduleList});
+  $Res call({int day, List<Schedule?> scheduleList});
 }
 
 /// @nodoc
@@ -50,13 +51,18 @@ class _$ScheduleDateCopyWithImpl<$Res, $Val extends ScheduleDate>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? day = null,
     Object? scheduleList = null,
   }) {
     return _then(_value.copyWith(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as int,
       scheduleList: null == scheduleList
           ? _value.scheduleList
           : scheduleList // ignore: cast_nullable_to_non_nullable
-              as List<Schedule>,
+              as List<Schedule?>,
     ) as $Val);
   }
 }
@@ -69,7 +75,7 @@ abstract class _$$ScheduleDateImplCopyWith<$Res>
       __$$ScheduleDateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Schedule> scheduleList});
+  $Res call({int day, List<Schedule?> scheduleList});
 }
 
 /// @nodoc
@@ -83,13 +89,18 @@ class __$$ScheduleDateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? day = null,
     Object? scheduleList = null,
   }) {
     return _then(_$ScheduleDateImpl(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as int,
       scheduleList: null == scheduleList
           ? _value._scheduleList
           : scheduleList // ignore: cast_nullable_to_non_nullable
-              as List<Schedule>,
+              as List<Schedule?>,
     ));
   }
 }
@@ -97,15 +108,18 @@ class __$$ScheduleDateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ScheduleDateImpl implements _ScheduleDate {
-  const _$ScheduleDateImpl({required final List<Schedule> scheduleList})
+  const _$ScheduleDateImpl(
+      {required this.day, required final List<Schedule?> scheduleList})
       : _scheduleList = scheduleList;
 
   factory _$ScheduleDateImpl.fromJson(Map<String, dynamic> json) =>
       _$$ScheduleDateImplFromJson(json);
 
-  final List<Schedule> _scheduleList;
   @override
-  List<Schedule> get scheduleList {
+  final int day;
+  final List<Schedule?> _scheduleList;
+  @override
+  List<Schedule?> get scheduleList {
     if (_scheduleList is EqualUnmodifiableListView) return _scheduleList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_scheduleList);
@@ -113,7 +127,7 @@ class _$ScheduleDateImpl implements _ScheduleDate {
 
   @override
   String toString() {
-    return 'ScheduleDate(scheduleList: $scheduleList)';
+    return 'ScheduleDate(day: $day, scheduleList: $scheduleList)';
   }
 
   @override
@@ -121,6 +135,7 @@ class _$ScheduleDateImpl implements _ScheduleDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ScheduleDateImpl &&
+            (identical(other.day, day) || other.day == day) &&
             const DeepCollectionEquality()
                 .equals(other._scheduleList, _scheduleList));
   }
@@ -128,7 +143,7 @@ class _$ScheduleDateImpl implements _ScheduleDate {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_scheduleList));
+      runtimeType, day, const DeepCollectionEquality().hash(_scheduleList));
 
   @JsonKey(ignore: true)
   @override
@@ -145,14 +160,17 @@ class _$ScheduleDateImpl implements _ScheduleDate {
 }
 
 abstract class _ScheduleDate implements ScheduleDate {
-  const factory _ScheduleDate({required final List<Schedule> scheduleList}) =
-      _$ScheduleDateImpl;
+  const factory _ScheduleDate(
+      {required final int day,
+      required final List<Schedule?> scheduleList}) = _$ScheduleDateImpl;
 
   factory _ScheduleDate.fromJson(Map<String, dynamic> json) =
       _$ScheduleDateImpl.fromJson;
 
   @override
-  List<Schedule> get scheduleList;
+  int get day;
+  @override
+  List<Schedule?> get scheduleList;
   @override
   @JsonKey(ignore: true)
   _$$ScheduleDateImplCopyWith<_$ScheduleDateImpl> get copyWith =>
