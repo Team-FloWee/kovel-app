@@ -16,8 +16,8 @@ class ScheduleListRepositoryImpl implements ScheduleListRepository {
 
   @override
   Future<void> updateSchedule(
-      {required String userId, required List<ScheduleDate> dateList}) async {
+      {required String userId, required List<ScheduleDate> planList}) async {
     await _scheduleDataSource.updateSchedule(
-        userId: userId, dateList: dateList);
+        userId: userId, planList: planList);
   }
 }

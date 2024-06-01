@@ -6,6 +6,8 @@ import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/domain/model/archived.dart';
+import 'package:kovel_app/domain/model/schedule.dart';
+import 'package:kovel_app/domain/model/schedule_date.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_appbar.dart';
@@ -28,12 +30,21 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   void initState() {
-    // Future.microtask(() => context
-    //     .read<ScheduleViewModel>()
-    //     .getScheduleList(userId: context.read<UserProvider>().user.userId));
-    Future.microtask(() => context
-        .read<ScheduleViewModel>()
-        .createPost(userId: context.read<UserProvider>().user.userId));
+    Future.microtask(() => context.read<ScheduleViewModel>().updateSchedule(
+            userId: context.read<UserProvider>().user.userId,
+            planList: [
+              ScheduleDate(day: 1, scheduleList: [
+                Schedule(
+                    id: 507480,
+                    contentType: 2,
+                    title: 'ㅇㅇㅇㅇ',
+                    mapx: '126.7987054614',
+                    mapy: '36.0799251950',
+                    imagePath:
+                        'http://tong.visitkorea.or.kr/cms/resource/45/3112145_image2_1.jpg',
+                    tel: '041-950-4016'),
+              ])
+            ]));
     super.initState();
   }
 

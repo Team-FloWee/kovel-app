@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kovel_app/domain/model/detail/tour_detail.dart';
-import 'package:kovel_app/domain/model/plan_date.dart';
 import 'package:kovel_app/domain/model/schedule.dart';
 import 'package:kovel_app/domain/model/schedule_date.dart';
 import 'package:kovel_app/domain/model/tour.dart';
-import 'package:kovel_app/domain/model/user_plan.dart';
 import 'package:kovel_app/domain/use_case/get_area_data_use_case.dart';
 import 'package:kovel_app/domain/use_case/get_schedule_list_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_schedule_use_case.dart';
@@ -58,58 +55,8 @@ class ScheduleViewModel with ChangeNotifier {
     await _getScheduleListUseCase.execute(userId: userId);
   }
 
-  void updateSchedule(
-      {required String userId, required Schedule schedule}) async {
-    _scheduledate?.scheduleList.add(schedule);
-    _dateList.add(_scheduledate!);
-    await _updateScheduleUseCase.execute(userId: userId, dateList: _dateList);
-  }
-
-  final _scheduleRef =
-      FirebaseFirestore.instance.collection('userPlan').withConverter<UserPlan>(
-            fromFirestore: (snapshot, _) => UserPlan.fromJson(snapshot.data()!),
-            toFirestore: (userPlan, _) => userPlan.toJson(),
-          );
-
-  Future<void> createPost({required String userId}) async {
-    final newUserPlan = UserPlan(
-      userId: userId,
-      planList: [
-        PlanDate(
-          title: '제주',
-          startDate: DateTime(2024, 5, 4),
-          endDate: DateTime(2024, 5, 8),
-          dateList: [ScheduleDate(day: 1, scheduleList: [])],
-        ),
-      ],
-    );
-    await _scheduleRef.add(newUserPlan).then((value) => print('성공'));
-  }
-
-  Future<UserPlan> getUserPlan({required String userId}) async {
-    try {
-      final scheduleDoc = await _scheduleRef.doc(userId).get();
-      if (scheduleDoc.exists) {
-        return scheduleDoc.data()!;
-      } else {
-        print('해당 유저의 일정을 찾을 수 없습니다.: $userId');
-        final newUserPlan = UserPlan(
-          userId: userId,
-          planList: [
-            PlanDate(
-              title: '제주',
-              startDate: DateTime(2024, 5, 4),
-              endDate: DateTime(2024, 5, 8),
-              dateList: [],
-            ),
-          ],
-        );
-        await _scheduleRef.doc(userId).set(newUserPlan);
-        return newUserPlan;
-      }
-    } catch (e) {
-      print('해당 유저의 일정을 불러올 수 없습니다.: $userId - $e');
-      throw Exception('Failed to get or create UserPlan');
-    }
+  Future<void> updateSchedule(
+      {required String userId, required List<ScheduleDate> planList}) async {
+    await _updateScheduleUseCase.execute(userId: userId, planList: planList);
   }
 }
