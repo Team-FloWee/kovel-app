@@ -106,7 +106,8 @@ class __$$ScheduleDateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ScheduleDateImpl implements _ScheduleDate {
   const _$ScheduleDateImpl(
       {required this.day, required final List<Schedule?> scheduleList})

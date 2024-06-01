@@ -6,6 +6,7 @@ part 'schedule_date.g.dart';
 
 @freezed
 class ScheduleDate with _$ScheduleDate {
+  @JsonSerializable(explicitToJson: true)
   const factory ScheduleDate({
     required int day,
     required List<Schedule?> scheduleList,

@@ -18,5 +18,5 @@ _$ScheduleDateImpl _$$ScheduleDateImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ScheduleDateImplToJson(_$ScheduleDateImpl instance) =>
     <String, dynamic>{
       'day': instance.day,
-      'scheduleList': instance.scheduleList,
+      'scheduleList': instance.scheduleList.map((e) => e?.toJson()).toList(),
     };
