@@ -174,7 +174,8 @@ class __$$ScheduleImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ScheduleImpl implements _Schedule {
   const _$ScheduleImpl(
       {required this.id,

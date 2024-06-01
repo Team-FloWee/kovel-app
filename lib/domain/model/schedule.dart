@@ -5,6 +5,7 @@ part 'schedule.g.dart';
 
 @freezed
 class Schedule with _$Schedule {
+  @JsonSerializable(explicitToJson: true)
   const factory Schedule({
     required int id,
     required int contentType,
