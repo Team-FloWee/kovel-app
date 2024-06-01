@@ -8,7 +8,6 @@ import 'package:kovel_app/core/provider/user_provider.dart';
 import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
-import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_appbar.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_list.dart';
 import 'package:kovel_app/presentation/schedule/schedule_view_model.dart';
@@ -29,10 +28,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   void initState() {
+    // Future.microtask(() => context
+    //     .read<ScheduleViewModel>()
+    //     .getScheduleList(userId: context.read<UserProvider>().user.userId));
     Future.microtask(() => context
         .read<ScheduleViewModel>()
-        .getScheduleList(userId: context.read<UserProvider>().user.userId));
-    Future.microtask(() => context.read<ScheduleViewModel>().getAreaData());
+        .createPost(userId: context.read<UserProvider>().user.userId));
     super.initState();
   }
 
@@ -166,32 +167,32 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
               ),
               SizedBox(height: 18.h),
-              SizedBox(
-                height: 200,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ...viewModel.areadata
-                          .map(
-                            (e) => InkWell(
-                              onTap: () {
-                                viewModel.updateSchedule(
-                                    userId: userProvider.user.userId,
-                                    schedule: viewModel.getSchedule(tour: e));
-                              },
-                              child: CommonText(
-                                badgeTitle: e.contentType.name,
-                                title: e.title,
-                                tel: e.tel,
-                                address: e.address1,
-                              ),
-                            ),
-                          )
-                          .toList()
-                    ],
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 200,
+              //   child: SingleChildScrollView(
+              //     child: Column(
+              //       children: [
+              //         ...viewModel.areadata
+              //             .map(
+              //               (e) => InkWell(
+              //                 onTap: () {
+              //                   viewModel.updateSchedule(
+              //                       userId: userProvider.user.userId,
+              //                       schedule: viewModel.getSchedule(tour: e));
+              //                 },
+              //                 child: CommonText(
+              //                   badgeTitle: e.contentType.name,
+              //                   title: e.title,
+              //                   tel: e.tel,
+              //                   address: e.address1,
+              //                 ),
+              //               ),
+              //             )
+              //             .toList()
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
