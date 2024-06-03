@@ -1,3 +1,4 @@
+import 'package:kovel_app/domain/model/user_plan.dart';
 import 'package:kovel_app/domain/repository/schedule_list_repository.dart';
 
 class GetScheduleListUseCase {
@@ -7,7 +8,7 @@ class GetScheduleListUseCase {
     required ScheduleListRepository scheduleListRepository,
   }) : _scheduleListRepository = scheduleListRepository;
 
-  Future<void> execute({required String userId}) async {
-    await _scheduleListRepository.getScheduleList(userId: userId);
+  Future<UserPlan> execute({required String userId}) async {
+    return await _scheduleListRepository.getScheduleList(userId: userId);
   }
 }

@@ -1,7 +1,8 @@
-import 'package:kovel_app/domain/model/schedule_date.dart';
+import 'package:kovel_app/domain/model/plan.dart';
+import 'package:kovel_app/domain/model/user_plan.dart';
 
 abstract interface class ScheduleListRepository {
-  Future<void> getScheduleList({required String userId});
+  Future<UserPlan> getScheduleList({required String userId});
   Future<void> updateSchedule(
-      {required String userId, required List<ScheduleDate> planList});
+      {required String userId, required List<Plan> planList});
 }
