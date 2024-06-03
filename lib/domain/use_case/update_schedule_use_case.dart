@@ -1,4 +1,4 @@
-import 'package:kovel_app/domain/model/schedule_date.dart';
+import 'package:kovel_app/domain/model/plan.dart';
 import 'package:kovel_app/domain/repository/schedule_list_repository.dart';
 
 class UpdateScheduleUseCase {
@@ -9,7 +9,7 @@ class UpdateScheduleUseCase {
   }) : _scheduleListRepository = scheduleListRepository;
 
   Future<void> execute(
-      {required String userId, required List<ScheduleDate> planList}) async {
+      {required String userId, required List<Plan> planList}) async {
     await _scheduleListRepository.updateSchedule(
         userId: userId, planList: planList);
   }
