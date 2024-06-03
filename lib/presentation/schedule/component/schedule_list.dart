@@ -2,19 +2,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kovel_app/config/ui_config.dart';
-import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/category/content_type.dart';
+import 'package:kovel_app/domain/model/schedule.dart';
 
 class ScheduleList extends StatelessWidget {
   final String index;
-  final Archived archived;
+  final Schedule schedule;
   final bool isSelected;
 
   ScheduleList({
     Key? key,
     required this.index,
     required this.isSelected,
-    required this.archived,
+    required this.schedule,
   }) : super(key: key);
 
   @override
@@ -46,7 +46,7 @@ class ScheduleList extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                archived.title,
+                schedule.title,
                 style: UiConfig.bodyStyle.copyWith(
                   fontWeight: UiConfig.semiBoldFont,
                 ),
@@ -54,7 +54,7 @@ class ScheduleList extends StatelessWidget {
               SizedBox(width: 8.w),
               Text('|'),
               SizedBox(width: 6.w),
-              Text(ContentType(contentTypeId: archived.contentType).name,
+              Text(ContentType(contentTypeId: schedule.contentType).name,
                   style: UiConfig.bodyStyle),
             ],
           ),
