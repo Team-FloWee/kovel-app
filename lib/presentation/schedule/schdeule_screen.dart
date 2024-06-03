@@ -5,11 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 import 'package:kovel_app/config/ui_config.dart';
 import 'package:kovel_app/core/provider/user_provider.dart';
-import 'package:kovel_app/domain/model/archived.dart';
 import 'package:kovel_app/domain/model/schedule.dart';
-import 'package:kovel_app/domain/model/schedule_date.dart';
 import 'package:kovel_app/presentation/components/bottom_navi_bar.dart';
 import 'package:kovel_app/presentation/components/common_app_bar.dart';
+import 'package:kovel_app/presentation/components/common_text.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_appbar.dart';
 import 'package:kovel_app/presentation/schedule/component/schedule_list.dart';
 import 'package:kovel_app/presentation/schedule/schedule_view_model.dart';
@@ -30,21 +29,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   void initState() {
-    Future.microtask(() => context.read<ScheduleViewModel>().updateSchedule(
-            userId: context.read<UserProvider>().user.userId,
-            planList: [
-              ScheduleDate(day: 1, scheduleList: [
-                Schedule(
-                    id: 507480,
-                    contentType: 2,
-                    title: 'ㅇㅇㅇㅇ',
-                    mapx: '126.7987054614',
-                    mapy: '36.0799251950',
-                    imagePath:
-                        'http://tong.visitkorea.or.kr/cms/resource/45/3112145_image2_1.jpg',
-                    tel: '041-950-4016'),
-              ])
-            ]));
+    Future.microtask(() => context.read<ScheduleViewModel>().getAreaData());
+    Future.microtask(() => context
+        .read<ScheduleViewModel>()
+        .getScheduleList(userId: context.read<UserProvider>().user.userId));
     super.initState();
   }
 
@@ -55,8 +43,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     AuthRepository.initialize(
       appKey: dotenv.get('KAKAO_JAVASCRIPT_APP_KEY'),
     );
-    List<CustomOverlay> buildCustomOverlays(List<Archived> scheduleList) {
-      return List.generate(userProvider.user.scheduleList.length, (index) {
+    List<CustomOverlay> buildCustomOverlays(List<Schedule> scheduleList) {
+      return List.generate(
+          viewModel.userPlan!.planList[0].dateList[0].scheduleList.length,
+          (index) {
         var content =
             '<div style="position: relative;width:23px;height:23px;top:50px;left:50px;">'
             '<div style="position: absolute;left: 0;top: 0;color: #fff;width: 23px;height: 23px;text-align: center;transform: translate(0%, 4px);z-index: 10;">${index + 1}</div>'
@@ -66,14 +56,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         return CustomOverlay(
           customOverlayId: 'customOverlay_$index',
           latLng: LatLng(
-              double.parse(userProvider.user.scheduleList[index].mapy),
-              double.parse(userProvider.user.scheduleList[index].mapx)),
+              double.parse(viewModel
+                  .userPlan!.planList[0].dateList[0].scheduleList[0].mapy),
+              double.parse(viewModel
+                  .userPlan!.planList[0].dateList[0].scheduleList[0].mapx)),
           content: content,
         );
       });
     }
 
-    customOverlays = buildCustomOverlays(userProvider.user.scheduleList);
+    customOverlays = buildCustomOverlays(
+        viewModel.userPlan!.planList[0].dateList[0].scheduleList);
 
     return Scaffold(
       appBar: CommonAppBar(
@@ -146,11 +139,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 days: 'day1',
                 dates: '5.4/토',
               ),
-              ...userProvider.user.scheduleList.mapIndexed(
+              ...viewModel.userPlan!.planList[0].dateList[0].scheduleList
+                  .mapIndexed(
                 (index, e) => ScheduleList(
                   index: (index + 1).toString(),
                   isSelected: true,
-                  archived: e,
+                  schedule: e,
                 ),
               ),
               SizedBox(height: 18.h),
@@ -178,32 +172,27 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
               ),
               SizedBox(height: 18.h),
-              // SizedBox(
-              //   height: 200,
-              //   child: SingleChildScrollView(
-              //     child: Column(
-              //       children: [
-              //         ...viewModel.areadata
-              //             .map(
-              //               (e) => InkWell(
-              //                 onTap: () {
-              //                   viewModel.updateSchedule(
-              //                       userId: userProvider.user.userId,
-              //                       schedule: viewModel.getSchedule(tour: e));
-              //                 },
-              //                 child: CommonText(
-              //                   badgeTitle: e.contentType.name,
-              //                   title: e.title,
-              //                   tel: e.tel,
-              //                   address: e.address1,
-              //                 ),
-              //               ),
-              //             )
-              //             .toList()
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              Column(
+                children: [
+                  ...viewModel.areadata
+                      .map(
+                        (e) => InkWell(
+                          onTap: () {
+                            viewModel.updateSchedule(
+                                userId: userProvider.user.userId,
+                                schedule: viewModel.toSchedule(tour: e));
+                          },
+                          child: CommonText(
+                            badgeTitle: e.contentType.name,
+                            title: e.title,
+                            tel: e.tel,
+                            address: e.address1,
+                          ),
+                        ),
+                      )
+                      .toList()
+                ],
+              ),
             ],
           ),
         ),
