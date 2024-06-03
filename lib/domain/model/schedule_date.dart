@@ -9,7 +9,7 @@ class ScheduleDate with _$ScheduleDate {
   @JsonSerializable(explicitToJson: true)
   const factory ScheduleDate({
     required int day,
-    required List<Schedule?> scheduleList,
+    required List<Schedule> scheduleList,
   }) = _ScheduleDate;
 
   factory ScheduleDate.fromJson(Map<String, Object?> json) =>

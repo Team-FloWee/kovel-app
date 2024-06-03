@@ -21,7 +21,7 @@ ScheduleDate _$ScheduleDateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ScheduleDate {
   int get day => throw _privateConstructorUsedError;
-  List<Schedule?> get scheduleList => throw _privateConstructorUsedError;
+  List<Schedule> get scheduleList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ScheduleDateCopyWith<$Res> {
           ScheduleDate value, $Res Function(ScheduleDate) then) =
       _$ScheduleDateCopyWithImpl<$Res, ScheduleDate>;
   @useResult
-  $Res call({int day, List<Schedule?> scheduleList});
+  $Res call({int day, List<Schedule> scheduleList});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$ScheduleDateCopyWithImpl<$Res, $Val extends ScheduleDate>
       scheduleList: null == scheduleList
           ? _value.scheduleList
           : scheduleList // ignore: cast_nullable_to_non_nullable
-              as List<Schedule?>,
+              as List<Schedule>,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$ScheduleDateImplCopyWith<$Res>
       __$$ScheduleDateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int day, List<Schedule?> scheduleList});
+  $Res call({int day, List<Schedule> scheduleList});
 }
 
 /// @nodoc
@@ -100,7 +100,7 @@ class __$$ScheduleDateImplCopyWithImpl<$Res>
       scheduleList: null == scheduleList
           ? _value._scheduleList
           : scheduleList // ignore: cast_nullable_to_non_nullable
-              as List<Schedule?>,
+              as List<Schedule>,
     ));
   }
 }
@@ -110,7 +110,7 @@ class __$$ScheduleDateImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$ScheduleDateImpl implements _ScheduleDate {
   const _$ScheduleDateImpl(
-      {required this.day, required final List<Schedule?> scheduleList})
+      {required this.day, required final List<Schedule> scheduleList})
       : _scheduleList = scheduleList;
 
   factory _$ScheduleDateImpl.fromJson(Map<String, dynamic> json) =>
@@ -118,9 +118,9 @@ class _$ScheduleDateImpl implements _ScheduleDate {
 
   @override
   final int day;
-  final List<Schedule?> _scheduleList;
+  final List<Schedule> _scheduleList;
   @override
-  List<Schedule?> get scheduleList {
+  List<Schedule> get scheduleList {
     if (_scheduleList is EqualUnmodifiableListView) return _scheduleList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_scheduleList);
@@ -163,7 +163,7 @@ class _$ScheduleDateImpl implements _ScheduleDate {
 abstract class _ScheduleDate implements ScheduleDate {
   const factory _ScheduleDate(
       {required final int day,
-      required final List<Schedule?> scheduleList}) = _$ScheduleDateImpl;
+      required final List<Schedule> scheduleList}) = _$ScheduleDateImpl;
 
   factory _ScheduleDate.fromJson(Map<String, dynamic> json) =
       _$ScheduleDateImpl.fromJson;
@@ -171,7 +171,7 @@ abstract class _ScheduleDate implements ScheduleDate {
   @override
   int get day;
   @override
-  List<Schedule?> get scheduleList;
+  List<Schedule> get scheduleList;
   @override
   @JsonKey(ignore: true)
   _$$ScheduleDateImplCopyWith<_$ScheduleDateImpl> get copyWith =>
