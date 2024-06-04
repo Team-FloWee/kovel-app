@@ -19,15 +19,21 @@ class _ScheduleHomeScreenState extends State<ScheduleHomeScreen> {
           // 유저 여행 일정 개수로 수정
           itemCount: 10,
           itemBuilder: (context, index) {
-            return ScheduleImageButton(
-              // 유저 여행 일정 정보로 수정
-              imagePath:
-                  'https://www.lottehotel.com/content/dam/lotte-hotel/lotte/jeju/overview/introduction/g-0807.jpg.thumb.768.768.jpg',
-              title: '영월',
-              date: 'YYYY년 MM월 DDdays',
-              // 버튼 클릭 시 발생할 이벤트 작성 (화면 이동)
-              onTap: () {
-                print('click');
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                double screenWidth = constraints.maxWidth;
+                return ScheduleImageButton(
+                  // 유저 여행 일정 정보로 수정
+                  title: '영월',
+                  date: 'YYYY년 MM월 DDdays',
+                  imagePath:
+                      'https://www.lottehotel.com/content/dam/lotte-hotel/lotte/jeju/overview/introduction/g-0807.jpg.thumb.768.768.jpg',
+                  screenWidth: screenWidth,
+                  // 버튼 클릭 시 발생할 이벤트 작성 (화면 이동)
+                  onTap: () {
+                    print('click');
+                  },
+                );
               },
             );
           },
