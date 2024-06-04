@@ -7,7 +7,6 @@ class ScheduleImageButton extends StatelessWidget {
   final String date;
   final String title;
   final String imagePath;
-  final double screenWidth;
   final VoidCallback onTap;
 
   const ScheduleImageButton({
@@ -15,54 +14,55 @@ class ScheduleImageButton extends StatelessWidget {
     required this.date,
     required this.title,
     required this.imagePath,
-    required this.screenWidth,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final double textPosition = 31.0;
-
     return GestureDetector(
       onTap: onTap,
-      child: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.all(13.0),
-            width: screenWidth,
-            height: 140,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(18.0),
-                child: CachedNetworkImageComponent(imagePath: imagePath)),
-          ),
-          Positioned(
-            bottom: textPosition,
-            left: textPosition,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: UiConfig.h3Style.copyWith(
-                    fontWeight: UiConfig.semiBoldFont,
-                    overflow: TextOverflow.ellipsis,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  date,
-                  style: UiConfig.bodyStyle.copyWith(
-                    fontWeight: UiConfig.semiBoldFont,
-                    overflow: TextOverflow.ellipsis,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+      child: Container(
+        margin: EdgeInsets.fromLTRB(13.0, 0.0, 13.0, 26.0),
+        width: double.infinity,
+        height: 140,
+        child: Stack(
+          alignment: AlignmentDirectional.bottomStart,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(18.0),
+              child: CachedNetworkImageComponent(
+                imagePath: imagePath,
+                imageSize: double.infinity,
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: UiConfig.h3Style.copyWith(
+                      fontWeight: UiConfig.semiBoldFont,
+                      overflow: TextOverflow.ellipsis,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    date,
+                    style: UiConfig.bodyStyle.copyWith(
+                      fontWeight: UiConfig.semiBoldFont,
+                      overflow: TextOverflow.ellipsis,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
