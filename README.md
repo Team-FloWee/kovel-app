@@ -49,7 +49,7 @@
 <br/>
 
 ## 서비스 소개
-[![Video Label](http://img.youtube.com/vi/IMpsU_mVFdk/0.jpg)](https://youtu.be/IMpsU_mVFdk)
+[![Video Label](http://img.youtube.com/vi/IMpsU_mVFdk/0.jpg)](https://youtu.be/IMpsU_mVFdk?t=543)
 <br/>
 
 ## 주요 API 및 Package
