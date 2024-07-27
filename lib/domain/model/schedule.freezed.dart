@@ -21,16 +21,8 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Schedule {
   int get id => throw _privateConstructorUsedError;
-  int get contentTypeId => throw _privateConstructorUsedError;
+  int get contentType => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get address1 => throw _privateConstructorUsedError;
-  String get address2 => throw _privateConstructorUsedError;
-  String get zipCode => throw _privateConstructorUsedError;
-  String get areaCode => throw _privateConstructorUsedError;
-  String get category1 => throw _privateConstructorUsedError;
-  String get category2 => throw _privateConstructorUsedError;
-  String get category3 => throw _privateConstructorUsedError;
-  String get categoryType => throw _privateConstructorUsedError;
   String get mapx => throw _privateConstructorUsedError;
   String get mapy => throw _privateConstructorUsedError;
   String get imagePath => throw _privateConstructorUsedError;
@@ -49,16 +41,8 @@ abstract class $ScheduleCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int contentTypeId,
+      int contentType,
       String title,
-      String address1,
-      String address2,
-      String zipCode,
-      String areaCode,
-      String category1,
-      String category2,
-      String category3,
-      String categoryType,
       String mapx,
       String mapy,
       String imagePath,
@@ -79,16 +63,8 @@ class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
   @override
   $Res call({
     Object? id = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? title = null,
-    Object? address1 = null,
-    Object? address2 = null,
-    Object? zipCode = null,
-    Object? areaCode = null,
-    Object? category1 = null,
-    Object? category2 = null,
-    Object? category3 = null,
-    Object? categoryType = null,
     Object? mapx = null,
     Object? mapy = null,
     Object? imagePath = null,
@@ -99,45 +75,13 @@ class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
               as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      address1: null == address1
-          ? _value.address1
-          : address1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      address2: null == address2
-          ? _value.address2
-          : address2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipCode: null == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      areaCode: null == areaCode
-          ? _value.areaCode
-          : areaCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      category1: null == category1
-          ? _value.category1
-          : category1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      category2: null == category2
-          ? _value.category2
-          : category2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      category3: null == category3
-          ? _value.category3
-          : category3 // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryType: null == categoryType
-          ? _value.categoryType
-          : categoryType // ignore: cast_nullable_to_non_nullable
               as String,
       mapx: null == mapx
           ? _value.mapx
@@ -169,16 +113,8 @@ abstract class _$$ScheduleImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      int contentTypeId,
+      int contentType,
       String title,
-      String address1,
-      String address2,
-      String zipCode,
-      String areaCode,
-      String category1,
-      String category2,
-      String category3,
-      String categoryType,
       String mapx,
       String mapy,
       String imagePath,
@@ -197,16 +133,8 @@ class __$$ScheduleImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? contentTypeId = null,
+    Object? contentType = null,
     Object? title = null,
-    Object? address1 = null,
-    Object? address2 = null,
-    Object? zipCode = null,
-    Object? areaCode = null,
-    Object? category1 = null,
-    Object? category2 = null,
-    Object? category3 = null,
-    Object? categoryType = null,
     Object? mapx = null,
     Object? mapy = null,
     Object? imagePath = null,
@@ -217,45 +145,13 @@ class __$$ScheduleImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      contentTypeId: null == contentTypeId
-          ? _value.contentTypeId
-          : contentTypeId // ignore: cast_nullable_to_non_nullable
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
               as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      address1: null == address1
-          ? _value.address1
-          : address1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      address2: null == address2
-          ? _value.address2
-          : address2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipCode: null == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      areaCode: null == areaCode
-          ? _value.areaCode
-          : areaCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      category1: null == category1
-          ? _value.category1
-          : category1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      category2: null == category2
-          ? _value.category2
-          : category2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      category3: null == category3
-          ? _value.category3
-          : category3 // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryType: null == categoryType
-          ? _value.categoryType
-          : categoryType // ignore: cast_nullable_to_non_nullable
               as String,
       mapx: null == mapx
           ? _value.mapx
@@ -278,20 +174,13 @@ class __$$ScheduleImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ScheduleImpl implements _Schedule {
   const _$ScheduleImpl(
       {required this.id,
-      required this.contentTypeId,
+      required this.contentType,
       required this.title,
-      required this.address1,
-      required this.address2,
-      required this.zipCode,
-      required this.areaCode,
-      required this.category1,
-      required this.category2,
-      required this.category3,
-      required this.categoryType,
       required this.mapx,
       required this.mapy,
       required this.imagePath,
@@ -303,25 +192,9 @@ class _$ScheduleImpl implements _Schedule {
   @override
   final int id;
   @override
-  final int contentTypeId;
+  final int contentType;
   @override
   final String title;
-  @override
-  final String address1;
-  @override
-  final String address2;
-  @override
-  final String zipCode;
-  @override
-  final String areaCode;
-  @override
-  final String category1;
-  @override
-  final String category2;
-  @override
-  final String category3;
-  @override
-  final String categoryType;
   @override
   final String mapx;
   @override
@@ -333,7 +206,7 @@ class _$ScheduleImpl implements _Schedule {
 
   @override
   String toString() {
-    return 'Schedule(id: $id, contentTypeId: $contentTypeId, title: $title, address1: $address1, address2: $address2, zipCode: $zipCode, areaCode: $areaCode, category1: $category1, category2: $category2, category3: $category3, categoryType: $categoryType, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel)';
+    return 'Schedule(id: $id, contentType: $contentType, title: $title, mapx: $mapx, mapy: $mapy, imagePath: $imagePath, tel: $tel)';
   }
 
   @override
@@ -342,24 +215,9 @@ class _$ScheduleImpl implements _Schedule {
         (other.runtimeType == runtimeType &&
             other is _$ScheduleImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.contentTypeId, contentTypeId) ||
-                other.contentTypeId == contentTypeId) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.address1, address1) ||
-                other.address1 == address1) &&
-            (identical(other.address2, address2) ||
-                other.address2 == address2) &&
-            (identical(other.zipCode, zipCode) || other.zipCode == zipCode) &&
-            (identical(other.areaCode, areaCode) ||
-                other.areaCode == areaCode) &&
-            (identical(other.category1, category1) ||
-                other.category1 == category1) &&
-            (identical(other.category2, category2) ||
-                other.category2 == category2) &&
-            (identical(other.category3, category3) ||
-                other.category3 == category3) &&
-            (identical(other.categoryType, categoryType) ||
-                other.categoryType == categoryType) &&
             (identical(other.mapx, mapx) || other.mapx == mapx) &&
             (identical(other.mapy, mapy) || other.mapy == mapy) &&
             (identical(other.imagePath, imagePath) ||
@@ -370,22 +228,7 @@ class _$ScheduleImpl implements _Schedule {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      contentTypeId,
-      title,
-      address1,
-      address2,
-      zipCode,
-      areaCode,
-      category1,
-      category2,
-      category3,
-      categoryType,
-      mapx,
-      mapy,
-      imagePath,
-      tel);
+      runtimeType, id, contentType, title, mapx, mapy, imagePath, tel);
 
   @JsonKey(ignore: true)
   @override
@@ -404,16 +247,8 @@ class _$ScheduleImpl implements _Schedule {
 abstract class _Schedule implements Schedule {
   const factory _Schedule(
       {required final int id,
-      required final int contentTypeId,
+      required final int contentType,
       required final String title,
-      required final String address1,
-      required final String address2,
-      required final String zipCode,
-      required final String areaCode,
-      required final String category1,
-      required final String category2,
-      required final String category3,
-      required final String categoryType,
       required final String mapx,
       required final String mapy,
       required final String imagePath,
@@ -425,25 +260,9 @@ abstract class _Schedule implements Schedule {
   @override
   int get id;
   @override
-  int get contentTypeId;
+  int get contentType;
   @override
   String get title;
-  @override
-  String get address1;
-  @override
-  String get address2;
-  @override
-  String get zipCode;
-  @override
-  String get areaCode;
-  @override
-  String get category1;
-  @override
-  String get category2;
-  @override
-  String get category3;
-  @override
-  String get categoryType;
   @override
   String get mapx;
   @override

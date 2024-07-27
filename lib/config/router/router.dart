@@ -212,43 +212,47 @@ final goRouter = GoRouter(
         name: 'license',
         builder: (context, state) => const LicensePage()),
     GoRoute(
-      path: '/postList',
-      name: 'postList',
-      pageBuilder: (context, state) {
-        return CustomTransitionPage(
-            child: ChangeNotifierProvider(
-              create: (_) => getIt<PostListViewModel>(),
-              child: PostListScreen(),
-            ),
-            transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-              return FadeTransition(
-                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-                child: child,
-              );
-            }
-        );
-      },
-      routes: [
-        GoRoute(
-            path: 'create',
-            name: 'postList/create',
-            builder: (context, state) {
-              return ChangeNotifierProvider(
+        path: '/postList',
+        name: 'postList',
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+              child: ChangeNotifierProvider(
+                create: (_) => getIt<PostListViewModel>(),
+                child: PostListScreen(),
+              ),
+              transitionsBuilder: (BuildContext context,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                  Widget child) {
+                return FadeTransition(
+                  opacity: CurveTween(curve: Curves.easeInOutCirc)
+                      .animate(animation),
+                  child: child,
+                );
+              });
+        },
+        routes: [
+          GoRoute(
+              path: 'create',
+              name: 'postList/create',
+              builder: (context, state) {
+                return ChangeNotifierProvider(
                   create: (_) => getIt<PostCreateViewModel>(),
                   child: PostCreateScreen(
                     originalPost: state.extra as Post?,
                   ),
-              );
-            }
-        )
-      ]
-    ),
+                );
+              })
+        ]),
     GoRoute(
       path: '/schedule',
       name: 'schedule',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          create: (context) => ScheduleViewModel(),
+          create: (context) => ScheduleViewModel(
+              getScheduleListUseCase: getIt(),
+              getAreaDataUseCase: getIt(),
+              updateScheduleUseCase: getIt()),
           child: const ScheduleScreen(),
         ); // HomeSearchScreen을 반환합니다.
       },

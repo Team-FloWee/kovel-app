@@ -3,13 +3,11 @@ import 'dart:core';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:kovel_app/domain/model/schedule.dart';
 import 'package:kovel_app/domain/model/user.dart';
 import 'package:kovel_app/domain/use_case/auth/get_user_use_case.dart';
 import 'package:kovel_app/domain/use_case/like_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/unlike_tour_use_case.dart';
 import 'package:kovel_app/domain/use_case/update_archived_use_case.dart';
-import 'package:kovel_app/domain/use_case/update_schedule_use_case.dart';
 
 import '../../domain/model/archived.dart';
 
@@ -18,18 +16,15 @@ class UserProvider with ChangeNotifier {
   final UpdateArchivedUseCase _updateArchivedUseCase;
   final LikeTourUseCase _likeTourUseCase;
   final UnLikeTourUseCase _unLikeTourUseCase;
-  final UpdateScheduleUseCase _updateScheduleUseCase;
-  UserProvider(
-      {required GetUserUseCase getUserUseCase,
-      required UpdateArchivedUseCase updateArchivedUseCase,
-      required LikeTourUseCase likeTourUseCase,
-      required UnLikeTourUseCase unLikeTourUseCase,
-      required UpdateScheduleUseCase updateScheduleUseCase})
-      : _getUserUseCase = getUserUseCase,
+  UserProvider({
+    required GetUserUseCase getUserUseCase,
+    required UpdateArchivedUseCase updateArchivedUseCase,
+    required LikeTourUseCase likeTourUseCase,
+    required UnLikeTourUseCase unLikeTourUseCase,
+  })  : _getUserUseCase = getUserUseCase,
         _updateArchivedUseCase = updateArchivedUseCase,
         _likeTourUseCase = likeTourUseCase,
-        _unLikeTourUseCase = unLikeTourUseCase,
-        _updateScheduleUseCase = updateScheduleUseCase;
+        _unLikeTourUseCase = unLikeTourUseCase;
 
   late User _user;
   User get user => _user;
@@ -67,11 +62,5 @@ class UserProvider with ChangeNotifier {
       }
       notifyListeners();
     });
-  }
-
-  Future<void> updateSchedule(
-      {required String userId, required List<Schedule> scheduleList}) async {
-    await _updateScheduleUseCase.execute(
-        userId: userId, scheduleList: scheduleList);
   }
 }
